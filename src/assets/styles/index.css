@@ -7,7 +7,20 @@
   body {
     @apply font-Pelak;
   }
+  body {
+    direction: rtl;
+  }
   img {
     @apply w-full h-full object-cover;
+  }
+}
+
+@layer components {
+  .content {
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  .transition {
+    @apply transition-all duration-200;
   }
 }

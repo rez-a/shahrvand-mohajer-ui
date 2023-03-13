@@ -1,9 +1,9 @@
 import Home from "pages/Home";
 import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LayoutHome from "./layout/layoutHome/LayoutHome";
 
-const Routes = () => {
+const AllRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
@@ -15,4 +15,4 @@ const Routes = () => {
   );
 };
 
-export default Routes;
+export default AllRoutes;

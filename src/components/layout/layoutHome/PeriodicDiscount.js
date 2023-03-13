@@ -4,7 +4,7 @@ import PeriodicDiscountBanner from "assets/images/banners/periodic-discount.jpg"
 
 const PeriodicDiscount = () => {
   return (
-    <div className="w-full h-20">
+    <div className="w-full h-12">
       <img src={PeriodicDiscountBanner} alt="PeriodicDiscountBanner" />
     </div>
   );
