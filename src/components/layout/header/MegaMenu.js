@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const MegaMenu = () => {
   return (
-    <div className="absolute top-[105%] right-0 w-[90vw] bg-white rounded grid grid-cols-4 p-4 gap-2 invisible group-hover:visible">
+    <div className="absolute top-[105%] right-0 w-[90vw] z-20 bg-white rounded grid grid-cols-4 p-4 gap-2 invisible group-hover:visible">
       <div className="col-span-3 grid grid-cols-3 gap-2">
         <div>
           <input
