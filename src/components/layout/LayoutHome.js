@@ -7,12 +7,12 @@ import { Outlet } from 'react-router-dom';
 
 const LayoutHome = () => {
   return (
-    <div>
+    <>
       <PeriodicDiscount />
       <Header />
       <Outlet />
       <FooterLayout />
-    </div>
+    </>
   );
 };
 

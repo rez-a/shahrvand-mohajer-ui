@@ -1,6 +1,6 @@
 import Banner from 'components/home/Banner';
 import BestSelling from 'components/home/BestSelling';
-import ShowCase from 'components/showcase/ShowCase';
+import ShowCase from 'components/home/showcase/ShowCase';
 import React from 'react';
 import OurSuggestion from 'components/home/OurSuggestion';
 import AmazingOffer from 'components/home/AmazingOffer';
@@ -16,6 +16,7 @@ import banner6 from 'assets/images/banners/banner6.jpg';
 import banner7 from 'assets/images/banners/banner7.jpg';
 import BiggestDiscount from 'components/home/BiggestDiscount';
 import PopularBrands from 'components/home/PopularBrands';
+import slugConverter from 'utilities/slugConverter';
 
 const Home = () => {
   return (

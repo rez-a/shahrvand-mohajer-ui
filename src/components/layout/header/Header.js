@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import logo from "assets/images/logo.svg";
-import MegaMenu from "./MegaMenu";
+import React from 'react';
+import PropTypes from 'prop-types';
+import logo from 'assets/images/logo.svg';
+import MegaMenu from './MegaMenu';
 
 const Header = () => {
   return (
@@ -36,13 +36,13 @@ const Header = () => {
               type="text"
               placeholder="نام کالا ، برند و یا دسته مورد نظر خود را جستجو کنید..."
             />
-            <button className="absolute right-0 group top-1/2 -translate-y-1/2 border-l px-2">
+            <button className="absolute right-1 hover:bg-rose-600 top-1/2 bg-rose-500 -translate-y-1/2 px-2 py-1 rounded">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 width="20"
                 height="20"
-                className="fill-zinc-400 group-hover:fill-zinc-500"
+                className="fill-white"
               >
                 <path fill="none" d="M0 0h24v24H0z" />
                 <path d="M18.031 16.617l4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617zm-2.006-.742A6.977 6.977 0 0 0 18 11c0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7a6.977 6.977 0 0 0 4.875-1.975l.15-.15z" />

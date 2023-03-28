@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const TitleIcon = ({ bg }) => {
+const TitleIcon = ({ bg = 'bg-zinc-400' }) => {
   return (
     <span className="flex items-center">
       <span

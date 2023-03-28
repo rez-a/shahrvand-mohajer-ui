@@ -40,7 +40,7 @@ const categories = [
     count: 15000,
   },
   {
-    id: 8,
+    id: 9,
     title: 'خوردنی و آشامیدنی',
     count: 22000,
   },
