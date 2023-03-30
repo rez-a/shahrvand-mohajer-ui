@@ -21,10 +21,10 @@ const Trust = () => {
         </p>
       </div>
       <div className="flex gap-4">
-        <div className="w-40 h-40 bg-zinc-100 border p-4 rounded">
+        <div className="w-40 h-40 bg-gray-50 border border-gray-100 p-4 rounded">
           <img src={samandehi} alt="samandehi" />
         </div>
-        <div className="w-40 h-40 bg-zinc-100 border p-4 rounded">
+        <div className="w-40 h-40 bg-gray-50 border border-gray-100 p-4 rounded">
           <img src={enemad} alt="enemad" />
         </div>
       </div>

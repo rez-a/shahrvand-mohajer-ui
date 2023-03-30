@@ -50,7 +50,7 @@ const Header = () => {
             </button>
           </div>
           <div className="mr-auto flex items-center">
-            <button className="border rounded text-xs py-1 px-2 flex items-center border-zinc-300 hover:bg-zinc-100 transition">
+            <button className="border rounded text-xs py-1 px-2 flex items-center bg-gray-50 border-gray-100 hover:bg-zinc-100 transition">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"

@@ -35,7 +35,7 @@ const SlideProduct = ({
         <div className="mr-auto">
           <a
             href={viewAllLink}
-            className="bg-zinc-300/70 hover:bg-zinc-300/100 transition-all duration-200 rounded-lg text-rose-500/70 font-bold px-4 py-2 relative before:absolute before:w-4 before:h-[1px] before:bg-zinc-300 before:-left-4 before:top-1/2 before:-translate-y-1/2"
+            className="bg-gray-50 border border-gray-100 hover:bg-gray-100 transition-all duration-200 rounded-lg text-rose-500/70 font-bold px-4 py-2 relative before:absolute before:w-4 before:h-[1px] before:bg-zinc-300 before:-left-4 before:top-1/2 before:-translate-y-1/2"
             type="button"
           >
             مشاهده همه
