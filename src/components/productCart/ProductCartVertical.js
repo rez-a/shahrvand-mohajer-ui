@@ -47,7 +47,7 @@ const ProductCartVertical = ({
         <span
           className={` relative ${
             discount > 0
-              ? 'opacity-30  before:absolute before:w-[110%] before:h-[1px] before:bg-black before:top-1/2 before:-translate-y-1/2 before:left-1/2 before:-translate-x-1/2 before:rotate-6'
+              ? 'opacity-30  before:absolute whitespace-nowrap before:w-[110%] before:h-[1px] before:bg-black before:top-1/2 before:-translate-y-1/2 before:left-1/2 before:-translate-x-1/2 before:rotate-6'
               : 'opacity-100 text-black'
           }`}
         >

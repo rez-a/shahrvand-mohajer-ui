@@ -5,6 +5,7 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LayoutHome from './layout/LayoutHome';
 import LayoutPage from './layout/LayoutPage';
+import MainGroupProducts from 'pages/MainGroupProducts';
 
 const AllRoutes = () => {
   return (
@@ -23,7 +24,7 @@ const AllRoutes = () => {
             element={<MainGroupProducts />}
           />
           <Route
-            path="products/:SideGroupErpCode/:slugSideGroupErpCode"
+            path="products/:MainGroupErpCode/:slugMainGroupErpCode/:SideGroupErpCode/:slugSideGroupErpCode"
             element={<ProductPage />}
           />
         </Route>
