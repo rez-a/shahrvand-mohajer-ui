@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const MegaMenu = () => {
   return (
-    <div className="absolute top-[105%] right-0 w-[90vw] z-20 bg-white rounded grid grid-cols-4 p-4 gap-2 invisible group-hover:visible">
+    <div className="absolute top-[105%] right-0 w-[70vw] z-20 bg-white rounded grid grid-cols-4 p-4 gap-2 invisible group-hover:visible">
       <div className="col-span-3 grid grid-cols-3 gap-2">
         <div>
           <input
@@ -208,7 +208,9 @@ const MegaMenu = () => {
       </div>
       <div className="border-r px-2 flex flex-col justify-between">
         <div>
-          <h2 className="text-sm text-rose-500 mb-2">محصولات غذاپزی قاصدک</h2>
+          <h2 className="text-sm text-rose-500 mb-2">
+            محصولات غذاپزی قاصدک
+          </h2>
           <ul className="mb-2">
             <li>
               <a

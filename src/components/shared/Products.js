@@ -7,23 +7,22 @@ import AccordionLayout from 'components/shared/accordion/AccordionLayout';
 import AccordionItem from 'components/shared/accordion/AccordionItem';
 import TitleAccordionItem from 'components/shared/accordion/TitleAccordionItem';
 import ContentAccordionItem from 'components/shared/accordion/ContentAccordionItem';
-import MultiRangeSlider from 'multi-range-slider-react';
+import RangeSlider from 'react-range-slider-input';
+import 'react-range-slider-input/dist/style.css';
+import PaginationLayout from 'components/pagination/PaginationLayout';
 
 const Products = (props) => {
-  const [minValue, setMinValue] = useState(0);
-  const [maxValue, setMaxValue] = useState(0);
-  const [minValue2, setMinValue2] = useState(0);
-  const [maxValue2, setMaxValue2] = useState(0);
+  const [price, setPrice] = useState([25, 75]);
   return (
-    <main className="grid grid-cols-5 gap-12">
-      <aside>
+    <main className="grid grid-cols-5 gap-12 items-start">
+      <aside className="border rounded-md p-4 bg-gray-50/50">
         <div className="mb-8">
           <h2 className="font-semibold text-zinc-400 flex items-center mb-4">
             <TitleIcon bg="bg-zinc-400" />
             <span className="mr-1"> فیلتر محصولات</span>
           </h2>
           <AccordionLayout>
-            <AccordionItem defaultClassName="border rounded-xl overflow-hidden">
+            <AccordionItem defaultClassName="border rounded-md overflow-hidden">
               <TitleAccordionItem>
                 <div className="flex items-center justify-between p-2">
                   <span>دسته بندی</span>
@@ -146,28 +145,47 @@ const Products = (props) => {
             <TitleIcon bg="bg-zinc-400" />
             <span className="mr-1"> فیلتر براساس قیمت</span>
           </h2>
-          <MultiRangeSlider
-            style={{ direction: 'ltr' }}
-            ruler={false}
-            label={false}
-            className="!shadow-none !border-none"
-            barInnerColor="!shadow-none"
-            onInput={(e) => {
-              setMinValue(e.minValue);
-              setMaxValue(e.maxValue);
-            }}
-            onChange={(e) => {
-              setMinValue2(e.minValue);
-              setMaxValue2(e.maxValue);
-            }}
-          ></MultiRangeSlider>
+          <RangeSlider
+            min={0}
+            max={100}
+            defaultValue={[25, 75]}
+            step={1}
+            value={price}
+            onInput={(price) => setPrice(price)}
+          />
+          <p className="text-xs mt-6">
+            <span>
+              قیمت : {price[0]} - {price[1]} تومان
+            </span>
+          </p>
         </div>
+        <div class="flex items-center w-full mb-12 my-8">
+          <label
+            for="toogleA"
+            class="flex items-center cursor-pointer"
+          >
+            <div class="relative ml-2">
+              <input id="toogleA" type="checkbox" class="sr-only" />
+
+              <div class="w-10 h-5 bg-gray-300 rounded-full shadow-inner"></div>
+
+              <div class="dot absolute w-4 h-4 bg-white rounded-full left-0.5 top-1/2 transition"></div>
+            </div>
+
+            <div class="ml-3 text-gray-700 font-medium">
+              فقط کالاهای موجود
+            </div>
+          </label>
+        </div>
+        <button className="bg-sky-500/90 text-white w-full py-2 rounded-md font-bold shadow-lg shadow-sky-500/50 hover:bg-sky-500 transition-all duration-300">
+          فیلتر
+        </button>
       </aside>
-      <main className="col-span-4">
+      <main className="col-span-4 ">
         <div>
           <ul className="flex items-center space-x-6 space-x-reverse text-xs">
             <li>
-              <button className="bg-rose-500 text-white px-3 py-2 font-bold rounded-lg">
+              <button className="bg-rose-500 text-white px-3 py-2 font-bold rounded-md">
                 پربازدید ترین
               </button>
             </li>
@@ -184,7 +202,7 @@ const Products = (props) => {
               <button>گران ترین</button>
             </li>
           </ul>
-          <div className="grid grid-cols-4 gap-8 mt-8">
+          <div className="grid grid-cols-4 gap-8 my-8">
             {products.map((product) => (
               <ProductCartVertical
                 containerClassName="border-b py-2 hover:shadow-lg transition-all duration-300"
@@ -194,6 +212,7 @@ const Products = (props) => {
             ))}
           </div>
         </div>
+        <PaginationLayout />
       </main>
     </main>
   );
