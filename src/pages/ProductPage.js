@@ -85,7 +85,7 @@ const ProductPage = () => {
               </div>
             </div>
             <div>
-              <div className="bg-gray-50 border border-gray-100 rounded p-4">
+              <div className="bg-gray-50/50 border rounded p-4">
                 <div className="flex items-center mb-4">
                   <div className="w-6 h-6">
                     <img

@@ -6,7 +6,7 @@ import tagBanner from 'assets/images/banners/tag-banner.png';
 import { A11y, Autoplay, Navigation, Pagination } from 'swiper';
 
 import products from 'productsFake';
-import ProductCartVertical from 'components/productCart/ProductCartVertical';
+import ProductCartVertical from 'components/productCard/ProductCardVertical';
 import SwiperNavBtn from 'components/swiper/SwiperNavBtn';
 
 const AmazingOffer = ({}) => {

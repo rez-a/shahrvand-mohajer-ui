@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import products from 'productsFake';
-import ProductCartVertical from 'components/productCart/ProductCartVertical';
+import ProductCartVertical from 'components/productCard/ProductCardVertical';
 import TitleIcon from 'components/shared/TitleIcon';
 import AccordionLayout from 'components/shared/accordion/AccordionLayout';
 import AccordionItem from 'components/shared/accordion/AccordionItem';
@@ -15,7 +15,7 @@ const Products = (props) => {
   const [price, setPrice] = useState([25, 75]);
   return (
     <main className="grid grid-cols-5 gap-12 items-start">
-      <aside className="border rounded-md p-4 bg-gray-50/50">
+      <aside className="border rounded-md p-4 bg-gray-50/50 border-gray-100">
         <div className="mb-8">
           <h2 className="font-semibold text-zinc-400 flex items-center mb-4">
             <TitleIcon bg="bg-zinc-400" />

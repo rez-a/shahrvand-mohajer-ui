@@ -1,11 +1,12 @@
 import Home from 'pages/Home';
 import ProductPage from 'pages/ProductPage';
-import Products from 'pages/MainGroupProducts';
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LayoutHome from './layout/LayoutHome';
 import LayoutPage from './layout/LayoutPage';
 import MainGroupProducts from 'pages/MainGroupProducts';
+import SideGroupProducts from 'pages/SideGroupProducts';
+import Cart from 'pages/Cart';
 
 const AllRoutes = () => {
   return (
@@ -25,8 +26,9 @@ const AllRoutes = () => {
           />
           <Route
             path="products/:MainGroupErpCode/:slugMainGroupErpCode/:SideGroupErpCode/:slugSideGroupErpCode"
-            element={<ProductPage />}
+            element={<SideGroupProducts />}
           />
+          <Route path="cart" element={<Cart />} />
         </Route>
       </Routes>
     </BrowserRouter>

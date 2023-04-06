@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import ProductCartVertical from 'components/productCart/ProductCartVertical';
+import ProductCartVertical from 'components/productCard/ProductCardVertical';
 import TitleIcon from 'components/shared/TitleIcon';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, A11y, Autoplay } from 'swiper';

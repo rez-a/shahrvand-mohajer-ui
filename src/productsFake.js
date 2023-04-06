@@ -17,6 +17,7 @@ const products = [
     discount: 20,
     rate: 40,
     imageCover: product1,
+    mainGroup: 'فروشگاه قاصدک',
   },
   {
     id: 2,
@@ -26,6 +27,7 @@ const products = [
     discount: 0,
     rate: 80,
     imageCover: product2,
+    mainGroup: 'فروشگاه قاصدک',
   },
   {
     id: 3,
@@ -35,6 +37,7 @@ const products = [
     discount: 10,
     rate: 20,
     imageCover: product3,
+    mainGroup: 'فروشگاه قاصدک',
   },
   {
     id: 4,
@@ -44,6 +47,7 @@ const products = [
     discount: 0,
     rate: 40,
     imageCover: product4,
+    mainGroup: 'فروشگاه قاصدک',
   },
   {
     id: 5,
@@ -53,6 +57,7 @@ const products = [
     discount: 0,
     rate: 20,
     imageCover: product5,
+    mainGroup: 'فروشگاه قاصدک',
   },
   {
     id: 6,
@@ -62,6 +67,7 @@ const products = [
     discount: 0,
     rate: 60,
     imageCover: product6,
+    mainGroup: 'فروشگاه قاصدک',
   },
   {
     id: 7,
@@ -71,6 +77,7 @@ const products = [
     discount: 0,
     rate: 60,
     imageCover: product7,
+    mainGroup: 'فروشگاه قاصدک',
   },
   {
     id: 8,
@@ -80,6 +87,7 @@ const products = [
     discount: 0,
     rate: 60,
     imageCover: product8,
+    mainGroup: 'فروشگاه قاصدک',
   },
   {
     id: 9,
@@ -89,6 +97,7 @@ const products = [
     discount: 0,
     rate: 100,
     imageCover: product9,
+    mainGroup: 'فروشگاه قاصدک',
   },
   {
     id: 10,
@@ -98,6 +107,7 @@ const products = [
     discount: 10,
     rate: 60,
     imageCover: product10,
+    mainGroup: 'فروشگاه قاصدک',
   },
 ];
 export default products;

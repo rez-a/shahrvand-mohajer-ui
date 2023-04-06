@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TitleIcon from 'components/shared/TitleIcon';
-import ProductCartHorizontal from 'components/productCart/ProductCartHorizontal';
+import ProductCartHorizontal from 'components/productCard/ProductCardHorizontal';
 import productsDiscount from 'productsDiscountFake';
 
 const BiggestDiscount = (props) => {
