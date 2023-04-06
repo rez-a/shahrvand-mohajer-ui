@@ -16,7 +16,6 @@ const ContentAccordionItem = ({
       className={` accordion-content ${defaultClassName} ${
         isOpen ? `show ${openClassName}` : closeClaseName
       }`}
-      style={isOpen ? { height: itemRef?.current?.scrollHeight } : {}}
     >
       {children}
     </div>

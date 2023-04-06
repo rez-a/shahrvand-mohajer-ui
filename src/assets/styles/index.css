@@ -19,7 +19,7 @@
     @apply overflow-hidden h-0 transition-all duration-200 ease-in-out will-change-[height];
   }
   .accordion-content.show {
-    @apply h-52;
+    @apply h-96;
   }
   .content {
     margin: 0 auto;
