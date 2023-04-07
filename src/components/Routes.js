@@ -8,8 +8,8 @@ import MainGroupProducts from 'pages/MainGroupProducts';
 import SideGroupProducts from 'pages/SideGroupProducts';
 import Cart from 'pages/Cart';
 import Checkout from 'pages/Checkout';
-import Profile from 'components/profile/MainProfile';
-import MainProfile from 'components/profile/MainProfile';
+import Profile from 'pages/Profile';
+import MainProfile from './profile/MainProfile';
 
 const AllRoutes = () => {
   return (

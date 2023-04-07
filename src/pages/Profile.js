@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TitleIcon from 'components/shared/TitleIcon';
-import { Outlet } from 'react-router-dom';
+import { Outlet, Route, Routes } from 'react-router-dom';
+import MainProfile from 'components/profile/MainProfile';
 
 const Profile = (props) => {
   return (
