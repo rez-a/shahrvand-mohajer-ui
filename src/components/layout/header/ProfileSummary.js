@@ -1,0 +1,181 @@
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
+const ProfileSummary = (props) => {
+  const [showProfileLinks, setShowProfileLinks] = useState(false);
+  return true ? (
+    <div className="flex items-center cursor-pointer relative group">
+      <button
+        onClick={() => setShowProfileLinks(!showProfileLinks)}
+        className=" w-full h-full absolute"
+      ></button>
+      <div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+          className="fill-zinc-400 group-hover:fill-zinc-500"
+        >
+          <path d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z"></path>
+        </svg>
+      </div>
+      <div className="text-sm">
+        <p className="w-28 text-left font-bold">جلال بهرامی راد</p>
+        <p className="w-28 text-left text-zinc-400 text-xs mt-1">
+          09302582971
+        </p>
+      </div>
+      <div className="bg-gray-100 p-1.5 rounded-full mr-2">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+          className="fill-zinc-400"
+        >
+          <path d="M4 22C4 17.5817 7.58172 14 12 14C16.4183 14 20 17.5817 20 22H4ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13Z"></path>
+        </svg>
+      </div>
+      {showProfileLinks && (
+        <div className="absolute border border-gray-100 bg-white w-[120%] left-0 top-full rounded text-xs mt-1">
+          <ul className="divide-y divide-gray-100">
+            <li>
+              <a
+                href="#"
+                className="flex items-center w-full p-3 font-semibold hover:bg-gray-50"
+              >
+                <span className="ml-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    className="fill-zinc-400"
+                  >
+                    <path d="M4 22C4 17.5817 7.58172 14 12 14C16.4183 14 20 17.5817 20 22H18C18 18.6863 15.3137 16 12 16C8.68629 16 6 18.6863 6 22H4ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11Z"></path>
+                  </svg>
+                </span>
+                <span>پروفایل</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className=" flex items-center w-full p-3 font-semibold hover:bg-gray-50"
+              >
+                <span className="ml-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    className="fill-zinc-400"
+                  >
+                    <path d="M6.41421 15.89L16.5563 5.74786L15.1421 4.33365L5 14.4758V15.89H6.41421ZM7.24264 17.89H3V13.6474L14.435 2.21233C14.8256 1.8218 15.4587 1.8218 15.8492 2.21233L18.6777 5.04075C19.0682 5.43128 19.0682 6.06444 18.6777 6.45497L7.24264 17.89ZM3 19.89H21V21.89H3V19.89Z"></path>
+                  </svg>
+                </span>
+                <span>ویرایش اطلاعات</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className=" flex items-center w-full p-3 font-semibold hover:bg-gray-50"
+              >
+                <span className="ml-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    className="fill-zinc-400"
+                  >
+                    <path d="M12 20.8995L16.9497 15.9497C19.6834 13.2161 19.6834 8.78392 16.9497 6.05025C14.2161 3.31658 9.78392 3.31658 7.05025 6.05025C4.31658 8.78392 4.31658 13.2161 7.05025 15.9497L12 20.8995ZM12 23.7279L5.63604 17.364C2.12132 13.8492 2.12132 8.15076 5.63604 4.63604C9.15076 1.12132 14.8492 1.12132 18.364 4.63604C21.8787 8.15076 21.8787 13.8492 18.364 17.364L12 23.7279ZM12 13C13.1046 13 14 12.1046 14 11C14 9.89543 13.1046 9 12 9C10.8954 9 10 9.89543 10 11C10 12.1046 10.8954 13 12 13ZM12 15C9.79086 15 8 13.2091 8 11C8 8.79086 9.79086 7 12 7C14.2091 7 16 8.79086 16 11C16 13.2091 14.2091 15 12 15Z"></path>
+                  </svg>
+                </span>
+                <span>آدرس ها</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className=" flex items-center w-full p-3 font-semibold hover:bg-gray-50"
+              >
+                <span className="ml-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    className="fill-zinc-400"
+                  >
+                    <path d="M17 3.99986V2.06738C17 1.79124 17.2239 1.56738 17.5 1.56738C17.617 1.56738 17.7302 1.60839 17.8201 1.68327L21.9391 5.11575C22.1512 5.29253 22.1799 5.60782 22.0031 5.81995C21.9081 5.93395 21.7674 5.99986 21.619 5.99986H2V3.99986H17ZM2 17.9999H22V19.9999H2V17.9999ZM2 10.9999H22V12.9999H2V10.9999Z"></path>
+                  </svg>
+                </span>
+                <span>سفارش ها</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className=" flex items-center w-full p-3 font-semibold hover:bg-gray-50"
+              >
+                <span className="ml-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    className="fill-zinc-400"
+                  >
+                    <path d="M3.00488 3H21.0049C21.5572 3 22.0049 3.44772 22.0049 4V20C22.0049 20.5523 21.5572 21 21.0049 21H3.00488C2.4526 21 2.00488 20.5523 2.00488 20V4C2.00488 3.44772 2.4526 3 3.00488 3ZM20.0049 12H4.00488V19H20.0049V12ZM20.0049 8V5H4.00488V8H20.0049Z"></path>
+                  </svg>
+                </span>
+                <span>پرداخت ها</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className=" flex items-center w-full p-3 font-semibold hover:bg-gray-50"
+              >
+                <span className="ml-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    className="fill-zinc-400"
+                  >
+                    <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C15.2713 2 18.1757 3.57078 20.0002 5.99923L17.2909 5.99931C15.8807 4.75499 14.0285 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C14.029 20 15.8816 19.2446 17.2919 17.9998L20.0009 17.9998C18.1765 20.4288 15.2717 22 12 22ZM19 16V13H11V11H19V8L24 12L19 16Z"></path>
+                  </svg>
+                </span>
+                <span>خروج از حساب کاربری</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      )}
+    </div>
+  ) : (
+    <button className="border rounded text-xs py-1 px-2 flex items-center bg-gray-50 border-gray-100 hover:bg-zinc-100 transition">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        width="24"
+        height="24"
+        className="fill-zinc-500"
+      >
+        <path fill="none" d="M0 0h24v24H0z" />
+        <path d="M10 11V8l5 4-5 4v-3H1v-2h9zm-7.542 4h2.124A8.003 8.003 0 0 0 20 12 8 8 0 0 0 4.582 9H2.458C3.732 4.943 7.522 2 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10c-4.478 0-8.268-2.943-9.542-7z" />
+      </svg>
+      <span className="px-2 border-l">ورود</span>
+      <span className="px-2">ثبت نام</span>
+    </button>
+  );
+};
+
+ProfileSummary.propTypes = {};
+
+export default ProfileSummary;

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import logo from 'assets/images/logo.svg';
 import MegaMenu from './MegaMenu';
+import ProfileSummary from './ProfileSummary';
 
 const Header = () => {
   return (
@@ -50,20 +51,7 @@ const Header = () => {
             </button>
           </div>
           <div className="mr-auto flex items-center">
-            <button className="border rounded text-xs py-1 px-2 flex items-center bg-gray-50 border-gray-100 hover:bg-zinc-100 transition">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                width="24"
-                height="24"
-                className="fill-zinc-500"
-              >
-                <path fill="none" d="M0 0h24v24H0z" />
-                <path d="M10 11V8l5 4-5 4v-3H1v-2h9zm-7.542 4h2.124A8.003 8.003 0 0 0 20 12 8 8 0 0 0 4.582 9H2.458C3.732 4.943 7.522 2 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10c-4.478 0-8.268-2.943-9.542-7z" />
-              </svg>
-              <span className="px-2 border-l">ورود</span>
-              <span className="px-2">ثبت نام</span>
-            </button>
+            <ProfileSummary />
             <button className="border-r mr-2 px-2 group border-zinc-300">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
