@@ -18,9 +18,6 @@
   .accordion-content {
     @apply overflow-hidden h-0 transition-all duration-200 ease-in-out will-change-[height];
   }
-  .accordion-content.show {
-    @apply h-96;
-  }
   .content {
     margin: 0 auto;
     padding: 0 1rem;
@@ -68,4 +65,33 @@ input:checked ~ .dot {
   background-color: #f43f5e;
   left: auto;
   right: 1.125rem;
+}
+
+.overflow-auto::-webkit-scrollbar,
+.overflow-auto::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+.overflow-auto::-webkit-scrollbar-track
+  .overflow-auto::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(77, 86, 224, 0.15);
+  border-radius: 100%;
+}
+
+.overflow-auto::-webkit-scrollbar-thumb,
+.overflow-auto::-webkit-scrollbar-thumb {
+  background-color: #fff;
+  border-radius: 2px;
+  visibility: hidden;
+}
+
+.overflow-auto:hover::-webkit-scrollbar-thumb,
+.overflow-auto:hover::-webkit-scrollbar-thumb {
+  background-color: rgb(222, 222, 222);
+  visibility: visible;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(134, 134, 134);
 }

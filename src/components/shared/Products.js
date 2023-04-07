@@ -10,6 +10,7 @@ import ContentAccordionItem from 'components/shared/accordion/ContentAccordionIt
 import RangeSlider from 'react-range-slider-input';
 import 'react-range-slider-input/dist/style.css';
 import PaginationLayout from 'components/pagination/PaginationLayout';
+import SwitchInput from './inputs/SwitchInput';
 
 const Products = (props) => {
   const [price, setPrice] = useState([25, 75]);
@@ -160,22 +161,7 @@ const Products = (props) => {
           </p>
         </div>
         <div class="flex items-center w-full mb-12 my-8">
-          <label
-            for="toogleA"
-            class="flex items-center cursor-pointer"
-          >
-            <div class="relative ml-2">
-              <input id="toogleA" type="checkbox" class="sr-only" />
-
-              <div class="w-10 h-5 bg-gray-300 rounded-full shadow-inner"></div>
-
-              <div class="dot absolute w-4 h-4 bg-white rounded-full left-0.5 top-1/2 transition"></div>
-            </div>
-
-            <div class="ml-3 text-gray-700 font-medium">
-              فقط کالاهای موجود
-            </div>
-          </label>
+          <SwitchInput label="فقط کالاهای موجود" id="is-available" />
         </div>
         <button className="bg-sky-500/90 text-white w-full py-2 rounded-md font-bold shadow-lg shadow-sky-500/50 hover:bg-sky-500 transition-all duration-300">
           فیلتر

@@ -7,6 +7,7 @@ import LayoutPage from './layout/LayoutPage';
 import MainGroupProducts from 'pages/MainGroupProducts';
 import SideGroupProducts from 'pages/SideGroupProducts';
 import Cart from 'pages/Cart';
+import Checkout from 'pages/Checkout';
 
 const AllRoutes = () => {
   return (
@@ -28,7 +29,8 @@ const AllRoutes = () => {
             path="products/:MainGroupErpCode/:slugMainGroupErpCode/:SideGroupErpCode/:slugSideGroupErpCode"
             element={<SideGroupProducts />}
           />
-          <Route path="cart" element={<Cart />} />
+          <Route path="checkout/cart" element={<Cart />} />
+          <Route path="checkout/shipping" element={<Checkout />} />
         </Route>
       </Routes>
     </BrowserRouter>
