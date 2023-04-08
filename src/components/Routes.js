@@ -10,6 +10,10 @@ import Cart from 'pages/Cart';
 import Checkout from 'pages/Checkout';
 import Profile from 'pages/Profile';
 import MainProfile from './profile/MainProfile';
+import EditProfile from './profile/EditProfile';
+import Addresses from './profile/Addresses';
+import Orders from './profile/Orders';
+import Payments from './profile/Payments';
 
 const AllRoutes = () => {
   return (
@@ -35,14 +39,14 @@ const AllRoutes = () => {
           <Route path="checkout/shipping" element={<Checkout />} />
           <Route path="profile" element={<Profile />}>
             <Route index element={<MainProfile />} />
-            <Route path="edit" element={<div></div>} />
-            <Route path="addresses" element={<div></div>} />
-            <Route path="orders" element={<div></div>}>
-              <Route index element={<div></div>} />
+            <Route path="edit" element={<EditProfile />} />
+            <Route path="addresses" element={<Addresses />} />
+            <Route path="orders">
+              <Route index element={<Orders />} />
               <Route path="details/:orderId" element={<div></div>} />
             </Route>
-            <Route path="payments" element={<div></div>}>
-              <Route index element={<div></div>} />
+            <Route path="payments">
+              <Route index element={<Payments />} />
               <Route
                 path="details/:paymentId"
                 element={<div></div>}

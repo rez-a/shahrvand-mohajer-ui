@@ -4,7 +4,7 @@
 @tailwind utilities;
 @layer base {
   body {
-    @apply font-Pelak;
+    @apply font-Pelak bg-sky-50/50;
   }
   body {
     direction: rtl;

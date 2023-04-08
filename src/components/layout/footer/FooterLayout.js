@@ -7,7 +7,7 @@ import Copyright from './Copyright';
 
 const FooterLayout = () => {
   return (
-    <div className="border-t p-2">
+    <div className="border-t p-2 bg-white mt-5">
       <div>
         <button type="button" className="flex items-center mx-auto">
           <svg

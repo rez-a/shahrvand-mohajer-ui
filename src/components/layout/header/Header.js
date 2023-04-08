@@ -6,7 +6,7 @@ import ProfileSummary from './ProfileSummary';
 
 const Header = () => {
   return (
-    <header className="shadow">
+    <header className="shadow bg-white">
       <div className="content 2xl:container">
         <nav className="flex items-center py-4">
           <div className="h-8 w-32">

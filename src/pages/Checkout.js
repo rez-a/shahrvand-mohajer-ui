@@ -1,5 +1,6 @@
 import CheckboxInput from 'components/shared/inputs/CheckboxInput';
 import RadioInput from 'components/shared/inputs/RadioInput';
+import TextAreaInput from 'components/shared/inputs/TextAreaInput';
 import ModalLayout from 'components/shared/modal/ModalLayout';
 import TitleIcon from 'components/shared/TitleIcon';
 import React, { useState } from 'react';
@@ -265,24 +266,11 @@ const Checkout = () => {
           </h4>
 
           <form className="mt-8 mb-2 px-4 py-3">
-            <div className="">
-              <label htmlFor="address">
-                <p className="flex items-center mb-3">
-                  <TitleIcon />
-                  <span className="font-bold text-zinc-500 mr-2">
-                    آدرس
-                  </span>
-                </p>
-              </label>
-              <textarea
-                className="border w-full border-gray-100 rounded-md p-3 focus:outline-none focus:border-gray-300"
-                cols="30"
-                rows="5"
-                id="address"
-                placeholder="آدرس"
-              ></textarea>
-            </div>
-
+            <TextAreaInput
+              label="آدرس"
+              placeholder="آدرس"
+              id="address"
+            />
             <button
               className="mt-6 w-full  rounded-md bg-rose-500 py-3 px-6 text-center  text-sm font-bold  text-white shadow-lg shadow-rose-500/20 transition-all hover:bg-rose-600 duration-300"
               type="button"
@@ -302,25 +290,11 @@ const Checkout = () => {
           </h4>
 
           <form className="mt-8 mb-2 px-4 py-3">
-            <div className="">
-              <label htmlFor="address">
-                <p className="flex items-center mb-3">
-                  <TitleIcon />
-                  <span className="font-bold text-zinc-500 mr-2">
-                    آدرس
-                  </span>
-                </p>
-              </label>
-              <textarea
-                className="border w-full border-gray-100 rounded-md p-3 focus:outline-none focus:border-gray-300"
-                cols="30"
-                rows="5"
-                id="address"
-                placeholder="آدرس"
-                value="استان خراسان شمالی ، ‌شهر بجنورد ، خراسان شمالی-بجنورد"
-              ></textarea>
-            </div>
-
+            <TextAreaInput
+              label="آدرس"
+              placeholder="آدرس"
+              id="address"
+            />
             <button
               className="mt-6 w-full  rounded-md bg-rose-500 py-3 px-6 text-center  text-sm font-bold  text-white shadow-lg shadow-rose-500/20 transition-all hover:bg-rose-600 duration-300"
               type="button"

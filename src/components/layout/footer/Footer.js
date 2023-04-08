@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className="grid grid-cols-4 p-8">
+    <footer className="grid grid-cols-4 p-8 bg-white">
       <ul className="space-y-2">
         <li>
           <h2 className="font-bold mb-4">راهنمای خرید از تاپ کالا</h2>
