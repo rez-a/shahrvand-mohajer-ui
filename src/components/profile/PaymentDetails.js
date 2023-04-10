@@ -9,9 +9,9 @@ import ProfileProductCard from 'components/productCard/ProfileProductCard';
 import products from 'productsFake';
 import storeLogo from 'assets/images/store-logo.png';
 
-const OrderDetails = (props) => {
+const PaymentDetails = (props) => {
   return (
-    <Card title="جزییات سفارش">
+    <Card title="جزییات پرداخت">
       <div className="p-4 flex items-center space-x-4 space-x-reverse bg-gray-100/70 ">
         <button className="text-center">
           <svg
@@ -27,7 +27,7 @@ const OrderDetails = (props) => {
           </span>
         </button>
         <div className="pr-6 border-r">
-          <p className="font-bold mb-2">سفارش SDGASDGSDGSG</p>
+          <p className="font-bold mb-2">پرداخت SDGASDGSDGSG</p>
           <p className="text-xs text-zinc-400 font-light ">
             ثبت شده در تاریخ 1401/05/09
           </p>
@@ -57,16 +57,16 @@ const OrderDetails = (props) => {
           </li>
           <li className="flex items-center py-4 border-b">
             <div className="space-y-2 w-1/2">
-              <p className="text-sky-500 font-bold">مبلغ سفارش :</p>
+              <p className="text-sky-500 font-bold">مبلغ پرداختی :</p>
               <p className="text-sm text-zinc-500">
                 <span className="font-bold text-base">235,000</span>
                 <span className="text-xs mr-1">تومان</span>
               </p>
             </div>
             <div className="space-y-2 w-1/2">
-              <p className="text-sky-500 font-bold">وضعیت سفارش :</p>
+              <p className="text-sky-500 font-bold">وضعیت پرداخت :</p>
               <p className="text-xs bg-rose-50 inline-flex px-2 py-1 rounded-md text-rose-500 border border-rose-300">
-                پرداخت نشده
+                ناموفق
               </p>
             </div>
           </li>
@@ -281,6 +281,6 @@ const OrderDetails = (props) => {
   );
 };
 
-OrderDetails.propTypes = {};
+PaymentDetails.propTypes = {};
 
-export default OrderDetails;
+export default PaymentDetails;
