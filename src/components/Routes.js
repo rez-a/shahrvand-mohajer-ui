@@ -14,6 +14,7 @@ import EditProfile from './profile/EditProfile';
 import Addresses from './profile/Addresses';
 import Orders from './profile/Orders';
 import Payments from './profile/Payments';
+import OrderDetails from './profile/OrderDetails';
 
 const AllRoutes = () => {
   return (
@@ -43,7 +44,10 @@ const AllRoutes = () => {
             <Route path="addresses" element={<Addresses />} />
             <Route path="orders">
               <Route index element={<Orders />} />
-              <Route path="details/:orderId" element={<div></div>} />
+              <Route
+                path="details/:orderId"
+                element={<OrderDetails />}
+              />
             </Route>
             <Route path="payments">
               <Route index element={<Payments />} />

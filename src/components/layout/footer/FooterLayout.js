@@ -8,14 +8,14 @@ import Copyright from './Copyright';
 const FooterLayout = () => {
   return (
     <div className="border-t p-2 bg-white mt-5">
-      <div>
+      <div className="py-4">
         <button type="button" className="flex items-center mx-auto">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             width="24"
             height="24"
-            className="bg-zinc-300 rounded-full w-8 h-8 p-1 fill-rose-500"
+            className="bg-zinc-100 rounded-full w-8 h-8 p-1 fill-rose-500"
           >
             <path fill="none" d="M0 0h24v24H0z" />
             <path d="M12 10.828l-4.95 4.95-1.414-1.414L12 8l6.364 6.364-1.414 1.414z" />

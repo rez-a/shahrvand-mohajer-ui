@@ -6,7 +6,7 @@ import Card from './Card';
 const Payments = (props) => {
   return (
     <Card title="آخرین پرداخت ها">
-      <div class="relative overflow-x-auto rounded-md border border-gray-100">
+      <div class="relative overflow-x-auto border border-gray-100">
         <table class="w-full text-sm text-right text-gray-500 ">
           <thead class="text-xs text-gray-700  bg-gray-100">
             <tr>
