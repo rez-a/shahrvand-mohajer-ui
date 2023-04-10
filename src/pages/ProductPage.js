@@ -9,7 +9,7 @@ import Breadcrumb from 'components/Breadcrumb';
 const ProductPage = () => {
   return (
     <>
-      <div className="flex items-start gap-6">
+      <div className="flex items-start gap-6 bg-white p-4 py-8 rounded-md border border-gray-100">
         <div className="w-72 max-h-96">
           <ImageZoom />
         </div>
@@ -128,7 +128,7 @@ const ProductPage = () => {
                   <span className="text-sm">تومان</span>
                 </p>
                 <small>321,600 تومان تخفیف کسر گردیده است.</small>
-                <button className="w-full bg-rose-500 text-white text-lg p-3 rounded mt-2 hover:bg-rose-600">
+                <button className="w-full bg-rose-500 text-white text-lg p-3 rounded mt-2 hover:bg-rose-600 transition-all duration-300">
                   افزودن به سبد خرید
                 </button>
               </div>

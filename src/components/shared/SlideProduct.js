@@ -25,7 +25,7 @@ const SlideProduct = ({
   };
   return (
     <div
-      className={`border rounded-lg p-4 pb-0 bullet-active-rose my-8 ${className}`}
+      className={`border border-gray-100 rounded-lg p-4 pb-0 bullet-active-rose bg-white my-8 ${className}`}
     >
       <header className="flex items-center text-sm">
         <h2 className="font-semibold text-zinc-400 flex items-center ">

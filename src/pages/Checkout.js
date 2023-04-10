@@ -4,9 +4,10 @@ import TextAreaInput from 'components/shared/inputs/TextAreaInput';
 import ModalLayout from 'components/shared/modal/ModalLayout';
 import TitleIcon from 'components/shared/TitleIcon';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Checkout = () => {
-  const [editAddress, setEditAddress] = useState(true);
+  const [editAddress, setEditAddress] = useState(false);
   const [showModalCreate, setShowModalCreate] = useState(false);
   const [showModalEdit, setShowModalEdit] = useState(false);
   return (
@@ -46,13 +47,16 @@ const Checkout = () => {
                         جلال بهرامی راد
                       </span>
                     </p>
-                    <button className="text-xs text-rose-500 underline decoration-dotted">
+                    <button
+                      onClick={() => setShowModalEdit(true)}
+                      className="text-xs text-rose-500 underline decoration-dotted"
+                    >
                       اصلاح این آدرس
                     </button>
                   </div>
                   <button
                     onClick={() => setEditAddress(true)}
-                    className="border rounded py-1 px-2 flex items-center bg-gray-50 border-gray-100 hover:bg-zinc-100 text-zinc-500 transition"
+                    className="border rounded py-1 px-2 flex items-center bg-white border-gray-100 hover:bg-gray-50/50 text-zinc-500 transition"
                   >
                     تغییر آدرس ارسال
                   </button>
@@ -72,11 +76,11 @@ const Checkout = () => {
               <div>
                 <button
                   onClick={() => setShowModalCreate(true)}
-                  className="border w-full border-dashed text-center text-sm text-zinc-400 rounded-md py-4 mb-3"
+                  className="border w-full border-dashed bg-white text-center text-sm text-zinc-400 rounded-md py-4 mb-3"
                 >
                   <span>ایجاد آدرس جدید</span>
                 </button>
-                <div className="border border-sky-200 bg-sky-50/50 p-4 rounded-md mb-3">
+                <div className="border border-sky-400 bg-sky-50/50 p-4 rounded-md mb-3">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-8">
                       <p className="text-zinc-500">
@@ -89,11 +93,11 @@ const Checkout = () => {
                     <div className="flex gap-3">
                       <button
                         onClick={() => setShowModalEdit(true)}
-                        className="border  rounded py-1 px-2 flex items-center bg-gray-100 text-xs border-gray-200 hover:bg-gray-200/70 text-zinc-500 transition-all duration-300"
+                        className="border  rounded py-1 px-2 flex items-center bg-white text-xs border-gray-200 hover:bg-gray-50/50 text-zinc-500 transition-all duration-300"
                       >
                         ویرایش
                       </button>
-                      <button className="border  rounded py-1 px-2 flex items-center bg-gray-100 text-xs border-gray-200 hover:bg-gray-200/70 text-zinc-500 transition-all duration-300">
+                      <button className="border  rounded py-1 px-2 flex items-center bg-white text-xs border-gray-200 hover:bg-gray-50/50 text-zinc-500 transition-all duration-300">
                         حذف
                       </button>
                     </div>
@@ -109,7 +113,7 @@ const Checkout = () => {
                     شمالی-بجنورد
                   </p>
                 </div>
-                <div className="border border-gray-100 bg-gray-50/50 p-4 rounded-md mb-3">
+                <div className="border border-gray-100 bg-white p-4 rounded-md mb-3">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-8">
                       <p className="text-zinc-500">
@@ -122,11 +126,11 @@ const Checkout = () => {
                     <div className="flex gap-3">
                       <button
                         onClick={() => setShowModalEdit(true)}
-                        className="border  rounded py-1 px-2 flex items-center bg-gray-100 text-xs border-gray-200 hover:bg-gray-200/70 text-zinc-500 transition-all duration-300"
+                        className="border  rounded py-1 px-2 flex items-center bg-white text-xs border-gray-200 hover:bg-gray-50/50 text-zinc-500 transition-all duration-300"
                       >
                         ویرایش
                       </button>
-                      <button className="border  rounded py-1 px-2 flex items-center bg-gray-100 text-xs border-gray-200 hover:bg-gray-200/70 text-zinc-500 transition-all duration-300">
+                      <button className="border  rounded py-1 px-2 flex items-center bg-white text-xs border-gray-200 hover:bg-gray-50/50 text-zinc-500 transition-all duration-300">
                         حذف
                       </button>
                     </div>
@@ -185,14 +189,14 @@ const Checkout = () => {
               </div>
             </div>
           </div>
-          <a
-            href="/checkout/cart"
+          <Link
+            to="/checkout/cart"
             className="text-rose-500 text-sm underline decoration-dotted my-4 block hover:no-underline"
           >
             بازگشت به سبد خرید
-          </a>
+          </Link>
         </main>
-        <aside className="bg-gray-50/50 border rounded border-gray-100 col-span-2 p-3 sticky top-4 mb-3">
+        <aside className="bg-white border rounded-md border-gray-100 col-span-2 p-3 sticky top-24 mb-3">
           <div className="mb-3 border-b pb-4">
             <p className="flex items-center justify-between mb-3">
               <span className="font-bold">مبلغ کل (2کالا)</span>

@@ -28,8 +28,11 @@ const Cart = () => {
         </div>
         <AccordionLayout>
           <AccordionItem defaultClassName="mb-3 border  rounded-md">
-            <TitleAccordionItem openClassName="border-b border-b-gray-100">
-              <div className="bg-gray-50/50 p-4  flex items-center justify-between">
+            <TitleAccordionItem
+              openClassName="border-b border-b-gray-100 bg-gray-50/50"
+              defaultClassName="bg-white"
+            >
+              <div className=" p-4   flex items-center justify-between">
                 <div className="flex items-center">
                   <div className="w-6 h-6">
                     <img
@@ -56,6 +59,7 @@ const Cart = () => {
             <ContentAccordionItem
               closeClaseName="h-0"
               openClassName="h-96"
+              defaultClassName="bg-white"
             >
               <div className="h-[20rem] overflow-auto">
                 <ul className="mb-12 divide-y col-span-3 p-4">
@@ -78,8 +82,11 @@ const Cart = () => {
             </ContentAccordionItem>
           </AccordionItem>
           <AccordionItem defaultClassName="mb-3 border  rounded-md">
-            <TitleAccordionItem openClassName="border-b border-b-gray-100">
-              <div className="bg-gray-50/50 p-4  flex items-center justify-between">
+            <TitleAccordionItem
+              openClassName="border-b border-b-gray-100 bg-gray-50/50"
+              defaultClassName="bg-white"
+            >
+              <div className=" p-4   flex items-center justify-between">
                 <div className="flex items-center">
                   <div className="w-6 h-6">
                     <img
@@ -103,7 +110,11 @@ const Cart = () => {
                 </svg>
               </div>
             </TitleAccordionItem>
-            <ContentAccordionItem closeClaseName="h-0">
+            <ContentAccordionItem
+              closeClaseName="h-0"
+              openClassName="h-96"
+              defaultClassName="bg-white"
+            >
               <div className="h-[20rem] overflow-auto">
                 <ul className="mb-12 divide-y col-span-3 p-4">
                   {products.slice(0, 2).map((product) => (
@@ -125,8 +136,11 @@ const Cart = () => {
             </ContentAccordionItem>
           </AccordionItem>
           <AccordionItem defaultClassName="mb-3 border  rounded-md">
-            <TitleAccordionItem openClassName="border-b border-b-gray-100">
-              <div className="bg-gray-50/50 p-4  flex items-center justify-between">
+            <TitleAccordionItem
+              openClassName="border-b border-b-gray-100 bg-gray-50/50"
+              defaultClassName="bg-white"
+            >
+              <div className=" p-4   flex items-center justify-between">
                 <div className="flex items-center">
                   <div className="w-6 h-6">
                     <img
@@ -150,7 +164,11 @@ const Cart = () => {
                 </svg>
               </div>
             </TitleAccordionItem>
-            <ContentAccordionItem closeClaseName="h-0">
+            <ContentAccordionItem
+              closeClaseName="h-0"
+              openClassName="h-96"
+              defaultClassName="bg-white"
+            >
               <div className="h-[20rem] overflow-auto">
                 <ul className="mb-12 divide-y col-span-3 p-4">
                   {products.slice(0, 2).map((product) => (
@@ -172,8 +190,11 @@ const Cart = () => {
             </ContentAccordionItem>
           </AccordionItem>
           <AccordionItem defaultClassName="mb-3 border  rounded-md">
-            <TitleAccordionItem openClassName="border-b border-b-gray-100">
-              <div className="bg-gray-50/50 p-4  flex items-center justify-between">
+            <TitleAccordionItem
+              openClassName="border-b border-b-gray-100 bg-gray-50/50"
+              defaultClassName="bg-white"
+            >
+              <div className=" p-4   flex items-center justify-between">
                 <div className="flex items-center">
                   <div className="w-6 h-6">
                     <img
@@ -197,7 +218,11 @@ const Cart = () => {
                 </svg>
               </div>
             </TitleAccordionItem>
-            <ContentAccordionItem closeClaseName="h-0">
+            <ContentAccordionItem
+              closeClaseName="h-0"
+              openClassName="h-96"
+              defaultClassName="bg-white"
+            >
               <div className="h-[20rem] overflow-auto">
                 <ul className="mb-12 divide-y col-span-3 p-4">
                   {products.slice(0, 2).map((product) => (
@@ -220,7 +245,7 @@ const Cart = () => {
           </AccordionItem>
         </AccordionLayout>
       </main>
-      <aside className="bg-gray-50/50 border rounded border-gray-100 col-span-2 p-3 sticky top-4 mb-3">
+      <aside className="bg-gray-50/50 border rounded-md border-gray-100 bg-white col-span-2 p-3 sticky top-24 mb-3">
         <p className="flex items-center justify-between mb-3">
           <span className="font-bold">مبلغ کل (2کالا)</span>
           <span className="opacity-60">16,879,000 تومان</span>

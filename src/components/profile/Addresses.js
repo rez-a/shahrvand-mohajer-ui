@@ -12,7 +12,7 @@ const Addresses = (props) => {
       <div>
         <button
           onClick={() => setShowModalCreate(true)}
-          className="border w-full border-dashed text-center text-sm text-zinc-400 rounded-md py-4 mb-3"
+          className="border w-full border-dashed text-center text-sm text-zinc-400 py-4 mb-3"
         >
           <span>ایجاد آدرس جدید</span>
         </button>

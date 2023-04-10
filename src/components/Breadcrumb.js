@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const Breadcrumb = (props) => {
   return (
     <nav
-      class="flex py-4 px-4 mb-4 text-gray-700 border border-gray-100 rounded mt-2 bg-gray-50"
+      class="flex py-4 px-4 mb-4 text-gray-700 border border-gray-100 rounded-md mt-2 bg-white"
       aria-label="Breadcrumb"
     >
       <ol class="inline-flex items-center">

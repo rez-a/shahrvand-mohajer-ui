@@ -16,7 +16,7 @@ const Products = (props) => {
   const [price, setPrice] = useState([25, 75]);
   return (
     <main className="grid grid-cols-5 gap-12 items-start">
-      <aside className="border rounded-md p-4 bg-gray-50/50 border-gray-100">
+      <aside className="border rounded-md p-4 bg-white border-gray-100">
         <div className="mb-8">
           <h2 className="font-semibold text-zinc-400 flex items-center mb-4">
             <TitleIcon bg="bg-zinc-400" />
@@ -40,7 +40,10 @@ const Products = (props) => {
                   </span>
                 </div>
               </TitleAccordionItem>
-              <ContentAccordionItem>
+              <ContentAccordionItem
+                closeClaseName="h-0"
+                openClassName="h-56 overflow-auto"
+              >
                 <ul class="text-sm font-medium text-gray-900 bg-white divide-y">
                   <li className="p-1 px-3 flex items-center py-3 hover:cursor-pointer hover:bg-zinc-100/70">
                     <div
@@ -136,6 +139,150 @@ const Products = (props) => {
                     </div>
                     <span className="mr-2 text-xs">دسته یندی 5</span>
                   </li>
+                  <li className="p-1 px-3 flex items-center py-3 hover:cursor-pointer hover:bg-zinc-100/70">
+                    <div
+                      className={`w-4 h-4 border rounded ${
+                        0 ? 'bg-rose-500 border-rose-500' : 'bg-white'
+                      }`}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        width="14"
+                        height="14"
+                        className="fill-white"
+                      >
+                        <path d="M10.0007 15.1709L19.1931 5.97852L20.6073 7.39273L10.0007 17.9993L3.63672 11.6354L5.05093 10.2212L10.0007 15.1709Z"></path>
+                      </svg>
+                    </div>
+                    <span className="mr-2 text-xs">دسته یندی 5</span>
+                  </li>
+                  <li className="p-1 px-3 flex items-center py-3 hover:cursor-pointer hover:bg-zinc-100/70">
+                    <div
+                      className={`w-4 h-4 border rounded ${
+                        0 ? 'bg-rose-500 border-rose-500' : 'bg-white'
+                      }`}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        width="14"
+                        height="14"
+                        className="fill-white"
+                      >
+                        <path d="M10.0007 15.1709L19.1931 5.97852L20.6073 7.39273L10.0007 17.9993L3.63672 11.6354L5.05093 10.2212L10.0007 15.1709Z"></path>
+                      </svg>
+                    </div>
+                    <span className="mr-2 text-xs">دسته یندی 5</span>
+                  </li>
+                  <li className="p-1 px-3 flex items-center py-3 hover:cursor-pointer hover:bg-zinc-100/70">
+                    <div
+                      className={`w-4 h-4 border rounded ${
+                        0 ? 'bg-rose-500 border-rose-500' : 'bg-white'
+                      }`}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        width="14"
+                        height="14"
+                        className="fill-white"
+                      >
+                        <path d="M10.0007 15.1709L19.1931 5.97852L20.6073 7.39273L10.0007 17.9993L3.63672 11.6354L5.05093 10.2212L10.0007 15.1709Z"></path>
+                      </svg>
+                    </div>
+                    <span className="mr-2 text-xs">دسته یندی 5</span>
+                  </li>
+                  <li className="p-1 px-3 flex items-center py-3 hover:cursor-pointer hover:bg-zinc-100/70">
+                    <div
+                      className={`w-4 h-4 border rounded ${
+                        0 ? 'bg-rose-500 border-rose-500' : 'bg-white'
+                      }`}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        width="14"
+                        height="14"
+                        className="fill-white"
+                      >
+                        <path d="M10.0007 15.1709L19.1931 5.97852L20.6073 7.39273L10.0007 17.9993L3.63672 11.6354L5.05093 10.2212L10.0007 15.1709Z"></path>
+                      </svg>
+                    </div>
+                    <span className="mr-2 text-xs">دسته یندی 5</span>
+                  </li>
+                  <li className="p-1 px-3 flex items-center py-3 hover:cursor-pointer hover:bg-zinc-100/70">
+                    <div
+                      className={`w-4 h-4 border rounded ${
+                        0 ? 'bg-rose-500 border-rose-500' : 'bg-white'
+                      }`}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        width="14"
+                        height="14"
+                        className="fill-white"
+                      >
+                        <path d="M10.0007 15.1709L19.1931 5.97852L20.6073 7.39273L10.0007 17.9993L3.63672 11.6354L5.05093 10.2212L10.0007 15.1709Z"></path>
+                      </svg>
+                    </div>
+                    <span className="mr-2 text-xs">دسته یندی 5</span>
+                  </li>
+                  <li className="p-1 px-3 flex items-center py-3 hover:cursor-pointer hover:bg-zinc-100/70">
+                    <div
+                      className={`w-4 h-4 border rounded ${
+                        0 ? 'bg-rose-500 border-rose-500' : 'bg-white'
+                      }`}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        width="14"
+                        height="14"
+                        className="fill-white"
+                      >
+                        <path d="M10.0007 15.1709L19.1931 5.97852L20.6073 7.39273L10.0007 17.9993L3.63672 11.6354L5.05093 10.2212L10.0007 15.1709Z"></path>
+                      </svg>
+                    </div>
+                    <span className="mr-2 text-xs">دسته یندی 5</span>
+                  </li>
+                  <li className="p-1 px-3 flex items-center py-3 hover:cursor-pointer hover:bg-zinc-100/70">
+                    <div
+                      className={`w-4 h-4 border rounded ${
+                        0 ? 'bg-rose-500 border-rose-500' : 'bg-white'
+                      }`}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        width="14"
+                        height="14"
+                        className="fill-white"
+                      >
+                        <path d="M10.0007 15.1709L19.1931 5.97852L20.6073 7.39273L10.0007 17.9993L3.63672 11.6354L5.05093 10.2212L10.0007 15.1709Z"></path>
+                      </svg>
+                    </div>
+                    <span className="mr-2 text-xs">دسته یندی 5</span>
+                  </li>
+                  <li className="p-1 px-3 flex items-center py-3 hover:cursor-pointer hover:bg-zinc-100/70">
+                    <div
+                      className={`w-4 h-4 border rounded ${
+                        0 ? 'bg-rose-500 border-rose-500' : 'bg-white'
+                      }`}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        width="14"
+                        height="14"
+                        className="fill-white"
+                      >
+                        <path d="M10.0007 15.1709L19.1931 5.97852L20.6073 7.39273L10.0007 17.9993L3.63672 11.6354L5.05093 10.2212L10.0007 15.1709Z"></path>
+                      </svg>
+                    </div>
+                    <span className="mr-2 text-xs">دسته یندی 5</span>
+                  </li>
                 </ul>
               </ContentAccordionItem>
             </AccordionItem>
@@ -191,7 +338,7 @@ const Products = (props) => {
           <div className="grid grid-cols-4 gap-8 my-8">
             {products.map((product) => (
               <ProductCartVertical
-                containerClassName="border-b py-2 hover:shadow-lg transition-all duration-300"
+                containerClassName="border-b py-2 hover:shadow-lg transition-all duration-300 bg-white rounded-md"
                 key={product.id}
                 {...product}
               />

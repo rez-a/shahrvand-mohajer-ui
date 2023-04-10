@@ -15,11 +15,7 @@ const OurSuggestion = (props) => {
       </header>
       <main className="grid grid-cols-3 gap-8 my-4">
         {[...products.slice(0, 9)].map((product, index) => (
-          <ProductCartHorizontal
-            key={index}
-            {...product}
-            containerClassName="border-b p-3 pr-0"
-          />
+          <ProductCartHorizontal key={index} {...product} />
         ))}
       </main>
     </div>

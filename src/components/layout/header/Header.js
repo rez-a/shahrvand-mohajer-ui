@@ -1,15 +1,29 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import logo from 'assets/images/logo.svg';
 import MegaMenu from './MegaMenu';
 import ProfileSummary from './ProfileSummary';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
+  const navLink = useRef();
+  const [showMenuNav, setShowMenuNav] = useState(true);
+  useEffect(() => {
+    window.addEventListener('scroll', controllerNavMenu);
+  }, []);
+  const controllerNavMenu = () => {
+    window.scrollY > navLink.current.getBoundingClientRect().height
+      ? setShowMenuNav(false)
+      : setShowMenuNav(true);
+  };
   return (
-    <header className="shadow bg-white">
+    <header
+      ref={navLink}
+      className="shadow bg-white sticky top-0 z-10"
+    >
       <div className="content 2xl:container">
-        <nav className="flex items-center py-4">
-          <div className="h-8 w-32">
+        <nav className="flex items-center  py-4 ">
+          <Link to="/" className="h-8 w-32">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="115"
@@ -30,7 +44,7 @@ const Header = () => {
                 </g>
               </g>
             </svg>
-          </div>
+          </Link>
           <div className="w-1/2 relative h-full mr-2">
             <input
               className="bg-zinc-100 outline-none focus-visible:outline-none text-xs border border-white transition focus:border-zinc-200 text-zinc-400 p-2 pr-12 rounded w-full"
@@ -52,7 +66,10 @@ const Header = () => {
           </div>
           <div className="mr-auto flex items-center">
             <ProfileSummary />
-            <button className="border-r mr-2 px-2 group border-zinc-300">
+            <Link
+              to="checkout/cart"
+              className="border-r mr-2 px-2 group border-zinc-300"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -63,11 +80,19 @@ const Header = () => {
                 <path fill="none" d="M0 0h24v24H0z" />
                 <path d="M4 16V4H2V2h3a1 1 0 0 1 1 1v12h12.438l2-8H8V5h13.72a1 1 0 0 1 .97 1.243l-2.5 10a1 1 0 0 1-.97.757H5a1 1 0 0 1-1-1zm2 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm12 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" />
               </svg>
-            </button>
+            </Link>
           </div>
         </nav>
-        <nav className="flex items-center gap-2 py-2">
-          <div className="border-l relative pl-2 group cursor-pointer font-semibold transition before:absolute before:w-0 before:h-[1px] before:transition-all before:duration-200 before:left-1/2 before:-translate-x-1/2 before:top-full before:bg-rose-500 py-1 hover:before:w-full">
+        <nav
+          className={`flex items-center gap-2  transition-all duration-100 ${
+            showMenuNav ? 'h-auto py-2' : 'h-0 py-0 overflow-hidden'
+          }`}
+        >
+          <div
+            className={`border-l relative pl-2 group cursor-pointer font-semibold transition before:absolute before:w-0 before:h-[1px] before:transition-all before:duration-200 before:left-1/2 before:-translate-x-1/2 before:top-full before:bg-rose-500 py-1 hover:before:w-full ${
+              showMenuNav ? '' : 'overflow-hidden'
+            }`}
+          >
             <MegaMenu />
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -7,7 +7,7 @@ import SwiperNavBtn from 'components/swiper/SwiperNavBtn';
 
 const CategoriesSection = () => {
   return (
-    <div className="border rounded-xl mx-4 p-4 my-8">
+    <div className="border rounded-xl mx-4 p-4 my-8 bg-white">
       <header className="text-zinc-400 text-center font-semibold p-4">
         بیش از ۱،۵۰۰،۰۰۰ کالا در دسته‌بندی‌های مختلف
       </header>

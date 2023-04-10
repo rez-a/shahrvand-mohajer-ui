@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Rates from 'components/shared/rating/Rates';
+import { Link } from 'react-router-dom';
 
 const ProductCartVertical = ({
   containerClassName,
@@ -34,9 +35,12 @@ const ProductCartVertical = ({
         />
       </div>
       <div class="px-6 py-4">
-        <div class="font-bold truncate text-rose-500/70 group-hover:text-rose-500/100 transition-all duration-200 text-base">
+        <Link
+          to="product/erpCode/slugProduct"
+          class="font-bold truncate text-rose-500/70 group-hover:text-rose-500/100 transition-all duration-200 text-base"
+        >
           {title}
-        </div>
+        </Link>
       </div>
       <div class="px-6 pt-4 pb-2">
         <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-xs text-gray-700 opacity-75 hover:opacity-100 transition-all duration-200 cursor-pointer">

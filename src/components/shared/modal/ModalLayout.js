@@ -41,7 +41,7 @@ const ModalLayout = ({ isShow, setShow, children }) => {
       document.getElementById('modal-root')
     );
   }
-  return null;
+  return <></>;
 };
 
 ModalLayout.propType = {

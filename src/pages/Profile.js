@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TitleIcon from 'components/shared/TitleIcon';
-import { Outlet, Route, Routes } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import MainProfile from 'components/profile/MainProfile';
 
-const Profile = (props) => {
+const Profile = ({ children }) => {
   return (
-    <main className="grid grid-cols-7 gap-4 items-start">
-      <aside className=" bg-gray-50/50 col-span-2 border-gray-200/70 overflow-hidden sticky top-4 bg-white rounded-3xl shadow-sm border">
+    <main className="grid grid-cols-7 gap-4 items-start mt-4">
+      <aside className=" bg-gray-50/50 col-span-2 border-gray-200/70 overflow-hidden sticky top-24 bg-white rounded-3xl shadow-sm border">
         <ul>
           <li>
-            <a
-              href="#"
+            <Link
+              to="."
               className="flex items-center w-full p-5 font-semibold bg-sky-50 text-sky-500 border-b border-b-sky-400"
             >
               <span className="ml-3">
@@ -26,11 +26,11 @@ const Profile = (props) => {
                 </svg>
               </span>
               <span>پروفایل</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="#"
+            <Link
+              to="edit"
               className=" flex items-center w-full p-5 font-semibold hover:bg-sky-50 hover:text-sky-500 border-b border-b-gray-100 hover:border-b-sky-400 group transition-all duration-300 text-slate-700"
             >
               <span className="ml-3">
@@ -45,11 +45,11 @@ const Profile = (props) => {
                 </svg>
               </span>
               <span>ویرایش اطلاعات</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="#"
+            <Link
+              to="addresses"
               className=" flex items-center w-full p-5 font-semibold hover:bg-sky-50 hover:text-sky-500 border-b border-b-gray-100 hover:border-b-sky-400 group transition-all duration-300 text-slate-700"
             >
               <span className="ml-3">
@@ -64,11 +64,11 @@ const Profile = (props) => {
                 </svg>
               </span>
               <span>آدرس ها</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="#"
+            <Link
+              to="orders"
               className=" flex items-center w-full p-5 font-semibold hover:bg-sky-50 hover:text-sky-500 border-b border-b-gray-100 hover:border-b-sky-400 group transition-all duration-300 text-slate-700"
             >
               <span className="ml-3">
@@ -83,11 +83,11 @@ const Profile = (props) => {
                 </svg>
               </span>
               <span>سفارش ها</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="#"
+            <Link
+              to="payments"
               className=" flex items-center w-full p-5 font-semibold hover:bg-sky-50 hover:text-sky-500 border-b border-b-gray-100 hover:border-b-sky-400 group transition-all duration-300 text-slate-700"
             >
               <span className="ml-3">
@@ -102,11 +102,11 @@ const Profile = (props) => {
                 </svg>
               </span>
               <span>پرداخت ها</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="#"
+            <Link
+              to="/"
               className=" flex items-center w-full p-5 font-semibold hover:bg-sky-50 hover:text-sky-500 border-b border-b-transparent hover:border-b-sky-400 group transition-all duration-300"
             >
               <span className="ml-3">
@@ -121,11 +121,11 @@ const Profile = (props) => {
                 </svg>
               </span>
               <span>خروج از حساب کاربری</span>
-            </a>
+            </Link>
           </li>
         </ul>
       </aside>
-      <Outlet />
+      {children}
     </main>
   );
 };

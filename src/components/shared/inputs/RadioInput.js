@@ -5,7 +5,7 @@ const RadioInput = ({ label, id, description, name }) => {
   return (
     <label
       htmlFor={id}
-      class="inline-flex items-center border pl-3 cursor-pointer bg-gray-50/50 rounded-md border-gray-100 py-1"
+      class="inline-flex items-center border pl-3 cursor-pointer bg-white rounded-md border-gray-100 py-1"
     >
       <label
         class="relative flex cursor-pointer items-center rounded-full p-3"

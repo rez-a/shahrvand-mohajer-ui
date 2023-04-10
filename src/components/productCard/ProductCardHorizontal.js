@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Rates from 'components/shared/rating/Rates';
 import product1 from 'assets/images/products/products1.jpg';
+import { Link } from 'react-router-dom';
 
 const ProductCartHorizontal = ({
   containerClassName,
@@ -13,7 +14,7 @@ const ProductCartHorizontal = ({
 }) => {
   return (
     <div class={`flex flex-col ${containerClassName}`}>
-      <div className="flex">
+      <div className="flex bg-white rounded-md p-2">
         <div class="h-24 w-24 text-center overflow-hidden">
           <img src={imageCover} alt="Avatar of Jonathan Reinink" />
         </div>
@@ -24,9 +25,12 @@ const ProductCartHorizontal = ({
           <div className="flex items-center justify-between">
             <Rates rate={rate} />
             <div className="text-left">
-              <button className="border border-sky-500 text-sky-500 bg-white rounded-lg text-xs px-4 py-2 hover:bg-sky-500 hover:text-white transition-all duration-200">
+              <Link
+                to="product/erpCode/slugProduct"
+                className="border border-sky-500 text-sky-600 bg-white rounded-lg text-xs px-4 py-2 hover:bg-sky-500 hover:text-white transition-all duration-200"
+              >
                 جزییات محصول
-              </button>
+              </Link>
             </div>
           </div>
           <div className="text-sm font-bold">
