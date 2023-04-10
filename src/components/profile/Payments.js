@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TitleIcon from 'components/shared/TitleIcon';
 import Card from './Card';
+import { Link } from 'react-router-dom';
 
 const Payments = (props) => {
   return (
@@ -59,9 +60,12 @@ const Payments = (props) => {
                   href="#"
                   class="font-medium flex items-center text-xs "
                 >
-                  <span className="bg-sky-50 border border-sky-300 p-2 text-sky-500 rounded-md hover:bg-sky-100/70">
+                  <Link
+                    to="details/2"
+                    className="bg-sky-50 border border-sky-300 p-2 text-sky-500 rounded-md hover:bg-sky-100/70"
+                  >
                     مشاهده جزییات
-                  </span>
+                  </Link>
                 </a>
               </td>
             </tr>
@@ -93,9 +97,12 @@ const Payments = (props) => {
                   href="#"
                   class="font-medium flex items-center text-xs "
                 >
-                  <span className="bg-sky-50 border border-sky-300 p-2 text-sky-500 rounded-md hover:bg-sky-100/70">
+                  <Link
+                    to="details/2"
+                    className="bg-sky-50 border border-sky-300 p-2 text-sky-500 rounded-md hover:bg-sky-100/70"
+                  >
                     مشاهده جزییات
-                  </span>
+                  </Link>
                 </a>
               </td>
             </tr>
@@ -127,9 +134,12 @@ const Payments = (props) => {
                   href="#"
                   class="font-medium flex items-center text-xs "
                 >
-                  <span className="bg-sky-50 border border-sky-300 p-2 text-sky-500 rounded-md hover:bg-sky-100/70">
+                  <Link
+                    to="details/2"
+                    className="bg-sky-50 border border-sky-300 p-2 text-sky-500 rounded-md hover:bg-sky-100/70"
+                  >
                     مشاهده جزییات
-                  </span>
+                  </Link>
                 </a>
               </td>
             </tr>
@@ -161,9 +171,12 @@ const Payments = (props) => {
                   href="#"
                   class="font-medium flex items-center text-xs "
                 >
-                  <span className="bg-sky-50 border border-sky-300 p-2 text-sky-500 rounded-md hover:bg-sky-100/70">
+                  <Link
+                    to="details/2"
+                    className="bg-sky-50 border border-sky-300 p-2 text-sky-500 rounded-md hover:bg-sky-100/70"
+                  >
                     مشاهده جزییات
-                  </span>
+                  </Link>
                 </a>
               </td>
             </tr>
@@ -195,9 +208,12 @@ const Payments = (props) => {
                   href="#"
                   class="font-medium flex items-center text-xs "
                 >
-                  <span className="bg-sky-50 border border-sky-300 p-2 text-sky-500 rounded-md hover:bg-sky-100/70">
+                  <Link
+                    to="details/2"
+                    className="bg-sky-50 border border-sky-300 p-2 text-sky-500 rounded-md hover:bg-sky-100/70"
+                  >
                     مشاهده جزییات
-                  </span>
+                  </Link>
                 </a>
               </td>
             </tr>
@@ -229,9 +245,12 @@ const Payments = (props) => {
                   href="#"
                   class="font-medium flex items-center text-xs "
                 >
-                  <span className="bg-sky-50 border border-sky-300 p-2 text-sky-500 rounded-md hover:bg-sky-100/70">
+                  <Link
+                    to="details/2"
+                    className="bg-sky-50 border border-sky-300 p-2 text-sky-500 rounded-md hover:bg-sky-100/70"
+                  >
                     مشاهده جزییات
-                  </span>
+                  </Link>
                 </a>
               </td>
             </tr>
@@ -263,9 +282,12 @@ const Payments = (props) => {
                   href="#"
                   class="font-medium flex items-center text-xs "
                 >
-                  <span className="bg-sky-50 border border-sky-300 p-2 text-sky-500 rounded-md hover:bg-sky-100/70">
+                  <Link
+                    to="details/2"
+                    className="bg-sky-50 border border-sky-300 p-2 text-sky-500 rounded-md hover:bg-sky-100/70"
+                  >
                     مشاهده جزییات
-                  </span>
+                  </Link>
                 </a>
               </td>
             </tr>
@@ -297,9 +319,12 @@ const Payments = (props) => {
                   href="#"
                   class="font-medium flex items-center text-xs "
                 >
-                  <span className="bg-sky-50 border border-sky-300 p-2 text-sky-500 rounded-md hover:bg-sky-100/70">
+                  <Link
+                    to="details/2"
+                    className="bg-sky-50 border border-sky-300 p-2 text-sky-500 rounded-md hover:bg-sky-100/70"
+                  >
                     مشاهده جزییات
-                  </span>
+                  </Link>
                 </a>
               </td>
             </tr>

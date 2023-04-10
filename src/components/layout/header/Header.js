@@ -68,7 +68,7 @@ const Header = () => {
             <ProfileSummary />
             <Link
               to="checkout/cart"
-              className="border-r mr-2 px-2 group border-zinc-300"
+              className="border-r relative mr-2 px-2 group border-zinc-300"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -80,6 +80,9 @@ const Header = () => {
                 <path fill="none" d="M0 0h24v24H0z" />
                 <path d="M4 16V4H2V2h3a1 1 0 0 1 1 1v12h12.438l2-8H8V5h13.72a1 1 0 0 1 .97 1.243l-2.5 10a1 1 0 0 1-.97.757H5a1 1 0 0 1-1-1zm2 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm12 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" />
               </svg>
+              <span className="bg-rose-500 rounded-full text-white w-5 h-5 flex items-center justify-center p-1 text-xs absolute -top-2 right-0">
+                2
+              </span>
             </Link>
           </div>
         </nav>

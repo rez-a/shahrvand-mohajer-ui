@@ -8,12 +8,13 @@ import ContentAccordionItem from 'components/shared/accordion/ContentAccordionIt
 import ProfileProductCard from 'components/productCard/ProfileProductCard';
 import products from 'productsFake';
 import storeLogo from 'assets/images/store-logo.png';
+import { Link } from 'react-router-dom';
 
 const OrderDetails = (props) => {
   return (
     <Card title="جزییات سفارش">
       <div className="p-4 flex items-center space-x-4 space-x-reverse bg-gray-100/70 ">
-        <button className="text-center">
+        <Link to="/profile/orders" className="text-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -25,7 +26,7 @@ const OrderDetails = (props) => {
           <span className="text-zinc-400 font-light text-xs">
             بازگشت
           </span>
-        </button>
+        </Link>
         <div className="pr-6 border-r">
           <p className="font-bold mb-2">سفارش SDGASDGSDGSG</p>
           <p className="text-xs text-zinc-400 font-light ">

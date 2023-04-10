@@ -6,23 +6,40 @@ import SHR_white from 'assets/images/SHM-White-Bold.svg';
 
 const MegaMenu = () => {
   return (
-    <div className="absolute top-[105%] right-0 w-[70vw] z-20 bg-white shadow-xl rounded-xl grid grid-cols-4  gap-2 visible group-hover:visible overflow-hidden">
-      <div className="col-span-1 grid max-h-80 overflow-auto gap-2 p-4">
+    <div className="absolute top-[105%] max-h-80 right-0 w-[70vw] z-20 bg-white shadow-2xl rounded-xl grid grid-cols-4  gap-2 invisible group-hover:visible overflow-hidden">
+      <div className="col-span-1 grid  max-h-80 h-full overflow-auto gap-2 px-2 py-1 border-l pt-4">
         <div>
           <input
-            id="test1"
+            id="test2"
             type="radio"
             name="category"
             className="peer appearance-none hidden"
           />
           <label
-            htmlFor="test1"
-            className="flex items-center text-zinc-500 transition gap-2 px-4  py-2 rounded bg-white border border-zinc-100 peer-checked:bg-sky-50/50 peer-checked:border-sky-100 peer-checked:text-black cursor-pointer  hover:bg-sky-50/50 hover:text-black hover:border-sky-100 group/item"
+            htmlFor="test2"
+            className="flex items-center text-zinc-500 text-slate-900 font-medium transition gap-2 rounded-xl border border-gray-50 peer-checked:bg-sky-50/50 peer-checked:border-sky-100 peer-checked:text-black cursor-pointer  hover:bg-sky-50/50 hover:text-black hover:border-sky-100 group/item"
           >
-            <div className="w-8 h-8">
-              <img src={iconStore} alt="category" />
+            <div className="w-16 h-16">
+              <img
+                src={iconStore}
+                class="rounded-l-none"
+                alt="category"
+              />
             </div>
-            <p className="text-sm whitespace-nowrap">غذاپزی قاصدک</p>
+            <div className="gap-2 px-5">
+              <p className="text-sm whitespace-nowrap">
+                غذاپزی قاصدک
+              </p>
+            </div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              className="mr-auto ml-2"
+            >
+              <path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path>
+            </svg>
           </label>
         </div>
         <div>
@@ -34,171 +51,246 @@ const MegaMenu = () => {
           />
           <label
             htmlFor="test2"
-            className="flex items-center text-zinc-500 transition gap-2 px-4  py-2 rounded bg-white border border-zinc-100 peer-checked:bg-sky-50/50 peer-checked:border-sky-100 peer-checked:text-black cursor-pointer  hover:bg-sky-50/50 hover:text-black hover:border-sky-100 group/item"
+            className="flex items-center text-zinc-500 text-slate-900 font-medium transition gap-2 rounded-xl border border-gray-50 peer-checked:bg-sky-50/50 peer-checked:border-sky-100 peer-checked:text-black cursor-pointer  hover:bg-sky-50/50 hover:text-black hover:border-sky-100 group/item"
           >
-            <div className="w-8 h-8">
-              <img src={iconStore} alt="category" />
+            <div className="w-16 h-16">
+              <img
+                src={iconStore}
+                class="rounded-l-none"
+                alt="category"
+              />
             </div>
-            <p className="text-sm whitespace-nowrap">غذاپزی قاصدک</p>
+            <div className="gap-2 px-5">
+              <p className="text-sm whitespace-nowrap">
+                غذاپزی قاصدک
+              </p>
+            </div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              className="mr-auto ml-2"
+            >
+              <path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path>
+            </svg>
           </label>
         </div>
         <div>
           <input
-            id="test3"
+            id="test2"
             type="radio"
             name="category"
             className="peer appearance-none hidden"
           />
           <label
-            htmlFor="test3"
-            className="flex items-center text-zinc-500 transition gap-2 px-4  py-2 rounded bg-white border border-zinc-100 peer-checked:bg-sky-50/50 peer-checked:border-sky-100 peer-checked:text-black cursor-pointer  hover:bg-sky-50/50 hover:text-black hover:border-sky-100 group/item"
+            htmlFor="test2"
+            className="flex items-center text-zinc-500 text-slate-900 font-medium transition gap-2 rounded-xl border border-gray-50 peer-checked:bg-sky-50/50 peer-checked:border-sky-100 peer-checked:text-black cursor-pointer  hover:bg-sky-50/50 hover:text-black hover:border-sky-100 group/item"
           >
-            <div className="w-8 h-8">
-              <img src={iconStore} alt="category" />
+            <div className="w-16 h-16">
+              <img
+                src={iconStore}
+                class="rounded-l-none"
+                alt="category"
+              />
             </div>
-            <p className="text-sm whitespace-nowrap">غذاپزی قاصدک</p>
+            <div className="gap-2 px-5">
+              <p className="text-sm whitespace-nowrap">
+                غذاپزی قاصدک
+              </p>
+            </div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              className="mr-auto ml-2"
+            >
+              <path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path>
+            </svg>
           </label>
         </div>
         <div>
           <input
-            id="test4"
+            id="test2"
             type="radio"
             name="category"
             className="peer appearance-none hidden"
           />
           <label
-            htmlFor="test4"
-            className="flex items-center text-zinc-500 transition gap-2 px-4  py-2 rounded bg-white border border-zinc-100 peer-checked:bg-sky-50/50 peer-checked:border-sky-100 peer-checked:text-black cursor-pointer  hover:bg-sky-50/50 hover:text-black hover:border-sky-100 group/item"
+            htmlFor="test2"
+            className="flex items-center text-zinc-500 text-slate-900 font-medium transition gap-2 rounded-xl border border-gray-50 peer-checked:bg-sky-50/50 peer-checked:border-sky-100 peer-checked:text-black cursor-pointer  hover:bg-sky-50/50 hover:text-black hover:border-sky-100 group/item"
           >
-            <div className="w-8 h-8">
-              <img src={iconStore} alt="category" />
+            <div className="w-16 h-16">
+              <img
+                src={iconStore}
+                class="rounded-l-none"
+                alt="category"
+              />
             </div>
-            <p className="text-sm whitespace-nowrap">غذاپزی قاصدک</p>
+            <div className="gap-2 px-5">
+              <p className="text-sm whitespace-nowrap">
+                غذاپزی قاصدک
+              </p>
+            </div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              className="mr-auto ml-2"
+            >
+              <path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path>
+            </svg>
           </label>
         </div>
         <div>
           <input
-            id="test5"
+            id="test2"
             type="radio"
             name="category"
             className="peer appearance-none hidden"
           />
           <label
-            htmlFor="test5"
-            className="flex items-center text-zinc-500 transition gap-2 px-4  py-2 rounded bg-white border border-zinc-100 peer-checked:bg-sky-50/50 peer-checked:border-sky-100 peer-checked:text-black cursor-pointer  hover:bg-sky-50/50 hover:text-black hover:border-sky-100 group/item"
+            htmlFor="test2"
+            className="flex items-center text-zinc-500 text-slate-900 font-medium transition gap-2 rounded-xl border border-gray-50 peer-checked:bg-sky-50/50 peer-checked:border-sky-100 peer-checked:text-black cursor-pointer  hover:bg-sky-50/50 hover:text-black hover:border-sky-100 group/item"
           >
-            <div className="w-8 h-8">
-              <img src={iconStore} alt="category" />
+            <div className="w-16 h-16">
+              <img
+                src={iconStore}
+                class="rounded-l-none"
+                alt="category"
+              />
             </div>
-            <p className="text-sm whitespace-nowrap">غذاپزی قاصدک</p>
+            <div className="gap-2 px-5">
+              <p className="text-sm whitespace-nowrap">
+                غذاپزی قاصدک
+              </p>
+            </div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              className="mr-auto ml-2"
+            >
+              <path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path>
+            </svg>
           </label>
         </div>
         <div>
           <input
-            id="test6"
+            id="test2"
             type="radio"
             name="category"
             className="peer appearance-none hidden"
           />
           <label
-            htmlFor="test6"
-            className="flex items-center text-zinc-500 transition gap-2 px-4  py-2 rounded bg-white border border-zinc-100 peer-checked:bg-sky-50/50 peer-checked:border-sky-100 peer-checked:text-black cursor-pointer  hover:bg-sky-50/50 hover:text-black hover:border-sky-100 group/item"
+            htmlFor="test2"
+            className="flex items-center text-zinc-500 text-slate-900 font-medium transition gap-2 rounded-xl border border-gray-50 peer-checked:bg-sky-50/50 peer-checked:border-sky-100 peer-checked:text-black cursor-pointer  hover:bg-sky-50/50 hover:text-black hover:border-sky-100 group/item"
           >
-            <div className="w-8 h-8">
-              <img src={iconStore} alt="category" />
+            <div className="w-16 h-16">
+              <img
+                src={iconStore}
+                class="rounded-l-none"
+                alt="category"
+              />
             </div>
-            <p className="text-sm whitespace-nowrap">غذاپزی قاصدک</p>
+            <div className="gap-2 px-5">
+              <p className="text-sm whitespace-nowrap">
+                غذاپزی قاصدک
+              </p>
+            </div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              className="mr-auto ml-2"
+            >
+              <path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path>
+            </svg>
           </label>
         </div>
         <div>
           <input
-            id="test7"
+            id="test2"
             type="radio"
             name="category"
             className="peer appearance-none hidden"
           />
           <label
-            htmlFor="test7"
-            className="flex items-center text-zinc-500 transition gap-2 px-4  py-2 rounded bg-white border border-zinc-100 peer-checked:bg-sky-50/50 peer-checked:border-sky-100 peer-checked:text-black cursor-pointer  hover:bg-sky-50/50 hover:text-black hover:border-sky-100 group/item"
+            htmlFor="test2"
+            className="flex items-center text-zinc-500 text-slate-900 font-medium transition gap-2 rounded-xl border border-gray-50 peer-checked:bg-sky-50/50 peer-checked:border-sky-100 peer-checked:text-black cursor-pointer  hover:bg-sky-50/50 hover:text-black hover:border-sky-100 group/item"
           >
-            <div className="w-8 h-8">
-              <img src={iconStore} alt="category" />
+            <div className="w-16 h-16">
+              <img
+                src={iconStore}
+                class="rounded-l-none"
+                alt="category"
+              />
             </div>
-            <p className="text-sm whitespace-nowrap">غذاپزی قاصدک</p>
+            <div className="gap-2 px-5">
+              <p className="text-sm whitespace-nowrap">
+                غذاپزی قاصدک
+              </p>
+            </div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              className="mr-auto ml-2"
+            >
+              <path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path>
+            </svg>
           </label>
         </div>
         <div>
           <input
-            id="test8"
+            id="test2"
             type="radio"
             name="category"
             className="peer appearance-none hidden"
           />
           <label
-            htmlFor="test8"
-            className="flex items-center text-zinc-500 transition gap-2 px-4  py-2 rounded bg-white border border-zinc-100 peer-checked:bg-sky-50/50 peer-checked:border-sky-100 peer-checked:text-black cursor-pointer  hover:bg-sky-50/50 hover:text-black hover:border-sky-100 group/item"
+            htmlFor="test2"
+            className="flex items-center text-zinc-500 text-slate-900 font-medium transition gap-2 rounded-xl border border-gray-50 peer-checked:bg-sky-50/50 peer-checked:border-sky-100 peer-checked:text-black cursor-pointer  hover:bg-sky-50/50 hover:text-black hover:border-sky-100 group/item"
           >
-            <div className="w-8 h-8">
-              <img src={iconStore} alt="category" />
+            <div className="w-16 h-16">
+              <img
+                src={iconStore}
+                class="rounded-l-none"
+                alt="category"
+              />
             </div>
-            <p className="text-sm whitespace-nowrap">غذاپزی قاصدک</p>
-          </label>
-        </div>
-        <div>
-          <input
-            id="test9"
-            type="radio"
-            name="category"
-            className="peer appearance-none hidden"
-          />
-          <label
-            htmlFor="test9"
-            className="flex items-center text-zinc-500 transition gap-2 px-4  py-2 rounded bg-white border border-zinc-100 peer-checked:bg-sky-50/50 peer-checked:border-sky-100 peer-checked:text-black cursor-pointer  hover:bg-sky-50/50 hover:text-black hover:border-sky-100 group/item"
-          >
-            <div className="w-8 h-8">
-              <img src={iconStore} alt="category" />
+            <div className="gap-2 px-5">
+              <p className="text-sm whitespace-nowrap">
+                غذاپزی قاصدک
+              </p>
             </div>
-            <p className="text-sm whitespace-nowrap">غذاپزی قاصدک</p>
-          </label>
-        </div>
-        <div>
-          <input
-            id="test10"
-            type="radio"
-            name="category"
-            className="peer appearance-none hidden"
-          />
-          <label
-            htmlFor="test10"
-            className="flex items-center text-zinc-500 transition gap-2 px-4  py-2 rounded bg-white border border-zinc-100 peer-checked:bg-sky-50/50 peer-checked:border-sky-100 peer-checked:text-black cursor-pointer  hover:bg-sky-50/50 hover:text-black hover:border-sky-100 group/item"
-          >
-            <div className="w-8 h-8">
-              <img src={iconStore} alt="category" />
-            </div>
-            <p className="text-sm whitespace-nowrap">غذاپزی قاصدک</p>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              className="mr-auto ml-2"
+            >
+              <path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path>
+            </svg>
           </label>
         </div>
       </div>
-      <div className="border-r px-2 flex col-span-2 flex-col justify-between p-4">
+      <div className="flex col-span-2 flex-col justify-between p-4">
         <div className="max-h-80 overflow-auto">
-          <ul className="mb-2 grid grid-cols-2 ">
+          <ul className="mb-2 grid grid-cols-2">
             {[...Array(20)].map((link) => (
               <li>
                 <Link
-                  className="text-sm p-2 rounded hover:bg-sky-50/50 border flex items-center transition border-white hover:border-sky-100 group w-full group/link"
+                  className="text-xs font-normal px-2 py-2.5 hover:text-rose-600 text-slate-500  flex items-center transition group w-full"
                   to="products/MainGroupErpCode/slugMainGroupErpCode/SideGroupErpCode/slugSideGroupErpCode"
                 >
                   ابزار آلات برقی
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    width="24"
-                    height="24"
-                    className="inline mr-auto opacity-0 transition-all duration-200 translate-x-4 group-hover/link:opacity-100 group-hover/link:translate-x-0"
-                  >
-                    <path fill="none" d="M0 0h24v24H0z" />
-                    <path d="M11.828 12l2.829 2.828-1.414 1.415L9 12l4.243-4.243 1.414 1.415L11.828 12z" />
-                  </svg>
                 </Link>
               </li>
             ))}
