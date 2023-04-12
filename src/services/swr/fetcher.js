@@ -1,3 +1,7 @@
+import { async } from 'q';
 import { handleRequest } from 'services';
 
-export const fetcher = (url) => handleRequest({ url });
+export const fetcher = async (url) => {
+  const response = await handleRequest({ url });
+  return response.data.data;
+};

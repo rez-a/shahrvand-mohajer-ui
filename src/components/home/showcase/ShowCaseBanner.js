@@ -1,16 +1,20 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const ShowCaseBanner = ({ bannerUrl }) => {
+const ShowCaseBanner = ({ banners, sectionNum }) => {
+  const banner = banners.find(
+    (banner) => banner.Status === sectionNum
+  );
   return (
-    <div className="rounded-xl overflow-hidden ">
-      <img src={bannerUrl} alt="image-slider" />
+    <div className="rounded-xl overflow-hidden h-1/2 ">
+      <img src={banner.Image} alt="image-slider" />
     </div>
   );
 };
 
 ShowCaseBanner.propTypes = {
-  bannerUrl: PropTypes.string.isRequired,
+  banners: PropTypes.array,
+  sectionNum: PropTypes.string,
 };
 
 export default ShowCaseBanner;

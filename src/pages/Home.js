@@ -7,7 +7,6 @@ import AmazingOffer from 'components/home/AmazingOffer';
 import BannerItem from 'components/shared/BannerItem';
 import CategoriesSection from 'components/home/categoriesSection/CategoriesSection';
 
-import banner1 from 'assets/images/banners/banner1.jpg';
 import banner2 from 'assets/images/banners/banner2.jpg';
 import banner3 from 'assets/images/banners/banner3.jpg';
 import banner4 from 'assets/images/banners/banner4.jpg';
@@ -16,23 +15,30 @@ import banner6 from 'assets/images/banners/banner6.jpg';
 import banner7 from 'assets/images/banners/banner7.jpg';
 import BiggestDiscount from 'components/home/BiggestDiscount';
 import PopularBrands from 'components/home/PopularBrands';
-import slugConverter from 'utilities/slugConverter';
+import useSWR from 'swr';
+import { BANNERS } from 'services/endPoints';
+import { fetcher } from 'services/swr/fetcher';
 
 const Home = () => {
+  const { data: banners, isLoading: loadBanner } = useSWR(
+    BANNERS,
+    fetcher
+  );
   return (
     <main className="2xl:container">
       <ShowCase />
-      <BestSelling />
-      <Banner className="grid-cols-2">
-        <BannerItem>
-          <img src={banner1} alt="banner" />
-        </BannerItem>
-        <BannerItem>
-          <img src={banner2} alt="banner" />
-        </BannerItem>
-      </Banner>
+      <CategoriesSection />
       <AmazingOffer />
-      <Banner className="grid-cols-4">
+      <Banner className="grid-cols-2 max-h-96">
+        {!loadBanner && (
+          <>
+            <BannerItem banners={banners} sectionNum="SECTION4" />
+            <BannerItem banners={banners} sectionNum="SECTION5" />
+          </>
+        )}
+      </Banner>
+      <BestSelling />
+      {/* <Banner className="grid-cols-4">
         <BannerItem>
           <img src={banner3} alt="banner" />
         </BannerItem>
@@ -45,14 +51,13 @@ const Home = () => {
         <BannerItem>
           <img src={banner6} alt="banner" />
         </BannerItem>
-      </Banner>
+      </Banner> */}
       <OurSuggestion />
-      <Banner>
+      {/* <Banner>
         <BannerItem>
           <img src={banner7} alt="banner" />
         </BannerItem>
-      </Banner>
-      <CategoriesSection />
+      </Banner> */}
       <BiggestDiscount />
       <PopularBrands />
     </main>

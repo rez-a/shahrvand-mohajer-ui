@@ -1,10 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ImageSlider from 'assets/images/banners/showcase-slider.jpg';
-import ImageSlider2 from 'assets/images/banners/showcase-slider2.jpg';
-import ImageSlider3 from 'assets/images/banners/showcase-slider3.jpg';
-import ImageSlider4 from 'assets/images/banners/showcase-slider4.jpg';
-import ImageSlider5 from 'assets/images/banners/showcase-slider5.jpg';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import {
   Navigation,
@@ -20,7 +15,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 import SwiperNavBtn from 'components/swiper/SwiperNavBtn';
 
-const ShowcaseSlider = () => {
+const ShowcaseSlider = ({ sliders }) => {
   const pagination = {
     clickable: true,
     renderBullet: function (_, className) {
@@ -40,21 +35,11 @@ const ShowcaseSlider = () => {
         slidesPerView="auto"
         className="mySwiper relative h-full rounded-lg !w-full"
       >
-        <SwiperSlide>
-          <img src={ImageSlider} alt="image-slider" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src={ImageSlider2} alt="image-slider" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src={ImageSlider3} alt="image-slider" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src={ImageSlider4} alt="image-slider" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src={ImageSlider5} alt="image-slider" />
-        </SwiperSlide>
+        {sliders?.map((slide) => (
+          <SwiperSlide>
+            <img src={slide.Image} alt="image-slider" />
+          </SwiperSlide>
+        ))}
         <SwiperNavBtn
           nextIcon={
             <svg
@@ -86,6 +71,8 @@ const ShowcaseSlider = () => {
   );
 };
 
-ShowcaseSlider.propTypes = {};
+ShowcaseSlider.propTypes = {
+  sliders: PropTypes.array,
+};
 
 export default ShowcaseSlider;

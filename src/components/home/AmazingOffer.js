@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-import tagBanner from 'assets/images/banners/tag-banner.png';
 import { A11y, Autoplay, Navigation, Pagination } from 'swiper';
-
-import products from 'productsFake';
 import ProductCartVertical from 'components/productCard/ProductCardVertical';
 import SwiperNavBtn from 'components/swiper/SwiperNavBtn';
+import useSWR from 'swr';
+import { SLIDER_VIP, SLIDESHOW } from 'services/endPoints';
+import { fetcher } from 'services/swr/fetcher';
+import { BASE_URL } from 'services/baseURL';
 
 const AmazingOffer = ({}) => {
   const pagination = {
@@ -17,10 +17,30 @@ const AmazingOffer = ({}) => {
     },
   };
 
+  const { data: sliderVip, isLoading: sliderLoading } = useSWR(
+    SLIDER_VIP,
+    fetcher
+  );
+  const { data: products, isLoading: productsLoading } = useSWR(
+    `${SLIDESHOW}?section=SLIDER1`,
+    fetcher
+  );
+
   return (
-    <div className="bg-rose-500 p-4 pb-0 my-8 grid grid-cols-5 items-center">
-      <div className="col-span-1 mx-auto w-2/3">
-        <img src={tagBanner} alt="amazing offer" />
+    <div
+      className="p-4 pb-0 my-8 grid grid-cols-5 items-center"
+      style={{ backgroundColor: sliderVip?.color }}
+    >
+      <div className="col-span-1 ">
+        <p className="text-white text-4xl px-4 pr-0 mb-4 font-semibold text-center leading-relaxed">
+          {sliderVip?.title}
+        </p>
+        <div className="mx-auto w-2/3">
+          <img
+            src={`${BASE_URL}${sliderVip?.image}`}
+            alt={sliderVip?.title}
+          />
+        </div>
       </div>
       <div className="col-span-4">
         <Swiper
@@ -34,14 +54,15 @@ const AmazingOffer = ({}) => {
           spaceBetween={20}
           className="mySwiper !pb-12"
         >
-          {products?.map((product) => (
-            <SwiperSlide key={product.id}>
-              <ProductCartVertical
-                {...product}
-                containerClassName="bg-white rounded-xl hover:shadow-lg py-4 transition-all duration-200"
-              />
-            </SwiperSlide>
-          ))}
+          {!productsLoading &&
+            products?.map((product) => (
+              <SwiperSlide key={product.Id}>
+                <ProductCartVertical
+                  {...product}
+                  containerClassName="bg-white rounded-xl hover:shadow-lg py-4 transition-all duration-200"
+                />
+              </SwiperSlide>
+            ))}
           <SwiperNavBtn
             nextIcon={
               <svg
