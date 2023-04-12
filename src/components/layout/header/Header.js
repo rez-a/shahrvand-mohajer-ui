@@ -1,9 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import logo from 'assets/images/logo.svg';
-import MegaMenu from './MegaMenu';
+import MegaMenu from './megaMenu/MegaMenu';
 import ProfileSummary from './ProfileSummary';
 import { Link } from 'react-router-dom';
+import useSWR from 'swr';
+import { fetcher } from 'services/swr/fetcher';
+import { CATEGORIES } from 'services/endPoints';
 
 const Header = () => {
   const navLink = useRef();
@@ -16,6 +19,11 @@ const Header = () => {
       ? setShowMenuNav(false)
       : setShowMenuNav(true);
   };
+  const [categories, setCategories] = useState([]);
+  const { data, isLoading } = useSWR(CATEGORIES, fetcher);
+  useEffect(() => {
+    setCategories(data?.data.data);
+  }, [data]);
   return (
     <header
       ref={navLink}
@@ -96,7 +104,10 @@ const Header = () => {
               showMenuNav ? '' : 'overflow-hidden'
             }`}
           >
-            <MegaMenu />
+            {categories?.length && (
+              <MegaMenu categories={categories} />
+            )}
+
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
