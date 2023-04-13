@@ -5,14 +5,19 @@ import ProductCartHorizontal from 'components/productCard/ProductCardHorizontal'
 import useSWR from 'swr';
 import { fetcher } from 'services/swr/fetcher';
 import { SLIDESHOW } from 'services/endPoints';
+import LoaderProductCardHorizontal from 'components/productCard/LoaderProductCardHorizontal';
+import useObserved from 'hooks/useObserved';
 
 const GridabledProducts = ({ title, section }) => {
-  const { data: products, isLoading } = useSWR(
-    `${SLIDESHOW}?section=${section}`,
+  const { ref, view } = useObserved();
+
+  const { data: products } = useSWR(
+    view && `${SLIDESHOW}?section=${section}`,
     fetcher
   );
+
   return (
-    <div className="my-8 mx-4">
+    <div className="my-8 mx-4" ref={ref}>
       <header className="text-sm">
         <h2 className="font-semibold text-zinc-400 flex items-center ">
           <TitleIcon bg="bg-zinc-400" />
@@ -20,10 +25,13 @@ const GridabledProducts = ({ title, section }) => {
         </h2>
       </header>
       <main className="grid grid-cols-3 gap-8 my-4">
-        {!isLoading &&
-          [...products.slice(0, 9)].map((product, index) => (
-            <ProductCartHorizontal key={index} {...product} />
-          ))}
+        {!!products
+          ? [...products.slice(0, 9)].map((product, index) => (
+              <ProductCartHorizontal key={index} {...product} />
+            ))
+          : [...Array(9)].map((_, index) => (
+              <LoaderProductCardHorizontal key={index} />
+            ))}
       </main>
     </div>
   );

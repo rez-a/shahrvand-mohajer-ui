@@ -25,6 +25,11 @@
   .transition {
     @apply transition-all duration-200;
   }
+  .loading-bg {
+    background-color: #cccccc;
+    border-radius: 5px;
+    animation: skeleton-loading 1s linear infinite alternate;
+  }
 }
 
 .swiper-pagination-bullet {
@@ -94,4 +99,13 @@ input:checked ~ .dot {
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: rgb(134, 134, 134);
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: #cccccc;
+  }
+  100% {
+    background-color: hsl(200, 20%, 95%);
+  }
 }

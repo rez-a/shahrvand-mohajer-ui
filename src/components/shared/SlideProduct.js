@@ -4,7 +4,6 @@ import ProductCartVertical from 'components/productCard/ProductCardVertical';
 import TitleIcon from 'components/shared/TitleIcon';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, A11y, Autoplay } from 'swiper';
-
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -12,6 +11,9 @@ import SwiperNavBtn from 'components/swiper/SwiperNavBtn';
 import useSWR from 'swr';
 import { SLIDESHOW } from 'services/endPoints';
 import { fetcher } from 'services/swr/fetcher';
+import LoaderProductCardVeritical from 'components/productCard/LoaderProductCardVeritical';
+import { useInView } from 'react-intersection-observer';
+import useObserved from 'hooks/useObserved';
 
 const SlideProduct = ({ title, section, className }) => {
   const pagination = {
@@ -21,13 +23,17 @@ const SlideProduct = ({ title, section, className }) => {
     },
   };
 
-  const { data: products, isLoading } = useSWR(
-    `${SLIDESHOW}?section=${section}`,
+  const { ref, view } = useObserved();
+
+  const { data: products } = useSWR(
+    view && `${SLIDESHOW}?section=${section}`,
     fetcher
   );
+
   return (
     <div
       className={`border border-gray-100 rounded-lg p-4 pb-0 bullet-active-rose bg-white my-8 ${className}`}
+      ref={ref}
     >
       <header className="flex items-center text-sm">
         <h2 className="font-semibold text-zinc-400 flex items-center ">
@@ -55,15 +61,20 @@ const SlideProduct = ({ title, section, className }) => {
           slidesPerView={5}
           className="mySwiper !pb-12"
         >
-          {!isLoading &&
-            products.slice(0, 9)?.map((product) => (
-              <SwiperSlide key={product.id}>
-                <ProductCartVertical
-                  {...product}
-                  containerClassName="border-l hover:shadow-lg py-4 transition-all duration-200"
-                />
-              </SwiperSlide>
-            ))}
+          {!!products
+            ? products.slice(0, 9)?.map((product) => (
+                <SwiperSlide key={product.id}>
+                  <ProductCartVertical
+                    {...product}
+                    containerClassName="border-l hover:shadow-lg py-4 transition-all duration-200"
+                  />
+                </SwiperSlide>
+              ))
+            : [...Array(10)].map((_, index) => (
+                <SwiperSlide key={index}>
+                  <LoaderProductCardVeritical />
+                </SwiperSlide>
+              ))}
           <SwiperNavBtn
             nextIcon={
               <svg

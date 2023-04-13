@@ -8,6 +8,7 @@ import useSWR from 'swr';
 import { SLIDER_VIP, SLIDESHOW } from 'services/endPoints';
 import { fetcher } from 'services/swr/fetcher';
 import { BASE_URL } from 'services/baseURL';
+import LoaderProductCardVeritical from 'components/productCard/LoaderProductCardVeritical';
 
 const VipSlider = ({}) => {
   const pagination = {
@@ -54,15 +55,20 @@ const VipSlider = ({}) => {
           spaceBetween={20}
           className="mySwiper !pb-12"
         >
-          {!productsLoading &&
-            products?.map((product) => (
-              <SwiperSlide key={product.Id}>
-                <ProductCartVertical
-                  {...product}
-                  containerClassName="bg-white rounded-xl hover:shadow-lg py-4 transition-all duration-200"
-                />
-              </SwiperSlide>
-            ))}
+          {productsLoading
+            ? [...Array(10)].map((_, index) => (
+                <SwiperSlide key={index}>
+                  <LoaderProductCardVeritical />
+                </SwiperSlide>
+              ))
+            : products?.map((product) => (
+                <SwiperSlide key={product.Id}>
+                  <ProductCartVertical
+                    {...product}
+                    containerClassName="bg-white rounded-xl hover:shadow-lg py-4 transition-all duration-200"
+                  />
+                </SwiperSlide>
+              ))}
           <SwiperNavBtn
             nextIcon={
               <svg

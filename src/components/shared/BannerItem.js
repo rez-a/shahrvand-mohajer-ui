@@ -3,15 +3,24 @@ import PropTypes from 'prop-types';
 import { BANNERS } from 'services/endPoints';
 import { fetcher } from 'services/swr/fetcher';
 import useSWR from 'swr';
+import LoaderBannerItem from './LoaderBannerItem';
+import useObserved from 'hooks/useObserved';
 
 const BannerItem = ({ sectionNum }) => {
-  const { data: banners, isLoading } = useSWR(BANNERS, fetcher);
+  const { ref, view } = useObserved();
+
+  const { data: banners } = useSWR(view && BANNERS, fetcher);
   const banner = banners?.find(
     (banner) => banner.Status === sectionNum
   );
+
   return (
-    <div className="rounded-lg overflow-hidden max-h-44">
-      {!!banner && <img src={banner.Image} alt="banner" />}
+    <div className="rounded-lg overflow-hidden max-h-44" ref={ref}>
+      {!!banners ? (
+        <img src={banner.Image} alt="banner" />
+      ) : (
+        <LoaderBannerItem />
+      )}
     </div>
   );
 };

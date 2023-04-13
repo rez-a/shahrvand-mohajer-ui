@@ -4,7 +4,7 @@ import React from 'react';
 import GridabledProducts from 'components/home/GridabledProducts';
 import VipSlider from 'components/home/VipSlider';
 import BannerItem from 'components/shared/BannerItem';
-import Vendors from 'components/home/VendorsSection/Vendors';
+import Vendors from 'components/home/vendorsSection/Vendors';
 import PopularBrands from 'components/home/PopularBrands';
 import SlideProduct from 'components/shared/SlideProduct';
 
