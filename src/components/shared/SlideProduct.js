@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import ProductCartVertical from 'components/productCard/ProductCardVertical';
 import TitleIcon from 'components/shared/TitleIcon';
@@ -9,20 +9,22 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import SwiperNavBtn from 'components/swiper/SwiperNavBtn';
+import useSWR from 'swr';
+import { SLIDESHOW } from 'services/endPoints';
+import { fetcher } from 'services/swr/fetcher';
 
-import products from 'productsFake';
-
-const SlideProduct = ({
-  title,
-  viewAllLink = '#',
-  className = '',
-}) => {
+const SlideProduct = ({ title, section, className }) => {
   const pagination = {
     clickable: true,
     renderBullet: function (_, className) {
       return `<span class=${className}></span>`;
     },
   };
+
+  const { data: products, isLoading } = useSWR(
+    `${SLIDESHOW}?section=${section}`,
+    fetcher
+  );
   return (
     <div
       className={`border border-gray-100 rounded-lg p-4 pb-0 bullet-active-rose bg-white my-8 ${className}`}
@@ -34,7 +36,7 @@ const SlideProduct = ({
         </h2>
         <div className="mr-auto">
           <a
-            href={viewAllLink}
+            href=""
             className="bg-gray-50 border border-gray-100 hover:bg-gray-100 transition-all duration-200 rounded-lg text-rose-500/70 font-bold px-4 py-2 relative before:absolute before:w-4 before:h-[1px] before:bg-zinc-300 before:-left-4 before:top-1/2 before:-translate-y-1/2"
             type="button"
           >
@@ -53,14 +55,15 @@ const SlideProduct = ({
           slidesPerView={5}
           className="mySwiper !pb-12"
         >
-          {products?.map((product) => (
-            <SwiperSlide key={product.id}>
-              <ProductCartVertical
-                {...product}
-                containerClassName="border-l hover:shadow-lg py-4 transition-all duration-200"
-              />
-            </SwiperSlide>
-          ))}
+          {!isLoading &&
+            products.slice(0, 9)?.map((product) => (
+              <SwiperSlide key={product.id}>
+                <ProductCartVertical
+                  {...product}
+                  containerClassName="border-l hover:shadow-lg py-4 transition-all duration-200"
+                />
+              </SwiperSlide>
+            ))}
           <SwiperNavBtn
             nextIcon={
               <svg

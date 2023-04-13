@@ -9,7 +9,7 @@ import { SLIDER_VIP, SLIDESHOW } from 'services/endPoints';
 import { fetcher } from 'services/swr/fetcher';
 import { BASE_URL } from 'services/baseURL';
 
-const AmazingOffer = ({}) => {
+const VipSlider = ({}) => {
   const pagination = {
     clickable: true,
     renderBullet: function (_, className) {
@@ -95,6 +95,6 @@ const AmazingOffer = ({}) => {
   );
 };
 
-AmazingOffer.propTypes = {};
+VipSlider.propTypes = {};
 
-export default AmazingOffer;
+export default VipSlider;

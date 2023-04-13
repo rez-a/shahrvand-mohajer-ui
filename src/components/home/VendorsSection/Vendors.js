@@ -1,13 +1,13 @@
 import React from 'react';
 import { Autoplay, Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import CategoriesItem from './CategoriesItem';
+import CategoriesItem from './VendorItem';
 import SwiperNavBtn from 'components/swiper/SwiperNavBtn';
 import useSWR from 'swr';
 import { fetcher } from 'services/swr/fetcher';
 import { VENDORS } from 'services/endPoints';
 
-const CategoriesSection = () => {
+const Vendors = () => {
   const { data: vendors, isLoading } = useSWR(VENDORS, fetcher);
 
   return (
@@ -67,4 +67,4 @@ const CategoriesSection = () => {
   );
 };
 
-export default CategoriesSection;
+export default Vendors;

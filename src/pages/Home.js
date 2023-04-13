@@ -1,64 +1,79 @@
 import Banner from 'components/home/Banner';
-import BestSelling from 'components/home/BestSelling';
 import ShowCase from 'components/home/showcase/ShowCase';
 import React from 'react';
-import OurSuggestion from 'components/home/OurSuggestion';
-import AmazingOffer from 'components/home/AmazingOffer';
+import GridabledProducts from 'components/home/GridabledProducts';
+import VipSlider from 'components/home/VipSlider';
 import BannerItem from 'components/shared/BannerItem';
-import CategoriesSection from 'components/home/categoriesSection/CategoriesSection';
-
-import banner2 from 'assets/images/banners/banner2.jpg';
-import banner3 from 'assets/images/banners/banner3.jpg';
-import banner4 from 'assets/images/banners/banner4.jpg';
-import banner5 from 'assets/images/banners/banner5.jpg';
-import banner6 from 'assets/images/banners/banner6.jpg';
-import banner7 from 'assets/images/banners/banner7.jpg';
-import BiggestDiscount from 'components/home/BiggestDiscount';
+import Vendors from 'components/home/VendorsSection/Vendors';
 import PopularBrands from 'components/home/PopularBrands';
-import useSWR from 'swr';
-import { BANNERS } from 'services/endPoints';
-import { fetcher } from 'services/swr/fetcher';
+import SlideProduct from 'components/shared/SlideProduct';
 
 const Home = () => {
-  const { data: banners, isLoading: loadBanner } = useSWR(
-    BANNERS,
-    fetcher
-  );
   return (
     <main className="2xl:container">
       <ShowCase />
-      <CategoriesSection />
-      <AmazingOffer />
+      <Vendors />
+      <VipSlider />
       <Banner className="grid-cols-2 max-h-96">
-        {!loadBanner && (
-          <>
-            <BannerItem banners={banners} sectionNum="SECTION4" />
-            <BannerItem banners={banners} sectionNum="SECTION5" />
-          </>
-        )}
+        <BannerItem sectionNum="SECTION4" />
+        <BannerItem sectionNum="SECTION5" />
       </Banner>
-      <BestSelling />
-      {/* <Banner className="grid-cols-4">
-        <BannerItem>
-          <img src={banner3} alt="banner" />
-        </BannerItem>
-        <BannerItem>
-          <img src={banner4} alt="banner" />
-        </BannerItem>
-        <BannerItem>
-          <img src={banner5} alt="banner" />
-        </BannerItem>
-        <BannerItem>
-          <img src={banner6} alt="banner" />
-        </BannerItem>
-      </Banner> */}
-      <OurSuggestion />
-      {/* <Banner>
-        <BannerItem>
-          <img src={banner7} alt="banner" />
-        </BannerItem>
-      </Banner> */}
-      <BiggestDiscount />
+      <GridabledProducts title="نوشیدنی" section="SLIDER7" />
+      <Banner className="grid-cols-3 max-h-96">
+        <BannerItem sectionNum="SECTION6" />
+        <BannerItem sectionNum="SECTION7" />
+        <BannerItem sectionNum="SECTION8" />
+      </Banner>
+      <SlideProduct
+        title="فرآورده های منجمدی"
+        section="SLIDER5"
+        className="mx-4"
+      />
+      <Banner className="grid-cols-4 max-h-96">
+        <BannerItem sectionNum="SECTION2" />
+        <BannerItem sectionNum="SECTION3" />
+        <BannerItem sectionNum="SECTION4" />
+        <BannerItem sectionNum="SECTION9" />
+      </Banner>
+      <GridabledProducts title="جدید ترین ها" section="SLIDER2" />
+      <Banner className="grid-cols-1 max-h-96">
+        <BannerItem sectionNum="SECTION1" />
+      </Banner>
+      <SlideProduct
+        title="لبنیات"
+        section="SLIDER3"
+        className="mx-4"
+      />
+      <Banner className="grid-cols-2 max-h-96">
+        <BannerItem sectionNum="SECTION2" />
+        <BannerItem sectionNum="SECTION3" />
+      </Banner>
+      <GridabledProducts title="خرید عمده" section="SLIDER4" />
+      <Banner className="grid-cols-3 max-h-96">
+        <BannerItem sectionNum="SECTION4" />
+        <BannerItem sectionNum="SECTION5" />
+        <BannerItem sectionNum="SECTION6" />
+      </Banner>
+      <SlideProduct
+        title="غذاهای آماده"
+        section="SLIDER8"
+        className="mx-4"
+      />
+      <Banner className="grid-cols-4 max-h-96">
+        <BannerItem sectionNum="SECTION7" />
+        <BannerItem sectionNum="SECTION8" />
+        <BannerItem sectionNum="SECTION9" />
+        <BannerItem sectionNum="SECTION2" />
+      </Banner>
+      <GridabledProducts title="پروتئینی" section="SLIDER9" />
+      <Banner className="grid-cols-1 max-h-96">
+        <BannerItem sectionNum="SECTION1" />
+      </Banner>
+      <SlideProduct
+        title="کالاهای پرتخفیف"
+        section="SLIDER6"
+        className="mx-4"
+      />
       <PopularBrands />
     </main>
   );

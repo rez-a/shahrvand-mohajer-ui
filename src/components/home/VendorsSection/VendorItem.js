@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import slugConverter from '../../../utilities/slugConverter';
+import slugConverter from 'utilities/slugConverter';
 
-const CategoriesItem = ({ ErpCode, Image, Name, TimeWork }) => {
+const VendorItem = ({ ErpCode, Image, Name, TimeWork }) => {
   return (
     <div className="relative group">
       <div className="w-32 h-32 mx-auto mb-3">
@@ -23,10 +23,10 @@ const CategoriesItem = ({ ErpCode, Image, Name, TimeWork }) => {
   );
 };
 
-CategoriesItem.propTypes = {
+VendorItem.propTypes = {
   ErpCode: PropTypes.string,
   Image: PropTypes.number,
   banner: PropTypes.string,
 };
 
-export default CategoriesItem;
+export default VendorItem;
