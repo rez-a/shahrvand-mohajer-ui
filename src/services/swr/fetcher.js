@@ -1,4 +1,3 @@
-import { async } from 'q';
 import { handleRequest } from 'services';
 
 export const fetcher = async (url) => {

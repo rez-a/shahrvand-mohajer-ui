@@ -8,9 +8,12 @@ const SubCategories = ({ Name, ErpCode, mainErpCode, mainName }) => {
     <li>
       <Link
         className="text-sm font-normal px-2 py-2.5 hover:underline	 text-white  flex items-center transition group w-full"
-        to={`products/${mainErpCode}/${slugConverter(
-          mainName
-        )}/${ErpCode}/${slugConverter(Name)}`}
+        to={{
+          pathname: `products/${mainErpCode}/${slugConverter(
+            mainName
+          )}`,
+          query: { sunCategories: ErpCode },
+        }}
       >
         {Name}
       </Link>

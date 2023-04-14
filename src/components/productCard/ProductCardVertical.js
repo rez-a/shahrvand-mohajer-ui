@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Rates from 'components/shared/rating/Rates';
 import { Link } from 'react-router-dom';
 import slugConverter from 'utilities/slugConverter';
 
@@ -19,6 +18,7 @@ const ProductCartVertical = ({
   const discount = Math.floor(
     (SellPrice - LastBuyPrice) / (LastBuyPrice / 100)
   );
+
   return (
     <div
       class={`max-w-xs overflow-hidden group ${containerClassName}`}
@@ -37,7 +37,11 @@ const ProductCartVertical = ({
       </div>
       <div class="px-6 py-4">
         <Link
-          to={`product/${ErpCode}/${slugConverter(Name)}`}
+          to={`/products/${MainGroupErpCode}/${slugConverter(
+            MainGroupName
+          )}/${SideGroupErpCode}/${slugConverter(
+            SideGroupName
+          )}/${ErpCode}/${slugConverter(Name)}`}
           class="font-bold truncate block w-full text-rose-500/70 group-hover:text-rose-500/100 transition-all duration-200 text-base"
         >
           {Name}
@@ -45,7 +49,7 @@ const ProductCartVertical = ({
       </div>
       <div class="px-6 pt-4 pb-2">
         <Link
-          to={`products/${MainGroupErpCode}/${slugConverter(
+          to={`/products/${MainGroupErpCode}/${slugConverter(
             MainGroupName
           )}/${SideGroupErpCode}/${slugConverter(SideGroupName)}`}
           class="inline-block bg-gray-200 max-w-full truncate rounded-full px-3 py-1 text-xs text-gray-700 opacity-75 hover:opacity-100 transition-all duration-200 cursor-pointer hover:underline"

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Autoplay, Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import CategoriesItem from './VendorItem';
+import VendorItem from './VendorItem';
 import SwiperNavBtn from 'components/swiper/SwiperNavBtn';
 import useSWR from 'swr';
 import { fetcher } from 'services/swr/fetcher';
@@ -14,10 +14,7 @@ const Vendors = () => {
   const { data: vendors } = useSWR(view && VENDORS, fetcher);
 
   return (
-    <div
-      className="border rounded-xl mx-4 p-4 my-8 bg-white"
-      ref={ref}
-    >
+    <div className="border rounded-xl p-4 my-8 bg-white" ref={ref}>
       <header className="text-zinc-400 text-center font-semibold p-4">
         بیش از 1,000 کالا در فروشگاه های شهروند
       </header>
@@ -35,7 +32,7 @@ const Vendors = () => {
         {!!vendors
           ? vendors?.map((vendor) => (
               <SwiperSlide key={vendor.id}>
-                <CategoriesItem
+                <VendorItem
                   {...vendor}
                   containerClassName="bg-white rounded-xl hover:shadow-lg py-4 transition-all duration-200"
                 />

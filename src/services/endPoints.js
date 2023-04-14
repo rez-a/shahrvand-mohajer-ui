@@ -4,3 +4,6 @@ export const BANNERS = '/api/banners';
 export const VENDORS = '/api/vendors';
 export const SLIDER_VIP = '/api/app/slider-vip';
 export const SLIDESHOW = '/api/pinneds/products';
+export const TIMEWORK = '/api/app/working-time';
+export const PRODUCTS = '/api/products?count=16';
+export const SUBCATEGORIES = '/api/subcategories/category';

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const PaginationLayout = (props) => {
+const PaginationLayout = ({ className }) => {
   return (
-    <div>
+    <div className={className}>
       <ul className="flex items-center space-x-4 space-x-reverse my-20 justify-center">
         <li className="inline-flex">
           <button>

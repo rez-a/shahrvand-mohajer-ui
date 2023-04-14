@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Rates from 'components/shared/rating/Rates';
-import product1 from 'assets/images/products/products1.jpg';
 import { Link } from 'react-router-dom';
-import slugConverter from '../../utilities/slugConverter';
+import slugConverter from 'utilities/slugConverter';
 
 const ProductCartHorizontal = ({
   containerClassName,

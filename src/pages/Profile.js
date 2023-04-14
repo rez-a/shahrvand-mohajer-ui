@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import TitleIcon from 'components/shared/TitleIcon';
 import { Link } from 'react-router-dom';
 import MainProfile from 'components/profile/MainProfile';
+import ProfileRoutes from 'components/routers/ProfileRoutes';
 
 const Profile = ({ children }) => {
   return (
@@ -125,7 +126,7 @@ const Profile = ({ children }) => {
           </li>
         </ul>
       </aside>
-      {children}
+      <ProfileRoutes />
     </main>
   );
 };
