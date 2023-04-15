@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const SwitchInput = ({ label, id }) => {
+const SwitchInput = ({ label, id, checked, changeHandler }) => {
   return (
     <div class="inline-flex items-center">
       <div class="relative inline-block h-4 w-8 cursor-pointer rounded-full">
         <input
           id={id}
+          onChange={changeHandler}
+          checked={checked}
           type="checkbox"
           class="peer absolute h-4 w-8 cursor-pointer appearance-none rounded-full bg-gray-200 transition-colors duration-300 checked:bg-rose-500 peer-checked:border-rose-500 peer-checked:before:bg-rose-500"
         />

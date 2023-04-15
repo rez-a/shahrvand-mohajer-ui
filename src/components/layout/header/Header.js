@@ -20,7 +20,7 @@ const Header = () => {
       : setShowMenuNav(true);
   };
 
-  const { data: categories, isLoading } = useSWR(CATEGORIES, fetcher);
+  const { data: categories } = useSWR(CATEGORIES, fetcher);
 
   return (
     <header

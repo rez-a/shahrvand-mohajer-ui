@@ -8,7 +8,7 @@ const useObserved = () => {
     threshold: 0,
   });
   useEffect(() => {
-    inView && setView(true);
+    !view && inView && setView(true);
   }, [inView]);
 
   return { ref, view };

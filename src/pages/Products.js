@@ -16,63 +16,142 @@ import {
 } from 'react-router-dom';
 import useSWR from 'swr';
 import { PRODUCTS, SUBCATEGORIES } from 'services/endPoints';
-import useObserved from 'hooks/useObserved';
 import { fetcher } from 'services/swr/fetcher';
 import LoaderProductCardVeritical from 'components/productCard/LoaderProductCardVeritical';
 import queryString from 'query-string';
+import useSWRMutation from 'swr/mutation';
+import SortItem from 'components/SortItem';
 
 const Products = (props) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [price, setPrice] = useState([25, 75]);
-  const [subCategoriesList, setList] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const sortItems = [
+    { type: 'VISIT_COUNT', title: 'بیشترین بازدید' },
+    { type: 'CHEAP', title: 'ارزان ترین' },
+    { type: 'EXPENSIVE', title: 'گران ترین' },
+    { type: 'DISCOUNT', title: 'بیشترین تخفیف' },
+  ];
+  const [query, setQuery] = useState(
+    queryString.parse(location.search, { arrayFormat: 'bracket' })
+  );
+  const [price, setPrice] = useState([
+    query['price[min]'] || 0,
+    query['price[max]'] || 10000000,
+  ]);
   const { mainErpCode } = useParams();
-  const { ref, view } = useObserved();
-  const { data: products } = useSWR(
-    view &&
-      queryString.stringifyUrl(
-        {
-          url: `${PRODUCTS}&category=${mainErpCode}`,
-          query: {
-            subcategory: subCategoriesList,
-          },
-        },
-        { arrayFormat: 'bracket' }
-      ),
+
+  const { data: products, trigger } = useSWRMutation(
+    setParamsFilters(),
     fetcher
   );
 
   const { data: subCategories } = useSWR(
-    view && `${SUBCATEGORIES}/${mainErpCode}`,
+    `${SUBCATEGORIES}/${mainErpCode}`,
     fetcher
   );
 
-  const handleSubCategories = (erpCode) => {
-    subCategoriesList.includes(erpCode)
-      ? setList([
-          ...subCategoriesList.filter(
-            (subCategory) => subCategory !== erpCode
-          ),
-        ])
-      : setList([...subCategoriesList, erpCode]);
+  useEffect(() => {
+    setLoading(true);
+    const triggerRun = async () => {
+      await trigger();
+      setLoading(false);
+    };
+    triggerRun();
+  }, [location]);
+
+  const handleQueries = (queryList) => {
+    setQuery(queryList);
   };
 
-  useEffect(() => {
+  const handleFilters = () => {
+    setLoading(true);
+    navigate(
+      queryString.stringifyUrl(
+        {
+          url: location.pathname,
+          query,
+        },
+        {
+          arrayFormat: 'bracket',
+          skipEmptyString: true,
+          skipNull: true,
+        }
+      )
+    );
+    trigger();
+    setLoading(false);
+  };
+
+  function setParamsFilters() {
+    return queryString.stringifyUrl(
+      {
+        url: `${PRODUCTS}&category=${mainErpCode}`,
+        query,
+      },
+      {
+        arrayFormat: 'bracket',
+        skipEmptyString: true,
+        skipNull: true,
+      }
+    );
+  }
+
+  const handleSubCategories = (erpCode) => {
+    if (query?.subcategory) {
+      query.subcategory.includes(erpCode)
+        ? handleQueries({
+            ...query,
+            subcategory: [
+              ...query.subcategory.filter((item) => item !== erpCode),
+            ],
+          })
+        : handleQueries({
+            ...query,
+            subcategory: [...query.subcategory, erpCode],
+          });
+    } else {
+      handleQueries({
+        ...query,
+        subcategory: [erpCode],
+      });
+    }
+  };
+  const handlePrice = (price) => {
+    setPrice(price);
+    setQuery({
+      ...query,
+      'price[min]': price[0],
+      'price[max]': price[1],
+    });
+  };
+  const handleSort = (type) => {
+    setLoading(true);
+    setQuery({ ...query, sort: type });
     navigate(
       queryString.stringifyUrl(
         {
           url: location.pathname,
           query: {
-            subcategory: subCategoriesList,
+            ...queryString.parse(location.search, {
+              arrayFormat: 'bracket',
+            }),
+            sort: query.sort,
           },
         },
-        { arrayFormat: 'bracket' }
+        {
+          arrayFormat: 'bracket',
+          skipEmptyString: true,
+          skipNull: true,
+        }
       )
     );
-  }, [subCategoriesList]);
+    trigger();
+    setLoading(false);
+  };
 
-  console.log(location);
-
+  console.log(query);
   return (
     <main className="grid grid-cols-5 gap-8 items-start">
       <aside className="border rounded-md p-4 bg-white border-gray-100 col-span-1 sticky top-20">
@@ -115,7 +194,7 @@ const Products = (props) => {
                       >
                         <div
                           className={`w-4 h-4 border rounded ${
-                            subCategoriesList.includes(
+                            query?.subcategory?.includes(
                               subCategory.ErpCode
                             )
                               ? 'bg-rose-500 border-rose-500'
@@ -151,49 +230,54 @@ const Products = (props) => {
           </h2>
           <RangeSlider
             min={0}
-            max={100}
-            defaultValue={[25, 75]}
+            max={10000000}
+            defaultValue={[0, 10000000]}
             step={1}
             value={price}
-            onInput={(price) => setPrice(price)}
+            onInput={(price) => handlePrice(price)}
           />
           <p className="text-xs mt-6">
             <span>
-              قیمت : {price[0]} - {price[1]} تومان
+              قیمت : {Number(price[0]).toLocaleString()} -
+              {Number(price[1]).toLocaleString()} ریال
             </span>
           </p>
         </div>
-        <div class="flex items-center w-full mb-12 my-8">
-          <SwitchInput label="فقط کالاهای موجود" id="is-available" />
+        <div class="flex items-center w-full mb-12 my-8 font-base">
+          <SwitchInput
+            changeHandler={(e) =>
+              setQuery({
+                ...query,
+                available: Number(!query.available),
+              })
+            }
+            checked={Boolean(query?.available) || false}
+            label="فقط کالاهای موجود"
+            id="is-available"
+          />
         </div>
-        <button className="bg-sky-500/90 text-white w-full py-2 rounded-md font-bold shadow-lg shadow-sky-500/50 hover:bg-sky-500 transition-all duration-300">
+        <button
+          onClick={handleFilters}
+          className="bg-sky-500/90 text-white w-full py-2 rounded-md font-bold shadow-lg shadow-sky-500/50 hover:bg-sky-500 transition-all duration-300"
+        >
           فیلتر
         </button>
       </aside>
 
       <div className="col-span-4">
         <ul className="flex items-center space-x-6 space-x-reverse text-xs">
-          <li>
-            <button className="bg-rose-500 text-white px-3 py-2 font-bold rounded-md">
-              پربازدید ترین
-            </button>
-          </li>
-          <li>
-            <button>قدیمی ترین</button>
-          </li>
-          <li>
-            <button>جدید ترین</button>
-          </li>
-          <li>
-            <button>ارزان ترین</button>
-          </li>
-          <li>
-            <button>گران ترین</button>
-          </li>
+          {sortItems.map((sortItem, index) => (
+            <SortItem
+              key={index}
+              {...sortItem}
+              querySort={query.sort}
+              clickHandler={() => handleSort(sortItem.type)}
+            />
+          ))}
         </ul>
-        <div className="grid grid-cols-4 gap-8 my-8" ref={ref}>
-          {!!products
-            ? products.map((product) => (
+        <div className="grid grid-cols-4 gap-8 my-8">
+          {!!products && !loading
+            ? products?.map((product) => (
                 <ProductCartVertical
                   containerClassName="border-b py-2 hover:shadow-lg transition-all duration-300 bg-white rounded-md"
                   key={product.Id}
@@ -201,7 +285,7 @@ const Products = (props) => {
                 />
               ))
             : [...Array(16)].map((_, index) => (
-                <LoaderProductCardVeritical />
+                <LoaderProductCardVeritical key={index} />
               ))}
         </div>
 
