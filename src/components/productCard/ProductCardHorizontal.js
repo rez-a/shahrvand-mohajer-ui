@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import slugConverter from 'utilities/slugConverter';
+import queryString from 'query-string';
 
 const ProductCartHorizontal = ({
   containerClassName,
@@ -23,16 +24,25 @@ const ProductCartHorizontal = ({
         </div>
         <div class="pr-2 bg-white flex flex-col justify-between leading-normal grow">
           <Link
-            to={`product/${ErpCode}/${slugConverter(Name)}`}
+            to={`/product/${MainGroupErpCode}/${slugConverter(
+              MainGroupName
+            )}/${SideGroupErpCode}/${slugConverter(
+              SideGroupName
+            )}/${ErpCode}/${slugConverter(Name)}`}
             class="text-gray-900 w-5/6 truncate font-bold whitespace-nowrap hover:text-rose-500 transition-all duration-200 mb-2"
           >
             {Name}
           </Link>
           <div className="flex items-center justify-between">
             <Link
-              to={`products/${MainGroupErpCode}/${slugConverter(
+              to={`/products/${MainGroupErpCode}/${slugConverter(
                 MainGroupName
-              )}/${SideGroupErpCode}/${slugConverter(SideGroupName)}`}
+              )}?${queryString.stringify(
+                {
+                  subcategory: [SideGroupErpCode],
+                },
+                { arrayFormat: 'bracket' }
+              )}`}
               class="inline-block max-w-[50%] truncate bg-gray-200 rounded-full px-3 py-1 text-xs text-gray-700 opacity-75 hover:opacity-100 transition-all duration-200 cursor-pointer hover:underline"
             >
               #{SideGroupName}

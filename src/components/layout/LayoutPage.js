@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Header from './header/Header';
 import { Outlet } from 'react-router-dom';
 import FooterLayout from './footer/FooterLayout';
-import Breadcrumb from 'components/Breadcrumb';
 import useControllerScroll from 'hooks/useControllerScroll';
 
 const LayoutPage = (props) => {

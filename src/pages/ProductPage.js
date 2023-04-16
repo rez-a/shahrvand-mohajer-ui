@@ -1,141 +1,197 @@
 import React from 'react';
-import product1 from 'assets/images/products/products1.jpg';
 import storeLogo from 'assets/images/store-logo.png';
 import TitleIcon from 'components/shared/TitleIcon';
 import SlideProduct from 'components/shared/SlideProduct';
 import ImageZoom from 'components/productPage/ImageZoom';
-import Breadcrumb from 'components/Breadcrumb';
+import { PRODUCT } from 'services/endPoints';
+import { fetcher } from 'services/swr/fetcher';
+import { useParams } from 'react-router-dom';
+import useSWR from 'swr';
+import { useEffect } from 'react';
+import { useContext } from 'react';
+import { LoadingContext } from 'context/LoadingProvider';
 
 const ProductPage = () => {
+  const { erpCode } = useParams();
+  const { setLoader } = useContext(LoadingContext);
+
+  const { data: product, isLoading } = useSWR(
+    `${PRODUCT}/${erpCode}`,
+    fetcher
+  );
+
+  const {
+    Name,
+    VisitCount,
+    IsVendor,
+    Attr,
+    IsAvailable,
+    Image,
+    LastBuyPrice,
+    SellPrice,
+    MainGroupName,
+    Few,
+    UnitName,
+  } = !!product && product;
+
+  useEffect(() => {
+    setLoader(isLoading);
+  }, [isLoading]);
+
+  const discount = Math.floor(
+    (SellPrice - LastBuyPrice) / (LastBuyPrice / 100)
+  );
+  console.log(discount);
   return (
     <>
-      <div className="flex items-start gap-6 bg-white p-4 py-8 rounded-md border border-gray-100">
-        <div className="w-72 max-h-96">
-          <ImageZoom />
-        </div>
-        <div className="grow">
-          <h2 className="font-bold py-4 border-b">
-            گوشی موبایل سامسونگ مدل Galaxy A50 SM-A505F/DS دو سیم کارت
-            ظرفیت 128گیگابایت
-          </h2>
-          <div className="flex items-start justify-between my-4">
-            <div>
-              <h4 className="flex">
-                <TitleIcon bg="bg-zinc-500" />
-                <span className="mr-2 text-zinc-600 font-semibold text-sm">
-                  ویژگی های محصول
-                </span>
-              </h4>
-              <ul className="text-xs space-y-2 mt-3">
-                <li className="mr-2">
-                  <span className="text-zinc-500 relative pr-4 font-semibold before:w-2 before:h-2 before:bg-zinc-500 before:right-0 before:top-1/2 before:-translate-y-1/2 before:rounded-full before:absolute">
-                    ویژگی یک :
-                  </span>
-                  <span className="text-zinc-400 mr-2">ویژگی یک</span>
-                </li>
-                <li className="mr-2">
-                  <span className="text-zinc-500 relative pr-4 font-semibold before:w-2 before:h-2 before:bg-zinc-500 before:right-0 before:top-1/2 before:-translate-y-1/2 before:rounded-full before:absolute">
-                    ویژگی دو :
-                  </span>
-                  <span className="text-zinc-400 mr-2">ویژگی دو</span>
-                </li>
-                <li className="mr-2">
-                  <span className="text-zinc-500 relative pr-4 font-semibold before:w-2 before:h-2 before:bg-zinc-500 before:right-0 before:top-1/2 before:-translate-y-1/2 before:rounded-full before:absolute">
-                    ویژگی سه :
-                  </span>
-                  <span className="text-zinc-400 mr-2">ویژگی سه</span>
-                </li>
-                <li className="mr-2">
-                  <span className="text-zinc-500 relative pr-4 font-semibold before:w-2 before:h-2 before:bg-zinc-500 before:right-0 before:top-1/2 before:-translate-y-1/2 before:rounded-full before:absolute">
-                    ویژگی چهار :
-                  </span>
-                  <span className="text-zinc-400 mr-2">
-                    ویژگی چهار
-                  </span>
-                </li>
-                <li className="mr-2">
-                  <span className="text-zinc-500 relative pr-4 font-semibold before:w-2 before:h-2 before:bg-zinc-500 before:right-0 before:top-1/2 before:-translate-y-1/2 before:rounded-full before:absolute">
-                    ویژگی پنج :
-                  </span>
-                  <span className="text-zinc-400 mr-2">
-                    ویژگی پنج
-                  </span>
-                </li>
-                <li className="mr-2">
-                  <span className="text-zinc-500 relative pr-4 font-semibold before:w-2 before:h-2 before:bg-zinc-500 before:right-0 before:top-1/2 before:-translate-y-1/2 before:rounded-full before:absolute">
-                    ویژگی شش :
-                  </span>
-                  <span className="text-zinc-400 mr-2">ویژگی شش</span>
-                </li>
-              </ul>
-              <div className="flex items-center max-w-[20rem] mx-auto my-8">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  width="35"
-                  height="35"
-                  className="fill-rose-500"
-                >
-                  <path fill="none" d="M0 0h24v24H0z" />
-                  <path d="M6.455 19L2 22.5V4a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H6.455zm4.838-6.879L8.818 9.646l-1.414 1.415 3.889 3.889 5.657-5.657-1.414-1.414-4.243 4.242z" />
-                </svg>
-                <p className="text-sm mr-2">
-                  بیش از ۴۳۰ نفر از این محصول بازدید کرده اند
-                </p>
-              </div>
-            </div>
-            <div>
-              <div className="bg-gray-50/50 border rounded p-4">
-                <div className="flex items-center mb-4">
-                  <div className="w-6 h-6">
-                    <img
-                      src={storeLogo}
-                      alt="test"
-                      className="object-contain"
-                    />
+      {!!product && (
+        <div className="flex items-start gap-6 bg-white p-4 py-8 rounded-md border border-gray-100">
+          <div className="w-72 max-h-96">
+            <ImageZoom image={Image} />
+          </div>
+          <div className="grow">
+            <h2 className="font-bold py-4 border-b">{Name}</h2>
+            <div className="flex items-start justify-between my-4">
+              <div>
+                {!!Attr.length && (
+                  <>
+                    <h4 className="flex">
+                      <TitleIcon bg="bg-zinc-500" />
+                      <span className="mr-2 text-zinc-600 font-semibold text-sm">
+                        انواع محصول
+                      </span>
+                    </h4>
+
+                    <ul className="text-xs space-y-2 mt-3">
+                      {Attr.map((atr, index) => (
+                        <li key={index} className="mr-2">
+                          <span className="text-zinc-500 relative pr-4 font-semibold before:w-2 before:h-2 before:bg-zinc-500 before:right-0 before:top-1/2 before:-translate-y-1/2 before:rounded-full before:absolute">
+                            {atr}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+                {IsAvailable && (
+                  <div className="flex items-center max-w-[20rem] mx-auto my-8">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      width="35"
+                      height="35"
+                      className="fill-rose-500"
+                    >
+                      <path fill="none" d="M0 0h24v24H0z" />
+                      <path d="M6.455 19L2 22.5V4a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H6.455zm4.838-6.879L8.818 9.646l-1.414 1.415 3.889 3.889 5.657-5.657-1.414-1.414-4.243 4.242z" />
+                    </svg>
+                    <p className="text-sm mr-2">
+                      تعداد {Few} {UnitName} از این محصول در انبار
+                      موجود است.
+                    </p>
                   </div>
-                  <p className="text-sm mr-2 text-zinc-700">
-                    فروشگاه قاصدک
-                  </p>
-                </div>
-                <p className="flex items-center my-4">
+                )}
+
+                <div className="flex items-center max-w-[20rem] mx-auto my-8">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
-                    width="22"
-                    height="22"
-                    className="fill-sky-500"
+                    width={35}
+                    height={35}
+                    className="fill-rose-500"
                   >
-                    <path fill="none" d="M0 0h24v24H0z" />
-                    <path d="M22 20v2H2v-2h1v-6.758A4.496 4.496 0 0 1 1 9.5c0-.827.224-1.624.633-2.303L4.345 2.5a1 1 0 0 1 .866-.5H18.79a1 1 0 0 1 .866.5l2.702 4.682A4.496 4.496 0 0 1 21 13.242V20h1zM5.789 4L3.356 8.213a2.5 2.5 0 0 0 4.466 2.216c.335-.837 1.52-.837 1.856 0a2.5 2.5 0 0 0 4.644 0c.335-.837 1.52-.837 1.856 0a2.5 2.5 0 1 0 4.457-2.232L18.21 4H5.79z" />
+                    <path d="M6.45455 19L2 22.5V4C2 3.44772 2.44772 3 3 3H21C21.5523 3 22 3.44772 22 4V18C22 18.5523 21.5523 19 21 19H6.45455ZM12.0178 14.6997L15.3765 11.341C16.2552 10.4623 16.2552 9.03769 15.3765 8.15901C14.4978 7.28033 13.0732 7.28033 12.1945 8.15901L12.0178 8.33579L11.841 8.15901C10.9623 7.28033 9.53769 7.28033 8.65901 8.15901C7.78033 9.03769 7.78033 10.4623 8.65901 11.341L12.0178 14.6997Z"></path>
                   </svg>
-                  <span className="text-sm mr-2 text-zinc-700">
-                    موجود در انبار
-                  </span>
-                </p>
-                <p className="flex items-center flex-row-reverse mt-4 mb-2">
-                  <span className="bg-rose-500 p-2 py-1 rounded-full text-white text-sm font-semibold">
-                    5%
-                  </span>
-                  <span className="text-gray-400 relative before:absolute before:w-[110%] before:h-[0.5px] before:bg-gray-400 before:top-1/2 before:-translate-y-1/2 before:left-1/2 before:-translate-x-1/2 ml-3 ">
-                    4,900,000
-                  </span>
-                </p>
-                <p className="text-rose-500 text-left mb-4">
-                  <span className="font-bold text-2xl ml-3">
-                    4,655,000
-                  </span>
-                  <span className="text-sm">تومان</span>
-                </p>
-                <small>321,600 تومان تخفیف کسر گردیده است.</small>
-                <button className="w-full bg-rose-500 text-white text-lg p-3 rounded mt-2 hover:bg-rose-600 transition-all duration-300">
-                  افزودن به سبد خرید
-                </button>
+                  <p className="text-sm mr-2">
+                    بیش از {VisitCount} نفر از این محصول بازدید کرده
+                    اند
+                  </p>
+                </div>
+              </div>
+              <div className="w-1/3">
+                <div className="bg-gray-50/50 border rounded p-4 w-full">
+                  <div className="flex items-center mb-4">
+                    <div className="w-6 h-6">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        className="fill-rose-500"
+                      >
+                        <path d="M22 20V22H2V20H3V13.2422C1.79401 12.435 1 11.0602 1 9.5C1 8.67286 1.22443 7.87621 1.63322 7.19746L4.3453 2.5C4.52393 2.1906 4.85406 2 5.21132 2H18.7887C19.1459 2 19.4761 2.1906 19.6547 2.5L22.3575 7.18172C22.7756 7.87621 23 8.67286 23 9.5C23 11.0602 22.206 12.435 21 13.2422V20H22ZM5.78865 4L3.35598 8.21321C3.12409 8.59843 3 9.0389 3 9.5C3 10.8807 4.11929 12 5.5 12C6.53096 12 7.44467 11.3703 7.82179 10.4295C8.1574 9.59223 9.3426 9.59223 9.67821 10.4295C10.0553 11.3703 10.969 12 12 12C13.031 12 13.9447 11.3703 14.3218 10.4295C14.6574 9.59223 15.8426 9.59223 16.1782 10.4295C16.5553 11.3703 17.469 12 18.5 12C19.8807 12 21 10.8807 21 9.5C21 9.0389 20.8759 8.59843 20.6347 8.19746L18.2113 4H5.78865Z"></path>
+                      </svg>
+                    </div>
+                    <p className="text-sm mr-2 text-zinc-700">
+                      {IsVendor ? MainGroupName : 'فروشگاه شهروند'}
+                    </p>
+                  </div>
+                  <p className="flex items-center my-4">
+                    <div className="w-6 h-6">
+                      {IsAvailable ? (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          className="fill-sky-500"
+                        >
+                          <path d="M4 3H20C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V4C3 3.44772 3.44772 3 4 3ZM11.0026 16L18.0737 8.92893L16.6595 7.51472L11.0026 13.1716L8.17421 10.3431L6.75999 11.7574L11.0026 16Z"></path>
+                        </svg>
+                      ) : (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          className="fill-zinc-300"
+                        >
+                          <path d="M4 3H20C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V4C3 3.44772 3.44772 3 4 3ZM7 11V13H17V11H7Z"></path>
+                        </svg>
+                      )}
+                    </div>
+                    <span className="text-sm mr-2 text-zinc-700">
+                      {IsAvailable ? 'موجود در انبار' : 'ناموجود'}
+                    </span>
+                  </p>
+                  {LastBuyPrice !== SellPrice ? (
+                    <>
+                      <p className="flex items-center flex-row-reverse mt-4 mb-2">
+                        <span className="bg-rose-500 p-2 py-1 rounded-full text-white text-sm font-semibold">
+                          {discount}%
+                        </span>
+                        <span className="text-gray-400 relative before:absolute before:w-[110%] before:h-[0.5px] before:bg-gray-400 before:top-1/2 before:-translate-y-1/2 before:left-1/2 before:-translate-x-1/2 ml-3 ">
+                          {SellPrice?.toLocaleString()}
+                        </span>
+                      </p>
+                      <p className="text-rose-500 text-left mb-4">
+                        <span className="font-bold text-2xl ml-3">
+                          {LastBuyPrice?.toLocaleString()}
+                        </span>
+                        <span className="text-sm">تومان</span>
+                      </p>
+                    </>
+                  ) : (
+                    <p className="text-rose-500 text-left mb-4">
+                      <span className="font-bold text-2xl ml-3">
+                        {LastBuyPrice?.toLocaleString()}
+                      </span>
+                      <span className="text-sm">تومان</span>
+                    </p>
+                  )}
+                  {LastBuyPrice !== SellPrice && (
+                    <small>
+                      {Number(
+                        SellPrice - LastBuyPrice
+                      ).toLocaleString()}
+                      <span className="mr-1">
+                        تومان تخفیف کسر گردیده است.
+                      </span>
+                    </small>
+                  )}
+                  <button className="w-full bg-rose-500 text-white text-lg p-3 rounded mt-2 hover:bg-rose-600 transition-all duration-300">
+                    افزودن به سبد خرید
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
       <SlideProduct title="سایر محصولات فروشگاه قاصدک" />
     </>
   );

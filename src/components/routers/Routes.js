@@ -4,15 +4,11 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LayoutHome from 'components/layout/LayoutHome';
 import LayoutPage from 'components/layout/LayoutPage';
-import Cart from 'pages/Cart';
-import Checkout from 'pages/Checkout';
 import Profile from 'pages/Profile';
-import ProfileRoutes from './ProfileRoutes';
 import NotFound from 'pages/NotFound';
-import Breadcrumb from 'components/Breadcrumb';
-import Categories from 'pages/Categories';
 import ProductsRoutes from './ProductsRoutes';
 import CheckoutRoutes from './CheckoutRoutes';
+import ProductRoutes from './ProductRoutes';
 
 const AllRoutes = () => {
   return (
@@ -23,6 +19,7 @@ const AllRoutes = () => {
         </Route>
         <Route path="/*" element={<LayoutPage />}>
           <Route path="products/*" element={<ProductsRoutes />} />
+          <Route path="product/*" element={<ProductRoutes />} />
           <Route path="checkout/*" element={<CheckoutRoutes />} />
           <Route path="profile/*" element={<Profile />} />
           <Route path="*" element={<NotFound />} />

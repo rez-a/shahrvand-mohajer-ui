@@ -5,6 +5,7 @@ import Categories from 'pages/Categories';
 import Breadcrumb from 'components/Breadcrumb';
 import Products from 'pages/Products';
 import ProductPage from 'pages/ProductPage';
+import NotFound from 'pages/NotFound';
 
 const ProductsRoutes = (props) => {
   return (
@@ -12,23 +13,12 @@ const ProductsRoutes = (props) => {
       <Breadcrumb />
       <Routes>
         <Route index element={<Categories />} />
-        <Route
-          path=":mainErpCode/:slugMain"
-          element={
-            <Routes>
-              <Route index element={<Products />} />
-              <Route
-                path=":subErpCode/:slugSub/:productErpCode/:slugProduct"
-                element={<ProductPage />}
-              />
-            </Routes>
-          }
-        />
+        <Route path=":mainErpCode/:slugMain" element={<Products />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
 };
-
 ProductsRoutes.propTypes = {};
 
 export default ProductsRoutes;

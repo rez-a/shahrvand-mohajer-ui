@@ -2,9 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import ReactImageMagnify from 'react-image-magnify';
-import product1 from 'assets/images/products/products1.jpg';
 
-const ImageZoom = () => {
+const ImageZoom = ({ image }) => {
   return (
     <ReactImageMagnify
       enlargedImageContainerStyle={{
@@ -19,10 +18,10 @@ const ImageZoom = () => {
         smallImage: {
           alt: 'Wristwatch by Ted Baker London',
           isFluidWidth: true,
-          src: product1,
+          src: image,
         },
         largeImage: {
-          src: product1,
+          src: image,
           width: 400,
           height: 500,
         },
@@ -31,6 +30,8 @@ const ImageZoom = () => {
   );
 };
 
-ImageZoom.propTypes = {};
+ImageZoom.propTypes = {
+  image: PropTypes.string,
+};
 
 export default ImageZoom;

@@ -38,7 +38,7 @@ const ProductCartVertical = ({
       </div>
       <div class="px-6 py-4">
         <Link
-          to={`/products/${MainGroupErpCode}/${slugConverter(
+          to={`/product/${MainGroupErpCode}/${slugConverter(
             MainGroupName
           )}/${SideGroupErpCode}/${slugConverter(
             SideGroupName

@@ -7,6 +7,9 @@ import { Link } from 'react-router-dom';
 import useSWR from 'swr';
 import { fetcher } from 'services/swr/fetcher';
 import { CATEGORIES } from 'services/endPoints';
+import Loading from 'components/shared/Loading';
+import { useContext } from 'react';
+import { LoadingContext } from 'context/LoadingProvider';
 
 const Header = () => {
   const navLink = useRef();
@@ -14,6 +17,9 @@ const Header = () => {
   useEffect(() => {
     window.addEventListener('scroll', controllerNavMenu);
   }, []);
+
+  const { loader } = useContext(LoadingContext);
+
   const controllerNavMenu = () => {
     window.scrollY > navLink.current.getBoundingClientRect().height
       ? setShowMenuNav(false)
@@ -21,13 +27,13 @@ const Header = () => {
   };
 
   const { data: categories } = useSWR(CATEGORIES, fetcher);
-
   return (
     <header
       ref={navLink}
       className="shadow bg-white sticky top-0 z-10"
     >
-      <div className="content 2xl:container">
+      {loader && <Loading />}
+      <div className="content relative 2xl:container">
         <nav className="flex items-center  py-4 ">
           <Link to="/" className="h-8 w-32">
             <svg

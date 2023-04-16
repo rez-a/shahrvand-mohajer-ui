@@ -2,18 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import slugConverter from 'utilities/slugConverter';
+import queryString from 'query-string';
 
 const SubCategories = ({ Name, ErpCode, mainErpCode, mainName }) => {
   return (
     <li>
       <Link
         className="text-sm font-normal px-2 py-2.5 hover:underline	 text-white  flex items-center transition group w-full"
-        to={{
-          pathname: `products/${mainErpCode}/${slugConverter(
-            mainName
-          )}`,
-          query: { sunCategories: ErpCode },
-        }}
+        to={`/products/${mainErpCode}/${slugConverter(
+          mainName
+        )}?${queryString.stringify(
+          {
+            subcategory: [ErpCode],
+          },
+          { arrayFormat: 'bracket' }
+        )}`}
       >
         {Name}
       </Link>
