@@ -5,15 +5,27 @@ import SlideProduct from 'components/shared/SlideProduct';
 import ImageZoom from 'components/productPage/ImageZoom';
 import { PRODUCT } from 'services/endPoints';
 import { fetcher } from 'services/swr/fetcher';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import useSWR from 'swr';
 import { useEffect } from 'react';
 import { useContext } from 'react';
-import { LoadingContext } from 'context/LoadingProvider';
+import { LoadingContext } from 'contexts/LoadingProvider';
+import ProductRelated from 'components/productPage/ProductRelated';
+import { CartContext } from 'contexts/CartProvider';
+import {
+  addToCart,
+  decrease,
+  increase,
+  removeFromCart,
+} from 'reducers/cart/actionCreators';
 
 const ProductPage = () => {
   const { erpCode } = useParams();
   const { setLoader } = useContext(LoadingContext);
+  const {
+    state: { cart },
+    dispatch,
+  } = useContext(CartContext);
 
   const { data: product, isLoading } = useSWR(
     `${PRODUCT}/${erpCode}`,
@@ -21,6 +33,7 @@ const ProductPage = () => {
   );
 
   const {
+    Id,
     Name,
     VisitCount,
     IsVendor,
@@ -32,6 +45,7 @@ const ProductPage = () => {
     MainGroupName,
     Few,
     UnitName,
+    MainGroupErpCode,
   } = !!product && product;
 
   useEffect(() => {
@@ -41,7 +55,12 @@ const ProductPage = () => {
   const discount = Math.floor(
     (SellPrice - LastBuyPrice) / (LastBuyPrice / 100)
   );
-  console.log(discount);
+
+  const quantity = cart.find(
+    (product) => product.Id === Id
+  )?.quantity;
+
+  console.log(cart);
   return (
     <>
       {!!product && (
@@ -183,16 +202,90 @@ const ProductPage = () => {
                       </span>
                     </small>
                   )}
-                  <button className="w-full bg-rose-500 text-white text-lg p-3 rounded mt-2 hover:bg-rose-600 transition-all duration-300">
-                    افزودن به سبد خرید
-                  </button>
+
+                  {!!quantity ? (
+                    <div className="flex items-center mt-4">
+                      <div className="items-center border flex p-2 rounded-md ">
+                        <button
+                          onClick={() => dispatch(increase(Id))}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            width="24"
+                            height="24"
+                            className="fill-sky-500"
+                          >
+                            <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
+                          </svg>
+                        </button>
+                        <span className="mx-4">{quantity}</span>
+                        {quantity === 1 ? (
+                          <button
+                            onClick={() =>
+                              dispatch(removeFromCart(Id))
+                            }
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              width="24"
+                              height="24"
+                              className="fill-zinc-400 hover:fill-rose-500 transition-all duration-300"
+                            >
+                              <path d="M17 6H22V8H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V8H2V6H7V3C7 2.44772 7.44772 2 8 2H16C16.5523 2 17 2.44772 17 3V6ZM18 8H6V20H18V8ZM9 11H11V17H9V11ZM13 11H15V17H13V11ZM9 4V6H15V4H9Z"></path>
+                            </svg>
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => dispatch(decrease(Id))}
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              width="24"
+                              height="24"
+                              className="fill-rose-500"
+                            >
+                              <path d="M5 11V13H19V11H5Z"></path>
+                            </svg>
+                          </button>
+                        )}
+                      </div>
+
+                      <div className="mr-2">
+                        <p className="text-sm">درسبد شما</p>
+                        <small className="text-xs text-zinc-400">
+                          مشاهده &zwnj;
+                          <Link
+                            to="/checkout/cart"
+                            className="text-sky-500"
+                          >
+                            سبد خرید
+                          </Link>
+                        </small>
+                      </div>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => dispatch(addToCart(product))}
+                      className="w-full bg-rose-500 text-white text-lg p-3 rounded mt-2 hover:bg-rose-600 transition-all duration-300"
+                    >
+                      افزودن به سبد خرید
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
           </div>
         </div>
       )}
-      <SlideProduct title="سایر محصولات فروشگاه قاصدک" />
+      <ProductRelated
+        title={`سایر محصولات فروشگاه ${
+          IsVendor ? MainGroupName : 'شهروند'
+        }`}
+        mainCategory={MainGroupErpCode}
+      />
     </>
   );
 };

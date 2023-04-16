@@ -48,7 +48,11 @@ const ProductCartHorizontal = ({
               #{SideGroupName}
             </Link>
             <Link
-              to={`product/${ErpCode}/${slugConverter(Name)}`}
+              to={`/product/${MainGroupErpCode}/${slugConverter(
+                MainGroupName
+              )}/${SideGroupErpCode}/${slugConverter(
+                SideGroupName
+              )}/${ErpCode}/${slugConverter(Name)}`}
               className="border block border-sky-500 text-sky-600 bg-white rounded-lg text-xs px-4 py-2 hover:bg-sky-500 hover:text-white transition-all duration-200"
             >
               جزییات محصول

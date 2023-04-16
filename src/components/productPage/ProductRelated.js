@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import useSWR from 'swr';
-import { SLIDESHOW } from 'services/endPoints';
-import { fetcher } from 'services/swr/fetcher';
-
 import useObserved from 'hooks/useObserved';
-import Slider from './Slider';
+import useSWR from 'swr';
+import { PRODUCTS_MAINCATEGORY } from 'services/endPoints';
+import { fetcher } from 'services/swr/fetcher';
+import Slider from 'components/shared/Slider';
 
-const SlideProduct = ({ title, section, className }) => {
+const ProductRelated = ({ title, mainCategory, className }) => {
   const { ref, view } = useObserved();
 
   const { data: products } = useSWR(
-    view && `${SLIDESHOW}?section=${section}`,
+    view && `${PRODUCTS_MAINCATEGORY}/${mainCategory}`,
     fetcher
   );
 
@@ -25,6 +24,6 @@ const SlideProduct = ({ title, section, className }) => {
   );
 };
 
-SlideProduct.propTypes = {};
+ProductRelated.propTypes = {};
 
-export default SlideProduct;
+export default ProductRelated;

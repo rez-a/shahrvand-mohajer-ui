@@ -16,7 +16,7 @@ const VendorItem = ({ ErpCode, Image, Name, TimeWork }) => {
         {TimeWork}
       </p>
       <Link
-        to={`/products/test/${ErpCode}/${slugConverter(Name)}`}
+        to={`/products/${ErpCode}/${slugConverter(Name)}`}
         className="absolute top-0 left-0 w-full h-full"
       />
     </div>

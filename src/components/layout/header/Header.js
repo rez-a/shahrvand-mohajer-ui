@@ -9,7 +9,8 @@ import { fetcher } from 'services/swr/fetcher';
 import { CATEGORIES } from 'services/endPoints';
 import Loading from 'components/shared/Loading';
 import { useContext } from 'react';
-import { LoadingContext } from 'context/LoadingProvider';
+import { LoadingContext } from 'contexts/LoadingProvider';
+import { CartContext } from 'contexts/CartProvider';
 
 const Header = () => {
   const navLink = useRef();
@@ -27,6 +28,10 @@ const Header = () => {
   };
 
   const { data: categories } = useSWR(CATEGORIES, fetcher);
+
+  const {
+    state: { cart },
+  } = useContext(CartContext);
   return (
     <header
       ref={navLink}
@@ -140,7 +145,7 @@ const Header = () => {
           <div className="mr-auto flex items-center">
             <ProfileSummary />
             <Link
-              to="checkout/cart"
+              to="/checkout/cart"
               className="border-r relative mr-2 px-2 group border-zinc-300"
             >
               <svg
@@ -153,9 +158,11 @@ const Header = () => {
                 <path fill="none" d="M0 0h24v24H0z" />
                 <path d="M4 16V4H2V2h3a1 1 0 0 1 1 1v12h12.438l2-8H8V5h13.72a1 1 0 0 1 .97 1.243l-2.5 10a1 1 0 0 1-.97.757H5a1 1 0 0 1-1-1zm2 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm12 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" />
               </svg>
-              <span className="bg-rose-500 rounded-full text-white w-5 h-5 flex items-center justify-center p-1 text-xs absolute -top-2 right-0">
-                2
-              </span>
+              {!!cart.length && (
+                <span className="bg-rose-500 rounded-full text-white w-5 h-5 flex items-center justify-center p-1 text-xs absolute -top-2 right-0">
+                  {cart.length}
+                </span>
+              )}
             </Link>
           </div>
         </nav>

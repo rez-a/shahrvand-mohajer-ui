@@ -1,7 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link, useLocation, useParams } from 'react-router-dom';
 
 const Breadcrumb = (props) => {
+  const params = useParams();
+  const location = useLocation();
+  console.log(location);
   return (
     <nav
       class="flex py-4 px-4 mb-4 text-gray-700 border border-gray-100 rounded-md mt-2 bg-white"
@@ -9,8 +13,8 @@ const Breadcrumb = (props) => {
     >
       <ol class="inline-flex items-center">
         <li class="inline-flex items-center">
-          <a
-            href="#"
+          <Link
+            to="/"
             class="inline-flex items-center text-xs text-gray-500 hover:text-rose-600 "
           >
             <svg
@@ -23,7 +27,7 @@ const Breadcrumb = (props) => {
               <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
             </svg>
             شهروند مهاجر
-          </a>
+          </Link>
         </li>
         <li>
           <div class="flex items-center">
