@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import slugConverter from 'utilities/slugConverter';
+import queryString from 'query-string';
 
 const ProductCartVertical = ({
   containerClassName,
@@ -51,7 +52,12 @@ const ProductCartVertical = ({
         <Link
           to={`/products/${MainGroupErpCode}/${slugConverter(
             MainGroupName
-          )}/${SideGroupErpCode}/${slugConverter(SideGroupName)}`}
+          )}?${queryString.stringify(
+            {
+              subcategory: [SideGroupErpCode],
+            },
+            { arrayFormat: 'bracket' }
+          )}`}
           class="inline-block bg-gray-200 max-w-full truncate rounded-full px-3 py-1 text-xs text-gray-700 opacity-75 hover:opacity-100 transition-all duration-200 cursor-pointer hover:underline"
         >
           #{SideGroupName}

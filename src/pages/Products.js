@@ -54,6 +54,9 @@ const Products = (props) => {
 
   useEffect(() => {
     setLoading(true);
+    setQuery(
+      queryString.parse(location.search, { arrayFormat: 'bracket' })
+    );
     const triggerRun = async () => {
       await trigger();
       setLoading(false);
@@ -66,7 +69,6 @@ const Products = (props) => {
   };
 
   const handleFilters = () => {
-    setLoading(true);
     navigate(
       queryString.stringifyUrl(
         {
@@ -80,8 +82,6 @@ const Products = (props) => {
         }
       )
     );
-    trigger();
-    setLoading(false);
   };
 
   function setParamsFilters() {
@@ -127,7 +127,6 @@ const Products = (props) => {
     });
   };
   const handleSort = (type) => {
-    setLoading(true);
     setQuery({ ...query, sort: type });
     navigate(
       queryString.stringifyUrl(
@@ -137,7 +136,7 @@ const Products = (props) => {
             ...queryString.parse(location.search, {
               arrayFormat: 'bracket',
             }),
-            sort: query.sort,
+            sort: type,
           },
         },
         {
@@ -147,8 +146,6 @@ const Products = (props) => {
         }
       )
     );
-    trigger();
-    setLoading(false);
   };
 
   console.log(query);
