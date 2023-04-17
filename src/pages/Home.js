@@ -28,6 +28,9 @@ const Home = () => {
         title="فرآورده های منجمدی"
         section="SLIDER5"
         className="mx-4"
+        linkTo={true}
+        isPagination={true}
+        viewCount={10}
       />
       <Banner className="grid-cols-4 max-h-96 mx-4">
         <BannerItem sectionNum="SECTION2" />
@@ -43,6 +46,9 @@ const Home = () => {
         title="لبنیات"
         section="SLIDER3"
         className="mx-4"
+        linkTo={true}
+        isPagination={true}
+        viewCount={10}
       />
       <Banner className="grid-cols-2 max-h-96 mx-4">
         <BannerItem sectionNum="SECTION2" />
@@ -58,6 +64,9 @@ const Home = () => {
         title="غذاهای آماده"
         section="SLIDER8"
         className="mx-4"
+        linkTo={true}
+        isPagination={true}
+        viewCount={10}
       />
       <Banner className="grid-cols-4 max-h-96 mx-4">
         <BannerItem sectionNum="SECTION7" />

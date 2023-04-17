@@ -9,40 +9,91 @@ import {
 export const cartReducer = (state, action) => {
   switch (action.type) {
     case ADD_TO_CART:
+      const availableInCart = !!state.cart.find(
+        (vendor) =>
+          vendor.vendorErpCode === action.payload.vendorErpCode
+      );
+
       return {
         ...state,
-        cart: [...state.cart, { ...action.payload, quantity: 1 }],
+        cart: availableInCart
+          ? [
+              ...state.cart.map((vendor) =>
+                vendor.vendorErpCode === action.payload.vendorErpCode
+                  ? {
+                      ...vendor,
+                      products: [
+                        ...vendor.products,
+                        { ...action.payload.products },
+                      ],
+                    }
+                  : { ...vendor }
+              ),
+            ]
+          : [...state.cart, { ...action.payload }],
       };
     case REMOVE_FROM_CART:
+      const vendor = state.cart.find(
+        (vendor) =>
+          vendor.vendorErpCode === action.payload.vendorErpCode
+      );
       return {
         ...state,
-        cart: [
-          ...state.cart.filter(
-            (product) => product.Id !== action.payload
-          ),
-        ],
+        cart:
+          vendor.products.length > 1
+            ? [
+                ...state.cart.map((vendor) =>
+                  vendor.vendorErpCode ===
+                  action.payload.vendorErpCode
+                    ? {
+                        ...vendor,
+                        products: vendor.products.filter(
+                          (product) =>
+                            product.Id !== action.payload.productId
+                        ),
+                      }
+                    : { ...vendor }
+                ),
+              ]
+            : [
+                ...state.cart.filter(
+                  (vendor) =>
+                    vendor.vendorErpCode !==
+                    action.payload.vendorErpCode
+                ),
+              ],
       };
     case INCREASE:
       return {
         ...state,
-        cart: [
-          ...state.cart.map((product) =>
-            product.Id === action.payload
-              ? { ...product, quantity: product.quantity + 1 }
-              : { ...product }
-          ),
-        ],
+        cart: state.cart.map((vendor) =>
+          vendor.vendorErpCode === action.payload.vendorErpCode
+            ? {
+                ...vendor,
+                products: vendor.products.map((product) =>
+                  product.Id === action.payload.productId
+                    ? { ...product, quantity: product.quantity + 1 }
+                    : { ...product }
+                ),
+              }
+            : { ...vendor }
+        ),
       };
     case DECREASE:
       return {
         ...state,
-        cart: [
-          ...state.cart.map((product) =>
-            product.Id === action.payload
-              ? { ...product, quantity: product.quantity - 1 }
-              : { ...product }
-          ),
-        ],
+        cart: state.cart.map((vendor) =>
+          vendor.vendorErpCode === action.payload.vendorErpCode
+            ? {
+                ...vendor,
+                products: vendor.products.map((product) =>
+                  product.Id === action.payload.productId
+                    ? { ...product, quantity: product.quantity - 1 }
+                    : { ...product }
+                ),
+              }
+            : { ...vendor }
+        ),
       };
     case CLEAR_CART:
       return {

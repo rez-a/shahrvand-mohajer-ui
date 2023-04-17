@@ -11,7 +11,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Link } from 'react-router-dom';
 
-const Slider = ({ products, title, toLink = '' }) => {
+const Slider = ({ products, title, linkTo, isPagination }) => {
   const pagination = {
     clickable: true,
     renderBullet: function (_, className) {
@@ -25,19 +25,21 @@ const Slider = ({ products, title, toLink = '' }) => {
           <TitleIcon bg="bg-zinc-400" />
           <span className="mr-1"> {title} </span>
         </h2>
-        <div className="mr-auto">
-          <Link
-            to={toLink}
-            className="bg-gray-50 border border-gray-100 hover:bg-gray-100 transition-all duration-200 rounded-lg text-rose-500/70 font-bold px-4 py-2 relative before:absolute before:w-4 before:h-[1px] before:bg-zinc-300 before:-left-4 before:top-1/2 before:-translate-y-1/2"
-            type="button"
-          >
-            مشاهده همه
-          </Link>
-        </div>
+        {!!linkTo && (
+          <div className="mr-auto">
+            <Link
+              to={linkTo}
+              className="bg-gray-50 border border-gray-100 hover:bg-gray-100 transition-all duration-200 rounded-lg text-rose-500/70 font-bold px-4 py-2 relative before:absolute before:w-4 before:h-[1px] before:bg-zinc-300 before:-left-4 before:top-1/2 before:-translate-y-1/2"
+              type="button"
+            >
+              مشاهده همه
+            </Link>
+          </div>
+        )}
       </header>
       <main className="pt-4">
         <Swiper
-          pagination={pagination}
+          pagination={isPagination && pagination}
           modules={[Navigation, Pagination, A11y, Autoplay]}
           autoplay={{
             delay: 2500,
@@ -47,7 +49,7 @@ const Slider = ({ products, title, toLink = '' }) => {
           className="mySwiper !pb-12"
         >
           {!!products
-            ? products.slice(0, 9)?.map((product) => (
+            ? products?.map((product) => (
                 <SwiperSlide key={product.id}>
                   <ProductCartVertical
                     {...product}
