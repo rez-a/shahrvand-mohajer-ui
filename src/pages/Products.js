@@ -278,7 +278,7 @@ const Products = (props) => {
                 <ProductCartVertical
                   containerClassName="border-b py-2 hover:shadow-lg transition-all duration-300 bg-white rounded-md"
                   key={product.Id}
-                  {...product}
+                  product={product}
                 />
               ))
             : [...Array(16)].map((_, index) => (

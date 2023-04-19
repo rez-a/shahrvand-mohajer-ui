@@ -24,20 +24,14 @@ const ProductCartHorizontal = ({
         </div>
         <div class="pr-2 bg-white flex flex-col justify-between leading-normal grow">
           <Link
-            to={`/product/${MainGroupErpCode}/${slugConverter(
-              MainGroupName
-            )}/${SideGroupErpCode}/${slugConverter(
-              SideGroupName
-            )}/${ErpCode}/${slugConverter(Name)}`}
+            to={`/product/${MainGroupErpCode}/${SideGroupErpCode}/${ErpCode}`}
             class="text-gray-900 w-5/6 truncate font-bold whitespace-nowrap hover:text-rose-500 transition-all duration-200 mb-2"
           >
             {Name}
           </Link>
           <div className="flex items-center justify-between">
             <Link
-              to={`/products/${MainGroupErpCode}/${slugConverter(
-                MainGroupName
-              )}?${queryString.stringify(
+              to={`/products/${MainGroupErpCode}?${queryString.stringify(
                 {
                   subcategory: [SideGroupErpCode],
                 },
@@ -48,11 +42,7 @@ const ProductCartHorizontal = ({
               #{SideGroupName}
             </Link>
             <Link
-              to={`/product/${MainGroupErpCode}/${slugConverter(
-                MainGroupName
-              )}/${SideGroupErpCode}/${slugConverter(
-                SideGroupName
-              )}/${ErpCode}/${slugConverter(Name)}`}
+              to={`/product/${MainGroupErpCode}/${SideGroupErpCode}/${ErpCode}`}
               className="border block border-sky-500 text-sky-600 bg-white rounded-lg text-xs px-4 py-2 hover:bg-sky-500 hover:text-white transition-all duration-200"
             >
               جزییات محصول

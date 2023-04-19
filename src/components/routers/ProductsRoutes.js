@@ -4,8 +4,8 @@ import { Route, Routes } from 'react-router-dom';
 import Categories from 'pages/Categories';
 import Breadcrumb from 'components/Breadcrumb';
 import Products from 'pages/Products';
-import ProductPage from 'pages/ProductPage';
 import NotFound from 'pages/NotFound';
+import ProductsSlide from 'pages/ProductsSlide';
 
 const ProductsRoutes = (props) => {
   return (
@@ -13,7 +13,8 @@ const ProductsRoutes = (props) => {
       <Breadcrumb />
       <Routes>
         <Route index element={<Categories />} />
-        <Route path=":mainErpCode/:slugMain" element={<Products />} />
+        <Route path=":mainErpCode" element={<Products />} />
+        <Route path="section/:section" element={<ProductsSlide />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

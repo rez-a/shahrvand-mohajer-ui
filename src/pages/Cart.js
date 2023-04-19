@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import products from 'productsFake';
 import storeLogo from 'assets/images/store-logo.png';
 import CartProductCard from 'components/productCard/CartProductCard';
@@ -6,11 +6,23 @@ import AccordionLayout from 'components/shared/accordion/AccordionLayout';
 import AccordionItem from 'components/shared/accordion/AccordionItem';
 import TitleAccordionItem from '../components/shared/accordion/TitleAccordionItem';
 import ContentAccordionItem from 'components/shared/accordion/ContentAccordionItem';
+import { CartContext } from 'contexts/CartProvider';
+import emptyCart from 'assets/images/empty-cart.svg';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
-  return (
+  const {
+    state: { cart },
+    dispatch,
+  } = useContext(CartContext);
+
+  const productsInCart = cart.reduce(
+    (totalProducts, vendor) => totalProducts + vendor.products.length,
+    0
+  );
+  return !!cart.length ? (
     <main className="grid grid-cols-7 gap-4 items-start">
-      <main className="col-span-5 ">
+      <section className="col-span-5 ">
         <div className="text-zinc-500 flex items-center border-b py-3 border-rose-500 mb-3">
           <p className=" flex items-center">
             <svg
@@ -24,227 +36,80 @@ const Cart = () => {
             </svg>
             <span className="mr-2">سبد خرید</span>
           </p>
-          <p className="text-xs mr-1">(2 کالا)</p>
+          <p className="text-xs mr-1">({productsInCart} کالا)</p>
         </div>
         <AccordionLayout>
-          <AccordionItem defaultClassName="mb-3 border  rounded-md">
-            <TitleAccordionItem
-              openClassName="border-b border-b-gray-100 bg-gray-50/50"
-              defaultClassName="bg-white"
+          {cart.map((vendor, index) => (
+            <AccordionItem
+              key={index}
+              defaultClassName="mb-3 border  rounded-md"
             >
-              <div className=" p-4   flex items-center justify-between">
-                <div className="flex items-center">
-                  <div className="w-6 h-6">
-                    <img
-                      src={storeLogo}
-                      alt="test"
-                      className="object-contain"
-                    />
+              <TitleAccordionItem
+                openClassName="border-b border-b-gray-100 bg-gray-50/50"
+                defaultClassName="bg-white"
+              >
+                <div className=" p-4   flex items-center justify-between">
+                  <div className="flex items-center">
+                    <div className="w-6 h-6">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        className="fill-rose-500"
+                      >
+                        <path d="M22 20V22H2V20H3V13.2422C1.79401 12.435 1 11.0602 1 9.5C1 8.67286 1.22443 7.87621 1.63322 7.19746L4.3453 2.5C4.52393 2.1906 4.85406 2 5.21132 2H18.7887C19.1459 2 19.4761 2.1906 19.6547 2.5L22.3575 7.18172C22.7756 7.87621 23 8.67286 23 9.5C23 11.0602 22.206 12.435 21 13.2422V20H22ZM5.78865 4L3.35598 8.21321C3.12409 8.59843 3 9.0389 3 9.5C3 10.8807 4.11929 12 5.5 12C6.53096 12 7.44467 11.3703 7.82179 10.4295C8.1574 9.59223 9.3426 9.59223 9.67821 10.4295C10.0553 11.3703 10.969 12 12 12C13.031 12 13.9447 11.3703 14.3218 10.4295C14.6574 9.59223 15.8426 9.59223 16.1782 10.4295C16.5553 11.3703 17.469 12 18.5 12C19.8807 12 21 10.8807 21 9.5C21 9.0389 20.8759 8.59843 20.6347 8.19746L18.2113 4H5.78865Z"></path>
+                      </svg>
+                    </div>
+                    <p className="text-sm mr-2 text-zinc-700 flex items-center">
+                      <span className="font-bold">
+                        فروشگاه {vendor.vendorName}
+                      </span>
+                    </p>
                   </div>
-                  <p className="text-sm mr-2 text-zinc-700 flex items-center">
-                    <span className="font-bold">فروشگاه قاصدک</span>
-                  </p>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                    className="fill-current"
+                  >
+                    <path d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z"></path>
+                  </svg>
                 </div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  width="24"
-                  height="24"
-                  className="fill-current"
-                >
-                  <path d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z"></path>
-                </svg>
-              </div>
-            </TitleAccordionItem>
-            <ContentAccordionItem
-              closeClaseName="h-0"
-              openClassName="h-96"
-              defaultClassName="bg-white"
-            >
-              <div className="h-[20rem] overflow-auto">
-                <ul className="mb-12 divide-y col-span-3 p-4">
-                  {products.slice(0, 2).map((product) => (
-                    <CartProductCard key={product.id} {...product} />
-                  ))}
-                </ul>
-              </div>
-              <div className="bg-gray-50 p-4 rounded-b-md flex justify-between relative -top-2">
-                <p className="flex items-center">
-                  <span className="font-bold">مبلغ کل (2کالا) :</span>
-                  <span className="opacity-60 mr-2">
-                    16,879,000 تومان
-                  </span>
-                </p>
-                <button className="bg-sky-500/90 text-white w-60 py-2 rounded-md font-bold shadow-lg shadow-sky-500/50 hover:bg-sky-500 transition-all duration-300">
-                  ثبت سفارش
-                </button>
-              </div>
-            </ContentAccordionItem>
-          </AccordionItem>
-          <AccordionItem defaultClassName="mb-3 border  rounded-md">
-            <TitleAccordionItem
-              openClassName="border-b border-b-gray-100 bg-gray-50/50"
-              defaultClassName="bg-white"
-            >
-              <div className=" p-4   flex items-center justify-between">
-                <div className="flex items-center">
-                  <div className="w-6 h-6">
-                    <img
-                      src={storeLogo}
-                      alt="test"
-                      className="object-contain"
-                    />
-                  </div>
-                  <p className="text-sm mr-2 text-zinc-700 flex items-center">
-                    <span className="font-bold">فروشگاه قاصدک</span>
-                  </p>
+              </TitleAccordionItem>
+              <ContentAccordionItem
+                closeClaseName="h-0"
+                openClassName="h-96"
+                defaultClassName="bg-white"
+              >
+                <div className="h-[20rem] overflow-auto">
+                  <ul className="mb-12 divide-y col-span-3 p-4">
+                    {vendor.products.map((product) => (
+                      <CartProductCard
+                        dispatch={dispatch}
+                        key={product.Id}
+                        {...product}
+                      />
+                    ))}
+                  </ul>
                 </div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  width="24"
-                  height="24"
-                  className="fill-current"
-                >
-                  <path d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z"></path>
-                </svg>
-              </div>
-            </TitleAccordionItem>
-            <ContentAccordionItem
-              closeClaseName="h-0"
-              openClassName="h-96"
-              defaultClassName="bg-white"
-            >
-              <div className="h-[20rem] overflow-auto">
-                <ul className="mb-12 divide-y col-span-3 p-4">
-                  {products.slice(0, 2).map((product) => (
-                    <CartProductCard key={product.id} {...product} />
-                  ))}
-                </ul>
-              </div>
-              <div className="bg-gray-50 p-4 rounded-b-md flex justify-between relative -top-2">
-                <p className="flex items-center">
-                  <span className="font-bold">مبلغ کل (2کالا) :</span>
-                  <span className="opacity-60 mr-2">
-                    16,879,000 تومان
-                  </span>
-                </p>
-                <button className="bg-sky-500/90 text-white w-60 py-2 rounded-md font-bold shadow-lg shadow-sky-500/50 hover:bg-sky-500 transition-all duration-300">
-                  ثبت سفارش
-                </button>
-              </div>
-            </ContentAccordionItem>
-          </AccordionItem>
-          <AccordionItem defaultClassName="mb-3 border  rounded-md">
-            <TitleAccordionItem
-              openClassName="border-b border-b-gray-100 bg-gray-50/50"
-              defaultClassName="bg-white"
-            >
-              <div className=" p-4   flex items-center justify-between">
-                <div className="flex items-center">
-                  <div className="w-6 h-6">
-                    <img
-                      src={storeLogo}
-                      alt="test"
-                      className="object-contain"
-                    />
-                  </div>
-                  <p className="text-sm mr-2 text-zinc-700 flex items-center">
-                    <span className="font-bold">فروشگاه قاصدک</span>
+                <div className="bg-gray-50 p-4 rounded-b-md flex justify-between relative -top-2">
+                  <p className="flex items-center">
+                    <span className="font-bold">
+                      مبلغ کل (2کالا) :
+                    </span>
+                    <span className="opacity-60 mr-2">
+                      16,879,000 تومان
+                    </span>
                   </p>
+                  <button className="bg-sky-500/90 text-white w-60 py-2 rounded-md font-bold shadow-lg shadow-sky-500/50 hover:bg-sky-500 transition-all duration-300">
+                    ثبت سفارش
+                  </button>
                 </div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  width="24"
-                  height="24"
-                  className="fill-current"
-                >
-                  <path d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z"></path>
-                </svg>
-              </div>
-            </TitleAccordionItem>
-            <ContentAccordionItem
-              closeClaseName="h-0"
-              openClassName="h-96"
-              defaultClassName="bg-white"
-            >
-              <div className="h-[20rem] overflow-auto">
-                <ul className="mb-12 divide-y col-span-3 p-4">
-                  {products.slice(0, 2).map((product) => (
-                    <CartProductCard key={product.id} {...product} />
-                  ))}
-                </ul>
-              </div>
-              <div className="bg-gray-50 p-4 rounded-b-md flex justify-between relative -top-2">
-                <p className="flex items-center">
-                  <span className="font-bold">مبلغ کل (2کالا) :</span>
-                  <span className="opacity-60 mr-2">
-                    16,879,000 تومان
-                  </span>
-                </p>
-                <button className="bg-sky-500/90 text-white w-60 py-2 rounded-md font-bold shadow-lg shadow-sky-500/50 hover:bg-sky-500 transition-all duration-300">
-                  ثبت سفارش
-                </button>
-              </div>
-            </ContentAccordionItem>
-          </AccordionItem>
-          <AccordionItem defaultClassName="mb-3 border  rounded-md">
-            <TitleAccordionItem
-              openClassName="border-b border-b-gray-100 bg-gray-50/50"
-              defaultClassName="bg-white"
-            >
-              <div className=" p-4   flex items-center justify-between">
-                <div className="flex items-center">
-                  <div className="w-6 h-6">
-                    <img
-                      src={storeLogo}
-                      alt="test"
-                      className="object-contain"
-                    />
-                  </div>
-                  <p className="text-sm mr-2 text-zinc-700 flex items-center">
-                    <span className="font-bold">فروشگاه قاصدک</span>
-                  </p>
-                </div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  width="24"
-                  height="24"
-                  className="fill-current"
-                >
-                  <path d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z"></path>
-                </svg>
-              </div>
-            </TitleAccordionItem>
-            <ContentAccordionItem
-              closeClaseName="h-0"
-              openClassName="h-96"
-              defaultClassName="bg-white"
-            >
-              <div className="h-[20rem] overflow-auto">
-                <ul className="mb-12 divide-y col-span-3 p-4">
-                  {products.slice(0, 2).map((product) => (
-                    <CartProductCard key={product.id} {...product} />
-                  ))}
-                </ul>
-              </div>
-              <div className="bg-gray-50 p-4 rounded-b-md flex justify-between relative -top-2">
-                <p className="flex items-center">
-                  <span className="font-bold">مبلغ کل (2کالا) :</span>
-                  <span className="opacity-60 mr-2">
-                    16,879,000 تومان
-                  </span>
-                </p>
-                <button className="bg-sky-500/90 text-white w-60 py-2 rounded-md font-bold shadow-lg shadow-sky-500/50 hover:bg-sky-500 transition-all duration-300">
-                  ثبت سفارش
-                </button>
-              </div>
-            </ContentAccordionItem>
-          </AccordionItem>
+              </ContentAccordionItem>
+            </AccordionItem>
+          ))}
         </AccordionLayout>
-      </main>
+      </section>
       <aside className="bg-gray-50/50 border rounded-md border-gray-100 bg-white col-span-2 p-3 sticky top-24 mb-3">
         <p className="flex items-center justify-between mb-3">
           <span className="font-bold">مبلغ کل (2کالا)</span>
@@ -336,6 +201,30 @@ const Cart = () => {
         </p>
       </aside>
     </main>
+  ) : (
+    <div className="text-center">
+      <div className="max-w-sm mx-auto">
+        <img src={emptyCart} alt="cart empty" />
+      </div>
+      <h2 className="text-black font-bold text-xl text-center">
+        سبد خرید شما خالی است!!
+      </h2>
+      <Link
+        to="/products"
+        className="bg-rose-500/90 mt-4 flex group mx-auto items-center justify-center text-white w-60 py-2 rounded-md font-bold shadow-lg shadow-rose-500/50 hover:bg-rose-500 transition-all duration-300"
+      >
+        بازگشت به فروشگاه
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+          className="fill-current mr-2 group-hover:-translate-x-2 transition-all duration-200"
+        >
+          <path d="M7.82843 10.9999H20V12.9999H7.82843L13.1924 18.3638L11.7782 19.778L4 11.9999L11.7782 4.22168L13.1924 5.63589L7.82843 10.9999Z"></path>
+        </svg>
+      </Link>
+    </div>
   );
 };
 

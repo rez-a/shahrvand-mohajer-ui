@@ -10,7 +10,7 @@ const ProductRoutes = (props) => {
       <Breadcrumb />
       <Routes>
         <Route
-          path=":mainErpCode/:slugMain/:sideErpCode/:slugSide/:erpCode/:slug"
+          path=":mainErpCode/:sideErpCode/:erpCode"
           element={<ProductPage />}
         />
       </Routes>

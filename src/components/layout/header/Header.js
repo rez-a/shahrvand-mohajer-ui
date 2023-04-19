@@ -22,9 +22,9 @@ const Header = () => {
   const { loader } = useContext(LoadingContext);
 
   const controllerNavMenu = () => {
-    // window.scrollY > navLink.current?.getBoundingClientRect()?.height
-    //   ? setShowMenuNav(false)
-    //   : setShowMenuNav(true);
+    window.scrollY > navLink.current?.getBoundingClientRect()?.height
+      ? setShowMenuNav(false)
+      : setShowMenuNav(true);
   };
 
   const { data: categories } = useSWR(CATEGORIES, fetcher);
@@ -32,8 +32,10 @@ const Header = () => {
   const {
     state: { cart },
   } = useContext(CartContext);
-
-  console.log(cart);
+  const productsInCart = cart.reduce(
+    (totalProducts, vendor) => totalProducts + vendor.products.length,
+    0
+  );
   return (
     <header
       ref={navLink}
@@ -162,10 +164,7 @@ const Header = () => {
               </svg>
               {!!cart.length && (
                 <span className="bg-rose-500 rounded-full text-white w-5 h-5 flex items-center justify-center p-1 text-xs absolute -top-2 right-0">
-                  {cart.reduce(
-                    (total, vendor) => total + vendor.products.length,
-                    0
-                  )}
+                  {productsInCart}
                 </span>
               )}
             </Link>

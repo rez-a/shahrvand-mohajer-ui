@@ -1,3 +1,4 @@
+import cartSummaryCalculator from 'helper/cartSummaryCalculator';
 import {
   ADD_TO_CART,
   CLEAR_CART,
@@ -7,98 +8,92 @@ import {
 } from './actionTypes';
 
 export const cartReducer = (state, action) => {
+  const vendor = state.cart.find(
+    (vendor) => vendor.vendorErpCode === action.payload.vendorErpCode
+  );
+  let newCart = [];
   switch (action.type) {
     case ADD_TO_CART:
-      const availableInCart = !!state.cart.find(
-        (vendor) =>
-          vendor.vendorErpCode === action.payload.vendorErpCode
-      );
-
-      return {
-        ...state,
-        cart: availableInCart
-          ? [
-              ...state.cart.map((vendor) =>
-                vendor.vendorErpCode === action.payload.vendorErpCode
-                  ? {
-                      ...vendor,
-                      products: [
-                        ...vendor.products,
-                        { ...action.payload.products },
-                      ],
-                    }
-                  : { ...vendor }
-              ),
-            ]
-          : [...state.cart, { ...action.payload }],
-      };
-    case REMOVE_FROM_CART:
-      const vendor = state.cart.find(
-        (vendor) =>
-          vendor.vendorErpCode === action.payload.vendorErpCode
-      );
-      return {
-        ...state,
-        cart:
-          vendor.products.length > 1
-            ? [
-                ...state.cart.map((vendor) =>
-                  vendor.vendorErpCode ===
-                  action.payload.vendorErpCode
-                    ? {
-                        ...vendor,
-                        products: vendor.products.filter(
-                          (product) =>
-                            product.Id !== action.payload.productId
-                        ),
-                      }
-                    : { ...vendor }
-                ),
-              ]
-            : [
-                ...state.cart.filter(
-                  (vendor) =>
-                    vendor.vendorErpCode !==
-                    action.payload.vendorErpCode
-                ),
+      {
+        const newVendor = !!vendor
+          ? {
+              ...vendor,
+              products: [
+                ...vendor.products,
+                { ...action.payload.products.at(-1) },
               ],
-      };
+            }
+          : { ...action.payload };
+
+        newCart = !!vendor
+          ? state.cart.map((vendor) =>
+              vendor.vendorErpCode === newVendor.vendorErpCode
+                ? newVendor
+                : vendor
+            )
+          : [...state.cart, newVendor];
+      }
+      break;
+    case REMOVE_FROM_CART:
+      {
+        const newProducts = vendor.products.filter(
+          (product) => product.Id !== action.payload.productId
+        );
+        console.log(newProducts);
+        const newVendor = { ...vendor, products: newProducts };
+
+        newCart = !!newVendor.products.length
+          ? state.cart.map((vendor) =>
+              vendor.vendorErpCode === action.payload.vendorErpCode
+                ? newVendor
+                : vendor
+            )
+          : state.cart.filter(
+              (vendor) =>
+                vendor.vendorErpCode !== action.payload.vendorErpCode
+            );
+      }
+      break;
+
     case INCREASE:
-      return {
-        ...state,
-        cart: state.cart.map((vendor) =>
-          vendor.vendorErpCode === action.payload.vendorErpCode
-            ? {
-                ...vendor,
-                products: vendor.products.map((product) =>
-                  product.Id === action.payload.productId
-                    ? { ...product, quantity: product.quantity + 1 }
-                    : { ...product }
-                ),
-              }
-            : { ...vendor }
-        ),
-      };
+      {
+        const newProducts = vendor.products.map((product) =>
+          product.Id === action.payload.productId
+            ? { ...product, quantity: product.quantity + 1 }
+            : { ...product }
+        );
+        const newVendor = { ...vendor, products: newProducts };
+
+        newCart = state.cart.map((vendor) =>
+          vendor.vendorErpCode === newVendor.vendorErpCode
+            ? newVendor
+            : vendor
+        );
+      }
+      break;
+
     case DECREASE:
-      return {
-        ...state,
-        cart: state.cart.map((vendor) =>
-          vendor.vendorErpCode === action.payload.vendorErpCode
-            ? {
-                ...vendor,
-                products: vendor.products.map((product) =>
-                  product.Id === action.payload.productId
-                    ? { ...product, quantity: product.quantity - 1 }
-                    : { ...product }
-                ),
-              }
-            : { ...vendor }
-        ),
-      };
+      {
+        const newProducts = vendor.products.map((product) =>
+          product.Id === action.payload.productId
+            ? { ...product, quantity: product.quantity - 1 }
+            : { ...product }
+        );
+        const newVendor = { ...vendor, products: newProducts };
+
+        newCart = state.cart.map((vendor) =>
+          vendor.vendorErpCode === newVendor.vendorErpCode
+            ? newVendor
+            : vendor
+        );
+      }
+      break;
+
     case CLEAR_CART:
-      return {
-        ...state,
-        cart: [],
-      };
   }
+  cartSummaryCalculator(newCart);
+  return {
+    ...state,
+    cart: newCart,
+  };
 };

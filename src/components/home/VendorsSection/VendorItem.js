@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import slugConverter from 'utilities/slugConverter';
 
 const VendorItem = ({ ErpCode, Image, Name, TimeWork }) => {
   return (
@@ -16,7 +15,7 @@ const VendorItem = ({ ErpCode, Image, Name, TimeWork }) => {
         {TimeWork}
       </p>
       <Link
-        to={`/products/${ErpCode}/${slugConverter(Name)}`}
+        to={`/products/${ErpCode}`}
         className="absolute top-0 left-0 w-full h-full"
       />
     </div>

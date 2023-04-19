@@ -20,8 +20,12 @@ const PopularBrands = (props) => {
       >
         {brands?.map((brand) => (
           <SwiperSlide key={brand.id}>
-            <div className="h-24 w-24 mx-auto relative top-1/2 ">
-              <img src={brand.brandCover} alt="brand" />
+            <div className="h-24 w-24 mx-auto  top-1/2 ">
+              <img
+                src={brand.brandCover}
+                className="w-full h-full object-contain"
+                alt="brand"
+              />
             </div>
           </SwiperSlide>
         ))}

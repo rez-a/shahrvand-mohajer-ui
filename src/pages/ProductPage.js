@@ -5,7 +5,7 @@ import SlideProduct from 'components/shared/SlideProduct';
 import ImageZoom from 'components/productPage/ImageZoom';
 import { PRODUCT } from 'services/endPoints';
 import { fetcher } from 'services/swr/fetcher';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import useSWR from 'swr';
 import { useEffect } from 'react';
 import { useContext } from 'react';
@@ -18,9 +18,11 @@ import {
   increase,
   removeFromCart,
 } from 'reducers/cart/actionCreators';
+import { useState } from 'react';
 
 const ProductPage = () => {
   const { erpCode } = useParams();
+  const location = useLocation();
   const { setLoader } = useContext(LoadingContext);
   const {
     state: { cart },
@@ -48,6 +50,8 @@ const ProductPage = () => {
     MainGroupErpCode,
   } = !!product && product;
 
+  const [quantity, setQuantity] = useState(false);
+
   useEffect(() => {
     setLoader(isLoading);
   }, [isLoading]);
@@ -55,17 +59,19 @@ const ProductPage = () => {
   const discount = Math.floor(
     (SellPrice - LastBuyPrice) / (LastBuyPrice / 100)
   );
-
-  const quantity = cart
-    .find((vendor) =>
-      vendor.vendorErpCode === IsVendor
-        ? MainGroupErpCode
-        : 'SHAHRVAND'
-    )
-    ?.products.find((product) => product.Id === Id)?.quantity;
-
+  useEffect(() => {
+    const vendor = cart.find((vendor) =>
+      IsVendor
+        ? vendor.vendorErpCode === MainGroupErpCode
+        : vendor.vendorErpCode === 'SHAHRVAND'
+    );
+    const product = vendor?.products.find(
+      (product) => product.Id === Id
+    );
+    setQuantity(product?.quantity);
+  }, [cart, location]);
   return (
-    <>
+    <div className="min-h-screen">
       {!!product && (
         <>
           <div className="flex items-start gap-6 bg-white p-4 py-8 rounded-md border border-gray-100">
@@ -331,7 +337,7 @@ const ProductPage = () => {
           />
         </>
       )}
-    </>
+    </div>
   );
 };
 

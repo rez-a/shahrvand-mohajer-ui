@@ -4,8 +4,6 @@ import brand3 from './assets/images/brands/brand3.png';
 import brand4 from './assets/images/brands/brand4.png';
 import brand5 from './assets/images/brands/brand5.png';
 import brand6 from './assets/images/brands/brand6.png';
-import brand7 from './assets/images/brands/brand7.png';
-import brand8 from './assets/images/brands/brand8.png';
 const brands = [
   {
     id: 1,
@@ -30,14 +28,6 @@ const brands = [
   {
     id: 6,
     brandCover: brand6,
-  },
-  {
-    id: 7,
-    brandCover: brand7,
-  },
-  {
-    id: 8,
-    brandCover: brand8,
   },
 ];
 export default brands;

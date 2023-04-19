@@ -64,7 +64,7 @@ const VipSlider = ({}) => {
             : products?.map((product) => (
                 <SwiperSlide key={product.Id}>
                   <ProductCartVertical
-                    {...product}
+                    product={product}
                     containerClassName="bg-white rounded-xl hover:shadow-lg py-4 transition-all duration-200"
                   />
                 </SwiperSlide>

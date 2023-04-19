@@ -52,7 +52,7 @@ const Slider = ({ products, title, linkTo, isPagination }) => {
             ? products?.map((product) => (
                 <SwiperSlide key={product.id}>
                   <ProductCartVertical
-                    {...product}
+                    product={product}
                     containerClassName="border-l hover:shadow-lg py-4 transition-all duration-200"
                   />
                 </SwiperSlide>
