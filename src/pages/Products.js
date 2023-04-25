@@ -148,7 +148,6 @@ const Products = (props) => {
     );
   };
 
-  console.log(query);
   return (
     <main className="grid grid-cols-5 gap-8 items-start">
       <aside className="border rounded-md p-4 bg-white border-gray-100 col-span-1 sticky top-20">

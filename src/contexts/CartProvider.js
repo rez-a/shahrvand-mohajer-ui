@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { createContext } from 'react';
 import { useReducer } from 'react';
 import { cartReducer } from 'reducers/cart/cartReducer';
+import getFromLS from 'helper/LS/getFromLS';
 
 const initialState = {
-  cart: [],
+  cart: getFromLS('SHAHRVAND_CART', []),
 };
 export const CartContext = createContext();
 

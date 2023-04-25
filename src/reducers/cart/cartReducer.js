@@ -6,6 +6,7 @@ import {
   INCREASE,
   REMOVE_FROM_CART,
 } from './actionTypes';
+import setToLS from 'helper/LS/setToLS';
 
 export const cartReducer = (state, action) => {
   const vendor = state.cart.find(
@@ -37,9 +38,8 @@ export const cartReducer = (state, action) => {
     case REMOVE_FROM_CART:
       {
         const newProducts = vendor.products.filter(
-          (product) => product.Id !== action.payload.productId
+          (product) => product.cartId !== action.payload.cartId
         );
-        console.log(newProducts);
         const newVendor = { ...vendor, products: newProducts };
 
         newCart = !!newVendor.products.length
@@ -58,8 +58,11 @@ export const cartReducer = (state, action) => {
     case INCREASE:
       {
         const newProducts = vendor.products.map((product) =>
-          product.Id === action.payload.productId
-            ? { ...product, quantity: product.quantity + 1 }
+          product.cartId === action.payload.cartId
+            ? {
+                ...product,
+                quantity: product.quantity + Number(product.UnitFew),
+              }
             : { ...product }
         );
         const newVendor = { ...vendor, products: newProducts };
@@ -75,8 +78,11 @@ export const cartReducer = (state, action) => {
     case DECREASE:
       {
         const newProducts = vendor.products.map((product) =>
-          product.Id === action.payload.productId
-            ? { ...product, quantity: product.quantity - 1 }
+          product.cartId === action.payload.cartId
+            ? {
+                ...product,
+                quantity: product.quantity - Number(product.UnitFew),
+              }
             : { ...product }
         );
         const newVendor = { ...vendor, products: newProducts };
@@ -90,8 +96,10 @@ export const cartReducer = (state, action) => {
       break;
 
     case CLEAR_CART:
+      break;
   }
   cartSummaryCalculator(newCart);
+  setToLS('SHAHRVAND_CART', newCart);
   return {
     ...state,
     cart: newCart,

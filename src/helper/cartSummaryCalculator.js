@@ -1,16 +1,8 @@
 import Toast from 'utilities/sweetAlert';
+import getTotalPrice from './getTotalPrice';
 
 const cartSummaryCalculator = (cart) => {
-  const totalPrice = cart.reduce(
-    (total, vendor) =>
-      total +
-      vendor.products.reduce(
-        (subTotal, product) =>
-          subTotal + product.LastBuyPrice * product.quantity,
-        0
-      ),
-    0
-  );
+  const totalPrice = getTotalPrice(cart);
 
   const totalCount = cart.reduce(
     (totalProducts, vendor) => totalProducts + vendor.products.length,

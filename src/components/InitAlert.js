@@ -6,23 +6,30 @@ const InitAlert = (props) => {
   const [show, setShow] = useState(true);
   return (
     <div
-      className={` flex items-center justify-center top-0 left-0 right-0 z-40 w-full  overflow-x-hidden overflow-y-auto inset-0 h-full bg-black/10 backdrop-blur-sm ${
+      className={` flex items-center  justify-center top-0 left-0 right-0 z-40 w-full  overflow-x-hidden overflow-y-auto inset-0 h-full bg-black/10 backdrop-blur-sm ${
         show ? 'fixed' : 'hidden'
       }`}
     >
-      <div className="bg-white max-w-lg p-3 py-5 rounded-md text-center">
-        <p className=" font-bold leading-8">
-          لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و
-          با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه
-          و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی
-          تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای
-          کاربردی می باشد.
-        </p>
+      <div className="bg-white max-w-xl w-96 rounded-xl text-center">
+        <div className="py-5 border-b font-bold  ">
+          پیام مدیریت به مشتریان
+        </div>
+        <div className="text-justify leading-8 px-7 py-6">
+          به هایپر مراکت آنلاین شهروند خوش آمدید
+          <br /> تلفن فروشگاه 38624080
+        </div>
         <button
           onClick={() => setShow(false)}
-          className="bg-sky-500/90 mt-4  text-white p-2 px-4 text-sm rounded-md font-bold shadow-lg shadow-sky-500/50 hover:bg-sky-500 transition-all duration-300"
+          className="bg-blue-600 w-full hover:opacity-80 text-white py-5 text-sm font-semibold rounded-b-xl transition-all duration-300"
         >
-          متوجه شدم
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-7 h-7 fill-current ml-2 inline"
+            viewBox="0 0 24 24"
+          >
+            <path d="M10.0007 15.1709L19.1931 5.97852L20.6073 7.39273L10.0007 17.9993L3.63672 11.6354L5.05093 10.2212L10.0007 15.1709Z"></path>
+          </svg>
+          بــــاشـــــه
         </button>
       </div>
     </div>

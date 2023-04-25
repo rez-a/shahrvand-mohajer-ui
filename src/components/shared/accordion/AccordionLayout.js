@@ -26,7 +26,7 @@ const AccordionLayout = ({ children, toggle }) => {
 };
 
 AccordionLayout.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.any,
   toggle: PropTypes.bool,
 };
 

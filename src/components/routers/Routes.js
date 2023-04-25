@@ -1,5 +1,4 @@
 import Home from 'pages/Home';
-import ProductPage from 'pages/ProductPage';
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LayoutHome from 'components/layout/LayoutHome';
@@ -12,7 +11,7 @@ import ProductRoutes from './ProductRoutes';
 
 const AllRoutes = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/index">
       <Routes>
         <Route path="/" element={<LayoutHome />}>
           <Route index element={<Home />} />

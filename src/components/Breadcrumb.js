@@ -5,7 +5,6 @@ import { Link, useLocation, useParams } from 'react-router-dom';
 const Breadcrumb = (props) => {
   const params = useParams();
   const location = useLocation();
-  console.log(location);
   return (
     <nav
       class="flex py-4 px-4 mb-4 text-gray-700 border border-gray-100 rounded-md mt-2 bg-white"

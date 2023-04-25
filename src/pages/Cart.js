@@ -1,6 +1,4 @@
 import React, { useContext } from 'react';
-import products from 'productsFake';
-import storeLogo from 'assets/images/store-logo.png';
 import CartProductCard from 'components/productCard/CartProductCard';
 import AccordionLayout from 'components/shared/accordion/AccordionLayout';
 import AccordionItem from 'components/shared/accordion/AccordionItem';
@@ -9,6 +7,9 @@ import ContentAccordionItem from 'components/shared/accordion/ContentAccordionIt
 import { CartContext } from 'contexts/CartProvider';
 import emptyCart from 'assets/images/empty-cart.svg';
 import { Link } from 'react-router-dom';
+import getTotalPrice from 'helper/getTotalPrice';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const Cart = () => {
   const {
@@ -16,10 +17,41 @@ const Cart = () => {
     dispatch,
   } = useContext(CartContext);
 
-  const productsInCart = cart.reduce(
-    (totalProducts, vendor) => totalProducts + vendor.products.length,
-    0
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [purchaseProfit, setPurchaseProfit] = useState(0);
+  const [productsInCart, setProductInCart] = useState(
+    cart.reduce(
+      (totalProducts, vendor) =>
+        totalProducts + vendor.products.length,
+      0
+    )
   );
+
+  useEffect(() => {
+    setTotalPrice(getTotalPrice(cart));
+    setProductInCart(
+      cart.reduce(
+        (totalProducts, vendor) =>
+          totalProducts + vendor.products.length,
+        0
+      )
+    );
+    setPurchaseProfit(
+      cart.reduce(
+        (total, vendor) =>
+          total +
+          vendor.products.reduce(
+            (subTotal, product) =>
+              subTotal +
+              product.SellPrice *
+                (product.quantity / product.UnitFew),
+            0
+          ),
+        0
+      ) - getTotalPrice(cart)
+    );
+  }, [cart]);
+
   return !!cart.length ? (
     <main className="grid grid-cols-7 gap-4 items-start">
       <section className="col-span-5 ">
@@ -38,11 +70,11 @@ const Cart = () => {
           </p>
           <p className="text-xs mr-1">({productsInCart} کالا)</p>
         </div>
-        <AccordionLayout>
-          {cart.map((vendor, index) => (
+        {cart.map((vendor, index) => (
+          <AccordionLayout toggle={false}>
             <AccordionItem
               key={index}
-              defaultClassName="mb-3 border  rounded-md"
+              defaultClassName="mb-3 border rounded-md"
             >
               <TitleAccordionItem
                 openClassName="border-b border-b-gray-100 bg-gray-50/50"
@@ -88,6 +120,7 @@ const Cart = () => {
                         dispatch={dispatch}
                         key={product.Id}
                         {...product}
+                        cart={cart}
                       />
                     ))}
                   </ul>
@@ -95,10 +128,20 @@ const Cart = () => {
                 <div className="bg-gray-50 p-4 rounded-b-md flex justify-between relative -top-2">
                   <p className="flex items-center">
                     <span className="font-bold">
-                      مبلغ کل (2کالا) :
+                      مبلغ کل ({vendor.products.length}کالا) :
                     </span>
                     <span className="opacity-60 mr-2">
-                      16,879,000 تومان
+                      {vendor.products
+                        .reduce(
+                          (total, product) =>
+                            total +
+                            (product.LastBuyPrice *
+                              product.quantity) /
+                              Number(product.UnitFew),
+                          0
+                        )
+                        .toLocaleString()}
+                      تومان
                     </span>
                   </p>
                   <button className="bg-sky-500/90 text-white w-60 py-2 rounded-md font-bold shadow-lg shadow-sky-500/50 hover:bg-sky-500 transition-all duration-300">
@@ -107,17 +150,23 @@ const Cart = () => {
                 </div>
               </ContentAccordionItem>
             </AccordionItem>
-          ))}
-        </AccordionLayout>
+          </AccordionLayout>
+        ))}
       </section>
       <aside className="bg-gray-50/50 border rounded-md border-gray-100 bg-white col-span-2 p-3 sticky top-24 mb-3">
         <p className="flex items-center justify-between mb-3">
-          <span className="font-bold">مبلغ کل (2کالا)</span>
-          <span className="opacity-60">16,879,000 تومان</span>
+          <span className="font-bold">
+            مبلغ کل ({productsInCart}کالا)
+          </span>
+          <span className="opacity-60">
+            {totalPrice.toLocaleString()} تومان
+          </span>
         </p>
         <p className="flex items-center justify-between mb-3 text-sky-500">
           <span className="font-bold">سود شما از خرید</span>
-          <span className="opacity-100">16,879,000 تومان</span>
+          <span className="opacity-100">
+            {purchaseProfit.toLocaleString()} تومان
+          </span>
         </p>
         <p className="flex items-center justify-between mb-3 border-b pb-4">
           <span className="font-bold flex items-center">
@@ -151,7 +200,7 @@ const Cart = () => {
           مبلغ قابل پرداخت :
         </p>
         <p className="font-bold text-2xl text-center text-rose-500 mb-4">
-          <span>16,879,000</span>
+          <span>{totalPrice.toLocaleString()}</span>
           <span className="font-medium text-sm mr-2">تومان</span>
         </p>
         <button className="relative bg-rose-500 h-12 w-full text-white font-bold rounded-md overflow-hidden group">
@@ -166,7 +215,7 @@ const Cart = () => {
               <path d="M7.82843 10.9999H20V12.9999H7.82843L13.1924 18.3638L11.7782 19.778L4 11.9999L11.7782 4.22168L13.1924 5.63589L7.82843 10.9999Z"></path>
             </svg>
           </span>
-          <span className="z-10 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
+          <span className="z-10 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 whitespace-nowrap">
             ادامه ثبت همه سفارش ها
           </span>
         </button>

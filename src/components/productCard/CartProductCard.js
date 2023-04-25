@@ -6,19 +6,25 @@ import {
   increase,
   removeFromCart,
 } from 'reducers/cart/actionCreators';
+import useProductInCart from 'hooks/useProductInCart';
+import { Link } from 'react-router-dom';
 
 const CartProductCard = ({
+  ErpCode,
   Name,
-  SellPrice,
-  LastBuyPrice,
-  Image,
-  IsAvailable,
   IsVendor,
+  Image,
+  LastBuyPrice,
+  SellPrice,
   MainGroupName,
-  dispatch,
-  quantity,
-  Id,
+  UnitName,
+  UnitFew,
+  SideGroupErpCode,
   MainGroupErpCode,
+  dispatch,
+  IsAvailable,
+  quantity,
+  cartId,
 }) => {
   const discount = Math.floor(
     (SellPrice - LastBuyPrice) / (LastBuyPrice / 100)
@@ -34,9 +40,62 @@ const CartProductCard = ({
       </div>
       <div class="flex flex-col justify-between leading-normal grow mr-2">
         <div>
-          <h5 class="text-base font-bold tracking-tight text-gray-900 dark:text-white mb-6">
-            {Name}
-          </h5>
+          <div className="flex items-center justify-between">
+            <div class="text-base font-bold tracking-tight text-gray-900 dark:text-white">
+              {!!discount && (
+                <div className=" inline">
+                  <span
+                    className={`bg-rose-500 mr-auto text-xs text-white p-2 rounded-xl rounded-br-none font-bold ${
+                      SellPrice !== LastBuyPrice
+                        ? 'visible'
+                        : 'invisible'
+                    }`}
+                  >
+                    {discount}%
+                  </span>
+                </div>
+              )}
+              <Link
+                class="hover:text-rose-500 transition-all duration-200"
+                to={`/product/${MainGroupErpCode}/${SideGroupErpCode}/${ErpCode}`}
+                className={`${!!discount ? 'mr-2' : ''}`}
+              >
+                {Name}
+              </Link>
+            </div>
+            <div className="flex items-center">
+              {!!discount ? (
+                <>
+                  <small className=" relative opacity-30  before:absolute before:w-[110%] before:h-[1px] before:bg-black before:top-1/2 before:-translate-y-1/2 before:left-1/2 before:-translate-x-1/2 before:rotate-6">
+                    <span>{SellPrice.toLocaleString()}</span>
+                  </small>
+                  <p className="font-bold mr-4 ">
+                    <span>{LastBuyPrice.toLocaleString()}</span>
+                    <span className="mr-1">تومان</span>
+                  </p>
+                </>
+              ) : (
+                <p className="font-bold mr-4 ">
+                  <span>{LastBuyPrice.toLocaleString()}</span>
+                  <span className="mr-1">تومان</span>
+                </p>
+              )}
+            </div>
+          </div>
+          <p className="text-xs flex items-center justify-end text-slate-400 mt-1">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              className="fill-current inline ml-1"
+              width={18}
+              height={18}
+            >
+              <path d="M5.99805 2C5.99805 2.51284 6.48805 3 6.99805 3H16.998C17.5109 3 17.998 2.51 17.998 2H19.998C19.998 3.65685 18.6549 5 16.998 5H12.998L12.999 7.06201C16.9449 7.55453 19.998 10.9207 19.998 15V21C19.998 21.5523 19.5503 22 18.998 22H4.99805C4.44576 22 3.99805 21.5523 3.99805 21V15C3.99805 10.9204 7.05176 7.55396 10.9981 7.06189L10.998 5H6.99805C5.33805 5 3.99805 3.66 3.99805 2H5.99805ZM11.998 11C9.78891 11 7.99805 12.7909 7.99805 15C7.99805 17.2091 9.78891 19 11.998 19C14.2072 19 15.998 17.2091 15.998 15C15.998 14.2582 15.7961 13.5635 15.4442 12.968L12.7052 15.7071L12.6109 15.7903C12.2187 16.0953 11.6514 16.0676 11.2909 15.7071C10.9004 15.3166 10.9004 14.6834 11.2909 14.2929L14.03 11.5538C13.4345 11.2019 12.7399 11 11.998 11Z"></path>
+            </svg>
+            <span>
+              به ازای هر {Number(UnitFew)} {UnitName}
+            </span>
+          </p>
           <div className="flex items-center mb-4">
             <div className="w-6 h-6">
               <svg
@@ -78,12 +137,12 @@ const CartProductCard = ({
         </div>
         <div className="flex items-center justify-between">
           <div className="flex items-center mt-2">
-            <div className="items-center border flex p-2 rounded-md ">
+            <div className="items-center bg-gray-50 flex p-2 rounded-md ">
               <button
                 onClick={() =>
                   dispatch(
                     increase(
-                      Id,
+                      cartId,
                       IsVendor ? MainGroupErpCode : 'SHAHRVAND'
                     )
                   )
@@ -92,48 +151,68 @@ const CartProductCard = ({
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
+                  width="24"
+                  height="24"
                   className="fill-sky-500"
                 >
                   <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
                 </svg>
               </button>
-              <span className="mx-4">{quantity}</span>
-
-              <button
-                onClick={() =>
-                  quantity === 1
-                    ? dispatch(
-                        decrease(
-                          Id,
-                          IsVendor ? MainGroupErpCode : 'SHAHRVAND'
-                        )
+              <p className="mx-6 text-center">
+                <span className="block font-bold">{quantity}</span>
+                <span className="text-xs text-slate-400">
+                  {UnitName}
+                </span>
+              </p>
+              {quantity === 1 ? (
+                <button
+                  onClick={() =>
+                    dispatch(
+                      removeFromCart(
+                        cartId,
+                        IsVendor ? MainGroupErpCode : 'SHAHRVAND'
                       )
-                    : dispatch(
-                        removeFromCart(
-                          Id,
-                          IsVendor ? MainGroupErpCode : 'SHAHRVAND'
-                        )
-                      )
-                }
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  className="fill-rose-500"
+                    )
+                  }
                 >
-                  <path d="M5 11V13H19V11H5Z"></path>
-                </svg>
-              </button>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                    className="fill-rose-500"
+                  >
+                    <path d="M5 11V13H19V11H5Z"></path>
+                  </svg>
+                </button>
+              ) : (
+                <button
+                  onClick={() =>
+                    dispatch(
+                      decrease(
+                        cartId,
+                        IsVendor ? MainGroupErpCode : 'SHAHRVAND'
+                      )
+                    )
+                  }
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                    className="fill-rose-500"
+                  >
+                    <path d="M5 11V13H19V11H5Z"></path>
+                  </svg>
+                </button>
+              )}
             </div>
             <button
               onClick={() =>
                 dispatch(
                   removeFromCart(
-                    Id,
+                    cartId,
                     IsVendor ? MainGroupErpCode : 'SHAHRVAND'
                   )
                 )
@@ -151,22 +230,15 @@ const CartProductCard = ({
             </button>
           </div>
           <div className="flex items-center">
-            {discount ? (
-              <>
-                <small className=" relative opacity-30  before:absolute before:w-[110%] before:h-[1px] before:bg-black before:top-1/2 before:-translate-y-1/2 before:left-1/2 before:-translate-x-1/2 before:rotate-6">
-                  <span>{SellPrice.toLocaleString()}</span>
-                </small>
-                <p className="font-bold mr-4 ">
-                  <span>{LastBuyPrice.toLocaleString()}</span>
-                  <span className="mr-1">تومان</span>
-                </p>
-              </>
-            ) : (
-              <p className="font-bold mr-4 ">
-                <span>{LastBuyPrice.toLocaleString()}</span>
-                <span className="mr-1">تومان</span>
-              </p>
-            )}
+            <p className="font-bold mr-4 ">
+              <span>
+                {(
+                  Number(LastBuyPrice) *
+                  (quantity / Number(UnitFew) || 0)
+                ).toLocaleString()}
+              </span>
+              <span className="mr-1">تومان</span>
+            </p>
           </div>
         </div>
       </div>
