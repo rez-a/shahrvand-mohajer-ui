@@ -3,109 +3,126 @@
 @tailwind components;
 @tailwind utilities;
 @layer base {
-  body {
-    @apply font-Pelak bg-sky-50/50;
-  }
-  body {
-    direction: rtl;
-  }
-  img {
-    @apply w-full h-full object-cover;
-  }
+    body {
+        @apply font-Pelak bg-sky-50/50;
+    }
+    body {
+        direction: rtl;
+    }
+    img {
+        @apply w-full h-full object-cover;
+    }
 }
 
 @layer components {
-  .accordion-content {
-    @apply overflow-hidden h-0 transition-all duration-200 ease-in-out will-change-[height];
-  }
-  .content {
-    margin: 0 auto;
-    padding: 0 1rem;
-  }
-  .transition {
-    @apply transition-all duration-200;
-  }
-  .loading-bg {
-    background-color: #cccccc;
-    border-radius: 5px;
-    animation: skeleton-loading 1s linear infinite alternate;
-  }
+    .accordion-content {
+        @apply overflow-hidden h-0 transition-all duration-200 ease-in-out will-change-[height];
+    }
+    .content {
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+    .transition {
+        @apply transition-all duration-200;
+    }
+    .loading-bg {
+        background-color: #cccccc;
+        border-radius: 5px;
+        animation: skeleton-loading 1s linear infinite alternate;
+    }
 }
 
 .swiper-pagination-bullet {
-  transition: all 0.2s ease-in-out !important;
+    transition: all 0.2s ease-in-out !important;
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #ffffffa3 !important;
-  width: 2rem !important;
-  border-radius: 10px !important;
+    background-color: #ffffffa3 !important;
+    width: 2rem !important;
+    border-radius: 10px !important;
 }
 
 .bullet-active-rose .swiper-pagination-bullet-active {
-  background-color: #f97d7d !important;
+    background-color: #f97d7d !important;
 }
 
 .range-slider {
-  height: 5px !important;
+    height: 5px !important;
 }
 
 .range-slider__thumb {
-  width: 18px !important;
-  height: 18px !important;
-  background: #f43f5e !important;
+    width: 18px !important;
+    height: 18px !important;
+    background: #f43f5e !important;
 }
 
 .range-slider__range {
-  background: #f43f5e !important;
+    background: #f43f5e !important;
 }
 
-input ~ .dot {
-  transform: translate(0%, -50%);
-  background-color: #fff;
+input~.dot {
+    transform: translate(0%, -50%);
+    background-color: #fff;
 }
 
-input:checked ~ .dot {
-  transform: translate(100%, -50%);
-  background-color: #f43f5e;
-  left: auto;
-  right: 1.125rem;
+input:checked~.dot {
+    transform: translate(100%, -50%);
+    background-color: #f43f5e;
+    left: auto;
+    right: 1.125rem;
 }
 
 .overflow-auto::-webkit-scrollbar,
 .overflow-auto::-webkit-scrollbar {
-  width: 0.5rem;
-  height: 0.5rem;
+    width: 0.5rem;
+    height: 0.5rem;
 }
 
-.overflow-auto::-webkit-scrollbar-track
-  .overflow-auto::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(77, 86, 224, 0.15);
-  border-radius: 100%;
+.overflow-auto::-webkit-scrollbar-track .overflow-auto::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(77, 86, 224, 0.15);
+    border-radius: 100%;
 }
 
 .overflow-auto::-webkit-scrollbar-thumb,
 .overflow-auto::-webkit-scrollbar-thumb {
-  background-color: #fff;
-  border-radius: 2px;
-  visibility: hidden;
+    background-color: #fff;
+    border-radius: 2px;
+    visibility: hidden;
 }
 
 .overflow-auto:hover::-webkit-scrollbar-thumb,
 .overflow-auto:hover::-webkit-scrollbar-thumb {
-  background-color: rgb(222, 222, 222);
-  visibility: visible;
+    background-color: rgb(222, 222, 222);
+    visibility: visible;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: rgb(134, 134, 134);
+    background-color: rgb(134, 134, 134);
 }
 
 @keyframes skeleton-loading {
-  0% {
-    background-color: #cccccc;
-  }
-  100% {
-    background-color: hsl(200, 20%, 95%);
-  }
+    0% {
+        background-color: #cccccc;
+    }
+    100% {
+        background-color: hsl(200, 20%, 95%);
+    }
+}
+
+@keyframes buzz {
+    0% {
+        left: -5px;
+    }
+    25% {
+        left: 5px;
+    }
+    50% {
+        left: -3px;
+    }
+    75% {
+        left: 3px;
+    }
+    100% {
+        left: 0px;
+    }
 }

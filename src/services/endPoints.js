@@ -9,3 +9,4 @@ export const PRODUCTS = '/api/products?count=16';
 export const PRODUCTS_MAINCATEGORY = '/api/products/category';
 export const SUBCATEGORIES = '/api/subcategories/category';
 export const PRODUCT = '/api/products';
+export const LOGIN = '/auth/login';

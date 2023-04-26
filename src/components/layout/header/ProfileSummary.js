@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import ProfileSummaryAccessLinks from './ProfileSummaryAccessLinks';
+import { Link } from 'react-router-dom';
 
 const ProfileSummary = (props) => {
   const [showProfileLinks, setShowProfileLinks] = useState(false);
@@ -10,7 +11,7 @@ const ProfileSummary = (props) => {
   }
   const profileLinksRef = useRef();
 
-  return true ? (
+  return false ? (
     <div
       ref={profileLinksRef}
       className="flex items-center cursor-pointer relative group z-50"
@@ -56,7 +57,10 @@ const ProfileSummary = (props) => {
       )}
     </div>
   ) : (
-    <button className="border rounded text-xs py-1 px-2 flex items-center bg-gray-50 border-gray-100 hover:bg-zinc-100 transition">
+    <Link
+      to="/login"
+      className="border rounded text-xs py-1 px-2 flex items-center bg-gray-50 border-gray-100 hover:bg-zinc-100 transition"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -69,7 +73,7 @@ const ProfileSummary = (props) => {
       </svg>
       <span className="px-2 border-l">ورود</span>
       <span className="px-2">ثبت نام</span>
-    </button>
+    </Link>
   );
 };
 

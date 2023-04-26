@@ -30,7 +30,6 @@ const ProductPage = () => {
   );
 
   const {
-    Id,
     Name,
     VisitCount,
     IsVendor,
@@ -40,8 +39,6 @@ const ProductPage = () => {
     LastBuyPrice,
     SellPrice,
     MainGroupName,
-    Few,
-    UnitName,
     ErpCode,
     MainGroupErpCode,
   } = !!product && product;

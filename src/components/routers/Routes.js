@@ -8,6 +8,7 @@ import NotFound from 'pages/NotFound';
 import ProductsRoutes from './ProductsRoutes';
 import CheckoutRoutes from './CheckoutRoutes';
 import ProductRoutes from './ProductRoutes';
+import Login from 'pages/Login';
 
 const AllRoutes = () => {
   return (
@@ -16,11 +17,13 @@ const AllRoutes = () => {
         <Route path="/" element={<LayoutHome />}>
           <Route index element={<Home />} />
         </Route>
+        <Route path="/login" element={<Login />} />
         <Route path="/*" element={<LayoutPage />}>
           <Route path="products/*" element={<ProductsRoutes />} />
           <Route path="product/*" element={<ProductRoutes />} />
           <Route path="checkout/*" element={<CheckoutRoutes />} />
           <Route path="profile/*" element={<Profile />} />
+
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
