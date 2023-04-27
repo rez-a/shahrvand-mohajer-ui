@@ -11,3 +11,5 @@ export const SUBCATEGORIES = '/api/subcategories/category';
 export const PRODUCT = '/api/products';
 export const LOGIN = '/api/auth/login';
 export const VERIFY = '/api/auth/verify';
+export const PROFILE = '/api/auth/profile';
+export const ORDERS = '/api/orders';
