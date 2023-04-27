@@ -4,6 +4,7 @@ import Spinner from 'components/shared/Spinner';
 import { postFetcher } from 'services/postFetcher';
 import { BASE_URL } from 'services/baseURL';
 import { LOGIN } from 'services/endPoints';
+import Toast from 'utilities/sweetAlert';
 
 const PhoneNumber = ({
   setSendVerifyCode,
@@ -27,6 +28,11 @@ const PhoneNumber = ({
       if (response?.status === 'Success') {
         setLoading(false);
         setSendVerifyCode(true);
+      } else if (response?.status === 'Error') {
+        Toast.fire({
+          title: 'بعد از 2 دقیقه مجددا تلاش کنید',
+          icon: 'error',
+        });
       }
     } else {
       labelRef.current.style.animation =

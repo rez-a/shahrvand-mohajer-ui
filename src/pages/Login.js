@@ -1,13 +1,21 @@
 import React, { useEffect } from 'react';
 import TitleIcon from 'components/shared/TitleIcon';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import PhoneNumber from 'components/login/PhoneNumber';
 import VerifyCode from 'components/login/VerifyCode';
 import { useState } from 'react';
+import { useContext } from 'react';
+import { UserContext } from 'contexts/UserProvider';
 
 const Login = (props) => {
   const [sendVerifyCode, setSendVerifyCode] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
+  const { user } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    !!user && navigate(-1);
+  }, []);
 
   return (
     <main className=" min-h-screen grid place-items-center">

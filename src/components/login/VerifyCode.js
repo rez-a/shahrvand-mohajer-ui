@@ -1,12 +1,42 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Spinner from 'components/shared/Spinner';
 import Timer from 'components/shared/Timer';
+import { useRef } from 'react';
+import { postFetcher } from 'services/postFetcher';
+import { BASE_URL } from 'services/baseURL';
+import { VERIFY } from 'services/endPoints';
+import storeAuthToken from 'helper/handlerAuthorazation/storeAuthToken';
+import { UserContext } from 'contexts/UserProvider';
+import decodeToken from 'helper/handlerAuthorazation/decodeToken';
+import { useNavigate } from 'react-router-dom';
 
 const VerifyCode = ({ setSendVerifyCode, phoneNumber }) => {
-  const handleLogin = () => {
-    console.log('login');
+  const [verifyCode, setVerifyCode] = useState('');
+  const [loading, setLoading] = useState(false);
+  const { setUser } = useContext(UserContext);
+  const labelRef = useRef(null);
+  const navigate = useNavigate();
+
+  const handleLogin = async () => {
+    if (verifyCode !== '') {
+      setLoading(true);
+      const response = await postFetcher(`${BASE_URL}${VERIFY}`, {
+        mobile: phoneNumber,
+        code: 11111,
+      });
+      if (response?.status === 'Success') {
+        storeAuthToken(response.data.access_token);
+        setUser(decodeToken(response.data.access_token));
+        setLoading(false);
+        navigate(-1);
+      }
+    } else {
+      labelRef.current.style.animation =
+        'buzz 0.5s linear forwards alternate';
+    }
   };
+
   return (
     <form className="w-full px-6">
       <div>
@@ -28,6 +58,10 @@ const VerifyCode = ({ setSendVerifyCode, phoneNumber }) => {
               <span className="mr-1">ویرایش</span>
             </button>
             <label
+              ref={labelRef}
+              onAnimationEnd={(e) => {
+                e.target.style = '';
+              }}
               className="text-sm font-semibold mb-2 border-r border-r-gray-300 pr-2"
               htmlFor="phone-number"
             >
@@ -41,13 +75,15 @@ const VerifyCode = ({ setSendVerifyCode, phoneNumber }) => {
           maxLength={11}
           type="text"
           id="phone-number"
+          value={verifyCode}
+          onChange={(e) => setVerifyCode(e.target.value)}
           placeholder="کد ارسال شده را وارد کنید"
         />
       </div>
       <button
         type="button"
         onClick={handleLogin}
-        disabled={false}
+        disabled={loading}
         className="relative bg-rose-500 h-12 w-full text-white font-bold rounded-md overflow-hidden group"
       >
         <span className="bg-rose-400 h-full flex items-center w-12 px-3 z-0 rounded-l-full absolute right-0 top-0 group-hover:w-full group-hover:rounded-l-none transition-all duration-300">
@@ -62,7 +98,7 @@ const VerifyCode = ({ setSendVerifyCode, phoneNumber }) => {
           </svg>
         </span>
         <span className="z-10 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 whitespace-nowrap flex ">
-          {false && <Spinner />}
+          {loading && <Spinner />}
           <span className="mr-2">ورود</span>
         </span>
       </button>

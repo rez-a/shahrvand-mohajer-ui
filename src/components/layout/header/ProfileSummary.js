@@ -1,17 +1,19 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import ProfileSummaryAccessLinks from './ProfileSummaryAccessLinks';
 import { Link } from 'react-router-dom';
+import { UserContext } from 'contexts/UserProvider';
 
 const ProfileSummary = (props) => {
   const [showProfileLinks, setShowProfileLinks] = useState(false);
+  const { user } = useContext(UserContext);
   function closeHandler(e) {
     !profileLinksRef?.current.contains(e.target) &&
       setShowProfileLinks(false);
   }
   const profileLinksRef = useRef();
 
-  return false ? (
+  return !!user ? (
     <div
       ref={profileLinksRef}
       className="flex items-center cursor-pointer relative group z-50"
@@ -32,9 +34,9 @@ const ProfileSummary = (props) => {
         </svg>
       </div>
       <div className="text-sm">
-        <p className="w-28 text-left font-bold">جلال بهرامی راد</p>
+        <p className="w-28 text-left font-bold">{user.name}</p>
         <p className="w-28 text-left text-zinc-400 text-xs mt-1">
-          09302582971
+          {user.mobile}
         </p>
       </div>
       <div className="bg-gray-100 p-1.5 rounded-full mr-2">
