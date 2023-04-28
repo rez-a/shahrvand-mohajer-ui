@@ -28,7 +28,7 @@ const PhoneNumber = ({
       if (response?.status === 'Success') {
         setLoading(false);
         setSendVerifyCode(true);
-      } else if (response?.status === 'Error') {
+      } else {
         Toast.fire({
           title: 'بعد از 2 دقیقه مجددا تلاش کنید',
           icon: 'error',
@@ -93,7 +93,7 @@ const PhoneNumber = ({
         </span>
         <span className="z-10 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 whitespace-nowrap flex ">
           {loading && <Spinner />}
-          <span className="mr-2">ارسال کد موقت</span>
+          <span className="mr-2">ارسال کد احراز هویت</span>
         </span>
       </button>
     </form>

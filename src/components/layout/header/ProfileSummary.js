@@ -34,7 +34,9 @@ const ProfileSummary = (props) => {
         </svg>
       </div>
       <div className="text-sm">
-        <p className="w-28 text-left font-bold">{user.name}</p>
+        <p className="w-28 text-left font-bold">
+          {!!user.name ? user.name : 'نام کاربری'}
+        </p>
         <p className="w-28 text-left text-zinc-400 text-xs mt-1">
           {user.mobile}
         </p>

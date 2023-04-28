@@ -12,7 +12,7 @@ import { Route, Routes } from 'react-router-dom';
 const ProfileRoutes = (props) => {
   return (
     <Routes>
-      <Route index element={<MainProfile />} />
+      <Route path="main" element={<MainProfile />} />
       <Route path="edit" element={<EditProfile />} />
       <Route path="addresses" element={<Addresses />} />
       <Route path="orders">

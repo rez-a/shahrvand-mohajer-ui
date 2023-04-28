@@ -21,7 +21,7 @@ const ProfileSummaryAccessLinks = ({
       >
         <li>
           <Link
-            to="profile"
+            to="/profile/main"
             className="flex items-center w-full p-3 font-semibold hover:bg-gray-50"
           >
             <span className="ml-1">
@@ -40,7 +40,7 @@ const ProfileSummaryAccessLinks = ({
         </li>
         <li>
           <Link
-            to="profile/edit"
+            to="/profile/edit"
             className=" flex items-center w-full p-3 font-semibold hover:bg-gray-50"
           >
             <span className="ml-1">
@@ -59,7 +59,7 @@ const ProfileSummaryAccessLinks = ({
         </li>
         <li>
           <Link
-            to="profile/addresses"
+            to="/profile/addresses"
             className=" flex items-center w-full p-3 font-semibold hover:bg-gray-50"
           >
             <span className="ml-1">
@@ -78,7 +78,7 @@ const ProfileSummaryAccessLinks = ({
         </li>
         <li>
           <Link
-            to="profile/orders"
+            to="/profile/orders"
             className=" flex items-center w-full p-3 font-semibold hover:bg-gray-50"
           >
             <span className="ml-1">
@@ -97,7 +97,7 @@ const ProfileSummaryAccessLinks = ({
         </li>
         <li>
           <Link
-            to="profile/payments"
+            to="/profile/payments"
             className=" flex items-center w-full p-3 font-semibold hover:bg-gray-50"
           >
             <span className="ml-1">
