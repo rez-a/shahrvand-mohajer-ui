@@ -1,9 +1,8 @@
 const validateUserInfo = (info) => {
-  const { name, tel, zip_code, address } = info;
+  const { name, tel, address } = info;
   let validate = {
     name: true,
     tel: true,
-    zip_code: true,
     address: true,
   };
 
@@ -17,12 +16,6 @@ const validateUserInfo = (info) => {
     validate = {
       ...validate,
       tel: false,
-    };
-  }
-  if (!zip_code.length || zip_code.length !== 10) {
-    validate = {
-      ...validate,
-      zip_code: false,
     };
   }
   if (!address.length) {

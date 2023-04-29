@@ -4,7 +4,7 @@ import TextInput from 'components/shared/inputs/TextInput';
 import Card from './Card';
 import { Link } from 'react-router-dom';
 import useSWR from 'swr';
-import { EDIT_PROFILE, PROFILE } from 'services/endPoints';
+import { ADDRESSES, EDIT_PROFILE, PROFILE } from 'services/endPoints';
 import { postWithToken } from 'services/swr/postWithToken';
 import Spinner from 'components/shared/Spinner';
 import TextAreaInput from 'components/shared/inputs/TextAreaInput';
@@ -15,22 +15,23 @@ import storeAuthToken from 'helper/handlerAuthorazation/storeAuthToken';
 import { useContext } from 'react';
 import { UserContext } from 'contexts/UserProvider';
 import decodeToken from 'helper/handlerAuthorazation/decodeToken';
+import { fetcher } from 'services/swr/fetcher';
 
 const EditProfile = (props) => {
   const { setUser } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
   const { data: user } = useSWR(PROFILE, postWithToken);
+  const { data: addresses } = useSWR(ADDRESSES, fetcher);
+  console.log(addresses);
   const [newInfo, setNewInfo] = useState({
     name: '',
     tel: '',
-    zip_code: '',
     address: '',
     mobile: '',
   });
   const [validateInfo, setValidateInfo] = useState({
     name: true,
     tel: true,
-    zip_code: true,
     address: true,
   });
 
@@ -41,9 +42,10 @@ const EditProfile = (props) => {
         address: user.address,
         mobile: user.mobile,
         tel: user.tel,
-        zip_code: user.zip_code,
       });
   }, [user]);
+
+  console.log(user);
 
   const handleEditProfile = async () => {
     if (Object.values(validateUserInfo(newInfo)).includes(false)) {
@@ -52,7 +54,6 @@ const EditProfile = (props) => {
       const response = await postFetcher(EDIT_PROFILE, {
         name: newInfo.name,
         tel: newInfo.tel,
-        zip_code: newInfo.zip_code,
         address: newInfo.address,
       });
     }
@@ -90,7 +91,7 @@ const EditProfile = (props) => {
                 id="mobile"
                 disabled={true}
                 valid={true}
-                defaultValue={newInfo.mobile}
+                value={newInfo.mobile}
               />
             </div>
             <div>
@@ -106,23 +107,11 @@ const EditProfile = (props) => {
               />
             </div>
             <div>
-              <TextInput
-                label="کد پستی"
-                placeholder="کد پستی"
-                id="zipCode"
-                valid={validateInfo.zip_code}
-                value={newInfo.zip_code}
-                changeHandler={(e) =>
-                  setNewInfo({ ...newInfo, zip_code: e.target.value })
-                }
-              />
-            </div>
-            <div>
               <TextAreaInput
                 id="address"
-                label="آدرس"
-                placeholder="آدرس"
-                valid={validateInfo.zip_code}
+                label="آدرس پیش فرض"
+                placeholder="آدرس پیش فرض"
+                valid={validateInfo.address}
                 value={newInfo.address}
                 changeHandler={(e) =>
                   setNewInfo({ ...newInfo, address: e.target.value })
@@ -131,12 +120,12 @@ const EditProfile = (props) => {
             </div>
           </form>
           <button
-            disabled={false}
+            disabled={loading}
             onClick={handleEditProfile}
             className="bg-sky-500/90  text-white w-60 py-2 text-sm rounded-md font-bold shadow-lg shadow-sky-500/50 hover:bg-sky-500 transition-all duration-300"
           >
             <div className="flex items-center justify-center">
-              {true && <Spinner />}
+              {loading && <Spinner />}
               <span className="mr-2">ویرایش اطلاعات</span>
             </div>
           </button>

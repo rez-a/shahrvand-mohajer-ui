@@ -14,3 +14,4 @@ export const VERIFY = '/api/auth/verify';
 export const PROFILE = '/api/auth/profile';
 export const EDIT_PROFILE = '/api/auth/profile/edit';
 export const ORDERS = '/api/orders';
+export const ADDRESSES = '/api/addresses';

@@ -10,7 +10,6 @@ const TextInput = ({
   value,
   changeHandler,
   disabled,
-  defaultValue,
 }) => {
   return (
     <div className="mb-6">
@@ -34,7 +33,6 @@ const TextInput = ({
             ? 'border-gray-100 focus:border-gray-300'
             : 'border-rose-200 focus:border-rose-400'
         }`}
-        defaultValue={defaultValue}
         id={id}
         placeholder={placeholder}
         value={value}
