@@ -2,7 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TitleIcon from 'components/shared/TitleIcon';
 
-const TextAreaInput = ({ label, placeholder, id, valid }) => {
+const TextAreaInput = ({
+  label,
+  placeholder,
+  id,
+  valid,
+  value,
+  changeHandler,
+  disabled,
+}) => {
   return (
     <div>
       <label htmlFor={id}>
@@ -18,7 +26,10 @@ const TextAreaInput = ({ label, placeholder, id, valid }) => {
         </p>
       </label>
       <textarea
-        className={`border w-full  rounded-md p-3 focus:outline-none  ${
+        disabled={disabled}
+        value={value}
+        onChange={changeHandler}
+        className={`border w-full  rounded-md p-3 focus:outline-none disabled:bg-gray-100  ${
           valid
             ? 'border-gray-100 focus:border-gray-300'
             : 'border-rose-200 focus:border-rose-400'

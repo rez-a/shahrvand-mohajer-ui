@@ -5,7 +5,7 @@ const Footer = () => {
     <footer className="grid grid-cols-4 p-8 bg-white">
       <ul className="space-y-2">
         <li>
-          <h2 className="font-bold mb-4">راهنمای خرید از تاپ کالا</h2>
+          <h2 className="font-bold mb-4">راهنمای خرید از شهروند</h2>
         </li>
         <li>
           <p>
@@ -85,7 +85,7 @@ const Footer = () => {
       </ul>
       <ul className="space-y-2">
         <li>
-          <h2 className="font-bold mb-4">با تاپ کالا</h2>
+          <h2 className="font-bold mb-4">با شهروند</h2>
         </li>
         <li>
           <p>
@@ -93,7 +93,7 @@ const Footer = () => {
               href="#"
               className="text-sm text-zinc-500 hover:text-zinc-800 transition-all duration-200"
             >
-              فروش در تاپ کالا
+              فروش در شهروند
             </a>
           </p>
         </li>
@@ -123,7 +123,7 @@ const Footer = () => {
               href="#"
               className="text-sm text-zinc-500 hover:text-zinc-800 transition-all duration-200"
             >
-              تماس با تاپ کالا
+              تماس با شهروند
             </a>
           </p>
         </li>
@@ -133,7 +133,7 @@ const Footer = () => {
               href="#"
               className="text-sm text-zinc-500 hover:text-zinc-800 transition-all duration-200"
             >
-              درباره تاپ کالا
+              درباره شهروند
             </a>
           </p>
         </li>
