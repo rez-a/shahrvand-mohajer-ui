@@ -8,7 +8,6 @@ const decodeToken = (token = null) => {
     : !!Cookies.get(AUTH_TOKEN_SHAHRVAND)
     ? jwt_decode(Cookies.get(AUTH_TOKEN_SHAHRVAND))
     : null;
-  console.log(tokenDecoded);
 
   const destrucToken = () => {
     const { mobile, name, exp } = tokenDecoded;

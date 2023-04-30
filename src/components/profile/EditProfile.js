@@ -30,13 +30,11 @@ const EditProfile = (props) => {
   const [newInfo, setNewInfo] = useState({
     name: '',
     tel: '',
-    address: '',
     mobile: '',
   });
   const [validateInfo, setValidateInfo] = useState({
     name: true,
     tel: true,
-    address: true,
   });
 
   useEffect(() => {
@@ -49,17 +47,7 @@ const EditProfile = (props) => {
           tel: user.tel,
         };
       });
-  }, [user?.Id]);
-
-  useEffect(() => {
-    addresses &&
-      setNewInfo((prevInfo) => {
-        return {
-          ...prevInfo,
-          address: addresses.at(0),
-        };
-      });
-  }, [addresses]);
+  }, [user?.id]);
 
   const handleEditProfile = async () => {
     if (Object.values(validateUserInfo(newInfo)).includes(false)) {
@@ -70,11 +58,11 @@ const EditProfile = (props) => {
         const editResponse = await postFetcher(EDIT_PROFILE, {
           name: newInfo.name,
           tel: newInfo.tel,
-          address: newInfo.address,
         });
         const refreshTokenResponse = await postWithToken(
           REFRESH_TOKEN
         );
+        console.log(refreshTokenResponse);
         editUser(refreshTokenResponse.data.access_token);
       } catch (err) {
         console.log('error');
@@ -88,6 +76,8 @@ const EditProfile = (props) => {
     storeAuthToken(token);
     setUser(decodeToken(token));
   };
+
+  console.log(user);
   return (
     <Card title="ویرایش اطلاعات کاربری">
       {!user && !addresses ? (
@@ -131,33 +121,34 @@ const EditProfile = (props) => {
                 }
               />
             </div>
-            <div>
-              <TextAreaInput
-                id="address"
-                label="آدرس پیش فرض"
-                placeholder="آدرس پیش فرض"
-                valid={validateInfo.address}
-                value={newInfo.address}
-                disabled={!!addresses?.length ? true : false}
-                changeHandler={(e) =>
-                  setNewInfo({ ...newInfo, address: e.target.value })
-                }
-              />
-            </div>
-            <div className="text-slate-400 mb-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                width={18}
-                height={18}
-                className="fill-current inline"
-              >
-                <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM11 7H13V9H11V7ZM11 11H13V17H11V11Z"></path>
-              </svg>
-              <p className="text-xs inline mr-1">
-                هنگام ثبت سفارش میتوانید آدرس دیگری را انتخاب کنید
-              </p>
-            </div>
+            {!!addresses && (
+              <>
+                <div>
+                  <TextAreaInput
+                    id="address"
+                    label="آدرس پیش فرض"
+                    placeholder="آدرس پیش فرض"
+                    valid={validateInfo.address}
+                    value={newInfo.address}
+                    disabled={true}
+                  />
+                </div>
+                <div className="text-slate-400 mb-4">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    width={18}
+                    height={18}
+                    className="fill-current inline"
+                  >
+                    <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM11 7H13V9H11V7ZM11 11H13V17H11V11Z"></path>
+                  </svg>
+                  <p className="text-xs inline mr-1">
+                    هنگام ثبت سفارش میتوانید آدرس دیگری را انتخاب کنید
+                  </p>
+                </div>
+              </>
+            )}
           </form>
           <button
             disabled={loading}
