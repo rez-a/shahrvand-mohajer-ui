@@ -10,6 +10,7 @@ const TextAreaInput = ({
   value,
   changeHandler,
   disabled,
+  className,
 }) => {
   return (
     <div>
@@ -29,7 +30,7 @@ const TextAreaInput = ({
         disabled={disabled}
         value={value}
         onChange={changeHandler}
-        className={`border w-full  rounded-md p-3 focus:outline-none disabled:bg-gray-100  ${
+        className={`border w-full  rounded-md p-3 focus:outline-none disabled:bg-gray-100 ${className} ${
           valid
             ? 'border-gray-100 focus:border-gray-300'
             : 'border-rose-200 focus:border-rose-400'

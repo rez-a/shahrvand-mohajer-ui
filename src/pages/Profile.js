@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import ProfileRoutes from 'components/routers/ProfileRoutes';
 
-const Profile = ({ children }) => {
+const Profile = () => {
   const baseStyleLinks = {
     display: 'flex',
     alignItems: 'center',

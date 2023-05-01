@@ -62,8 +62,8 @@ const EditProfile = (props) => {
         const refreshTokenResponse = await postWithToken(
           REFRESH_TOKEN
         );
-        console.log(refreshTokenResponse);
-        // editUser(refreshTokenResponse.data.access_token);
+        editUser(refreshTokenResponse.access_token);
+        console.log(refreshTokenResponse.access_token);
       } catch (err) {}
 
       setLoading(false);
@@ -103,6 +103,7 @@ const EditProfile = (props) => {
                 disabled={true}
                 valid={true}
                 value={newInfo.mobile}
+                className="text-gray-400"
               />
             </div>
             <div>
@@ -121,6 +122,7 @@ const EditProfile = (props) => {
               <>
                 <div>
                   <TextAreaInput
+                    className="text-gray-400"
                     id="address"
                     label="آدرس پیش فرض"
                     placeholder="آدرس پیش فرض"

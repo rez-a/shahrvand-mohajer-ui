@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import { AUTH_TOKEN_SHAHRVAND } from './authTokenKey';
 
 const decodeToken = (token = null) => {
-  const tokenDecoded = token
+  const tokenDecoded = !!token
     ? jwt_decode(token)
     : !!Cookies.get(AUTH_TOKEN_SHAHRVAND)
     ? jwt_decode(Cookies.get(AUTH_TOKEN_SHAHRVAND))
