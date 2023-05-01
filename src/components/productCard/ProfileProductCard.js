@@ -4,24 +4,24 @@ import productImage from 'assets/images/products/products1.jpg';
 import storeLogo from 'assets/images/store-logo.png';
 
 const ProfileProductCard = ({
-  title,
-  price,
-  imageCover,
-  discount,
+  Name,
+  SellPrice,
+  Image,
+  discount = 5,
 }) => {
   return (
     <div className="flex items-start py-4 border-gray-100">
       <div className="h-40 w-40">
         <img
           class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
-          src={imageCover}
+          src={Image}
           alt=""
         />
       </div>
       <div class="flex flex-col justify-between leading-normal grow">
         <div>
           <h5 class="text-base font-bold tracking-tight text-gray-900 dark:text-white mb-6">
-            {title}
+            {Name}
           </h5>
           <div className="flex items-center mb-3">
             <div className="w-6 h-6">
@@ -55,13 +55,13 @@ const ProfileProductCard = ({
           {discount ? (
             <>
               <small className=" relative opacity-30  before:absolute before:w-[110%] before:h-[1px] before:bg-black before:top-1/2 before:-translate-y-1/2 before:left-1/2 before:-translate-x-1/2 before:rotate-6">
-                <span>{price.toLocaleString()}</span>
+                <span>{SellPrice.toLocaleString()}</span>
               </small>
               <p className="font-bold mr-4 ">
                 <span>
                   {(
-                    price -
-                    (price * discount) / 100
+                    SellPrice -
+                    (SellPrice * discount) / 100
                   ).toLocaleString()}
                 </span>
                 <span className="mr-1">تومان</span>
@@ -69,7 +69,7 @@ const ProfileProductCard = ({
             </>
           ) : (
             <p className="font-bold mr-4 ">
-              <span>{price.toLocaleString()}</span>
+              <span>{SellPrice.toLocaleString()}</span>
               <span className="mr-1">تومان</span>
             </p>
           )}

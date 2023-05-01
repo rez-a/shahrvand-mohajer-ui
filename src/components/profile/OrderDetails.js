@@ -110,7 +110,7 @@ const OrderDetails = (props) => {
                   <ul className="mb-12 divide-y col-span-3 p-4">
                     {products.slice(0, 2).map((product) => (
                       <ProfileProductCard
-                        key={product.id}
+                        key={product.Id}
                         {...product}
                       />
                     ))}
