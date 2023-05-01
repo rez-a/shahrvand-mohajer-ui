@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MainProfile from '../profile/MainProfile';
 import EditProfile from '../profile/EditProfile';
-import Addresses from '../profile/Addresses';
+import Addresses from '../profile/Addresses/Addresses';
 import Orders from '../profile/Orders';
 import Payments from '../profile/Payments';
 import OrderDetails from '../profile/OrderDetails';

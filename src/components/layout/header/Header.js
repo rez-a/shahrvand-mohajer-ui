@@ -177,7 +177,7 @@ const Header = () => {
           }`}
         >
           <div
-            className={`border-l relative pl-2 group cursor-pointer font-semibold transition before:absolute before:w-0 before:h-[1px] before:transition-all before:duration-200 before:left-1/2 before:-translate-x-1/2 before:top-full before:bg-rose-500 py-1 hover:before:w-full ${
+            className={`border-l relative pl-2 group cursor-pointer font-semibold transition before:absolute before:w-0 before:h-[1px] before:transition-all before:duration-200 before:left-1/2 py-3 before:-translate-x-1/2 before:top-full before:bg-rose-500  hover:before:w-full ${
               showMenuNav ? '' : 'overflow-hidden'
             }`}
           >
