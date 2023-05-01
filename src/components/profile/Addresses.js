@@ -13,7 +13,12 @@ import { Link } from 'react-router-dom';
 import { patchFetcher } from 'services/patchFetcher';
 
 const Addresses = (props) => {
-  const [showModalCreate, setShowModalCreate] = useState(false);
+  const [showModalAdd, setShowModalAdd] = useState(false);
+  const [loading, setLoding] = useState({
+    add: false,
+    edit: false,
+    remove: false,
+  });
   const [showModalEdit, setShowModalEdit] = useState(false);
   const [newAddress, setNewAddress] = useState('');
   const { user } = useContext(UserContext);
@@ -24,10 +29,17 @@ const Addresses = (props) => {
 
   const handelSendAddresses = async (addresses) => {
     const response = await patchFetcher(ADDRESSES, { addresses });
-    mutate();
+    await mutate();
+    setLoding({
+      add: false,
+      edit: false,
+      remove: false,
+    });
+    setNewAddress('');
   };
 
   const handleRemoveAddress = (index) => {
+    setLoding({ ...loading, remove: true });
     const newAddresses = addresses.filter(
       (_, addressIndex) => addressIndex !== index
     );
@@ -35,6 +47,7 @@ const Addresses = (props) => {
   };
 
   const handleEditAddress = (index) => {
+    !!newAddress.length && setLoding({ ...loading, edit: true });
     const addressesEdited = addresses.map(
       (addressText, addressIndex) => {
         return addressIndex === index ? newAddress : addressText;
@@ -43,11 +56,17 @@ const Addresses = (props) => {
     handelSendAddresses(addressesEdited);
   };
 
+  const handleAddAddress = () => {
+    setLoding({ ...loading, add: true });
+    const newAddresses = [...addresses, newAddress];
+    handelSendAddresses(newAddresses);
+  };
+
   return (
     <Card title="آدرس ها">
       <div>
         <button
-          onClick={() => setShowModalCreate(true)}
+          onClick={() => setShowModalAdd(true)}
           className="border w-full border-dashed text-center text-sm text-zinc-400 py-4 mb-3"
         >
           <span>ایجاد آدرس جدید</span>
@@ -231,8 +250,8 @@ const Addresses = (props) => {
         )}
 
         <ModalLayout
-          isShow={showModalCreate}
-          setShow={() => setShowModalCreate(false)}
+          isShow={showModalAdd}
+          setShow={() => setShowModalAdd(false)}
         >
           <div className="relative flex flex-col rounded-md bg-clip-border text-gray-700 shadow-none bg-white max-w-lg w-full  ">
             <h4 className="text-xl font-semibold text-center border-b mx-4 py-3">

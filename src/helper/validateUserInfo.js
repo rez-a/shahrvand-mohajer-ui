@@ -3,7 +3,6 @@ const validateUserInfo = (info) => {
   let validate = {
     name: true,
     tel: true,
-    address: true,
   };
 
   if (!name.length) {
@@ -16,12 +15,6 @@ const validateUserInfo = (info) => {
     validate = {
       ...validate,
       tel: false,
-    };
-  }
-  if (!address.length) {
-    validate = {
-      ...validate,
-      address: false,
     };
   }
 

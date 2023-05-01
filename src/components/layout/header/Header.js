@@ -43,7 +43,7 @@ const Header = () => {
     >
       {loader && <Loading />}
       <div className="content relative 2xl:container">
-        <nav className="flex items-center  py-4 ">
+        <nav className="flex items-center  py-6 pb-10">
           <Link to="/" className="h-8 w-32">
             <svg
               width="55.861481mm"
@@ -127,19 +127,20 @@ const Header = () => {
               </g>
             </svg>
           </Link>
-          <div className="w-1/2 relative h-full mr-2">
+          <div className="w-1/2 relative h-full mr-5">
             <input
-              className="bg-zinc-100 outline-none focus-visible:outline-none text-xs border border-white transition focus:border-zinc-200 text-zinc-400 p-2 pr-12 rounded w-full"
+              className="bg-whit outline-none focus-visible:outline-none text-base border border-slate-200 shadow-sm transition-all duration-200 focus:border-slate-300 text-slate-800 p-2 pr-5 rounded-md w-full placeholder:text-sm focus:shadow-sm"
               type="text"
               placeholder="نام کالا ، برند و یا دسته مورد نظر خود را جستجو کنید..."
             />
-            <button className="absolute right-1 hover:bg-rose-600 top-1/2 bg-rose-500 -translate-y-1/2 px-2 py-1 rounded">
+            <button className="absolute left-0 top-0 h-full px-4 rounded-l-md">
+              <span className="h-full w-0.5 border-r border-slate-200 pl-4"></span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 width="20"
                 height="20"
-                className="fill-white"
+                className="fill-gray-700 inline-flex"
               >
                 <path fill="none" d="M0 0h24v24H0z" />
                 <path d="M18.031 16.617l4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617zm-2.006-.742A6.977 6.977 0 0 0 18 11c0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7a6.977 6.977 0 0 0 4.875-1.975l.15-.15z" />

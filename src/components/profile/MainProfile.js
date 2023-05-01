@@ -14,7 +14,6 @@ const MainProfile = (props) => {
   const { data: orders } = useSWR(ORDERS, fetchWithToken, {
     refreshInterval: false,
   });
-  console.log(user);
   return (
     <div className="grid col-span-5 gap-y-4">
       <Card title="اطلاعات شخصی">

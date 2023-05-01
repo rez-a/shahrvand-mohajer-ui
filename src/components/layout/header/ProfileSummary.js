@@ -12,6 +12,7 @@ const ProfileSummary = (props) => {
       setShowProfileLinks(false);
   }
   const profileLinksRef = useRef();
+  console.log(user);
 
   return !!user ? (
     <div

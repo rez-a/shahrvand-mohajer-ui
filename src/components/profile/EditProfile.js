@@ -63,10 +63,8 @@ const EditProfile = (props) => {
           REFRESH_TOKEN
         );
         console.log(refreshTokenResponse);
-        editUser(refreshTokenResponse.data.access_token);
-      } catch (err) {
-        console.log('error');
-      }
+        // editUser(refreshTokenResponse.data.access_token);
+      } catch (err) {}
 
       setLoading(false);
     }
@@ -76,8 +74,6 @@ const EditProfile = (props) => {
     storeAuthToken(token);
     setUser(decodeToken(token));
   };
-
-  console.log(user);
   return (
     <Card title="ویرایش اطلاعات کاربری">
       {!user && !addresses ? (
@@ -128,8 +124,8 @@ const EditProfile = (props) => {
                     id="address"
                     label="آدرس پیش فرض"
                     placeholder="آدرس پیش فرض"
-                    valid={validateInfo.address}
-                    value={newInfo.address}
+                    valid={true}
+                    value={addresses.at(0)}
                     disabled={true}
                   />
                 </div>
