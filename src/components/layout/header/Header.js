@@ -1,9 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import logo from 'assets/images/logo.svg';
+import { Link, useNavigate } from 'react-router-dom';
 import MegaMenu from './megaMenu/MegaMenu';
 import ProfileSummary from './ProfileSummary';
-import { Link } from 'react-router-dom';
 import useSWR from 'swr';
 import { fetcher } from 'services/swr/fetcher';
 import { CATEGORIES } from 'services/endPoints';
@@ -14,7 +13,9 @@ import { CartContext } from 'contexts/CartProvider';
 
 const Header = () => {
   const navLink = useRef();
+  const navigaion = useNavigate();
   const [showMenuNav, setShowMenuNav] = useState(true);
+  const [search, setSearch] = useState('');
   useEffect(() => {
     window.addEventListener('scroll', controllerNavMenu);
   }, []);
@@ -36,6 +37,10 @@ const Header = () => {
     (totalProducts, vendor) => totalProducts + vendor.products.length,
     0
   );
+
+  const handleSearch = () => {
+    !!search && navigaion(`/search?q=${search}`);
+  };
   return (
     <header
       ref={navLink}
@@ -129,11 +134,16 @@ const Header = () => {
           </Link>
           <div className="w-1/2 relative h-full mr-5">
             <input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
               className="bg-whit outline-none focus-visible:outline-none text-base border border-slate-200 shadow-sm transition-all duration-200 focus:border-slate-300 text-slate-800 p-2 pr-5 rounded-md w-full placeholder:text-sm focus:shadow-sm"
               type="text"
               placeholder="نام کالا ، برند و یا دسته مورد نظر خود را جستجو کنید..."
             />
-            <button className="absolute left-0 top-0 h-full px-4 rounded-l-md">
+            <button
+              onClick={handleSearch}
+              className="absolute left-0 top-0 h-full pl-4 rounded-l-md flex items-center justify-center"
+            >
               <span className="h-full w-0.5 border-r border-slate-200 pl-4"></span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

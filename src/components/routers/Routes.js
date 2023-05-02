@@ -9,6 +9,7 @@ import ProductsRoutes from './ProductsRoutes';
 import CheckoutRoutes from './CheckoutRoutes';
 import ProductRoutes from './ProductRoutes';
 import Login from 'pages/Login';
+import Search from 'pages/Search';
 
 const AllRoutes = () => {
   return (
@@ -23,7 +24,7 @@ const AllRoutes = () => {
           <Route path="product/*" element={<ProductRoutes />} />
           <Route path="checkout/*" element={<CheckoutRoutes />} />
           <Route path="profile/*" element={<Profile />} />
-
+          <Route path="search" element={<Search />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
