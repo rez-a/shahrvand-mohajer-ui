@@ -16,3 +16,4 @@ export const EDIT_PROFILE = '/api/auth/profile/edit';
 export const ORDERS = '/api/orders';
 export const ADDRESSES = '/api/addresses';
 export const REFRESH_TOKEN = '/api/auth/refresh/token';
+export const ORDER_DETAILS = '/api/orders/details';

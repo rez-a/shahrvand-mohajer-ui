@@ -4,25 +4,34 @@ import productImage from 'assets/images/products/products1.jpg';
 import storeLogo from 'assets/images/store-logo.png';
 
 const ProfileProductCard = ({
-  Name,
-  SellPrice,
-  Image,
-  discount = 5,
+  Total,
+  Price,
+  Quantity,
+  UnitName,
+  Product,
 }) => {
   return (
     <div className="flex items-start py-4 border-gray-100">
       <div className="h-40 w-40">
         <img
           class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
-          src={Image}
+          src={Product.Image}
           alt=""
         />
       </div>
-      <div class="flex flex-col justify-between leading-normal grow">
+      <div class="flex flex-col justify-between leading-normal grow mr-2">
         <div>
-          <h5 class="text-base font-bold tracking-tight text-gray-900 dark:text-white mb-6">
-            {Name}
-          </h5>
+          <div className="flex items-center mb-6 justify-between">
+            <h5 class="text-base font-bold tracking-tight text-gray-900 dark:text-white ">
+              {Product.Name}
+            </h5>
+            <div className="flex items-center justify-end">
+              <p className="font-bold mr-4 ">
+                <span>{Price.toLocaleString()}</span>
+                <span className="mr-1">تومان</span>
+              </p>
+            </div>
+          </div>
           <div className="flex items-center mb-3">
             <div className="w-6 h-6">
               <img
@@ -32,7 +41,10 @@ const ProfileProductCard = ({
               />
             </div>
             <p className="text-sm mr-2 text-zinc-700">
-              فروشگاه قاصدک
+              <span>فروشگاه </span>
+              <span>
+                {Product.IsVendor ? Product.MainGroupName : 'شهروند'}
+              </span>
             </p>
           </div>
           <p className="flex items-center">
@@ -50,29 +62,20 @@ const ProfileProductCard = ({
               موجود در انبار
             </span>
           </p>
-        </div>
-        <div className="flex items-center mt-4 justify-end">
-          {discount ? (
-            <>
-              <small className=" relative opacity-30  before:absolute before:w-[110%] before:h-[1px] before:bg-black before:top-1/2 before:-translate-y-1/2 before:left-1/2 before:-translate-x-1/2 before:rotate-6">
-                <span>{SellPrice.toLocaleString()}</span>
-              </small>
-              <p className="font-bold mr-4 ">
-                <span>
-                  {(
-                    SellPrice -
-                    (SellPrice * discount) / 100
-                  ).toLocaleString()}
-                </span>
-                <span className="mr-1">تومان</span>
-              </p>
-            </>
-          ) : (
+          <div className="flex items-center justify-between mt-3">
+            <p className="bg-gray-100 px-2 py-1  rounded-md border  border-gray-300/60">
+              <span className="text-xl font-semibold">
+                {Quantity}
+              </span>
+              <span className="mr-1 text-xs text-gray-500">
+                {UnitName}
+              </span>
+            </p>
             <p className="font-bold mr-4 ">
-              <span>{SellPrice.toLocaleString()}</span>
+              <span>{Total.toLocaleString()}</span>
               <span className="mr-1">تومان</span>
             </p>
-          )}
+          </div>
         </div>
       </div>
     </div>
