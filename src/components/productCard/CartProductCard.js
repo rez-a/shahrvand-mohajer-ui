@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import storeLogo from 'assets/images/store-logo.png';
 import {
   decrease,
   increase,
   removeFromCart,
 } from 'reducers/cart/actionCreators';
-import useProductInCart from 'hooks/useProductInCart';
 import { Link } from 'react-router-dom';
 
 const CartProductCard = ({

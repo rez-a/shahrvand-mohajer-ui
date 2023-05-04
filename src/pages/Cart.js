@@ -10,13 +10,16 @@ import { Link } from 'react-router-dom';
 import getTotalPrice from 'helper/getTotalPrice';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { CostContext } from 'contexts/Cost';
 
 const Cart = () => {
   const {
     state: { cart },
     dispatch,
   } = useContext(CartContext);
-
+  const { price_courier_cost, min_order_amount } =
+    useContext(CostContext);
+  console.log(price_courier_cost, min_order_amount);
   const [totalPrice, setTotalPrice] = useState(0);
   const [purchaseProfit, setPurchaseProfit] = useState(0);
   const [productsInCart, setProductInCart] = useState(
@@ -187,20 +190,26 @@ const Cart = () => {
               >
                 <div class="px-3 py-2">
                   <p className="leading-6">
-                    هزینه ارسال مرسولات می‌تواند وابسته به شهر و آدرس
-                    گیرنده متفاوت باشد.
+                    زمان تحویل کالا با ارسال رایگان حدودا یک ساعت و
+                    ارسال فوری 30 دقیقه خواهد بود.
                   </p>
                 </div>
               </div>
             </div>
           </span>
-          <span className="opacity-60">وابسته به آدرس</span>
+          <span className="opacity-60">
+            {Number(price_courier_cost).toLocaleString()} تومان
+          </span>
         </p>
         <p className="font-bold text-lg text-center mb-2">
           مبلغ قابل پرداخت :
         </p>
         <p className="font-bold text-2xl text-center text-rose-500 mb-4">
-          <span>{totalPrice.toLocaleString()}</span>
+          <span>
+            {(
+              totalPrice + Number(price_courier_cost)
+            ).toLocaleString()}
+          </span>
           <span className="font-medium text-sm mr-2">تومان</span>
         </p>
         <button className="relative bg-rose-500 h-12 w-full text-white font-bold rounded-md overflow-hidden group">

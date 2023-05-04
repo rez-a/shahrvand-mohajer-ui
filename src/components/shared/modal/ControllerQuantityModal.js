@@ -62,7 +62,7 @@ const ControllerQuantityModal = ({
             <p className="text-sm font-bold">{Name}</p>
           </div>
           <div className="text-left">
-            <div className="text-sm flex font-bold mr-auto">
+            <div className="text-sm flex justify-end font-bold mr-auto">
               <div
                 className={` relative ${
                   SellPrice !== LastBuyPrice
