@@ -30,16 +30,16 @@ const VipSlider = ({}) => {
   return (
     <div
       className="p-4 pb-0 my-8 grid grid-cols-5 items-center"
-      style={{ backgroundColor: sliderVip?.color }}
+      style={{ backgroundColor: sliderVip?.data?.color }}
     >
       <div className="col-span-1 ">
         <p className="text-white text-4xl px-4 pr-0 mb-4 font-semibold text-center leading-relaxed">
-          {sliderVip?.title}
+          {sliderVip?.data?.title}
         </p>
         <div className="mx-auto w-2/3">
           <img
-            src={`${BASE_URL}${sliderVip?.image}`}
-            alt={sliderVip?.title}
+            src={`${BASE_URL}${sliderVip?.data?.image}`}
+            alt={sliderVip?.data?.title}
           />
         </div>
       </div>
@@ -61,7 +61,7 @@ const VipSlider = ({}) => {
                   <LoaderProductCardVeritical />
                 </SwiperSlide>
               ))
-            : products?.map((product) => (
+            : products?.data?.map((product) => (
                 <SwiperSlide key={product.Id}>
                   <ProductCartVertical
                     product={product}

@@ -32,8 +32,8 @@ const Vendors = () => {
         spaceBetween={10}
         className="mySwiper"
       >
-        {!!vendors
-          ? vendors?.map((vendor) => (
+        {!!vendors?.data
+          ? vendors?.data?.map((vendor) => (
               <SwiperSlide key={vendor.id}>
                 <VendorItem
                   {...vendor}

@@ -25,7 +25,7 @@ const WorkingTime = () => {
         <span>ساعت کاری فروشگاه :</span>
       </span>
       <span className="bg-yellow-500 px-3 py-1 rounded-full">
-        {timeWork}
+        {timeWork?.data}
       </span>
     </div>
   );

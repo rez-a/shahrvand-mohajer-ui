@@ -16,17 +16,23 @@ const ShowCase = () => {
   return (
     <div className="grid grid-cols-3  gap-4 py-4 mx-4 my-8" ref={ref}>
       <div className="col-span-2 rounded-xl overflow-hidden max-h-[31rem] h-full">
-        {!!sliders ? (
-          <ShowcaseSlider sliders={sliders} />
+        {!!sliders?.data ? (
+          <ShowcaseSlider sliders={sliders?.data} />
         ) : (
           <div className="loading-bg w-full h-[31rem]"></div>
         )}
       </div>
       <div className="max-h-[31rem] gap-4 flex flex-col h-full">
-        {!!banners ? (
+        {!!banners?.data ? (
           <>
-            <ShowCaseBanner banners={banners} sectionNum="SECTION2" />
-            <ShowCaseBanner banners={banners} sectionNum="SECTION3" />
+            <ShowCaseBanner
+              banners={banners?.data}
+              sectionNum="SECTION2"
+            />
+            <ShowCaseBanner
+              banners={banners?.data}
+              sectionNum="SECTION3"
+            />
           </>
         ) : (
           <>

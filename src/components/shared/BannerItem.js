@@ -10,13 +10,13 @@ const BannerItem = ({ sectionNum }) => {
   const { ref, view } = useObserved();
 
   const { data: banners } = useSWR(view && BANNERS, fetcher);
-  const banner = banners?.find(
+  const banner = banners?.data?.find(
     (banner) => banner.Status === sectionNum
   );
 
   return (
     <div className="rounded-lg overflow-hidden max-h-44" ref={ref}>
-      {!!banners ? (
+      {!!banners?.data ? (
         <img src={banner.Image} alt="banner" />
       ) : (
         <LoaderBannerItem />

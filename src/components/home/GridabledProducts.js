@@ -25,8 +25,8 @@ const GridabledProducts = ({ title, section }) => {
         </h2>
       </header>
       <main className="grid grid-cols-3 gap-8 my-4">
-        {!!products
-          ? [...products.slice(0, 9)].map((product, index) => (
+        {!!products?.data
+          ? [...products?.data.slice(0, 9)].map((product, index) => (
               <ProductCartHorizontal key={index} {...product} />
             ))
           : [...Array(9)].map((_, index) => (

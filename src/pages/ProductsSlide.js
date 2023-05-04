@@ -15,8 +15,8 @@ const ProductsSlide = (props) => {
   );
   return (
     <main className="grid grid-cols-5 gap-8 items-start">
-      {!!products
-        ? products?.map((product) => (
+      {!!products?.data
+        ? products?.data?.map((product) => (
             <ProductCartVertical
               containerClassName="border-b py-2 hover:shadow-lg transition-all duration-300 bg-white rounded-md"
               key={product.Id}

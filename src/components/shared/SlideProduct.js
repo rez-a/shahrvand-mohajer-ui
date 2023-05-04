@@ -28,7 +28,9 @@ const SlideProduct = ({
       <Slider
         linkTo={`/products/section/${section}`}
         products={
-          !!viewCount ? products?.slice(0, viewCount - 1) : products
+          !!viewCount
+            ? products?.data?.slice(0, viewCount - 1)
+            : products?.data
         }
         title={title}
         isPagination={isPagination}

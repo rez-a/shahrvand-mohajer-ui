@@ -41,7 +41,7 @@ const ProductPage = () => {
     MainGroupName,
     ErpCode,
     MainGroupErpCode,
-  } = !!product && product;
+  } = !!product?.data && product?.data;
   const [attrSelected, setAttrSelected] = useState(Attr?.[0]);
   useEffect(() => {
     setLoader(isLoading);
@@ -60,7 +60,7 @@ const ProductPage = () => {
 
   return (
     <div className="min-h-screen">
-      {!!product && (
+      {!!product?.data && (
         <>
           <div className="flex items-start gap-6 bg-white p-4 py-8 rounded-md border border-gray-100">
             <div className="w-72 max-h-96">
@@ -206,7 +206,7 @@ const ProductPage = () => {
           />
           <ModalLayout isShow={showModal} setShow={setShowModal}>
             <ControllerQuantityModal
-              product={product}
+              product={product?.data}
               productInCart={productInCart}
               dispatch={dispatch}
               setShowModal={setShowModal}

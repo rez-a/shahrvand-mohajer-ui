@@ -47,7 +47,6 @@ const Addresses = (props) => {
   };
 
   const handelSendAddresses = async (addresses) => {
-    console.log(addresses);
     const response = await patchFetcher(ADDRESSES, { addresses });
     await mutate();
     setLoding({

@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import TitleIcon from 'components/shared/TitleIcon';
-import AccordionLayout from 'components/shared/accordion/AccordionLayout';
-import AccordionItem from 'components/shared/accordion/AccordionItem';
-import TitleAccordionItem from 'components/shared/accordion/TitleAccordionItem';
-import ContentAccordionItem from 'components/shared/accordion/ContentAccordionItem';
 import RangeSlider from 'react-range-slider-input/dist/components/RangeSlider';
 import SwitchInput from 'components/shared/inputs/SwitchInput';
 import ProductCartVertical from 'components/productCard/ProductCardVertical';
@@ -15,8 +10,7 @@ import {
   useNavigate,
   useSearchParams,
 } from 'react-router-dom';
-import useSWR from 'swr';
-import { PRODUCTS, SUBCATEGORIES } from 'services/endPoints';
+import { PRODUCTS } from 'services/endPoints';
 import { fetcher } from 'services/swr/fetcher';
 import LoaderProductCardVeritical from 'components/productCard/LoaderProductCardVeritical';
 import queryString from 'query-string';
@@ -35,8 +29,16 @@ const Search = (props) => {
     { type: 'EXPENSIVE', title: 'گران ترین' },
     { type: 'DISCOUNT', title: 'بیشترین تخفیف' },
   ];
+
+  const currentQueries = queryString.parse(location.search, {
+    arrayFormat: 'bracket',
+  });
   const [query, setQuery] = useState(
-    queryString.parse(location.search, { arrayFormat: 'bracket' })
+    Object.keys(currentQueries)
+      .filter((queryKey) => queryKey != 'q')
+      .reduce((cur, key) => {
+        return Object.assign(cur, { [key]: currentQueries[key] });
+      }, {})
   );
   const [price, setPrice] = useState([
     query['price[min]'] || 0,
@@ -47,29 +49,38 @@ const Search = (props) => {
     setParamsFilters(),
     fetcher
   );
-
   useEffect(() => {
     setLoading(true);
     setQuery(
-      queryString.parse(location.search, { arrayFormat: 'bracket' })
+      Object.keys(currentQueries)
+        .filter((queryKey) => queryKey != 'q')
+        .reduce((cur, key) => {
+          return Object.assign(cur, {
+            [key]: currentQueries[key],
+          });
+        }, {})
     );
     const triggerRun = async () => {
       await trigger();
       setLoading(false);
     };
     triggerRun();
-  }, [location]);
+  }, [location.search]);
 
-  // const handleQueries = (queryList) => {
-  //   setQuery(queryList);
-  // };
+  useEffect(() => {
+    setQuery({});
+    setPrice([0, 10000000]);
+  }, [searchParams.get('q')]);
 
   const handleFilters = () => {
     navigate(
       queryString.stringifyUrl(
         {
           url: location.pathname,
-          query,
+          query: {
+            ...query,
+            q: searchParams.get('q'),
+          },
         },
         {
           arrayFormat: 'bracket',
@@ -84,7 +95,10 @@ const Search = (props) => {
     return queryString.stringifyUrl(
       {
         url: `${PRODUCTS}&q=${searchParams.get('q')}`,
-        query,
+        query: {
+          ...query,
+          page: searchParams.get('page') || 1,
+        },
       },
       {
         arrayFormat: 'bracket',
@@ -126,7 +140,7 @@ const Search = (props) => {
 
   return (
     <main className="grid grid-cols-5 gap-8 items-start">
-      <aside className="border rounded-md p-4 bg-white border-gray-100 col-span-1 sticky top-20">
+      <aside className="border rounded-md p-4 bg-white border-gray-100 col-span-1 sticky top-32">
         <div>
           <h2 className="font-semibold text-zinc-400 flex items-center mb-4">
             <TitleIcon bg="bg-zinc-400" />
@@ -179,9 +193,9 @@ const Search = (props) => {
             />
           ))}
         </ul>
-        <div className="grid grid-cols-4 gap-8 my-8">
-          {!!products && !loading
-            ? products?.map((product) => (
+        <div className="grid grid-cols-4 gap-8 my-8 min-h-screen">
+          {!!products?.data && !loading
+            ? products?.data?.map((product) => (
                 <ProductCartVertical
                   containerClassName="border-b py-2 hover:shadow-lg transition-all duration-300 bg-white rounded-md"
                   key={product.Id}
@@ -193,7 +207,12 @@ const Search = (props) => {
               ))}
         </div>
 
-        <PaginationLayout className="flex items-center justify-center" />
+        <PaginationLayout
+          totalPage={products?.meta.last_page}
+          currentPage={products?.meta.current_page}
+          query={query}
+          className="flex items-center justify-center"
+        />
       </div>
     </main>
   );

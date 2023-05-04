@@ -63,7 +63,6 @@ const EditProfile = (props) => {
           REFRESH_TOKEN
         );
         editUser(refreshTokenResponse.access_token);
-        console.log(refreshTokenResponse.access_token);
       } catch (err) {}
 
       setLoading(false);

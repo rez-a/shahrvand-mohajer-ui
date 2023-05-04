@@ -13,6 +13,7 @@ import {
   useParams,
   useLocation,
   useNavigate,
+  useSearchParams,
 } from 'react-router-dom';
 import useSWR from 'swr';
 import { PRODUCTS, SUBCATEGORIES } from 'services/endPoints';
@@ -26,7 +27,7 @@ const Products = (props) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-
+  const [searchParams, setSearchParams] = useSearchParams();
   const sortItems = [
     { type: 'VISIT_COUNT', title: 'بیشترین بازدید' },
     { type: 'CHEAP', title: 'ارزان ترین' },
@@ -62,33 +63,24 @@ const Products = (props) => {
       setLoading(false);
     };
     triggerRun();
-  }, [location]);
+  }, [location.search]);
 
   const handleQueries = (queryList) => {
     setQuery(queryList);
   };
 
-  const handleFilters = () => {
-    navigate(
-      queryString.stringifyUrl(
-        {
-          url: location.pathname,
-          query,
-        },
-        {
-          arrayFormat: 'bracket',
-          skipEmptyString: true,
-          skipNull: true,
-        }
-      )
-    );
-  };
+  useEffect(() => {
+    console.log('change query');
+  }, [query]);
 
   function setParamsFilters() {
     return queryString.stringifyUrl(
       {
         url: `${PRODUCTS}&category=${mainErpCode}`,
-        query,
+        query: {
+          ...query,
+          page: searchParams.get('page') || 1,
+        },
       },
       {
         arrayFormat: 'bracket',
@@ -126,6 +118,25 @@ const Products = (props) => {
       'price[max]': price[1],
     });
   };
+
+  const handleFilters = () => {
+    navigate(
+      queryString.stringifyUrl(
+        {
+          url: location.pathname,
+          query: {
+            ...query,
+            page: 1,
+          },
+        },
+        {
+          arrayFormat: 'bracket',
+          skipEmptyString: true,
+          skipNull: true,
+        }
+      )
+    );
+  };
   const handleSort = (type) => {
     setQuery({ ...query, sort: type });
     navigate(
@@ -137,6 +148,7 @@ const Products = (props) => {
               arrayFormat: 'bracket',
             }),
             sort: type,
+            page: 1,
           },
         },
         {
@@ -151,7 +163,7 @@ const Products = (props) => {
   return (
     <main className="grid grid-cols-5 gap-8 items-start">
       <aside className="border rounded-md p-4 bg-white border-gray-100 col-span-1 sticky top-20">
-        {!!subCategories?.length && (
+        {!!subCategories?.data?.length && (
           <div className="mb-8">
             <h2 className="font-semibold text-zinc-400 flex items-center mb-4">
               <TitleIcon bg="bg-zinc-400" />
@@ -180,7 +192,7 @@ const Products = (props) => {
                   openClassName="h-56 overflow-auto"
                 >
                   <ul class="text-sm font-medium text-gray-900 bg-white divide-y">
-                    {subCategories.map((subCategory) => (
+                    {subCategories?.data.map((subCategory) => (
                       <li
                         key={subCategory.Id}
                         onClick={() =>
@@ -272,8 +284,8 @@ const Products = (props) => {
           ))}
         </ul>
         <div className="grid grid-cols-4 gap-8 my-8">
-          {!!products && !loading
-            ? products?.map((product) => (
+          {!!products?.data && !loading
+            ? products?.data?.map((product) => (
                 <ProductCartVertical
                   containerClassName="border-b py-2 hover:shadow-lg transition-all duration-300 bg-white rounded-md"
                   key={product.Id}
@@ -285,7 +297,12 @@ const Products = (props) => {
               ))}
         </div>
 
-        <PaginationLayout className="flex items-center justify-center" />
+        <PaginationLayout
+          totalPage={products?.meta.last_page}
+          currentPage={products?.meta.current_page}
+          query={query}
+          className="flex items-center justify-center"
+        />
       </div>
     </main>
   );

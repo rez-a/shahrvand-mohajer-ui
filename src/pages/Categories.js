@@ -27,8 +27,8 @@ const Categories = (props) => {
           </span>
         </h2>
         <div className="grid grid-cols-5 gap-4" ref={ref}>
-          {!!categories
-            ? categories?.map((category) => (
+          {!!categories?.data
+            ? categories?.data?.map((category) => (
                 <CategoryCard {...category} />
               ))
             : [...Array(15)].map((_, index) => (

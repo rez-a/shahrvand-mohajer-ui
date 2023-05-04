@@ -19,7 +19,7 @@ const ProductRelated = ({ title, mainCategory, className }) => {
       className={`border border-gray-100 rounded-lg p-4 pb-0 bullet-active-rose bg-white my-8 ${className}`}
       ref={ref}
     >
-      <Slider products={products} title={title} />
+      <Slider products={products?.data} title={title} />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import MegaMenu from './megaMenu/MegaMenu';
 import ProfileSummary from './ProfileSummary';
 import useSWR from 'swr';
@@ -12,10 +12,11 @@ import { LoadingContext } from 'contexts/LoadingProvider';
 import { CartContext } from 'contexts/CartProvider';
 
 const Header = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const navLink = useRef();
   const navigaion = useNavigate();
   const [showMenuNav, setShowMenuNav] = useState(true);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState(searchParams.get('q'));
   useEffect(() => {
     window.addEventListener('scroll', controllerNavMenu);
   }, []);
@@ -44,7 +45,7 @@ const Header = () => {
   return (
     <header
       ref={navLink}
-      className="shadow bg-white sticky top-0 z-10"
+      className="shadow bg-white sticky top-0 z-10 mb-10"
     >
       {loader && <Loading />}
       <div className="content relative 2xl:container">
@@ -191,8 +192,8 @@ const Header = () => {
               showMenuNav ? '' : 'overflow-hidden'
             }`}
           >
-            {categories?.length && (
-              <MegaMenu categories={categories} />
+            {categories?.data?.length && (
+              <MegaMenu categories={categories?.data} />
             )}
 
             <svg
