@@ -27,7 +27,7 @@ const CategoryCard = ({ Name, Image, ErpCode }) => {
       </span>
       <Link
         className="absolute w-full h-full top-0 left-0"
-        to={`${ErpCode}/${slugConverter(Name)}`}
+        to={`/products/${ErpCode}`}
       ></Link>
     </div>
   );

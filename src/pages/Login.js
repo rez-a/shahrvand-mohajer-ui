@@ -18,7 +18,7 @@ const Login = (props) => {
   }, []);
 
   return (
-    <main className=" min-h-screen grid place-items-center">
+    <main className=" min-h-screen grid place-items-center px-4">
       <div>
         <div className="w-full max-w-lg mx-auto">
           <div>
@@ -158,7 +158,7 @@ const Login = (props) => {
           </div>
         </div>
         <div className="w-full text-center border-t mx-auto mt-20 grid place-items-center text-gray-500 space-y-4 py-4">
-          <ul className="flex space-x-8 space-x-reverse text-sm">
+          <ul className="grid grid-cols-2 md:grid-cols-4 gap-8 text-sm">
             <li>
               <Link
                 to="/"

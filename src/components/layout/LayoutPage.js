@@ -11,7 +11,7 @@ const LayoutPage = (props) => {
   return (
     <>
       <Header />
-      <main className="2xl:container mx-4">
+      <main className="2xl:container mx-auto">
         <Outlet />
       </main>
       <FooterLayout />

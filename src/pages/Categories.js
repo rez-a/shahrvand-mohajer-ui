@@ -18,15 +18,18 @@ const Categories = (props) => {
     fetcher
   );
   return (
-    <main className="my-4">
+    <main>
       <div>
-        <h2 className="flex items-center mb-4">
+        <h2 className="flex items-center mb-4 mx-4">
           <TitleIcon />
           <span className="mr-1 text-zinc-500 font-bold">
             دسته بندی ها
           </span>
         </h2>
-        <div className="grid grid-cols-5 gap-4" ref={ref}>
+        <div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:lg:grid-cols-4 gap-4 mx-4"
+          ref={ref}
+        >
           {!!categories?.data
             ? categories?.data?.map((category) => (
                 <CategoryCard {...category} />
@@ -35,10 +38,13 @@ const Categories = (props) => {
                 <LoaderCategoryCard key={index} />
               ))}
         </div>
-        <Banner className="grid-cols-3 max-h-96">
+        <Banner className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           <BannerItem sectionNum="SECTION6" />
           <BannerItem sectionNum="SECTION7" />
-          <BannerItem sectionNum="SECTION8" />
+          <BannerItem
+            className="sm:col-span-2 lg:col-span-1"
+            sectionNum="SECTION8"
+          />
         </Banner>
         <Vendors />
       </div>

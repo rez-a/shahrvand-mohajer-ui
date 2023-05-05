@@ -161,8 +161,8 @@ const Products = (props) => {
   };
 
   return (
-    <main className="grid grid-cols-5 gap-8 items-start">
-      <aside className="border rounded-md p-4 bg-white border-gray-100 col-span-1 sticky top-20">
+    <main className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-8 items-start mx-4">
+      <aside className="sm:col-span-1 xl:col-span-1  border rounded-md p-4 bg-white border-gray-100 col-span-1 sm:sticky top-20">
         {!!subCategories?.data?.length && (
           <div className="mb-8">
             <h2 className="font-semibold text-zinc-400 flex items-center mb-4">
@@ -272,8 +272,8 @@ const Products = (props) => {
         </button>
       </aside>
 
-      <div className="col-span-4">
-        <ul className="flex items-center space-x-6 space-x-reverse text-xs">
+      <div className="sm:col-span-1 md:col-span-2 xl:col-span-3 2xl:col-span-4">
+        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:w-1/2 items-center gap-8 xl:gap-4 justify-center xl:justify-start text-xs">
           {sortItems.map((sortItem, index) => (
             <SortItem
               key={index}
@@ -283,7 +283,7 @@ const Products = (props) => {
             />
           ))}
         </ul>
-        <div className="grid grid-cols-4 gap-8 my-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-8 my-8">
           {!!products?.data && !loading
             ? products?.data?.map((product) => (
                 <ProductCartVertical
@@ -301,7 +301,7 @@ const Products = (props) => {
           totalPage={products?.meta.last_page}
           currentPage={products?.meta.current_page}
           query={query}
-          className="flex items-center justify-center"
+          className="flex items-center justify-center "
         />
       </div>
     </main>

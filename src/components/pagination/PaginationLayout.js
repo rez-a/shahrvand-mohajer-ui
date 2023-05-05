@@ -31,7 +31,7 @@ const PaginationLayout = ({ className, totalPage, currentPage }) => {
   return (
     totalPage !== 1 && (
       <div className={className}>
-        <ul className="flex items-center space-x-4 space-x-reverse my-20 justify-center">
+        <ul className="flex items-center space-x-1 sm:space-x-2 md:space-x-4 space-x-reverse my-20 justify-center">
           <li className="inline-flex">
             <button
               disabled={currentPage === 1 ? true : false}
