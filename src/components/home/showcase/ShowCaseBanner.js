@@ -6,7 +6,7 @@ const ShowCaseBanner = ({ banners, sectionNum }) => {
     (banner) => banner.Status === sectionNum
   );
   return (
-    <div className="rounded-xl overflow-hidden h-1/2 ">
+    <div className="rounded-xl overflow-hidden">
       <img src={banner.Image} alt="image-slider" />
     </div>
   );

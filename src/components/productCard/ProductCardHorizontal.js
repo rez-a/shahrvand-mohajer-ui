@@ -19,10 +19,10 @@ const ProductCartHorizontal = ({
   return (
     <div class={`flex flex-col ${containerClassName}`}>
       <div className="flex bg-white rounded-md p-2">
-        <div class="h-24 w-24 text-center overflow-hidden">
+        <div class="h-24 w-1/4 text-center overflow-hidden">
           <img src={Image} alt={Name} />
         </div>
-        <div class="pr-2 bg-white flex flex-col justify-between leading-normal grow">
+        <div class="pr-2 w-3/4 bg-white flex flex-col justify-between leading-normal grow">
           <Link
             to={`/product/${MainGroupErpCode}/${SideGroupErpCode}/${ErpCode}`}
             class="text-gray-900 w-5/6 truncate font-bold whitespace-nowrap hover:text-rose-500 transition-all duration-200 mb-2"
@@ -43,7 +43,7 @@ const ProductCartHorizontal = ({
             </Link>
             <Link
               to={`/product/${MainGroupErpCode}/${SideGroupErpCode}/${ErpCode}`}
-              className="border block border-sky-500 text-sky-600 bg-white rounded-lg text-xs px-4 py-2 hover:bg-sky-500 hover:text-white transition-all duration-200"
+              className="border block border-sky-500 text-sky-600 bg-white rounded-lg text-xs whitespace-nowrap px-2 py-1 sm:px-4 sm:py-2 mr-2 hover:bg-sky-500 hover:text-white transition-all duration-200"
             >
               جزییات محصول
             </Link>

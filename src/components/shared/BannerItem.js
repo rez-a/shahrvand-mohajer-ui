@@ -6,7 +6,7 @@ import useSWR from 'swr';
 import LoaderBannerItem from './LoaderBannerItem';
 import useObserved from 'hooks/useObserved';
 
-const BannerItem = ({ sectionNum }) => {
+const BannerItem = ({ sectionNum, className }) => {
   const { ref, view } = useObserved();
 
   const { data: banners } = useSWR(view && BANNERS, fetcher);
@@ -15,7 +15,10 @@ const BannerItem = ({ sectionNum }) => {
   );
 
   return (
-    <div className="rounded-lg overflow-hidden max-h-44" ref={ref}>
+    <div
+      className={`rounded-lg overflow-hidden h-44 ${className}`}
+      ref={ref}
+    >
       {!!banners?.data ? (
         <img src={banner.Image} alt="banner" />
       ) : (

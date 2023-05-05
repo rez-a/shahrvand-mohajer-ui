@@ -14,15 +14,18 @@ const Home = () => {
       <ShowCase />
       <Vendors />
       <VipSlider />
-      <Banner className="grid-cols-2 max-h-96 mx-4">
+      <Banner className="grid-cols-1 sm:grid-cols-2 max-h-96 mx-4">
         <BannerItem sectionNum="SECTION4" />
         <BannerItem sectionNum="SECTION5" />
       </Banner>
       <GridabledProducts title="نوشیدنی" section="SLIDER7" />
-      <Banner className="grid-cols-3 max-h-96 mx-4">
+      <Banner className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mx-4">
         <BannerItem sectionNum="SECTION6" />
         <BannerItem sectionNum="SECTION7" />
-        <BannerItem sectionNum="SECTION8" />
+        <BannerItem
+          sectionNum="SECTION8"
+          className="sm:col-span-2 lg:col-span-1"
+        />
       </Banner>
       <SlideProduct
         title="فرآورده های منجمدی"
@@ -32,7 +35,7 @@ const Home = () => {
         isPagination={true}
         viewCount={10}
       />
-      <Banner className="grid-cols-4 max-h-96 mx-4">
+      <Banner className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mx-4">
         <BannerItem sectionNum="SECTION2" />
         <BannerItem sectionNum="SECTION3" />
         <BannerItem sectionNum="SECTION4" />
@@ -50,15 +53,18 @@ const Home = () => {
         isPagination={true}
         viewCount={10}
       />
-      <Banner className="grid-cols-2 max-h-96 mx-4">
+      <Banner className="grid-cols-1 sm:grid-cols-2 max-h-96 mx-4">
         <BannerItem sectionNum="SECTION2" />
         <BannerItem sectionNum="SECTION3" />
       </Banner>
       <GridabledProducts title="خرید عمده" section="SLIDER4" />
-      <Banner className="grid-cols-3 max-h-96 mx-4">
+      <Banner className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mx-4">
         <BannerItem sectionNum="SECTION4" />
         <BannerItem sectionNum="SECTION5" />
-        <BannerItem sectionNum="SECTION6" />
+        <BannerItem
+          sectionNum="SECTION6"
+          className="sm:col-span-2 lg:col-span-1"
+        />
       </Banner>
       <SlideProduct
         title="غذاهای آماده"
@@ -68,7 +74,7 @@ const Home = () => {
         isPagination={true}
         viewCount={10}
       />
-      <Banner className="grid-cols-4 max-h-96 mx-4">
+      <Banner className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mx-4">
         <BannerItem sectionNum="SECTION7" />
         <BannerItem sectionNum="SECTION8" />
         <BannerItem sectionNum="SECTION9" />

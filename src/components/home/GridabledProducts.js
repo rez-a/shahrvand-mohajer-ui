@@ -17,14 +17,14 @@ const GridabledProducts = ({ title, section }) => {
   );
 
   return (
-    <div className="my-8 mx-4" ref={ref}>
+    <div className="my-4 mx-4" ref={ref}>
       <header className="text-sm">
         <h2 className="font-semibold text-zinc-400 flex items-center ">
           <TitleIcon bg="bg-zinc-400" />
           <span className="mr-1"> {title}</span>
         </h2>
       </header>
-      <main className="grid grid-cols-3 gap-8 my-4">
+      <main className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 my-4">
         {!!products?.data
           ? [...products?.data.slice(0, 9)].map((product, index) => (
               <ProductCartHorizontal key={index} {...product} />

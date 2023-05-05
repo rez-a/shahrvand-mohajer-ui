@@ -32,7 +32,7 @@ const VipSlider = ({}) => {
       className="p-4 pb-0 my-8 grid grid-cols-5 items-center"
       style={{ backgroundColor: sliderVip?.data?.color }}
     >
-      <div className="col-span-1 ">
+      <div className="hidden lg:block col-span-1 ">
         <p className="text-white text-4xl px-4 pr-0 mb-4 font-semibold text-center leading-relaxed">
           {sliderVip?.data?.title}
         </p>
@@ -43,13 +43,27 @@ const VipSlider = ({}) => {
           />
         </div>
       </div>
-      <div className="col-span-4">
+      <div className="col-span-5 lg:col-span-4">
         <Swiper
           pagination={pagination}
           modules={[Navigation, Pagination, A11y, Autoplay]}
           autoplay={{
             delay: 2500,
             disableOnInteraction: false,
+          }}
+          breakpoints={{
+            0: {
+              slidesPerView: 1,
+            },
+            640: {
+              slidesPerView: 2,
+            },
+            768: {
+              slidesPerView: 3,
+            },
+            1280: {
+              slidesPerView: 4,
+            },
           }}
           slidesPerView={4}
           spaceBetween={20}

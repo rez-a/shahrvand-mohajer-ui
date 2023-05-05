@@ -14,10 +14,7 @@ const Vendors = () => {
   const { data: vendors } = useSWR(view && VENDORS, fetcher);
 
   return (
-    <div
-      className="border rounded-xl p-4 my-8 mx-4 bg-white"
-      ref={ref}
-    >
+    <div className="border rounded-xl p-4 m-4 bg-white" ref={ref}>
       <header className="text-zinc-400 text-center font-semibold p-4">
         بیش از 1,000 کالا در فروشگاه های شهروند
       </header>
@@ -27,6 +24,26 @@ const Vendors = () => {
         autoplay={{
           delay: 2500,
           disableOnInteraction: false,
+        }}
+        breakpoints={{
+          0: {
+            slidesPerView: 1,
+          },
+          425: {
+            slidesPerView: 2,
+          },
+          640: {
+            slidesPerView: 3,
+          },
+          768: {
+            slidesPerView: 4,
+          },
+          1024: {
+            slidesPerView: 5,
+          },
+          1280: {
+            slidesPerView: 6,
+          },
         }}
         slidesPerView={6}
         spaceBetween={10}

@@ -45,6 +45,23 @@ const Slider = ({ products, title, linkTo, isPagination }) => {
             delay: 2500,
             disableOnInteraction: false,
           }}
+          breakpoints={{
+            0: {
+              slidesPerView: 1,
+            },
+            640: {
+              slidesPerView: 2,
+            },
+            768: {
+              slidesPerView: 3,
+            },
+            1024: {
+              slidesPerView: 4,
+            },
+            1280: {
+              slidesPerView: 5,
+            },
+          }}
           slidesPerView={5}
           className="mySwiper !pb-12"
         >

@@ -14,15 +14,18 @@ const ShowCase = () => {
   const { data: banners } = useSWR(view && BANNERS, fetcher);
 
   return (
-    <div className="grid grid-cols-3  gap-4 py-4 mx-4 my-8" ref={ref}>
-      <div className="col-span-2 rounded-xl overflow-hidden max-h-[31rem] h-full">
+    <div
+      className="grid grid-cols-3  gap-4 py-4 mx-4  items-start"
+      ref={ref}
+    >
+      <div className=" col-span-3 lg:col-span-2 rounded-xl overflow-hidden max-h-[31rem] h-full">
         {!!sliders?.data ? (
           <ShowcaseSlider sliders={sliders?.data} />
         ) : (
           <div className="loading-bg w-full h-[31rem]"></div>
         )}
       </div>
-      <div className="max-h-[31rem] gap-4 flex flex-col h-full">
+      <div className=" col-span-3 lg:col-span-1  lg:max-h-[31rem] h-full gap-4 hidden sm:grid sm:grid-cols-2 lg:grid-cols-1">
         {!!banners?.data ? (
           <>
             <ShowCaseBanner

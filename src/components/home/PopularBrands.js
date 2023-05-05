@@ -14,6 +14,23 @@ const PopularBrands = (props) => {
           delay: 2500,
           disableOnInteraction: false,
         }}
+        breakpoints={{
+          0: {
+            slidesPerView: 1,
+          },
+          425: {
+            slidesPerView: 2,
+          },
+          640: {
+            slidesPerView: 3,
+          },
+          768: {
+            slidesPerView: 4,
+          },
+          1024: {
+            slidesPerView: 5,
+          },
+        }}
         slidesPerView={5}
         spaceBetween={15}
         className="mySwiper"

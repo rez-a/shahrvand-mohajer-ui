@@ -11,10 +11,10 @@ const LayoutHome = () => {
 
   return (
     <>
-      <WorkingTime />
-      <Header />
+      {/* <WorkingTime />
+      <Header /> */}
       <Outlet />
-      <FooterLayout />
+      {/* <FooterLayout /> */}
     </>
   );
 };
