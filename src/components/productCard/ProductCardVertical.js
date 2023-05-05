@@ -41,9 +41,7 @@ const ProductCartVertical = ({ containerClassName, product }) => {
 
   return (
     <>
-      <div
-        class={`max-w-xs overflow-hidden group ${containerClassName}`}
-      >
+      <div class={` overflow-hidden group ${containerClassName}`}>
         <div className="px-4 flex items-center">
           <span
             className={`bg-rose-500 mr-auto text-xs text-white p-2 rounded-xl rounded-br-none font-bold ${
