@@ -13,22 +13,20 @@ import Search from 'pages/Search';
 
 const AllRoutes = () => {
   return (
-    <BrowserRouter basename="/index">
-      <Routes>
-        <Route path="/" element={<LayoutHome />}>
-          <Route index element={<Home />} />
-        </Route>
-        <Route path="/login" element={<Login />} />
-        <Route path="/*" element={<LayoutPage />}>
-          <Route path="products/*" element={<ProductsRoutes />} />
-          <Route path="product/*" element={<ProductRoutes />} />
-          <Route path="checkout/*" element={<CheckoutRoutes />} />
-          <Route path="profile/*" element={<Profile />} />
-          <Route path="search" element={<Search />} />
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<LayoutHome />}>
+        <Route index element={<Home />} />
+      </Route>
+      <Route path="/login" element={<Login />} />
+      <Route path="/*" element={<LayoutPage />}>
+        <Route path="products/*" element={<ProductsRoutes />} />
+        <Route path="product/*" element={<ProductRoutes />} />
+        <Route path="checkout/*" element={<CheckoutRoutes />} />
+        <Route path="profile/*" element={<Profile />} />
+        <Route path="search" element={<Search />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   );
 };
 

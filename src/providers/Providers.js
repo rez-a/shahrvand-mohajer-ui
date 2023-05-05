@@ -3,15 +3,18 @@ import PropTypes from 'prop-types';
 import LoadingProvider from 'contexts/LoadingProvider';
 import CartProvider from 'contexts/CartProvider';
 import UserProvider from 'contexts/UserProvider';
-import CostProvider from 'contexts/Cost';
+import CostProvider from 'contexts/CostProvider';
+import LogoutHandlerProvider from 'contexts/LogoutHandlerProvider';
 
 const Providers = ({ children }) => {
   return (
     <CostProvider>
       <UserProvider>
-        <CartProvider>
-          <LoadingProvider>{children}</LoadingProvider>
-        </CartProvider>
+        <LogoutHandlerProvider>
+          <CartProvider>
+            <LoadingProvider>{children}</LoadingProvider>
+          </CartProvider>
+        </LogoutHandlerProvider>
       </UserProvider>
     </CostProvider>
   );

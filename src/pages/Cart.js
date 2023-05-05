@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import getTotalPrice from 'helper/getTotalPrice';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { CostContext } from 'contexts/Cost';
+import { CostContext } from 'contexts/CostProvider';
 
 const Cart = () => {
   const {

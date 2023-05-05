@@ -8,8 +8,8 @@ const WorkingTime = () => {
   const { data: timeWork, isLoading } = useSWR(TIMEWORK, fetcher);
   return (
     <div
-      className={`w-full  bg-rose-500 overflow-hidden transition-all text-center font-bold flex flex-col md:flex-row   items-center justify-center duration-300 ${
-        isLoading ? 'h-0' : 'h-20 py-2 sm:h-16'
+      className={`w-full  bg-rose-500 overflow-hidden transition-all text-center font-bold flex flex-col md:flex-row  items-center justify-center duration-300 ${
+        isLoading ? 'h-0' : 'h-20 py-2 sm:h-18 md:h-16'
       }`}
     >
       <span className="text-white ml-2 flex items-center">

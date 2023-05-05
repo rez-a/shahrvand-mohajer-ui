@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { LogoutContext } from 'contexts/LogoutHandlerProvider';
 
 const ProfileSummaryAccessLinks = ({
   setShowProfileLinks,
@@ -12,6 +14,8 @@ const ProfileSummaryAccessLinks = ({
     return () =>
       window.document.removeEventListener('click', closeHandler);
   });
+
+  const { logoutHandler } = useContext(LogoutContext);
 
   return (
     <div className="absolute border border-gray-100 bg-white sm:w-[120%] w-60 left-0 top-full rounded text-xs mt-1">
@@ -115,8 +119,8 @@ const ProfileSummaryAccessLinks = ({
           </Link>
         </li>
         <li>
-          <a
-            href="#"
+          <button
+            onClick={() => logoutHandler()}
             className=" flex items-center w-full p-3 font-semibold hover:bg-gray-50"
           >
             <span className="ml-1">
@@ -131,7 +135,7 @@ const ProfileSummaryAccessLinks = ({
               </svg>
             </span>
             <span>خروج از حساب کاربری</span>
-          </a>
+          </button>
         </li>
       </ul>
     </div>

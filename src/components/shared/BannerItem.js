@@ -5,6 +5,8 @@ import { fetcher } from 'services/swr/fetcher';
 import useSWR from 'swr';
 import LoaderBannerItem from './LoaderBannerItem';
 import useObserved from 'hooks/useObserved';
+import { Link } from 'react-router-dom';
+import queryString from 'query-string';
 
 const BannerItem = ({ sectionNum, className }) => {
   const { ref, view } = useObserved();
@@ -16,11 +18,24 @@ const BannerItem = ({ sectionNum, className }) => {
 
   return (
     <div
-      className={`rounded-lg overflow-hidden h-44 ${className}`}
+      className={`rounded-lg overflow-hidden h-44 relative ${className}`}
       ref={ref}
     >
       {!!banners?.data ? (
-        <img src={banner.Image} alt="banner" />
+        <>
+          <img src={banner.Image} alt="banner" />
+          <Link
+            to={`/products/${
+              banner.LinkToMainGroup
+            }?${queryString.stringify(
+              {
+                subcategory: [banner.LinkToSideGroup],
+              },
+              { arrayFormat: 'bracket' }
+            )}`}
+            className="absolute top-0 right-0 w-full h-full"
+          />
+        </>
       ) : (
         <LoaderBannerItem />
       )}

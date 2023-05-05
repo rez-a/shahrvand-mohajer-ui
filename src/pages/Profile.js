@@ -1,8 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import ProfileRoutes from 'components/routers/ProfileRoutes';
+import { useContext } from 'react';
+import { LogoutContext } from 'contexts/LogoutHandlerProvider';
 
 const Profile = () => {
+  const { logoutHandler } = useContext(LogoutContext);
+
   const baseStyleLinks = {
     display: 'flex',
     alignItems: 'center',
@@ -135,12 +139,10 @@ const Profile = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/"
-              className={(navData) =>
-                navData.isActive
-                  ? ' text-blue-700 font-medium border-b group is-published'
-                  : 'hover:bg-gray-100 border-b   group transition-all duration-300 text-[#1a2947]'
+            <button
+              onClick={() => logoutHandler()}
+              className={
+                'hover:bg-gray-100 border-b   group transition-all duration-300 text-[#1a2947]'
               }
               style={baseStyleLinks}
             >
@@ -156,7 +158,7 @@ const Profile = () => {
                 </svg>
               </span>
               <span>خروج از حساب کاربری</span>
-            </NavLink>
+            </button>
           </li>
         </ul>
       </aside>
