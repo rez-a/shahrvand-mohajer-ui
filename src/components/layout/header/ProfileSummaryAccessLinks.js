@@ -14,7 +14,7 @@ const ProfileSummaryAccessLinks = ({
   });
 
   return (
-    <div className="absolute border border-gray-100 bg-white w-[120%] left-0 top-full rounded text-xs mt-1">
+    <div className="absolute border border-gray-100 bg-white sm:w-[120%] w-60 left-0 top-full rounded text-xs mt-1">
       <ul
         className="divide-y divide-gray-100"
         onClick={() => setShowProfileLinks(false)}

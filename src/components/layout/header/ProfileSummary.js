@@ -33,7 +33,7 @@ const ProfileSummary = (props) => {
           <path d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z"></path>
         </svg>
       </div>
-      <div className="text-sm">
+      <div className="text-sm hidden sm:block">
         <p className="w-28 text-left font-bold">
           {!!user.name ? user.name : 'نام کاربری'}
         </p>

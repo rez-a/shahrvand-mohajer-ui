@@ -8,8 +8,8 @@ const WorkingTime = () => {
   const { data: timeWork, isLoading } = useSWR(TIMEWORK, fetcher);
   return (
     <div
-      className={`w-full  bg-rose-500 overflow-hidden transition-all text-center font-bold flex items-center justify-center duration-300 ${
-        isLoading ? 'h-0' : 'h-14'
+      className={`w-full  bg-rose-500 overflow-hidden transition-all text-center font-bold flex flex-col md:flex-row   items-center justify-center duration-300 ${
+        isLoading ? 'h-0' : 'h-20 py-2 sm:h-16'
       }`}
     >
       <span className="text-white ml-2 flex items-center">
@@ -24,7 +24,7 @@ const WorkingTime = () => {
         </svg>
         <span>ساعت کاری فروشگاه :</span>
       </span>
-      <span className="bg-yellow-500 px-3 py-1 rounded-full">
+      <span className="bg-yellow-500 px-3 py-1 mt-2 md:mt-0 rounded-full">
         {timeWork?.data}
       </span>
     </div>

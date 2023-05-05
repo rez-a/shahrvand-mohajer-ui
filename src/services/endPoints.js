@@ -1,4 +1,4 @@
-export const CATEGORIES = '/api/categories';
+export const CATEGORIES = '/api/category';
 export const SLIDERS = '/api/sliders';
 export const BANNERS = '/api/banners';
 export const VENDORS = '/api/vendors';
@@ -18,3 +18,4 @@ export const ADDRESSES = '/api/addresses';
 export const REFRESH_TOKEN = '/api/auth/refresh/token';
 export const ORDER_DETAILS = '/api/orders/details';
 export const COST = '/api/orders/courier/cost';
+export const INSTANT_MESSAGINGS = '/api/app/instant-messagings';

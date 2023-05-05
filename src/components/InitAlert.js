@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import ModalLayout from './shared/modal/ModalLayout';
 
-const InitAlert = (props) => {
+const InitAlert = ({ message }) => {
   const [show, setShow] = useState(true);
+
   return (
     <div
       className={` flex items-center  justify-center top-0 left-0 right-0 z-40 w-full  overflow-x-hidden overflow-y-auto inset-0 h-full bg-black/10 backdrop-blur-sm ${
@@ -14,9 +14,10 @@ const InitAlert = (props) => {
         <div className="py-5 border-b font-bold  ">
           پیام مدیریت به مشتریان
         </div>
-        <div className="text-justify leading-8 px-7 py-6">
-          به هایپر مراکت آنلاین شهروند خوش آمدید
-          <br /> تلفن فروشگاه 38624080
+        <div className="leading-8 px-7 py-6 text-center">
+          به هایپر مارکت آنلاین شهروند خوش آمدید
+          <br />
+          {message.data}
         </div>
         <button
           onClick={() => setShow(false)}
@@ -36,6 +37,6 @@ const InitAlert = (props) => {
   );
 };
 
-InitAlert.propTypes = {};
+InitAlert.propTypes = { message: PropTypes.string };
 
 export default InitAlert;

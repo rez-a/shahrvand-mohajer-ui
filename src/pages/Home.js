@@ -7,12 +7,14 @@ import BannerItem from 'components/shared/BannerItem';
 import Vendors from 'components/home/vendorsSection/Vendors';
 import PopularBrands from 'components/home/PopularBrands';
 import SlideProduct from 'components/shared/SlideProduct';
+import Categories from 'components/home/categoriesSection/Categoris';
 
 const Home = () => {
   return (
     <main className="2xl:container">
       <ShowCase />
       <Vendors />
+      <Categories />
       <VipSlider />
       <Banner className="grid-cols-1 sm:grid-cols-2 max-h-96">
         <BannerItem sectionNum="SECTION4" />
