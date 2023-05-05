@@ -1,40 +1,41 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="grid grid-cols-4 p-8 bg-white">
+    <footer className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 bg-white">
       <ul className="space-y-2">
         <li>
           <h2 className="font-bold mb-4">راهنمای خرید از شهروند</h2>
         </li>
         <li>
           <p>
-            <a
-              href="#"
+            <Link
+              href="/faq"
               className="text-sm text-zinc-500 hover:text-zinc-800 transition-all duration-200"
             >
               نحوه ثبت سفارش
-            </a>
+            </Link>
           </p>
         </li>
         <li>
           <p>
-            <a
-              href="#"
+            <Link
+              href="/faq"
               className="text-sm text-zinc-500 hover:text-zinc-800 transition-all duration-200"
             >
               رویه ارسال سفارش
-            </a>
+            </Link>
           </p>
         </li>
         <li>
           <p>
-            <a
-              href="#"
+            <Link
+              href="/faq"
               className="text-sm text-zinc-500 hover:text-zinc-800 transition-all duration-200"
             >
               شیوه‌های پرداخت
-            </a>
+            </Link>
           </p>
         </li>
       </ul>
@@ -44,42 +45,42 @@ const Footer = () => {
         </li>
         <li>
           <p>
-            <a
-              href="#"
+            <Link
+              href="/faq"
               className="text-sm text-zinc-500 hover:text-zinc-800 transition-all duration-200"
             >
               پاسخ به پرسش‌های متداول
-            </a>
+            </Link>
           </p>
         </li>
         <li>
           <p>
-            <a
-              href="#"
+            <Link
+              href="/faq"
               className="text-sm text-zinc-500 hover:text-zinc-800 transition-all duration-200"
             >
               رویه‌های بازگرداندن کالا
-            </a>
+            </Link>
           </p>
         </li>
         <li>
           <p>
-            <a
-              href="#"
+            <Link
+              href="/privacy"
               className="text-sm text-zinc-500 hover:text-zinc-800 transition-all duration-200"
             >
               شرایط استفاده
-            </a>
+            </Link>
           </p>
         </li>
         <li>
           <p>
-            <a
-              href="#"
+            <Link
+              href="/privacy"
               className="text-sm text-zinc-500 hover:text-zinc-800 transition-all duration-200"
             >
               حریم خصوصی
-            </a>
+            </Link>
           </p>
         </li>
       </ul>
@@ -89,52 +90,42 @@ const Footer = () => {
         </li>
         <li>
           <p>
-            <a
-              href="#"
+            <Link
+              href="/faq"
               className="text-sm text-zinc-500 hover:text-zinc-800 transition-all duration-200"
             >
               فروش در شهروند
-            </a>
+            </Link>
           </p>
         </li>
         <li>
           <p>
-            <a
-              href="#"
+            <Link
+              href="/faq"
               className="text-sm text-zinc-500 hover:text-zinc-800 transition-all duration-200"
             >
               همکاری با سازمان‌ها
-            </a>
+            </Link>
           </p>
         </li>
         <li>
           <p>
-            <a
-              href="#"
-              className="text-sm text-zinc-500 hover:text-zinc-800 transition-all duration-200"
-            >
-              فرصت‌های شغلی
-            </a>
-          </p>
-        </li>
-        <li>
-          <p>
-            <a
-              href="#"
+            <Link
+              href="/contact-us"
               className="text-sm text-zinc-500 hover:text-zinc-800 transition-all duration-200"
             >
               تماس با شهروند
-            </a>
+            </Link>
           </p>
         </li>
         <li>
           <p>
-            <a
-              href="#"
+            <Link
+              href="/about-us"
               className="text-sm text-zinc-500 hover:text-zinc-800 transition-all duration-200"
             >
               درباره شهروند
-            </a>
+            </Link>
           </p>
         </li>
       </ul>

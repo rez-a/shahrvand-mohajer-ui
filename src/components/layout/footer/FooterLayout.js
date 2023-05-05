@@ -25,10 +25,12 @@ const FooterLayout = () => {
           </span>
         </button>
       </div>
-      <Services />
-      <Footer />
-      <Trust />
-      <Copyright />
+      <div className="container mx-auto">
+        <Services />
+        <Footer />
+        <Trust />
+        <Copyright />
+      </div>
     </div>
   );
 };

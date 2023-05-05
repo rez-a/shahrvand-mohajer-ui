@@ -14,7 +14,7 @@ const LayoutHome = () => {
       {/* <WorkingTime />
       <Header /> */}
       <Outlet />
-      {/* <FooterLayout /> */}
+      <FooterLayout />
     </>
   );
 };

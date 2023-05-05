@@ -5,8 +5,8 @@ import enemad from 'assets/images/enemad.png';
 
 const Trust = () => {
   return (
-    <div className="flex gap-8 p-8 justify-between">
-      <div className="w-3/5">
+    <div className="flex flex-col lg:flex-row gap-8 py-8 justify-between">
+      <div className="w-full lg:w-3/5 ">
         <h2 className="font-bold mb-3">
           فروشگاه اینترنتی شهروند، بررسی، انتخاب و خرید آنلاین
         </h2>
