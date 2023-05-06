@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import MegaMenu from '../megaMenu/MegaMenu';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const NavHeader = ({ categories, showMenuNav }) => {
   return (
@@ -66,7 +67,7 @@ const NavHeader = ({ categories, showMenuNav }) => {
           </a>
         </li>
         <li className="group text-xs text-zinc-500  group relative transition hover:text-rose-500 before:absolute before:w-0 before:h-[1px] before:transition-all before:duration-200 before:left-1/2 before:-translate-x-1/2 before:top-full before:bg-rose-500 py-1 hover:before:w-full">
-          <a href="#">
+          <Link to="/about-us">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -78,7 +79,7 @@ const NavHeader = ({ categories, showMenuNav }) => {
               <path d="M21 4v14.721a.5.5 0 0 1-.298.458L12 23.03 3.298 19.18A.5.5 0 0 1 3 18.72V4H1V2h22v2h-2zM5 4v13.745l7 3.1 7-3.1V4H5zm3 4h8v2H8V8zm0 4h8v2H8v-2z" />
             </svg>
             درباره ما
-          </a>
+          </Link>
         </li>
         <li className="group text-xs text-zinc-500  group relative transition hover:text-rose-500 before:absolute before:w-0 before:h-[1px] before:transition-all before:duration-200 before:left-1/2 before:-translate-x-1/2 before:top-full before:bg-rose-500 py-1 hover:before:w-full">
           <a href="#">

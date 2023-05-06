@@ -10,6 +10,7 @@ import CheckoutRoutes from './CheckoutRoutes';
 import ProductRoutes from './ProductRoutes';
 import Login from 'pages/Login';
 import Search from 'pages/Search';
+import AboutUs from 'pages/AboutUs';
 
 const AllRoutes = () => {
   return (
@@ -24,6 +25,7 @@ const AllRoutes = () => {
         <Route path="checkout/*" element={<CheckoutRoutes />} />
         <Route path="profile/*" element={<Profile />} />
         <Route path="search" element={<Search />} />
+        <Route path="about-us" element={<AboutUs />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
