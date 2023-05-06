@@ -12,9 +12,7 @@ import { postWithToken } from 'services/swr/postWithToken';
 
 const Orders = (props) => {
   const { data: user } = useSWR(PROFILE, postWithToken);
-  const { data: orders } = useSWR(ORDERS, fetchWithToken, {
-    refreshInterval: false,
-  });
+  const { data: orders } = useSWR(ORDERS, fetchWithToken);
   return (
     <Card title="آخرین سفارش ها">
       {!user?.addresses ? (
@@ -193,9 +191,9 @@ const Orders = (props) => {
         <TableLoaded count={3} />
       ) : !!orders.length ? (
         <div>
-          <div class="relative overflow-x-auto border border-gray-100">
+          <div class="relative overflow-auto max-h-screen border border-gray-100">
             <table class="w-full text-sm text-right text-gray-500 ">
-              <thead class="text-sm text-gray-700  bg-gray-100">
+              <thead class="text-sm whitespace-nowrap text-gray-700  bg-gray-100">
                 <tr>
                   <th scope="col" class="px-6 py-3">
                     #
@@ -217,7 +215,7 @@ const Orders = (props) => {
                   </th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="whitespace-nowrap">
                 {orders.map((order, index) => (
                   <tr
                     key={order.Id}

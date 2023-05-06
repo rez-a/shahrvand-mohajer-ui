@@ -1,13 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Card from './Card';
-import AccordionLayout from 'components/shared/accordion/AccordionLayout';
-import AccordionItem from 'components/shared/accordion/AccordionItem';
-import TitleAccordionItem from 'components/shared/accordion/TitleAccordionItem';
-import ContentAccordionItem from 'components/shared/accordion/ContentAccordionItem';
 import ProfileProductCard from 'components/productCard/ProfileProductCard';
-import products from 'productsFake';
-import storeLogo from 'assets/images/store-logo.png';
 import { Link, useParams } from 'react-router-dom';
 import { ORDER_DETAILS } from 'services/endPoints';
 import { fetchWithToken } from 'services/swr/fetchWithToken';
@@ -56,76 +49,64 @@ const OrderDetails = (props) => {
                 </p>
               </div>
             </div>
-            <div className="">
-              <ul className="">
-                <li className="flex items-center py-4 border-b px-7">
-                  <div className="space-y-2 w-1/2">
-                    <p className="text-blue-700 font-bold">
-                      نام کاربری :
-                    </p>
-                    <p className="text-sm text-zinc-500">
-                      {user.name}
-                    </p>
-                  </div>
-                  <div className="space-y-2 w-1/2">
-                    <p className="text-blue-700 font-bold">
-                      شماره تماس :
-                    </p>
-                    <p className="text-sm text-zinc-500">
-                      {user.mobile}
-                    </p>
-                  </div>
-                </li>
-                <li className="flex items-center py-4 border-b px-7">
-                  <div className="space-y-2 w-1/2">
-                    <p className="text-blue-700 font-bold">
-                      نحوه ارسال :
-                    </p>
-                    <p className="text-sm text-zinc-500">
-                      {order.ShippingMethod === 'FREE'
-                        ? 'ارسال رایگان'
-                        : 'ارسال فوری'}
-                    </p>
-                  </div>
-                  <div className="space-y-2 w-1/2">
-                    <p className="text-blue-700 font-bold">
-                      نحوه پرداخت :
-                    </p>
-                    <p className="text-sm text-zinc-500">
-                      پرداخت درب منزل
-                    </p>
-                  </div>
-                </li>
-                <li className="flex items-center py-4 px-7">
-                  <div className="space-y-2 w-1/2">
-                    <p className="text-blue-700 font-bold">
-                      مبلغ سفارش :
-                    </p>
-                    <p className="text-sm text-zinc-500">
-                      <span className="font-bold text-base">
-                        {Number(order.TotalPrice).toLocaleString()}
-                      </span>
-                      <span className="text-xs mr-1">تومان</span>
-                    </p>
-                  </div>
-                  <div className="space-y-2 w-1/2">
-                    <p className="text-blue-700 font-bold">
-                      وضعیت سفارش :
-                    </p>
-                    <p
-                      className={`text-xs  inline-flex px-2 py-1 rounded-md  border  ${
-                        order.Status === 'Completed'
-                          ? 'border-green-300 text-green-500 bg-green-50'
-                          : 'border-rose-300 text-rose-500 bg-rose-50'
-                      }`}
-                    >
-                      {order.Status === 'Completed'
-                        ? 'ثبت شده'
-                        : 'ثبت نشده'}
-                    </p>
-                  </div>
-                </li>
-              </ul>
+            <div className=" gap-0 columns-auto sm:columns-2  xl:columns-3">
+              <div className="space-y-2 py-4 px-7 border-b border-b-gray-100 h-24">
+                <p className="text-blue-700 font-bold">
+                  نام کاربری :
+                </p>
+                <p className="text-sm text-zinc-500">{user.name}</p>
+              </div>
+              <div className="space-y-2 py-4 px-7 border-b border-b-gray-100 h-24">
+                <p className="text-blue-700 font-bold">
+                  شماره تماس :
+                </p>
+                <p className="text-sm text-zinc-500">{user.mobile}</p>
+              </div>
+              <div className="space-y-2 py-4 px-7 border-b border-b-gray-100 h-24">
+                <p className="text-blue-700 font-bold">
+                  نحوه ارسال :
+                </p>
+                <p className="text-sm text-zinc-500">
+                  {order.ShippingMethod === 'FREE'
+                    ? 'ارسال رایگان'
+                    : 'ارسال فوری'}
+                </p>
+              </div>
+              <div className="space-y-2 py-4 px-7 border-b border-b-gray-100 h-24">
+                <p className="text-blue-700 font-bold">
+                  نحوه پرداخت :
+                </p>
+                <p className="text-sm text-zinc-500">
+                  پرداخت درب منزل
+                </p>
+              </div>
+              <div className="space-y-2 py-4 px-7 border-b border-b-gray-100 h-24">
+                <p className="text-blue-700 font-bold">
+                  مبلغ سفارش :
+                </p>
+                <p className="text-sm text-zinc-500">
+                  <span className="font-bold text-base">
+                    {Number(order.TotalPrice).toLocaleString()}
+                  </span>
+                  <span className="text-xs mr-1">تومان</span>
+                </p>
+              </div>
+              <div className="space-y-2 py-4 px-7 border-b border-b-gray-100 h-24">
+                <p className="text-blue-700 font-bold">
+                  وضعیت سفارش :
+                </p>
+                <p
+                  className={`text-xs  inline-flex px-2 py-1 rounded-md  border  ${
+                    order.Status === 'Completed'
+                      ? 'border-green-300 text-green-500 bg-green-50'
+                      : 'border-rose-300 text-rose-500 bg-rose-50'
+                  }`}
+                >
+                  {order.Status === 'Completed'
+                    ? 'ثبت شده'
+                    : 'ثبت نشده'}
+                </p>
+              </div>
             </div>
           </>
         )}
@@ -133,8 +114,8 @@ const OrderDetails = (props) => {
       {!!order && (
         <Card title="محصولات سفارش">
           <div className="mt-4 border-t">
-            <div className="max-h-[40rem] h-full overflow-auto">
-              <ul className="mb-12 divide-y col-span-3 p-4 border border-neutral-100">
+            <div className="max-h-[40rem] h-full overflow-y-auto">
+              <ul className="mb-12 divide-y col-span-3 p-4 border-b border-b-neutral-100">
                 {order.items.map((product) => (
                   <ProfileProductCard key={product.Id} {...product} />
                 ))}
