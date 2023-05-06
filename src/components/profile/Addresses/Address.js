@@ -22,7 +22,7 @@ const Address = ({
       key={index}
       className="border border-gray-100 bg-gray-50/50 p-4 mb-3"
     >
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 justify-between">
         <div className="flex items-center gap-8">
           <p className="text-zinc-500">
             گیرنده :
