@@ -188,7 +188,7 @@ const Orders = (props) => {
           </svg>
         </EmptyDataProfile>
       ) : !orders ? (
-        <TableLoaded count={3} />
+        <TableLoaded count={5} />
       ) : !!orders.length ? (
         <div>
           <div class="relative overflow-auto max-h-screen border border-gray-100">

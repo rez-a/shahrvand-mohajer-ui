@@ -8,6 +8,7 @@ import Payments from '../profile/Payments';
 import OrderDetails from '../profile/OrderDetails';
 import PaymentDetails from '../profile/PaymentDetails';
 import { Route, Routes } from 'react-router-dom';
+import NotFound from 'pages/NotFound';
 
 const ProfileRoutes = (props) => {
   return (
@@ -22,11 +23,12 @@ const ProfileRoutes = (props) => {
         </Route>
         <Route path="payments">
           <Route index element={<Payments />} />
-          <Route
+          {/* <Route
             path="details/:paymentId"
             element={<PaymentDetails />}
-          />
+          /> */}
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );
