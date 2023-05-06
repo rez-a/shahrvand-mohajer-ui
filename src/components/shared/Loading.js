@@ -22,7 +22,7 @@ const Loading = ({ isShow = true }) => {
     };
   }, [isShow]);
   return (
-    <div className="absolute flex items-center justify-center top-full left-0 right-0 z-30 w-full h-screen  overflow-x-hidden overflow-y-auto inset-0 bg-black/10 backdrop-blur-sm">
+    <div className="fixed flex items-center justify-center top-[10.5rem] left-0 right-0  w-full h-[calc(100vh_-_10.5rem)]  overflow-x-hidden overflow-y-auto inset-0 bg-black/10 backdrop-blur-sm">
       <div className="bg-white/50 w-32 h-32 flex items-center justify-center  rounded-md border border-gray-300">
         <div role="status">
           <svg

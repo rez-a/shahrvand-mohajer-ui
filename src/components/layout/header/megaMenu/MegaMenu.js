@@ -9,8 +9,8 @@ const MegaMenu = ({ categories }) => {
     categories[0].ErpCode
   );
   return (
-    <div className="absolute top-[105%] max-h-80 right-0 w-[70vw] z-40 bg-white shadow-2xl rounded-xl  grid-cols-3  hidden group-hover:grid overflow-hidden">
-      <div className="col-span-1 grid  max-h-80 h-full overflow-auto overflow-x-hidden  gap-2 px-2 py-1 border-l pt-4">
+    <div className="absolute top-[105%] max-h-80 right-0 w-screen lg:max-w-screen-md xl:max-w-screen-xl z-40 bg-white shadow-2xl rounded-xl  lg:grid-cols-4 xl:grid-cols-3  hidden group-hover:grid overflow-hidden">
+      <div className="col-span-2 xl:col-span-1 grid  max-h-80 h-full overflow-auto overflow-x-hidden  gap-2 px-2 py-1 border-l pt-4">
         {categories.map((category) => (
           <MainCategory
             key={category.Id}
