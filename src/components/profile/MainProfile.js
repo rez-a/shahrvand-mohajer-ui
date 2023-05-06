@@ -16,7 +16,7 @@ const MainProfile = (props) => {
   });
   const payments = [];
   return (
-    <div className="grid xl:col-span-5 gap-y-4">
+    <>
       <Card title="اطلاعات شخصی">
         {!user ? (
           <div className="border border-gray-100 bg-gray-50/50 p-4 rounded-md grid place-items-center">
@@ -976,7 +976,7 @@ const MainProfile = (props) => {
           </EmptyDataProfile>
         )}
       </Card>
-    </div>
+    </>
   );
 };
 

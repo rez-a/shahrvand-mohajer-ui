@@ -147,10 +147,11 @@ const EditProfile = (props) => {
               </>
             )}
           </form>
+
           <button
             disabled={loading}
             onClick={handleEditProfile}
-            className="bg-sky-500/90  text-white w-60 py-2 text-sm rounded-md font-bold shadow-lg shadow-sky-500/50 hover:bg-sky-500 transition-all duration-300"
+            className="bg-sky-500/90  text-white w-full sm:w-60 py-2 text-sm rounded-md font-bold shadow-lg shadow-sky-500/50 hover:bg-sky-500 transition-all duration-300"
           >
             <div className="flex items-center justify-center">
               {loading && <Spinner />}
@@ -159,7 +160,7 @@ const EditProfile = (props) => {
           </button>
           <Link
             to="/profile/main"
-            className="bg-rose-500/90 text-white p-2 px-4 mr-2 text-sm rounded-md font-bold shadow-lg shadow-rose-500/50 hover:bg-rose-500 transition-all duration-300"
+            className="bg-rose-500/90 block sm:inline text-center text-white p-2 px-4 mr-0 mt-6 sm:mr-2 sm:mt-0 text-sm rounded-md font-bold shadow-lg shadow-rose-500/50 hover:bg-rose-500 transition-all duration-300"
           >
             انصراف
           </Link>

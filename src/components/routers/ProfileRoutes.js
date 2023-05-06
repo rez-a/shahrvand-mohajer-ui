@@ -11,22 +11,24 @@ import { Route, Routes } from 'react-router-dom';
 
 const ProfileRoutes = (props) => {
   return (
-    <Routes>
-      <Route path="main" element={<MainProfile />} />
-      <Route path="edit" element={<EditProfile />} />
-      <Route path="addresses" element={<Addresses />} />
-      <Route path="orders">
-        <Route index element={<Orders />} />
-        <Route path="details/:orderId" element={<OrderDetails />} />
-      </Route>
-      <Route path="payments">
-        <Route index element={<Payments />} />
-        <Route
-          path="details/:paymentId"
-          element={<PaymentDetails />}
-        />
-      </Route>
-    </Routes>
+    <div className="grid xl:col-span-5 gap-y-4">
+      <Routes>
+        <Route path="main" element={<MainProfile />} />
+        <Route path="edit" element={<EditProfile />} />
+        <Route path="addresses" element={<Addresses />} />
+        <Route path="orders">
+          <Route index element={<Orders />} />
+          <Route path="details/:orderId" element={<OrderDetails />} />
+        </Route>
+        <Route path="payments">
+          <Route index element={<Payments />} />
+          <Route
+            path="details/:paymentId"
+            element={<PaymentDetails />}
+          />
+        </Route>
+      </Routes>
+    </div>
   );
 };
 
