@@ -15,7 +15,7 @@ const ShowCase = () => {
 
   return (
     <div
-      className="grid grid-cols-3  gap-4 py-4 mx-4  items-start"
+      className="grid grid-cols-3  gap-4 py-4 mx-4 2xl:mx-0  items-start"
       ref={ref}
     >
       <div className=" col-span-3 lg:col-span-2 rounded-xl overflow-hidden max-h-[31rem] h-full">

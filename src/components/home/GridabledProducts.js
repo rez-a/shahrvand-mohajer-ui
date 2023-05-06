@@ -17,7 +17,7 @@ const GridabledProducts = ({ title, section }) => {
   );
 
   return (
-    <div className="my-4 mx-4" ref={ref}>
+    <div className="my-4 mx-4 2xl:mx-0" ref={ref}>
       <header className="text-sm">
         <h2 className="font-semibold text-zinc-400 flex items-center ">
           <TitleIcon bg="bg-zinc-400" />

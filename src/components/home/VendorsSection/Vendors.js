@@ -14,7 +14,10 @@ const Vendors = () => {
   const { data: vendors } = useSWR(view && VENDORS, fetcher);
 
   return (
-    <div className="border rounded-xl p-4 m-4 bg-white" ref={ref}>
+    <div
+      className="border rounded-xl p-4 m-4 2xl:mx-0 bg-white"
+      ref={ref}
+    >
       <header className="text-zinc-400 text-center font-semibold p-4">
         بیش از 1,000 کالا در فروشگاه های شهروند
       </header>

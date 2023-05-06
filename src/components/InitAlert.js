@@ -6,7 +6,7 @@ const InitAlert = ({ message }) => {
 
   return (
     <div
-      className={` flex items-center  justify-center top-0 left-0 right-0 z-40 w-full  overflow-x-hidden overflow-y-auto inset-0 h-full bg-black/10 backdrop-blur-sm ${
+      className={` flex items-center px-4 justify-center top-0 left-0 right-0 z-40 w-full  overflow-x-hidden overflow-y-auto inset-0 h-full bg-black/10 backdrop-blur-sm ${
         show ? 'fixed' : 'hidden'
       }`}
     >

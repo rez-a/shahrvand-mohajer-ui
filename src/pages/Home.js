@@ -32,7 +32,7 @@ const Home = () => {
       <SlideProduct
         title="فرآورده های منجمدی"
         section="SLIDER5"
-        className="mx-4"
+        className="mx-4 2xl:mx-0"
         linkTo={true}
         isPagination={true}
         viewCount={10}
@@ -50,7 +50,7 @@ const Home = () => {
       <SlideProduct
         title="لبنیات"
         section="SLIDER3"
-        className="mx-4"
+        className="mx-4 2xl:mx-0"
         linkTo={true}
         isPagination={true}
         viewCount={10}
@@ -71,7 +71,7 @@ const Home = () => {
       <SlideProduct
         title="غذاهای آماده"
         section="SLIDER8"
-        className="mx-4"
+        className="mx-4 2xl:mx-0"
         linkTo={true}
         isPagination={true}
         viewCount={10}
@@ -89,7 +89,7 @@ const Home = () => {
       <SlideProduct
         title="کالاهای پرتخفیف"
         section="SLIDER6"
-        className="mx-4"
+        className="mx-4 2xl:mx-0"
       />
       <PopularBrands />
     </main>

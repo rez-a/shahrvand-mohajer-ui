@@ -7,7 +7,7 @@ import { Autoplay, Navigation } from 'swiper';
 
 const PopularBrands = (props) => {
   return (
-    <div className="border rounded-xl mx-4 p-4 my-8 bg-white">
+    <div className="border rounded-xl mx-4 2xl:mx-0 p-4 my-8 bg-white">
       <Swiper
         modules={[Navigation, Autoplay]}
         autoplay={{
