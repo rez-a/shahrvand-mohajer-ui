@@ -15,20 +15,20 @@ const Profile = () => {
     fontWeight: '600',
   };
   return (
-    <main className="grid grid-cols-7 gap-4 items-start mt-4">
-      <aside className=" bg-gray-50/50 col-span-2 border-gray-200/70 overflow-hidden sticky top-24 bg-white rounded-3xl shadow-sm border">
+    <main className="grid grid-cols-1 xl:grid-cols-7 gap-4 items-start mt-4 mx-4 2xl:mx-0">
+      <aside className=" bg-gray-50/50 xl:col-span-2 border-gray-200/70 overflow-hidden xl:sticky top-24 bg-white rounded-3xl shadow-sm border">
         <ul>
           <li>
             <NavLink
               to="/profile/main"
               className={(navData) =>
                 navData.isActive
-                  ? ' text-blue-700 font-medium border-b group is-published'
+                  ? ' text-rose-500 font-medium border-b group is-published'
                   : 'hover:bg-gray-100 group border-b   transition-all duration-300 text-[#1a2947]'
               }
               style={baseStyleLinks}
             >
-              <span className="ml-3 bg-neutral-100 rounded-md p-2 py-1.5 group-[.is-published]:bg-blue-700 transition-all duration-200 ">
+              <span className="ml-3 bg-neutral-100 rounded-md p-2 py-1.5 group-[.is-published]:bg-rose-500 transition-all duration-200 ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -47,12 +47,12 @@ const Profile = () => {
               to="/profile/edit"
               className={(navData) =>
                 navData.isActive
-                  ? ' text-blue-700 font-medium border-b group is-published'
+                  ? ' text-rose-500 font-medium border-b group is-published'
                   : 'hover:bg-gray-100 border-b   group transition-all duration-300 text-[#1a2947]'
               }
               style={baseStyleLinks}
             >
-              <span className="ml-3 bg-neutral-100 rounded-md p-2 py-1.5 group-[.is-published]:bg-blue-700 transition-all duration-200">
+              <span className="ml-3 bg-neutral-100 rounded-md p-2 py-1.5 group-[.is-published]:bg-rose-500 transition-all duration-200">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -71,12 +71,12 @@ const Profile = () => {
               to="/profile/addresses"
               className={(navData) =>
                 navData.isActive
-                  ? ' text-blue-700 font-medium border-b group is-published'
+                  ? ' text-rose-500 font-medium border-b group is-published'
                   : 'hover:bg-gray-100 border-b   group transition-all duration-300 text-[#1a2947]'
               }
               style={baseStyleLinks}
             >
-              <span className="ml-3 bg-neutral-100 rounded-md p-2 py-1.5 group-[.is-published]:bg-blue-700 transition-all duration-200">
+              <span className="ml-3 bg-neutral-100 rounded-md p-2 py-1.5 group-[.is-published]:bg-rose-500 transition-all duration-200">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -95,12 +95,12 @@ const Profile = () => {
               to="/profile/orders"
               className={(navData) =>
                 navData.isActive
-                  ? ' text-blue-700 font-medium border-b group is-published'
+                  ? ' text-rose-500 font-medium border-b group is-published'
                   : 'hover:bg-gray-100 border-b   group transition-all duration-300 text-[#1a2947]'
               }
               style={baseStyleLinks}
             >
-              <span className="ml-3 bg-neutral-100 rounded-md p-2 py-1.5 group-[.is-published]:bg-blue-700 transition-all duration-200">
+              <span className="ml-3 bg-neutral-100 rounded-md p-2 py-1.5 group-[.is-published]:bg-rose-500 transition-all duration-200">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -119,12 +119,12 @@ const Profile = () => {
               to="/profile/payments"
               className={(navData) =>
                 navData.isActive
-                  ? ' text-blue-700 font-medium border-b group is-published'
+                  ? ' text-rose-500 font-medium border-b group is-published'
                   : 'hover:bg-gray-100 border-b   group transition-all duration-300 text-[#1a2947]'
               }
               style={baseStyleLinks}
             >
-              <span className="ml-3 bg-neutral-100 rounded-md p-2 py-1.5 group-[.is-published]:bg-blue-700 transition-all duration-200">
+              <span className="ml-3 bg-neutral-100 rounded-md p-2 py-1.5 group-[.is-published]:bg-rose-500 transition-all duration-200">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -146,7 +146,7 @@ const Profile = () => {
               }
               style={baseStyleLinks}
             >
-              <span className="ml-3 bg-neutral-100 rounded-md p-2 py-1.5 group-[.is-published]:bg-blue-700 transition-all duration-200">
+              <span className="ml-3 bg-neutral-100 rounded-md p-2 py-1.5 group-[.is-published]:bg-rose-500 transition-all duration-200">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"

@@ -155,7 +155,7 @@ const Checkout = () => {
                 <TitleIcon />
                 <span className="mr-1">نحوه پرداخت</span>
               </h2>
-              <div class="flex flex-col sm:flex-row gap-4 w-full">
+              <div class="flex flex-col sm:flex-row xl:flex-col gap-4 w-full">
                 <RadioInput
                   label="پرداخت درب منزل"
                   id="Pay-at-home"
@@ -175,7 +175,7 @@ const Checkout = () => {
                 <TitleIcon />
                 <span className="mr-1">انتخاب نحوه ارسال</span>
               </h2>
-              <div class="flex flex-col sm:flex-row gap-4 w-full">
+              <div class="flex flex-col sm:flex-row xl:flex-col gap-4 w-full">
                 <RadioInput
                   label="ارسال رایگان"
                   id="free-delivery"
