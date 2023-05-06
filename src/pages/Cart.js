@@ -6,7 +6,7 @@ import TitleAccordionItem from '../components/shared/accordion/TitleAccordionIte
 import ContentAccordionItem from 'components/shared/accordion/ContentAccordionItem';
 import { CartContext } from 'contexts/CartProvider';
 import emptyCart from 'assets/images/empty-cart.svg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import getTotalPrice from 'helper/getTotalPrice';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -17,6 +17,7 @@ const Cart = () => {
     state: { cart },
     dispatch,
   } = useContext(CartContext);
+  const navigate = useNavigate();
   const { price_courier_cost, min_order_amount } =
     useContext(CostContext);
   console.log(price_courier_cost, min_order_amount);
@@ -54,6 +55,10 @@ const Cart = () => {
       ) - getTotalPrice(cart)
     );
   }, [cart]);
+
+  const handleCheck = () => {
+    navigate('/checkout/shipping');
+  };
 
   return !!cart.length ? (
     <main className="grid grid-cols-1 xl:grid-cols-7 gap-4 items-start mx-4 2xl:mx-0">
@@ -212,7 +217,10 @@ const Cart = () => {
           </span>
           <span className="font-medium text-sm mr-2">تومان</span>
         </p>
-        <button className="relative bg-rose-500 h-12 w-full text-white font-bold rounded-md overflow-hidden group">
+        <button
+          onClick={handleCheck}
+          className="relative bg-rose-500 h-12 w-full text-white font-bold rounded-md overflow-hidden group"
+        >
           <span className="bg-rose-400 h-full flex items-center w-12 px-3 z-0 rounded-l-full absolute right-0 top-0 group-hover:w-full group-hover:rounded-l-none transition-all duration-300">
             <svg
               xmlns="http://www.w3.org/2000/svg"

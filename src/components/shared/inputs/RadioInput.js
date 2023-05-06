@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const RadioInput = ({ label, id, description, name }) => {
+const RadioInput = ({ label, id, description, name, className }) => {
   return (
     <label
       htmlFor={id}
-      class="inline-flex items-center border pl-3 cursor-pointer bg-white rounded-md border-gray-100 py-1"
+      class={`inline-flex items-center border pl-3 cursor-pointer bg-white rounded-md border-gray-100 py-1  ${className}`}
     >
       <label
         class="relative flex cursor-pointer items-center rounded-full p-3"

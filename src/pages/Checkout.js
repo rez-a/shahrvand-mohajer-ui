@@ -12,8 +12,8 @@ const Checkout = () => {
   const [showModalEdit, setShowModalEdit] = useState(false);
   return (
     <>
-      <main className="grid grid-cols-7 gap-4 items-start">
-        <main className="col-span-5">
+      <main className="grid grid-cols-1 xl:grid-cols-7 gap-4 items-start mx-4 2xl:mx-0">
+        <section className="col-span-1 xl:col-span-5">
           <div className="mb-12">
             <div className="flex items-center mb-4 justify-between">
               <h2 className="text-zinc-500 font-bold flex items-center">
@@ -39,8 +39,8 @@ const Checkout = () => {
             </div>
             {!editAddress ? (
               <div className="border-r-2 border-r-rose-500 pr-2">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-8">
+                <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between gap-4 sm:gap-8 mb-6 md:mb-2">
                     <p className="text-zinc-500">
                       گیرنده :
                       <span className="text-black font-semibold mr-1">
@@ -81,7 +81,7 @@ const Checkout = () => {
                   <span>ایجاد آدرس جدید</span>
                 </button>
                 <div className="border border-sky-400 bg-sky-50/50 p-4 rounded-md mb-3">
-                  <div className="flex items-center justify-between">
+                  <div className="flex flex-col items-start gap-4 justify-between">
                     <div className="flex items-center gap-8">
                       <p className="text-zinc-500">
                         گیرنده :
@@ -149,42 +149,46 @@ const Checkout = () => {
               </div>
             )}
           </div>
-          <div className="flex justify-between">
-            <div className="grow">
+          <div className="flex flex-col xl:flex-row gap-12 justify-between">
+            <div className="grow mb-8 xl:w-1/2">
               <h2 className="text-zinc-500 font-bold flex items-center mb-4">
                 <TitleIcon />
                 <span className="mr-1">نحوه پرداخت</span>
               </h2>
-              <div class="flex flex-col gap-4 w-2/3">
+              <div class="flex flex-col sm:flex-row gap-4 w-full">
                 <RadioInput
                   label="پرداخت درب منزل"
                   id="Pay-at-home"
                   name="payment"
+                  className="sm:w-1/2"
                 />
                 <RadioInput
                   label="پرداخت آنلاین"
                   id="online-payment"
                   name="payment"
+                  className="sm:w-1/2"
                 />
               </div>
             </div>
-            <div className="grow">
-              <h2 className="text-zinc-500 font-bold flex items-center mb-4">
+            <div className="grow xl:w-1/2">
+              <h2 className="text-zinc-500 font-bold  flex items-center mb-4">
                 <TitleIcon />
                 <span className="mr-1">انتخاب نحوه ارسال</span>
               </h2>
-              <div class="flex flex-col gap-4 w-2/3">
+              <div class="flex flex-col sm:flex-row gap-4 w-full">
                 <RadioInput
                   label="ارسال رایگان"
                   id="free-delivery"
                   name="delivery"
                   description="حدودا یک ساعت"
+                  className="sm:w-1/2"
                 />
                 <RadioInput
                   label="ارسال فوری"
                   id="Immediate-delivery"
                   name="delivery"
                   description="7,000 تومان حدودا 30 دقیقه"
+                  className="sm:w-1/2"
                 />
               </div>
             </div>
@@ -195,8 +199,8 @@ const Checkout = () => {
           >
             بازگشت به سبد خرید
           </Link>
-        </main>
-        <aside className="bg-white border rounded-md border-gray-100 col-span-2 p-3 sticky top-24 mb-3">
+        </section>
+        <aside className="bg-gray-50/50 border rounded-md border-gray-100 bg-white xl:col-span-2 p-3 xl:sticky top-24 mb-3">
           <div className="mb-3 border-b pb-4">
             <p className="flex items-center justify-between mb-3">
               <span className="font-bold">مبلغ کل (2کالا)</span>
