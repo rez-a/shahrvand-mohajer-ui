@@ -11,7 +11,7 @@ const Footer = () => {
         <li>
           <p>
             <Link
-              href="/faq"
+              to="/faq"
               className="text-sm text-zinc-500 hover:text-zinc-800 transition-all duration-200"
             >
               نحوه ثبت سفارش
@@ -21,7 +21,7 @@ const Footer = () => {
         <li>
           <p>
             <Link
-              href="/faq"
+              to="/faq"
               className="text-sm text-zinc-500 hover:text-zinc-800 transition-all duration-200"
             >
               رویه ارسال سفارش
@@ -31,7 +31,7 @@ const Footer = () => {
         <li>
           <p>
             <Link
-              href="/faq"
+              to="/faq"
               className="text-sm text-zinc-500 hover:text-zinc-800 transition-all duration-200"
             >
               شیوه‌های پرداخت
@@ -46,7 +46,7 @@ const Footer = () => {
         <li>
           <p>
             <Link
-              href="/faq"
+              to="/faq"
               className="text-sm text-zinc-500 hover:text-zinc-800 transition-all duration-200"
             >
               پاسخ به پرسش‌های متداول
@@ -56,7 +56,7 @@ const Footer = () => {
         <li>
           <p>
             <Link
-              href="/faq"
+              to="/faq"
               className="text-sm text-zinc-500 hover:text-zinc-800 transition-all duration-200"
             >
               رویه‌های بازگرداندن کالا
@@ -66,7 +66,7 @@ const Footer = () => {
         <li>
           <p>
             <Link
-              href="/privacy"
+              to="/privacy"
               className="text-sm text-zinc-500 hover:text-zinc-800 transition-all duration-200"
             >
               شرایط استفاده
@@ -76,7 +76,7 @@ const Footer = () => {
         <li>
           <p>
             <Link
-              href="/privacy"
+              to="/privacy"
               className="text-sm text-zinc-500 hover:text-zinc-800 transition-all duration-200"
             >
               حریم خصوصی
@@ -91,7 +91,7 @@ const Footer = () => {
         <li>
           <p>
             <Link
-              href="/faq"
+              to="/faq"
               className="text-sm text-zinc-500 hover:text-zinc-800 transition-all duration-200"
             >
               فروش در شهروند
@@ -101,7 +101,7 @@ const Footer = () => {
         <li>
           <p>
             <Link
-              href="/faq"
+              to="/faq"
               className="text-sm text-zinc-500 hover:text-zinc-800 transition-all duration-200"
             >
               همکاری با سازمان‌ها
@@ -111,7 +111,7 @@ const Footer = () => {
         <li>
           <p>
             <Link
-              href="/contact-us"
+              to="/contact-us"
               className="text-sm text-zinc-500 hover:text-zinc-800 transition-all duration-200"
             >
               تماس با شهروند
@@ -121,7 +121,7 @@ const Footer = () => {
         <li>
           <p>
             <Link
-              href="/about-us"
+              to="/about-us"
               className="text-sm text-zinc-500 hover:text-zinc-800 transition-all duration-200"
             >
               درباره شهروند

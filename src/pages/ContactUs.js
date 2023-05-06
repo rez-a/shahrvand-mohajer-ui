@@ -1,53 +1,50 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import Breadcrumb from 'components/Breadcrumb';
+import { Link } from 'react-router-dom';
 import TitleIcon from 'components/shared/TitleIcon';
-import { Link, useNavigate } from 'react-router-dom';
-import PhoneNumber from 'components/login/PhoneNumber';
-import VerifyCode from 'components/login/VerifyCode';
-import { useState } from 'react';
-import { useContext } from 'react';
-import { UserContext } from 'contexts/UserProvider';
+import TextInput from 'components/shared/inputs/TextInput';
+import TextAreaInput from 'components/shared/inputs/TextAreaInput';
 
-const Login = (props) => {
-  const [sendVerifyCode, setSendVerifyCode] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const { user } = useContext(UserContext);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    !!user && navigate(-1);
-  }, []);
-
+const ContactUs = (props) => {
+  const [contactForm, setContactForm] = useState({
+    subject: '',
+    name: '',
+    email: '',
+    phone: '',
+    message: '',
+  });
   return (
-    <main className=" min-h-screen grid place-items-center px-4">
-      <div>
-        <div className="w-full max-w-lg mx-auto">
-          <div>
-            <svg
-              version="1.1"
-              id="Layer_1"
-              xmlns="http://www.w3.org/2000/svg"
-              x="0px"
-              y="0px"
-              viewBox="0 0 235.21 170.32"
-              className="fill-rose-600 mx-auto"
-              width={200}
-              height={200}
-            >
-              <circle class="st0" cx="98.22" cy="55.52" r="4.3" />
-              <path
-                class="st0"
-                d="M141.87,54.14c-3.62-2.22-8.12-2.22-11.74,0c-1.12,0.69-1.47,2.15-0.79,3.28c0.45,0.73,1.23,1.14,2.03,1.14
+    <>
+      <Breadcrumb links={[{ title: 'تماس با ما' }]} />
+      <main className="container mx-auto ">
+        <section>
+          <svg
+            version="1.1"
+            id="Layer_1"
+            xmlns="http://www.w3.org/2000/svg"
+            x="0px"
+            y="0px"
+            viewBox="0 0 235.21 170.32"
+            className="fill-rose-600 mx-auto"
+            width={200}
+            height={200}
+          >
+            <circle class="st0" cx="98.22" cy="55.52" r="4.3" />
+            <path
+              class="st0"
+              d="M141.87,54.14c-3.62-2.22-8.12-2.22-11.74,0c-1.12,0.69-1.47,2.15-0.79,3.28c0.45,0.73,1.23,1.14,2.03,1.14
 	c0.42,0,0.85-0.11,1.24-0.35c2.05-1.26,4.71-1.26,6.76,0c1.12,0.69,2.59,0.33,3.28-0.79C143.34,56.3,142.99,54.83,141.87,54.14z"
-              />
-              <path
-                class="st0"
-                d="M136,65.65c-1.32,0-2.38,1.07-2.38,2.38c0,9.1-7.4,16.5-16.5,16.5c-9.1,0-16.5-7.4-16.5-16.5
+            />
+            <path
+              class="st0"
+              d="M136,65.65c-1.32,0-2.38,1.07-2.38,2.38c0,9.1-7.4,16.5-16.5,16.5c-9.1,0-16.5-7.4-16.5-16.5
 	c0-1.32-1.07-2.38-2.38-2.38s-2.38,1.07-2.38,2.38c0,11.73,9.54,21.27,21.27,21.27c11.73,0,21.27-9.54,21.27-21.27
 	C138.38,66.72,137.31,65.65,136,65.65z"
-              />
-              <path
-                class="st0"
-                d="M161.79,93.04l-6.09-58.62c-0.86-8.27-7.78-14.51-16.09-14.51h-5.86v-0.64c0-9.18-7.47-16.64-16.64-16.64
+            />
+            <path
+              class="st0"
+              d="M161.79,93.04l-6.09-58.62c-0.86-8.27-7.78-14.51-16.09-14.51h-5.86v-0.64c0-9.18-7.47-16.64-16.64-16.64
 	s-16.64,7.47-16.64,16.64v0.64h-4.91c-8.32,0-15.24,6.24-16.09,14.51l-6.09,58.62c-0.47,4.55,1.01,9.11,4.08,12.51
 	c3.06,3.4,7.44,5.35,12.02,5.35h56.23c4.57,0,8.95-1.95,12.02-5.35C160.78,102.14,162.26,97.59,161.79,93.04z M105.23,19.27
 	c0-6.55,5.33-11.88,11.88-11.88s11.88,5.33,11.88,11.88v0.64h-23.75V19.27z M154.17,102.35c-2.16,2.4-5.25,3.77-8.48,3.77H89.47
@@ -55,27 +52,27 @@ const Login = (props) => {
 	c-1.32,0-2.38,1.07-2.38,2.38c0,1.32,1.07,2.38,2.38,2.38h5.28c1.32,0,2.38-1.07,2.38-2.38c0-1.32-1.07-2.38-2.38-2.38h-0.26v-4.77
 	h23.75v4.77h-0.26c-1.32,0-2.38,1.07-2.38,2.38c0,1.32,1.07,2.38,2.38,2.38h5.28c1.32,0,2.38-1.07,2.38-2.38
 	c0-1.32-1.07-2.38-2.38-2.38h-0.26v-4.77h5.86c5.87,0,10.75,4.4,11.35,10.24l6.09,58.62C157.38,96.74,156.33,99.95,154.17,102.35z"
-              />
-              <rect
-                x="24.02"
-                y="158.81"
-                class="st0"
-                width="6.32"
-                height="6.32"
-              />
-              <path
-                class="st0"
-                d="M43.33,138.25c-0.1,0-0.21-0.03-0.35-0.08l-8.73-4.08c-1.22-0.65-2.52-0.98-3.87-0.98
+            />
+            <rect
+              x="24.02"
+              y="158.81"
+              class="st0"
+              width="6.32"
+              height="6.32"
+            />
+            <path
+              class="st0"
+              d="M43.33,138.25c-0.1,0-0.21-0.03-0.35-0.08l-8.73-4.08c-1.22-0.65-2.52-0.98-3.87-0.98
 	c-1.17,0-2.34,0.24-3.51,0.71c-1.17,0.48-2.19,1.23-3.06,2.26l-4.28,5.22l5.22,4.57l4.24-4.69c0.49-0.43,0.98-0.65,1.47-0.65
 	c0.24,0,0.54,0.08,0.9,0.24l4.69,2.28l-3.22,2.86c-1.31,1.14-2.88,1.71-4.73,1.71h-9.14h-1.63c-0.27,0-0.48-0.08-0.63-0.24
 	c-0.15-0.16-0.22-0.38-0.22-0.65v-7.75H11.3H8.97v14.28c0,1.52-0.09,2.62-0.27,3.3c-0.18,0.68-0.65,1.37-1.41,2.08
 	c-0.76,0.71-2.09,1.63-4,2.77l2.81,6.28c2.86-1.42,5.02-2.77,6.48-4.06c1.47-1.29,2.48-2.73,3.04-4.3c0.38-1.08,0.62-2.38,0.74-3.88
 	c0.31,0.04,0.61,0.09,0.95,0.09h1.63h8.12c1.79,0,3.55-0.32,5.26-0.96c1.71-0.64,3.25-1.57,4.61-2.79l6.61-6.2h5.02v-7.34h-5.02
 	C43.5,138.25,43.43,138.25,43.33,138.25z"
-              />
-              <path
-                class="st0"
-                d="M101.59,138.19c-1.47-0.78-3.07-1.16-4.81-1.16H85.16v7.5h2.61v0.77v0.73v0.69c0,0.27-0.08,0.49-0.22,0.65
+            />
+            <path
+              class="st0"
+              d="M101.59,138.19c-1.47-0.78-3.07-1.16-4.81-1.16H85.16v7.5h2.61v0.77v0.73v0.69c0,0.27-0.08,0.49-0.22,0.65
 	c-0.15,0.16-0.36,0.24-0.63,0.24h-2.94h0h-1.83c-0.38,0-0.76,0.03-1.12,0.07c0.09-0.51,0.14-1.04,0.14-1.58
 	c0-1.74-0.43-3.34-1.28-4.79c-0.86-1.45-2.02-2.62-3.49-3.49c-1.47-0.87-3.07-1.31-4.81-1.31c-1.71,0-3.26,0.43-4.63,1.29
 	c-1.37,0.86-2.45,2.02-3.22,3.49c-0.78,1.47-1.16,3.07-1.16,4.81v1.51h-1.14h-2.49c-0.24,0-0.44-0.08-0.59-0.23
@@ -90,33 +87,33 @@ const Login = (props) => {
 	c-0.1,0.6-0.16,1.21-0.16,1.84v1.39H72.03z M98.01,147.25c-0.3,0.31-0.71,0.47-1.22,0.47c-0.49,0-0.88-0.16-1.16-0.47
 	c-0.29-0.31-0.43-0.71-0.43-1.2v-1.51h1.59c0.52,0,0.92,0.14,1.22,0.41c0.3,0.27,0.45,0.64,0.45,1.1
 	C98.45,146.53,98.3,146.94,98.01,147.25z"
-              />
-              <rect
-                x="139.28"
-                y="128.26"
-                class="st0"
-                width="6.32"
-                height="6.32"
-              />
-              <path
-                class="st0"
-                d="M138.75,146.78c0,0.24-0.08,0.45-0.24,0.61c-0.16,0.16-0.35,0.24-0.57,0.24h-2.41c-0.41,0-0.71-0.1-0.9-0.29
+            />
+            <rect
+              x="139.28"
+              y="128.26"
+              class="st0"
+              width="6.32"
+              height="6.32"
+            />
+            <path
+              class="st0"
+              d="M138.75,146.78c0,0.24-0.08,0.45-0.24,0.61c-0.16,0.16-0.35,0.24-0.57,0.24h-2.41c-0.41,0-0.71-0.1-0.9-0.29
 	c-0.19-0.19-0.37-0.49-0.53-0.9l-5.3-14.6l-7.14,2.65l4.08,11.01c0.16,0.55,0.24,0.87,0.24,0.98c0,0.76-0.48,1.14-1.43,1.14h-10.03
 	v7.91h10.03c1.33,0,2.38-0.12,3.14-0.35c0.76-0.23,1.64-0.73,2.65-1.49c0.46,0.49,1.1,0.92,1.92,1.28c0.82,0.37,1.77,0.55,2.86,0.55
 	h0.41h2.49c1.52,0,2.91-0.37,4.16-1.12c1.25-0.75,2.24-1.75,2.98-3.02c0.73-1.26,1.1-2.64,1.1-4.14v-9.42h-7.51V146.78z"
-              />
-              <path
-                class="st0"
-                d="M166.89,146.53c0-1.74-0.39-3.35-1.16-4.81s-1.85-2.63-3.22-3.49c-1.37-0.86-2.92-1.29-4.63-1.29
+            />
+            <path
+              class="st0"
+              d="M166.89,146.53c0-1.74-0.39-3.35-1.16-4.81s-1.85-2.63-3.22-3.49c-1.37-0.86-2.92-1.29-4.63-1.29
 	c-1.74,0-3.34,0.43-4.79,1.29c-1.45,0.86-2.62,2.02-3.49,3.49c-0.87,1.47-1.31,3.07-1.31,4.81c0,1.71,0.43,3.26,1.28,4.63
 	c0.86,1.37,2.02,2.45,3.49,3.22c1.47,0.77,3.07,1.16,4.81,1.16h1.51c0,0.54-0.18,1.04-0.53,1.49c-0.35,0.45-1.1,0.99-2.24,1.63
 	c-1.14,0.64-2.87,1.45-5.18,2.43l2.32,6.61c3.59-1.52,6.29-2.94,8.12-4.24c1.82-1.31,3.11-2.81,3.87-4.51
 	c0.76-1.7,1.14-3.95,1.14-6.75V146.53z M159.39,148.12h-1.51c-0.49,0-0.89-0.14-1.2-0.43c-0.31-0.29-0.47-0.67-0.47-1.16
 	c0-0.52,0.16-0.92,0.47-1.22c0.31-0.3,0.71-0.45,1.2-0.45c0.46,0,0.83,0.15,1.1,0.45c0.27,0.3,0.41,0.71,0.41,1.22V148.12z"
-              />
-              <path
-                class="st0"
-                d="M224.36,137.85v9.79h-0.73c-0.24,0-0.44-0.08-0.59-0.24c-0.15-0.16-0.22-0.38-0.22-0.65v-7.75h-1.51h-4.49
+            />
+            <path
+              class="st0"
+              d="M224.36,137.85v9.79h-0.73c-0.24,0-0.44-0.08-0.59-0.24c-0.15-0.16-0.22-0.38-0.22-0.65v-7.75h-1.51h-4.49
 	h-1.51v7.83c0,0.27-0.08,0.49-0.22,0.65c-0.15,0.16-0.36,0.24-0.63,0.24c-0.27,0-0.48-0.08-0.63-0.24
 	c-0.15-0.16-0.22-0.38-0.22-0.65v-7.83h-1.51h-4.49h-1.51v7.75c0,0.27-0.08,0.49-0.22,0.65c-0.15,0.16-0.36,0.24-0.63,0.24h-1.63
 	h-1.84c-0.38,0-0.76,0.03-1.12,0.07c0.09-0.51,0.14-1.04,0.14-1.58c0-1.74-0.43-3.34-1.28-4.79c-0.86-1.45-2.02-2.62-3.49-3.49
@@ -130,47 +127,28 @@ const Login = (props) => {
 	c0.29-0.31,0.67-0.47,1.16-0.47c0.52,0,0.92,0.16,1.22,0.47c0.3,0.31,0.45,0.71,0.45,1.2c0,0.46-0.15,0.83-0.45,1.1
 	c-0.3,0.27-0.71,0.41-1.22,0.41h-1.59V146.13z M191.65,158.61c-0.54,0-1.01-0.2-1.39-0.59c-0.38-0.39-0.57-0.86-0.57-1.41v-1.06
 	h1.51c0.6,0,1.18-0.07,1.75-0.17c-0.1,0.6-0.16,1.21-0.16,1.84v1.39H191.65z"
-              />
-              <polygon
-                class="st0"
-                points="225.21,135.73 225.21,129.4 222.07,129.4 222.07,123.9 215.75,123.9 215.75,129.4 212.57,129.4 
+            />
+            <polygon
+              class="st0"
+              points="225.21,135.73 225.21,129.4 222.07,129.4 222.07,123.9 215.75,123.9 215.75,129.4 212.57,129.4 
 	212.57,135.73 218.89,135.73 "
-              />
-            </svg>
-          </div>
-          <div className="  w-full border rounded-md bg-white p-4 pb-6">
-            <h2 className="font-semibold text-zinc-400 flex items-center mb-4">
-              <TitleIcon bg="bg-zinc-400" />
-              <span className="mr-1"> ورود</span>
-            </h2>
-            {sendVerifyCode ? (
-              <VerifyCode
-                setSendVerifyCode={setSendVerifyCode}
-                phoneNumber={phoneNumber}
-              />
-            ) : (
-              <PhoneNumber
-                phoneNumber={phoneNumber}
-                setPhoneNumber={setPhoneNumber}
-                setSendVerifyCode={setSendVerifyCode}
-              />
-            )}
-          </div>
-        </div>
-        <div className="w-full text-center border-t mx-auto mt-20 grid place-items-center text-gray-500 space-y-4 py-4">
+            />
+          </svg>
+        </section>
+        <div className="w-full text-center border-t mx-auto grid place-items-center text-gray-500 space-y-4 py-4">
           <ul className="grid grid-cols-2 md:grid-cols-4 gap-8 text-sm">
             <li>
               <Link
                 to="/"
-                className="hover:text-black transition-all duration-200"
+                className="hover:text-rose-500 transition-all duration-200"
               >
                 فروشگاه شهروند
               </Link>
             </li>
             <li>
               <Link
-                to="/about"
-                className="hover:text-black transition-all duration-200"
+                to="/about-us"
+                className="hover:text-rose-500 transition-all duration-200"
               >
                 درباره شهروند
               </Link>
@@ -178,7 +156,7 @@ const Login = (props) => {
             <li>
               <Link
                 to="/contact-us"
-                className="hover:text-black transition-all duration-200"
+                className="hover:text-rose-500 transition-all duration-200"
               >
                 تماس با ما
               </Link>
@@ -186,28 +164,107 @@ const Login = (props) => {
             <li>
               <Link
                 to="/rules"
-                className="hover:text-black transition-all duration-200"
+                className="hover:text-rose-500 transition-all duration-200"
               >
                 قوانین و مقررات
               </Link>
             </li>
           </ul>
-          <p>
-            <small className="text-xs text-gray-400">
-              استفاده از مطالب فروشگاه اینترنتی شهروند فقط برای مقاصد
-              غیرتجاری و با ذکر منبع بلامانع است. کلیه حقوق این سایت
-              متعلق به (فروشگاه آنلاین شهروند) می‌باشد.
-            </small>
-          </p>
-          <p className="text-xs text-gray-400">
-            Copyright © 2019 shahrvand
-          </p>
         </div>
-      </div>
-    </main>
+        <section className=" bg-white p-4 py-8 rounded-md border border-gray-100">
+          <article className="mb-12">
+            <div className="flex items-center mb-4">
+              <TitleIcon bg="bg-rose-500 " />
+              <h2 className="text-rose-500 font-bold mr-2">
+                تماس با هایپر مارکت شهروند
+              </h2>
+            </div>
+            <p className="text-sm text-gray-700 leading-8">
+              لطفاً پیش از ارسال ایمیل یا تماس تلفنی، ابتدا
+              <Link to="/faq" className="text-sky-500">
+                &zwnj; پرسش‌‌های متداول &zwnj;
+              </Link>
+              را مشاهده کنید.
+            </p>
+          </article>
+          <form className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <TextInput
+                value={contactForm.subject}
+                changeHandler={(e) =>
+                  setContactForm({
+                    ...contactForm,
+                    subject: e.target.value,
+                  })
+                }
+                id="subject"
+                label="موضوع"
+              />
+            </div>
+            <div>
+              <TextInput
+                value={contactForm.name}
+                changeHandler={(e) =>
+                  setContactForm({
+                    ...contactForm,
+                    name: e.target.value,
+                  })
+                }
+                id="name"
+                label="نام و نام خانوادگی"
+              />
+            </div>
+            <div>
+              <TextInput
+                value={contactForm.email}
+                changeHandler={(e) =>
+                  setContactForm({
+                    ...contactForm,
+                    email: e.target.value,
+                  })
+                }
+                id="email"
+                label="ایمیل"
+              />
+            </div>
+            <div>
+              <TextInput
+                value={contactForm.phone}
+                changeHandler={(e) =>
+                  setContactForm({
+                    ...contactForm,
+                    phone: e.target.value,
+                  })
+                }
+                id="phone"
+                label="تلفن تماس"
+              />
+            </div>
+            <div className="col-span-1 sm:col-span-2">
+              <TextAreaInput
+                value={contactForm.message}
+                changeHandler={(e) =>
+                  setContactForm({
+                    ...contactForm,
+                    message: e.target.value,
+                  })
+                }
+                id="message"
+                label="متن پیام"
+              />
+            </div>
+            <div>
+              <button className="bg-rose-500/90 w-full text-white sm:w-60 py-2 rounded-md font-bold shadow-lg shadow-rose-500/50 hover:bg-rose-500 transition-all duration-300">
+                ارسال پیام
+              </button>
+            </div>
+          </form>
+        </section>
+      </main>
+    </>
   );
 };
 
-Login.propTypes = {};
+ContactUs.propTypes = {};
 
-export default Login;
+export default ContactUs;

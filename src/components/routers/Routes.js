@@ -11,6 +11,7 @@ import ProductRoutes from './ProductRoutes';
 import Login from 'pages/Login';
 import Search from 'pages/Search';
 import AboutUs from 'pages/AboutUs';
+import ContactUs from 'pages/ContactUs';
 
 const AllRoutes = () => {
   return (
@@ -26,6 +27,7 @@ const AllRoutes = () => {
         <Route path="profile/*" element={<Profile />} />
         <Route path="search" element={<Search />} />
         <Route path="about-us" element={<AboutUs />} />
+        <Route path="contact-us" element={<ContactUs />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
