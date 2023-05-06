@@ -56,8 +56,8 @@ const Cart = () => {
   }, [cart]);
 
   return !!cart.length ? (
-    <main className="grid grid-cols-7 gap-4 items-start">
-      <section className="col-span-5 ">
+    <main className="grid grid-cols-1 xl:grid-cols-7 gap-4 items-start mx-4 2xl:mx-0">
+      <section className="col-span-1 xl:col-span-5 ">
         <div className="text-zinc-500 flex items-center border-b py-3 border-rose-500 mb-3">
           <p className=" flex items-center">
             <svg
@@ -113,11 +113,11 @@ const Cart = () => {
               </TitleAccordionItem>
               <ContentAccordionItem
                 closeClaseName="h-0"
-                openClassName="h-96"
+                openClassName="lg:h-96 h-auto"
                 defaultClassName="bg-white"
               >
-                <div className="h-[20rem] overflow-auto">
-                  <ul className="mb-12 divide-y col-span-3 p-4">
+                <div className="max-h-[20rem] overflow-y-auto p-0">
+                  <ul className="mb-12 divide-y p-4 w-full">
                     {vendor.products.map((product) => (
                       <CartProductCard
                         dispatch={dispatch}
@@ -128,8 +128,8 @@ const Cart = () => {
                     ))}
                   </ul>
                 </div>
-                <div className="bg-gray-50 p-4 rounded-b-md flex justify-between relative -top-2">
-                  <p className="flex items-center">
+                <div className="bg-gray-50 p-4 rounded-b-md flex flex-col lg:flex-row  justify-center lg:justify-between items-center relative lg:-top-2">
+                  <p className="flex flex-col items-center mb-4 lg:flex-row lg:mb-0">
                     <span className="font-bold">
                       مبلغ کل ({vendor.products.length}کالا) :
                     </span>
@@ -156,7 +156,7 @@ const Cart = () => {
           </AccordionLayout>
         ))}
       </section>
-      <aside className="bg-gray-50/50 border rounded-md border-gray-100 bg-white col-span-2 p-3 sticky top-24 mb-3">
+      <aside className="bg-gray-50/50 border rounded-md border-gray-100 bg-white xl:col-span-2 p-3 xl:sticky top-24 mb-3">
         <p className="flex items-center justify-between mb-3">
           <span className="font-bold">
             مبلغ کل ({productsInCart}کالا)
@@ -224,7 +224,7 @@ const Cart = () => {
               <path d="M7.82843 10.9999H20V12.9999H7.82843L13.1924 18.3638L11.7782 19.778L4 11.9999L11.7782 4.22168L13.1924 5.63589L7.82843 10.9999Z"></path>
             </svg>
           </span>
-          <span className="z-10 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 whitespace-nowrap">
+          <span className="z-0 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 whitespace-nowrap">
             ادامه ثبت همه سفارش ها
           </span>
         </button>

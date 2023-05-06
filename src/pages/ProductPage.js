@@ -59,17 +59,17 @@ const ProductPage = () => {
   );
 
   return (
-    <div className="min-h-screen mx-4">
+    <div className="min-h-screen mx-4 2xl:mx-0">
       {!!product?.data && (
         <>
           <div className="flex flex-col sm:flex-row items-start gap-6 bg-white p-4 py-8 rounded-md border border-gray-100">
             <div className="w-72 max-h-96 hidden lg:block">
               <ImageZoom image={Image} alt={Name} />
             </div>
-            <div className="w-full max-h-96 block lg:hidden">
+            <div className="sm:w-1/2 w-full max-h-96 block lg:hidden">
               <img src={Image} alt={Name} />
             </div>
-            <div className="grow">
+            <div className="grow w-full sm:w-1/2">
               <h2 className="font-bold py-4 border-b">{Name}</h2>
               <div className="flex flex-col lg:flex-row items-start justify-between my-4">
                 <div>

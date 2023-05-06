@@ -28,18 +28,18 @@ const CartProductCard = ({
     (SellPrice - LastBuyPrice) / (LastBuyPrice / 100)
   );
   return (
-    <div className="flex items-start py-4 border-gray-100">
-      <div className="h-40 w-40">
+    <div className="flex flex-col items-start py-4 border-gray-100 lg:flex-row">
+      <div className="lg:h-40 w-full lg:w-40 mb-4">
         <img
           class="object-cover w-full  h-96 md:h-auto md:w-48  "
           src={Image}
           alt={Name}
         />
       </div>
-      <div class="flex flex-col justify-between leading-normal grow mr-2">
+      <div class="flex flex-col justify-between leading-normal w-full grow lg:mr-2">
         <div>
-          <div className="flex items-center justify-between">
-            <div class="text-base font-bold tracking-tight text-gray-900 dark:text-white">
+          <div className="flex flex-col items-start justify-between sm:flex-row">
+            <div class="text-base font-bold tracking-tight text-gray-900 dark:text-white mb-4 sm:mb-2">
               {!!discount && (
                 <div className=" inline">
                   <span
@@ -73,14 +73,14 @@ const CartProductCard = ({
                   </p>
                 </>
               ) : (
-                <p className="font-bold mr-4 ">
+                <p className="font-bold lg:mr-4 ">
                   <span>{LastBuyPrice.toLocaleString()}</span>
                   <span className="mr-1">تومان</span>
                 </p>
               )}
             </div>
           </div>
-          <p className="text-xs flex items-center justify-end text-slate-400 mt-1">
+          <p className="text-xs flex items-center justify-start sm:justify-end text-slate-400 mt-1 mb-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -133,9 +133,9 @@ const CartProductCard = ({
             </span>
           </p>
         </div>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center mt-2">
-            <div className="items-center bg-gray-50 flex p-2 rounded-md ">
+        <div className="flex flex-col items-center justify-center lg:flex-row lg:justify-between">
+          <div className="flex items-center mt-2 mb-4 w-full sm:justify-center lg:w-2/3 lg:justify-start">
+            <div className="items-center justify-between bg-gray-50 flex p-2 rounded-md w-full sm:w-1/2 xl:w-1/3">
               <button
                 onClick={() =>
                   dispatch(
@@ -207,6 +207,7 @@ const CartProductCard = ({
               )}
             </div>
             <button
+              className="hidden sm:block"
               onClick={() =>
                 dispatch(
                   removeFromCart(
@@ -228,7 +229,7 @@ const CartProductCard = ({
             </button>
           </div>
           <div className="flex items-center">
-            <p className="font-bold mr-4 ">
+            <p className="font-bold lg:mr-4 ">
               <span>
                 {(
                   Number(LastBuyPrice) *
