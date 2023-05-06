@@ -50,8 +50,8 @@ const ControllerQuantityModal = ({
         </button>
       </div>
       <div className="w-full border-b">
-        <div className="flex items-center gap-2 justify-between px-5 pb-2">
-          <div className="flex flex-col justify-start">
+        <div className="flex flex-col sm:flex-row items-center gap-2 justify-between px-5 pb-2">
+          <div className="flex flex-col justify-center items-center sm:items-start">
             <div className="h-24 w-24 mr-2 mb-2">
               <img
                 className="object-contain"
@@ -61,8 +61,8 @@ const ControllerQuantityModal = ({
             </div>
             <p className="text-sm font-bold">{Name}</p>
           </div>
-          <div className="text-left">
-            <div className="text-sm flex justify-end font-bold mr-auto">
+          <div className="text-center sm:text-left">
+            <div className="text-sm flex justify-center sm:justify-end font-bold mr-auto">
               <div
                 className={` relative ${
                   SellPrice !== LastBuyPrice
@@ -84,7 +84,7 @@ const ControllerQuantityModal = ({
                 </div>
               )}
             </div>
-            <p className="text-xs text-left flex items-center justify-end text-slate-400 mt-2">
+            <p className="text-xs text-left flex items-center justify-center sm:justify-end text-slate-400 mt-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"

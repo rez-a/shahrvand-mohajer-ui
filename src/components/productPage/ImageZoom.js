@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import ReactImageMagnify from 'react-image-magnify';
 
-const ImageZoom = ({ image }) => {
+const ImageZoom = ({ image, Name }) => {
   return (
     <ReactImageMagnify
       enlargedImageContainerStyle={{
@@ -16,7 +16,7 @@ const ImageZoom = ({ image }) => {
       }}
       {...{
         smallImage: {
-          alt: 'Wristwatch by Ted Baker London',
+          alt: { Name },
           isFluidWidth: true,
           src: image,
         },

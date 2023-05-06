@@ -59,16 +59,19 @@ const ProductPage = () => {
   );
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen mx-4">
       {!!product?.data && (
         <>
-          <div className="flex items-start gap-6 bg-white p-4 py-8 rounded-md border border-gray-100">
-            <div className="w-72 max-h-96">
-              <ImageZoom image={Image} />
+          <div className="flex flex-col sm:flex-row items-start gap-6 bg-white p-4 py-8 rounded-md border border-gray-100">
+            <div className="w-72 max-h-96 hidden lg:block">
+              <ImageZoom image={Image} alt={Name} />
+            </div>
+            <div className="w-full max-h-96 block lg:hidden">
+              <img src={Image} alt={Name} />
             </div>
             <div className="grow">
               <h2 className="font-bold py-4 border-b">{Name}</h2>
-              <div className="flex items-start justify-between my-4">
+              <div className="flex flex-col lg:flex-row items-start justify-between my-4">
                 <div>
                   {!!Attr.length && (
                     <>
@@ -106,7 +109,7 @@ const ProductPage = () => {
                     </p>
                   </div>
                 </div>
-                <div className="w-1/3">
+                <div className="w-full lg:w-1/2 xl:w-1/3">
                   <div className="bg-gray-50/50 border rounded p-4 w-full">
                     <div className="flex items-center mb-4">
                       <div className="w-6 h-6">

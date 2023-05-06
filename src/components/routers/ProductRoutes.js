@@ -1,8 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Route, Routes } from 'react-router-dom';
 import Breadcrumb from 'components/Breadcrumb';
 import ProductPage from 'pages/ProductPage';
+import NotFound from 'pages/NotFound';
 
 const ProductRoutes = (props) => {
   return (
@@ -13,6 +13,7 @@ const ProductRoutes = (props) => {
           path=":mainErpCode/:sideErpCode/:erpCode"
           element={<ProductPage />}
         />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
