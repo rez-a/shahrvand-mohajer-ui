@@ -1,13 +1,13 @@
 import React from 'react';
 import { Autoplay, Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import VendorItem from './VendorItem';
+import VendorItem from 'components/home/VendorsSection/VendorItem';
 import SwiperNavBtn from 'components/swiper/SwiperNavBtn';
 import useSWR from 'swr';
 import { fetcher } from 'services/swr/fetcher';
 import { VENDORS } from 'services/endPoints';
 import useObserved from 'hooks/useObserved';
-import LoaderVendor from './LoaderVendor';
+import LoaderVendor from 'components/home/VendorsSection/LoaderVendor';
 
 const Vendors = () => {
   const { ref, view } = useObserved();

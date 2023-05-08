@@ -1,7 +1,7 @@
 import React from 'react';
 import { Autoplay, Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import VendorItem from './CategoryItem';
+import CategoryItem from 'components/home/categoriesSection/CategoryItem';
 import SwiperNavBtn from 'components/swiper/SwiperNavBtn';
 import useSWR from 'swr';
 import { fetcher } from 'services/swr/fetcher';
@@ -55,7 +55,7 @@ const Categoris = () => {
         {!!categories?.data
           ? categories?.data?.map((vendor) => (
               <SwiperSlide key={vendor.id}>
-                <VendorItem
+                <CategoryItem
                   {...vendor}
                   containerClassName="bg-white rounded-xl hover:shadow-lg py-4 transition-all duration-200"
                 />

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Breadcrumb from 'components/Breadcrumb';
 import { Link } from 'react-router-dom';
 import AccordionLayout from 'components/shared/accordion/AccordionLayout';
@@ -129,7 +128,7 @@ const Faq = (props) => {
             />
           </svg>
         </section>
-        <div className="w-full text-center border-t mx-auto grid place-items-center text-gray-500 space-y-4 py-4">
+        <div className="w-full text-center border-t mx-auto grid place-items-center text-gray-500 space-y-4 py-4 mb-8">
           <ul className="grid grid-cols-2 md:grid-cols-4 gap-8 text-sm">
             <li>
               <Link
@@ -166,16 +165,73 @@ const Faq = (props) => {
           </ul>
         </div>
         <AccordionLayout>
-          <AccordionItem>
+          <AccordionItem defaultClassName="bg-white p-3 rounded-lg border border-gray-200 my-2">
             <TitleAccordionItem>
-              چطور میتوانم سفارشم را لغو کنم ؟
+              <div className="flex items-center justify-between font-semibold">
+                <h3>چطور میتوانم سفارشم را لغو کنم ؟</h3>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  className="w-8 h-8"
+                >
+                  <path d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z"></path>
+                </svg>
+              </div>
             </TitleAccordionItem>
             <ContentAccordionItem
               closeClaseName="h-0 "
-              openClassName="h-20"
+              openClassName="h-20 sm:h-16"
             >
-              شما میتوانید با مراجعه به پروفایل خود سفارش یا مرسوله
-              ایی که از ارسال آن منصرف شدید را لغو نمایید.
+              <div className="text-sm text-gray-600 mt-4">
+                شما میتوانید با مراجعه به پروفایل خود سفارش یا مرسوله
+                ایی که از ارسال آن منصرف شدید را لغو نمایید.
+              </div>
+            </ContentAccordionItem>
+          </AccordionItem>
+          <AccordionItem defaultClassName="bg-white p-3 rounded-lg border border-gray-200 my-2">
+            <TitleAccordionItem>
+              <div className="flex items-center justify-between font-semibold ">
+                <h3>هزینه ی ارسال در شهروند چگونه محاسبه میشود؟</h3>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  className="w-8 h-8"
+                >
+                  <path d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z"></path>
+                </svg>
+              </div>
+            </TitleAccordionItem>
+            <ContentAccordionItem
+              closeClaseName="h-0 "
+              openClassName="h-20 sm:h-16"
+            >
+              <div className="text-sm text-gray-600 mt-4">
+                هزینه ارسال بر اساس شیوه ارسال متفاوت است و در زمان
+                ثبت سفارش نمایش داده می شود.
+              </div>
+            </ContentAccordionItem>
+          </AccordionItem>
+          <AccordionItem defaultClassName="bg-white p-3 rounded-lg border border-gray-200 my-2">
+            <TitleAccordionItem>
+              <div className="flex items-center justify-between font-semibold ">
+                <h3>زمان های تحویل کالا چگونه است؟</h3>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  className="w-8 h-8"
+                >
+                  <path d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z"></path>
+                </svg>
+              </div>
+            </TitleAccordionItem>
+            <ContentAccordionItem
+              closeClaseName="h-0 "
+              openClassName="h-20 sm:h-16"
+            >
+              <div className="text-sm text-gray-600 mt-4">
+                بر اساس نوع تحویل زمان آن متغیر است . ارسال عادی
+                تقریبا یکساعت و ارسال فوری تقریبا نیم ساعت طول میکشد.
+              </div>
             </ContentAccordionItem>
           </AccordionItem>
         </AccordionLayout>

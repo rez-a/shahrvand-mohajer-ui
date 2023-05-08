@@ -8,7 +8,7 @@ import CategoryCard from 'components/CategoryCard/CategoryCard';
 import LoaderCategoryCard from 'components/CategoryCard/LoaderCategoryCard';
 import BannerItem from 'components/shared/BannerItem';
 import Banner from 'components/home/Banner';
-import Vendors from 'components/home/vendorsSection/Vendors';
+// import Vendors from 'components/home/vendorsSection/Vendors';
 import useObserved from 'hooks/useObserved';
 import Breadcrumb from 'components/Breadcrumb';
 
@@ -49,7 +49,7 @@ const Categories = (props) => {
               sectionNum="SECTION8"
             />
           </Banner>
-          <Vendors />
+          {/* <Vendors /> */}
         </div>
       </main>
     </>
