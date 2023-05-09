@@ -19,6 +19,8 @@ const OrderDetails = (props) => {
       refreshInterval: false,
     }
   );
+
+  const orderCanceling = () => {};
   return (
     <div className="grid col-span-5 gap-y-4">
       <Card title="جزییات سفارش">
@@ -40,13 +42,18 @@ const OrderDetails = (props) => {
                   بازگشت
                 </span>
               </Link>
-              <div className="pr-6 border-r">
-                <p className="font-bold mb-2">
-                  سفارش <span>{order.Code}</span>
-                </p>
-                <p className="text-xs text-zinc-400 font-light ">
-                  ثبت شده در تاریخ <span>{order.CreatedAt}</span>
-                </p>
+              <div className="pr-6 border-r flex justify-between grow items-center">
+                <div>
+                  <p className="font-bold mb-2">
+                    سفارش <span>{order.Code}</span>
+                  </p>
+                  <p className="text-xs text-zinc-400 font-light ">
+                    ثبت شده در تاریخ <span>{order.CreatedAt}</span>
+                  </p>
+                </div>
+                <button className="text-xs bg-rose-50 text-rose-600 p-2 rounded-md hover:bg-rose-100/60 transition-all duration-200 mr-auto">
+                  لفو کردن سفارش
+                </button>
               </div>
             </div>
             <div className=" gap-0 columns-auto sm:columns-2  xl:columns-3">
@@ -97,20 +104,33 @@ const OrderDetails = (props) => {
                 </p>
                 <p
                   className={`text-xs  inline-flex px-2 py-1 rounded-md  border  ${
-                    order.Status === 'Completed'
+                    !Number(order.Cancelled)
                       ? 'border-green-300 text-green-500 bg-green-50'
                       : 'border-rose-300 text-rose-500 bg-rose-50'
                   }`}
                 >
-                  {order.Status === 'Completed'
-                    ? 'ثبت شده'
-                    : 'ثبت نشده'}
+                  {!Number(order.Cancelled) ? 'ثبت شده' : 'لغو شده'}
                 </p>
               </div>
             </div>
           </>
         )}
       </Card>
+      {!!Number(order.Suggest) && (
+        <div className="col-span-5 relative bg-white text-blue-700 rounded-3xl shadow-sm border border-gray-200/70 px-4 py-5">
+          <svg
+            className="fill-blue-700 w-6 h-6 inline"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM11.0026 16L18.0737 8.92893L16.6595 7.51472L11.0026 13.1716L8.17421 10.3431L6.75999 11.7574L11.0026 16Z"></path>
+          </svg>
+          <span className="mr-2 text-sm font-semibold">
+            درصورت ناموجودی محصول ، با نوع دیگری جایگزین شود
+          </span>
+        </div>
+      )}
+
       {!!order && (
         <Card title="محصولات سفارش">
           <div className="mt-4 border-t">

@@ -7,7 +7,7 @@ import ProductCartVertical from 'components/productCard/ProductCardVertical';
 import LoaderProductCardVeritical from 'components/productCard/LoaderProductCardVeritical';
 import { SLIDESHOW } from 'services/endPoints';
 
-const ProductsSlide = (props) => {
+const ProductsSection = (props) => {
   const { section } = useParams();
   const { data: products } = useSWR(
     `${SLIDESHOW}?section=${section}`,
@@ -30,6 +30,6 @@ const ProductsSlide = (props) => {
   );
 };
 
-ProductsSlide.propTypes = {};
+ProductsSection.propTypes = {};
 
-export default ProductsSlide;
+export default ProductsSection;

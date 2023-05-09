@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MegaMenu from '../megaMenu/MegaMenu';
-import { useState } from 'react';
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const NavHeader = ({ categories, showMenuNav }) => {
@@ -37,7 +35,7 @@ const NavHeader = ({ categories, showMenuNav }) => {
       </div>
       <ul className="flex items-center gap-4">
         <li className="group text-xs text-zinc-500  group relative transition hover:text-rose-500 before:absolute before:w-0 before:h-[1px] before:transition-all before:duration-200 before:left-1/2 before:-translate-x-1/2 before:top-full before:bg-rose-500 py-1 hover:before:w-full">
-          <a href="#">
+          <Link to="/products/section/SLIDER2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -48,11 +46,11 @@ const NavHeader = ({ categories, showMenuNav }) => {
               <path fill="none" d="M0 0h24v24H0z" />
               <path d="M12 23a7.5 7.5 0 0 0 7.5-7.5c0-.866-.23-1.697-.5-2.47-1.667 1.647-2.933 2.47-3.8 2.47 3.995-7 1.8-10-4.2-14 .5 5-2.796 7.274-4.138 8.537A7.5 7.5 0 0 0 12 23zm.71-17.765c3.241 2.75 3.257 4.887.753 9.274-.761 1.333.202 2.991 1.737 2.991.688 0 1.384-.2 2.119-.595a5.5 5.5 0 1 1-9.087-5.412c.126-.118.765-.685.793-.71.424-.38.773-.717 1.118-1.086 1.23-1.318 2.114-2.78 2.566-4.462z" />
             </svg>
-            پرفروش ترین ها
-          </a>
+            جدیدترین محصولات
+          </Link>
         </li>
         <li className="group text-xs text-zinc-500  group relative transition hover:text-rose-500 before:absolute before:w-0 before:h-[1px] before:transition-all before:duration-200 before:left-1/2 before:-translate-x-1/2 before:top-full before:bg-rose-500 py-1 hover:before:w-full">
-          <a href="#">
+          <Link to="/products/section/SLIDER6">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -64,7 +62,7 @@ const NavHeader = ({ categories, showMenuNav }) => {
               <path d="M10.9 2.1l9.899 1.415 1.414 9.9-9.192 9.192a1 1 0 0 1-1.414 0l-9.9-9.9a1 1 0 0 1 0-1.414L10.9 2.1zm.707 2.122L3.828 12l8.486 8.485 7.778-7.778-1.06-7.425-7.425-1.06zm2.12 6.364a2 2 0 1 1 2.83-2.829 2 2 0 0 1-2.83 2.829z" />
             </svg>
             تخفیف ها و پیشنهادها
-          </a>
+          </Link>
         </li>
         <li className="group text-xs text-zinc-500  group relative transition hover:text-rose-500 before:absolute before:w-0 before:h-[1px] before:transition-all before:duration-200 before:left-1/2 before:-translate-x-1/2 before:top-full before:bg-rose-500 py-1 hover:before:w-full">
           <Link to="/about-us">

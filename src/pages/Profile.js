@@ -16,7 +16,7 @@ const Profile = () => {
   };
   return (
     <main className="grid grid-cols-1 xl:grid-cols-7 gap-4 items-start mt-4 mx-4 2xl:mx-0">
-      <aside className=" bg-gray-50/50 xl:col-span-2 border-gray-200/70 overflow-hidden xl:sticky top-24 bg-white rounded-3xl shadow-sm border">
+      <aside className=" bg-gray-50/50 xl:col-span-2 border-gray-200/70 overflow-hidden xl:sticky top-32 bg-white rounded-3xl shadow-sm border">
         <ul>
           <li>
             <NavLink

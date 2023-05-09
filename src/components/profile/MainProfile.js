@@ -284,14 +284,14 @@ const MainProfile = (props) => {
                         </span>
                       </td>
                       <td class="px-6 py-4 text-right">
-                        <a
-                          href="#"
+                        <Link
+                          to={`/profile/orders/details/${order.Id}`}
                           class="font-medium flex items-center text-xs "
                         >
                           <span className="bg-sky-50 border border-sky-300 p-2 text-sky-500 rounded-md hover:bg-sky-100/70">
                             مشاهده جزییات
                           </span>
-                        </a>
+                        </Link>
                       </td>
                     </tr>
                   ))}

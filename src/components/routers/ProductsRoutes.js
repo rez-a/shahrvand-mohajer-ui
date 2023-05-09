@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import Categories from 'pages/Categories';
 import Products from 'pages/Products';
 import NotFound from 'pages/NotFound';
-import ProductsSlide from 'pages/ProductsSlide';
+import ProductsSection from 'pages/ProductsSection';
 
 const ProductsRoutes = (props) => {
   return (
@@ -12,7 +12,10 @@ const ProductsRoutes = (props) => {
       <Routes>
         <Route index element={<Categories />} />
         <Route path=":mainErpCode" element={<Products />} />
-        <Route path="section/:section" element={<ProductsSlide />} />
+        <Route
+          path="section/:section"
+          element={<ProductsSection />}
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
