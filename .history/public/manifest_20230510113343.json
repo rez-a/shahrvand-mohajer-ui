@@ -3,8 +3,6 @@
  "id": "https://mohajeran.shop/index",
  "start_url": "https://mohajeran.shop/index",
  "display": "fullscreen",
- "background_color": "#fe5353",
- "theme_color": "#fe5353",
  "icons": [
   {
    "src": "\/index\/android-icon-36x36.png",

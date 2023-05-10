@@ -4,13 +4,11 @@ import './assets/styles/index.css';
 import App from './App';
 import { SWRConfig } from 'swr';
 import * as serviceWorker from './serviceWorker';
-import InstallPWA from 'utilities/InstallPWA';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <SWRConfig value={{ revalidateOnFocus: false }}>
-      <InstallPWA/>
       <App />
     </SWRConfig>
   </React.StrictMode>

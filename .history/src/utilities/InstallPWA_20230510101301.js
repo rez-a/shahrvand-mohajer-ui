@@ -1,0 +1,45 @@
+import React, { useEffect, useState } from "react";
+
+
+const InstallPWA = () => {
+  const [supportsPWA, setSupportsPWA] = useState(false);
+  const [promptInstall, setPromptInstall] = useState(null);
+
+//   useEffect(() => {
+//     const handler = e => {
+//       e.preventDefault();
+//       setSupportsPWA(true);
+//       setPromptInstall(e);
+//     };
+//     window.addEventListener("beforeinstallprompt", handler);
+
+//     return () => window.removeEventListener("transitionend", handler);
+//   }, []);
+
+  const onClick = evt => {
+    evt.preventDefault();
+    if (!promptInstall) {
+      return;
+    }
+    promptInstall.prompt();
+  };
+  if (!supportsPWA) {
+    return null;
+  }
+  return (
+    <div className="w-full fixed bottom-0 left-0 z-50 bg-neutral-900">
+        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و 
+        <button
+        className="px-5 py-3"
+        id="setup_button"
+        aria-label="Install app"
+        title="Install app"
+        onClick={onClick}
+        >
+        Install
+        </button>
+    </div>
+  );
+};
+
+export default InstallPWA;
