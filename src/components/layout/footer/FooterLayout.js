@@ -6,10 +6,20 @@ import Trust from './Trust';
 import Copyright from './Copyright';
 
 const FooterLayout = () => {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
   return (
     <div className="border-t p-2 bg-white mt-5">
       <div className="py-4">
-        <button type="button" className="flex items-center mx-auto">
+        <button
+          onClick={scrollToTop}
+          type="button"
+          className="flex items-center mx-auto"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"

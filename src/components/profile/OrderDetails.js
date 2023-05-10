@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from './Card';
 import ProfileProductCard from 'components/productCard/ProfileProductCard';
 import { Link, useParams } from 'react-router-dom';
@@ -8,11 +8,14 @@ import useSWR from 'swr';
 import { useContext } from 'react';
 import { UserContext } from 'contexts/UserProvider';
 import TableLoaded from 'components/shared/TableLoaded';
+import { fetcher } from 'services/swr/fetcher';
+import Spinner from 'components/shared/Spinner';
 
 const OrderDetails = (props) => {
   const { orderId } = useParams();
   const { user } = useContext(UserContext);
-  const { data: order } = useSWR(
+  const [loading, setLoading] = useState(false);
+  const { data: order, mutate } = useSWR(
     `${ORDER_DETAILS}/${orderId}`,
     fetchWithToken,
     {
@@ -20,7 +23,12 @@ const OrderDetails = (props) => {
     }
   );
 
-  const orderCanceling = () => {};
+  const orderCanceling = async () => {
+    setLoading(true);
+    const response = await fetcher(`orders/${orderId}/cancelled`);
+    if (response.status === 'Success') mutate();
+    setLoading(false);
+  };
   return (
     <div className="grid col-span-5 gap-y-4">
       <Card title="جزییات سفارش">
@@ -51,12 +59,23 @@ const OrderDetails = (props) => {
                     ثبت شده در تاریخ <span>{order.CreatedAt}</span>
                   </p>
                 </div>
-                <button className="text-xs bg-rose-50 text-rose-600 p-2 rounded-md hover:bg-rose-100/60 transition-all duration-200 mr-auto">
-                  لفو کردن سفارش
-                </button>
+                {!Number(order.Cancelled) && (
+                  <button
+                    onClick={() => orderCanceling()}
+                    className="text-xs flex items-center gap-2 bg-rose-50 text-rose-600 p-2 rounded-md hover:bg-rose-100/60 transition-all duration-200 mr-auto"
+                  >
+                    {loading && (
+                      <Spinner
+                        color="text-rose-200"
+                        fill="fill-rose-700"
+                      />
+                    )}
+                    <span>لفو کردن سفارش</span>
+                  </button>
+                )}
               </div>
             </div>
-            <div className=" gap-0 columns-auto sm:columns-2  xl:columns-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ">
               <div className="space-y-2 py-4 px-7 border-b border-b-gray-100 h-24">
                 <p className="text-blue-700 font-bold">
                   نام کاربری :
@@ -100,6 +119,14 @@ const OrderDetails = (props) => {
               </div>
               <div className="space-y-2 py-4 px-7 border-b border-b-gray-100 h-24">
                 <p className="text-blue-700 font-bold">
+                  وضعیت پرداخت :
+                </p>
+                <p className="text-sm text-zinc-500">
+                  درحال بروز رسانی...
+                </p>
+              </div>
+              <div className="space-y-2 py-4 px-7 border-b border-b-gray-100 h-24">
+                <p className="text-blue-700 font-bold">
                   وضعیت سفارش :
                 </p>
                 <p
@@ -116,7 +143,7 @@ const OrderDetails = (props) => {
           </>
         )}
       </Card>
-      {!!Number(order.Suggest) && (
+      {!!Number(order?.Suggest) && (
         <div className="col-span-5 relative bg-white text-blue-700 rounded-3xl shadow-sm border border-gray-200/70 px-4 py-5">
           <svg
             className="fill-blue-700 w-6 h-6 inline"
