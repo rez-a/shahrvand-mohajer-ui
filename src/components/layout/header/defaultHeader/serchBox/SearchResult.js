@@ -1,9 +1,39 @@
 import ProductSearchResultCard from 'components/productCard/ProductSearchResultCard';
 import React from 'react';
+import { useEffect } from 'react';
+import { useRef } from 'react';
 
-const SearchResult = ({ products, loading, search }) => {
+const SearchResult = ({
+  products,
+  loading,
+  search,
+  setShowResult,
+  setShowDimmer,
+  setLoading,
+  setSearch,
+}) => {
+  const resultRef = useRef();
+  function closeSearchResult(e) {
+    if (!resultRef?.current.contains(e.target)) {
+      setShowResult(false);
+      setShowDimmer(false);
+      setLoading(false);
+      setSearch('');
+    }
+  }
+
+  useEffect(() => {
+    window.document.addEventListener('click', closeSearchResult);
+
+    return () =>
+      window.document.removeEventListener('click', closeSearchResult);
+  });
   return (
-    <div className="w-full pt-1 h-72 absolute right-0 top-full bg-white border border-gray-200 z-50 shadow-lg rounded-md overflow-auto ">
+    <div
+      ref={resultRef}
+      id="search-result"
+      className="w-full pt-1 h-72 absolute right-0 top-full bg-white border border-gray-200 z-50 shadow-lg rounded-md overflow-auto "
+    >
       {!loading ? (
         <ul className="divide-y">
           {products.map((product, i) => (

@@ -1,13 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
-import {
-  useLocation,
-  useNavigate,
-  useSearchParams,
-} from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import SearchResult from './SearchResult';
 import { useEffect } from 'react';
-import useSWRMutation from 'swr/mutation';
 import { PRODUCTS } from 'services/endPoints';
 import { fetcher } from 'services/swr/fetcher';
 import Spinner from 'components/shared/Spinner';
@@ -51,6 +46,7 @@ const SearchBox = () => {
       setShowDimmer(false);
     }
   }, [search]);
+
   return (
     <div className="w-1/2 relative h-full mr-5">
       <input
@@ -86,6 +82,10 @@ const SearchBox = () => {
           products={products}
           loading={loading}
           search={search}
+          setShowResult={setShowResult}
+          setShowDimmer={setShowDimmer}
+          setLoading={setLoading}
+          setSearch={setSearch}
         />
       )}
     </div>
