@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import samandehi from 'assets/images/samandehi.png';
 import enemad from 'assets/images/enemad.png';
+import { Link } from 'react-router-dom';
 
 const Trust = () => {
   return (
@@ -24,8 +25,14 @@ const Trust = () => {
         <div className="w-40 h-40 bg-gray-50 border border-gray-100 p-4 rounded">
           <img src={samandehi} alt="samandehi" />
         </div>
-        <div className="w-40 h-40 bg-gray-50 border border-gray-100 p-4 rounded">
+        <div className="w-40 h-40 bg-gray-50 border border-gray-100 p-4 rounded relative">
           <img src={enemad} alt="enemad" />
+          <Link
+            referrerPolicy="origin"
+            target="_blank"
+            className="absolute w-full h-full top-0 left-0"
+            to="https://trustseal.enamad.ir/?id=341070&amp;Code=0rzntT9kEo9UZuhvt1vh"
+          />
         </div>
       </div>
     </div>

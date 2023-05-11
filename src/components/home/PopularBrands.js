@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperNavBtn from 'components/swiper/SwiperNavBtn';
-import brands from 'brandsFake';
+import brands from 'brands';
 import { Autoplay, Navigation } from 'swiper';
+import { Link } from 'react-router-dom';
 
 const PopularBrands = (props) => {
   return (
@@ -36,7 +37,7 @@ const PopularBrands = (props) => {
         className="mySwiper"
       >
         {brands?.map((brand) => (
-          <SwiperSlide key={brand.id}>
+          <SwiperSlide className="relative" key={brand.id}>
             <div className="h-24 w-24 mx-auto  top-1/2 ">
               <img
                 src={brand.brandCover}
@@ -44,6 +45,10 @@ const PopularBrands = (props) => {
                 alt="brand"
               />
             </div>
+            <Link
+              to={`/search?q=${brand.linkTo}`}
+              className="absolute w-full h-full top-0 left-0 z-20"
+            />
           </SwiperSlide>
         ))}
         <SwiperNavBtn
