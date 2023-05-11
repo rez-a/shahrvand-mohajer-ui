@@ -37,6 +37,6 @@ const InitAlert = ({ message }) => {
   );
 };
 
-InitAlert.propTypes = { message: PropTypes.string };
+InitAlert.propTypes = { message: PropTypes.object };
 
 export default InitAlert;

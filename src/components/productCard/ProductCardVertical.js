@@ -41,7 +41,7 @@ const ProductCartVertical = ({ containerClassName, product }) => {
 
   return (
     <>
-      <div class={` overflow-hidden group ${containerClassName}`}>
+      <div className={` overflow-hidden group ${containerClassName}`}>
         <div className="px-4 flex items-center">
           <span
             className={`bg-rose-500 mr-auto text-xs text-white p-2 rounded-xl rounded-br-none font-bold ${
@@ -66,15 +66,15 @@ const ProductCartVertical = ({ containerClassName, product }) => {
             ? 'تغییر تعداد محصول'
             : 'افزودن به سبد خرید'}
         </button>
-        <div class="px-6 py-4">
+        <div className="px-6 py-4">
           <Link
             to={`/product/${MainGroupErpCode}/${SideGroupErpCode}/${ErpCode}`}
-            class="font-bold truncate block w-full text-rose-500/70 group-hover:text-rose-500/100 transition-all duration-200 text-base"
+            className="font-bold truncate block w-full text-rose-500/70 group-hover:text-rose-500/100 transition-all duration-200 text-base"
           >
             {Name}
           </Link>
         </div>
-        <div class="px-6 pb-2">
+        <div className="px-6 pb-2">
           <Link
             to={`/products/${MainGroupErpCode}?${queryString.stringify(
               {
@@ -82,7 +82,7 @@ const ProductCartVertical = ({ containerClassName, product }) => {
               },
               { arrayFormat: 'bracket' }
             )}`}
-            class="inline-block bg-gray-200 max-w-full truncate rounded-full px-3 py-1 text-xs text-gray-700 opacity-75 hover:opacity-100 transition-all duration-200 cursor-pointer hover:underline"
+            className="inline-block bg-gray-200 max-w-full truncate rounded-full px-3 py-1 text-xs text-gray-700 opacity-75 hover:opacity-100 transition-all duration-200 cursor-pointer hover:underline"
           >
             #{SideGroupName}
           </Link>

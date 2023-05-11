@@ -26,7 +26,7 @@ const MainCategory = ({
         }`}
       >
         <div className="w-16 h-16">
-          <img src={Image} class="rounded-l-none" alt={Name} />
+          <img src={Image} className="rounded-l-none" alt={Name} />
         </div>
         <div className="gap-2 px-5">
           <p className="text-sm whitespace-nowrap">{Name}</p>

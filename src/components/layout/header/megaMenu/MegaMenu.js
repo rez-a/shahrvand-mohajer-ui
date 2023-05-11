@@ -23,6 +23,7 @@ const MegaMenu = ({ categories }) => {
       <div className="flex col-span-2 bg-rose-500 flex-col justify-between ">
         {categories.map((category) => (
           <div
+            key={category.Id}
             className={`max-h-80 overflow-auto p-4 ${
               categoryFocused === category.ErpCode
                 ? 'block'

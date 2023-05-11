@@ -8,5 +8,9 @@ const baseOptions = {
   },
 };
 
-export const handleRequest = (options) =>
-  axios.request(Object.assign(baseOptions, options));
+export const handleRequest = async (options) => {
+  const response = await axios.request(
+    Object.assign(baseOptions, options)
+  );
+  return response.data;
+};

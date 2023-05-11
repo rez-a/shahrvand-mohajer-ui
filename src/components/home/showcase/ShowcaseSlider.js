@@ -35,8 +35,8 @@ const ShowcaseSlider = ({ sliders }) => {
         slidesPerView="auto"
         className="mySwiper relative h-full rounded-lg !w-full"
       >
-        {sliders?.map((slide) => (
-          <SwiperSlide>
+        {sliders?.map((slide, index) => (
+          <SwiperSlide key={index}>
             <img src={slide.Image} alt="image-slider" />
           </SwiperSlide>
         ))}

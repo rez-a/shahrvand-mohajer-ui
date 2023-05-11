@@ -1,3 +1,4 @@
+import ErrorBoundary from 'components/ErrorBoundary';
 import InitAlert from 'components/InitAlert';
 import AllRoutes from 'components/routers/Routes';
 import Providers from 'providers/Providers';

@@ -39,8 +39,8 @@ const ShowCase = () => {
           </>
         ) : (
           <>
-            <div className="loading-bg w-full h-1/2"></div>
-            <div className="loading-bg w-full h-1/2"></div>
+            <div className="loading-bg w-full h-full rounded-lg"></div>
+            <div className="loading-bg w-full h-full rounded-lg"></div>
           </>
         )}
       </div>

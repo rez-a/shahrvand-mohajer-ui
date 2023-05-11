@@ -17,5 +17,5 @@ export const fetcher = async (url) => {
     method: 'get',
     headers: setHeaders(),
   });
-  return response.data;
+  return response;
 };
