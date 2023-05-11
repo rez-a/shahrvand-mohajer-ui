@@ -70,10 +70,6 @@ const Products = (props) => {
     setQuery(queryList);
   };
 
-  useEffect(() => {
-    console.log('change query');
-  }, [query]);
-
   function setParamsFilters() {
     return queryString.stringifyUrl(
       {
@@ -161,7 +157,6 @@ const Products = (props) => {
     );
   };
 
-  console.log(products?.data[0]);
   return (
     <>
       <Breadcrumb

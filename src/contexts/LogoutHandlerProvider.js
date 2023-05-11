@@ -14,7 +14,6 @@ const LogoutHandlerProvider = ({ children }) => {
   const accessRoutesUser = ['profile', 'shipping'];
 
   const logoutHandler = () => {
-    console.log('logout');
     removeAuthToken(AUTH_TOKEN_SHAHRVAND);
     setUser(null);
     const result = [];

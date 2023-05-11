@@ -4,6 +4,7 @@ import CartProvider from 'contexts/CartProvider';
 import UserProvider from 'contexts/UserProvider';
 import CostProvider from 'contexts/CostProvider';
 import LogoutHandlerProvider from 'contexts/LogoutHandlerProvider';
+import DimmerProvider from 'contexts/DimmerProvider';
 
 const Providers = ({ children }) => {
   return (
@@ -11,7 +12,9 @@ const Providers = ({ children }) => {
       <UserProvider>
         <LogoutHandlerProvider>
           <CartProvider>
-            <LoadingProvider>{children}</LoadingProvider>
+            <DimmerProvider>
+              <LoadingProvider>{children}</LoadingProvider>
+            </DimmerProvider>
           </CartProvider>
         </LogoutHandlerProvider>
       </UserProvider>

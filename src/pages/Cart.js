@@ -20,7 +20,6 @@ const Cart = () => {
   const navigate = useNavigate();
   const { price_courier_cost, min_order_amount } =
     useContext(CostContext);
-  console.log(price_courier_cost, min_order_amount);
   const [totalPrice, setTotalPrice] = useState(0);
   const [purchaseProfit, setPurchaseProfit] = useState(0);
   const [productsInCart, setProductInCart] = useState(

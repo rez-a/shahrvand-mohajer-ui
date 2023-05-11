@@ -47,7 +47,6 @@ const ProductPage = () => {
     ErpCode,
     MainGroupErpCode,
   } = !!product?.data && product?.data;
-  console.log(product?.data);
   const [attrSelected, setAttrSelected] = useState(Attr?.[0]);
   useEffect(() => {
     setLoader(isLoading);
@@ -89,7 +88,7 @@ const ProductPage = () => {
         {!!product?.data ? (
           <>
             <div className="flex flex-col sm:flex-row items-start gap-6 bg-white p-4 py-8 rounded-md border border-gray-100">
-              <div className="w-72 max-h-96 hidden lg:block">
+              <div className="w-72 max-h-96 hidden lg:block overflow-hidden">
                 <ImageZoom image={Image} alt={Name} />
               </div>
               <div className="sm:w-1/2 w-full max-h-96 block lg:hidden">

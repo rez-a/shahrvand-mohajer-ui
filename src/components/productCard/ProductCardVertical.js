@@ -9,8 +9,12 @@ import ModalLayout from 'components/shared/modal/ModalLayout';
 import useProductInCart from 'hooks/useProductInCart';
 import ControllerQuantityModal from 'components/shared/modal/ControllerQuantityModal';
 import md5 from 'md5-hash';
+import { addToCart } from 'reducers/cart/actionCreators';
 
-const ProductCartVertical = ({ containerClassName, product }) => {
+const ProductCartVertical = ({
+  containerClassName = '',
+  product,
+}) => {
   const {
     Name,
     ErpCode,
@@ -19,6 +23,7 @@ const ProductCartVertical = ({ containerClassName, product }) => {
     SideGroupErpCode,
     SellPrice,
     LastBuyPrice,
+    MainGroupName,
     Image,
     Id,
     IsVendor,
@@ -39,6 +44,24 @@ const ProductCartVertical = ({ containerClassName, product }) => {
     IsVendor ? MainGroupErpCode : 'SHAHRVAND'
   );
 
+  const handleShowModal = () => {
+    dispatch(
+      addToCart(
+        { ...product, attrSelected },
+        IsVendor
+          ? {
+              vendorErpCode: MainGroupErpCode,
+              vendorName: MainGroupName,
+            }
+          : {
+              vendorErpCode: 'SHAHRVAND',
+              vendorName: 'شهروند',
+            }
+      )
+    );
+    setShowModal(true);
+  };
+
   return (
     <>
       <div className={` overflow-hidden group ${containerClassName}`}>
@@ -54,18 +77,38 @@ const ProductCartVertical = ({ containerClassName, product }) => {
         <div className="w-full h-60 p-4 overflow-hidden">
           <img className="object-contain" src={Image} alt={Name} />
         </div>
-        <button
-          onClick={() => setShowModal(true)}
-          className={` text-white  py-1 px-2 text-xs rounded-md mx-6 shadow-lg   transition-all duration-300 ${
-            !!productInCart
-              ? 'bg-sky-500/90 hover:bg-sky-500 shadow-sky-500/0'
-              : 'bg-rose-500/90 hover:bg-rose-500 shadow-rose-500/0'
-          }`}
-        >
-          {!!productInCart
-            ? 'تغییر تعداد محصول'
-            : 'افزودن به سبد خرید'}
-        </button>
+        {!!productInCart ? (
+          <button
+            onClick={() => setShowModal(true)}
+            className="text-white  py-1.5 px-2 text-xs rounded-md mx-6 shadow-xl   transition-all duration-300 bg-yellow-400/90 hover:bg-yellow-400 shadow-sky-500/0  border-b-4 border-b-yellow-700"
+          >
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                className="w-6 h-6 fill-black/60"
+              >
+                <path d="M3.00488 3.00293H21.0049C21.5572 3.00293 22.0049 3.45064 22.0049 4.00293V20.0029C22.0049 20.5552 21.5572 21.0029 21.0049 21.0029H3.00488C2.4526 21.0029 2.00488 20.5552 2.00488 20.0029V4.00293C2.00488 3.45064 2.4526 3.00293 3.00488 3.00293ZM4.00488 5.00293V19.0029H20.0049V5.00293H4.00488ZM9.00488 11.0029H11.0049V13.0029H9.00488V15.0029H7.00488V13.0029H5.00488V11.0029H7.00488V9.00293H9.00488V11.0029ZM13.0049 11.0029H19.0049V13.0029H13.0049V11.0029Z"></path>
+              </svg>
+            </div>
+          </button>
+        ) : (
+          <button
+            onClick={handleShowModal}
+            className="text-white  py-1.5 px-2 text-xs rounded-md mx-6 shadow-xl   transition-all duration-300 bg-rose-400/90 hover:bg-rose-400 shadow-sky-500/0  border-b-4 border-b-rose-700"
+          >
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-6 h-6 fill-white"
+                viewBox="0 0 24 24"
+              >
+                <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
+              </svg>
+            </div>
+          </button>
+        )}
+
         <div className="px-6 py-4">
           <Link
             to={`/product/${MainGroupErpCode}/${SideGroupErpCode}/${ErpCode}`}

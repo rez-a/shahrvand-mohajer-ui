@@ -20,7 +20,7 @@ const DefaultHeader = ({ categories }) => {
   return (
     <header
       ref={navLink}
-      className="shadow bg-white sticky top-0 z-10 mb-6 hidden lg:block"
+      className="shadow bg-white sticky top-0 z-10 hidden lg:block"
     >
       <div className="content relative 2xl:container">
         <TopHeader />

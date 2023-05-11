@@ -9,7 +9,7 @@ import returnPolicy from 'assets/images/services/return-policy.svg';
 const Services = (props) => {
   return (
     <ul className="my-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10 ">
-      <li className="">
+      <li>
         <div className="w-16 h-16 mx-auto">
           <img
             className="object-contain"
@@ -21,7 +21,7 @@ const Services = (props) => {
           تحویل فوری
         </p>
       </li>
-      <li className="">
+      <li>
         <div className="w-16 h-16 mx-auto">
           <img
             className="object-contain"
@@ -33,7 +33,7 @@ const Services = (props) => {
           پشتیبانی 24 ساعته
         </p>
       </li>
-      <li className="">
+      <li>
         <div className="w-16 h-16 mx-auto">
           <img
             className="object-contain"
@@ -45,7 +45,7 @@ const Services = (props) => {
           پرداخت درمحل
         </p>
       </li>
-      <li className="">
+      <li>
         <div className="w-16 h-16 mx-auto">
           <img
             className="object-contain"
@@ -57,7 +57,7 @@ const Services = (props) => {
           ۷ روز ضمانت بازگشت
         </p>
       </li>
-      <li className="">
+      <li>
         <div className="w-16 h-16 mx-auto">
           <img
             className="object-contain"
