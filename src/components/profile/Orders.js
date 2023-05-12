@@ -1,21 +1,21 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import TitleIcon from 'components/shared/TitleIcon';
 import Card from './Card';
 import { Link } from 'react-router-dom';
 import useSWR from 'swr';
 import { ORDERS, PROFILE } from 'services/endPoints';
-import { fetchWithToken } from 'services/swr/fetchWithToken';
 import EmptyDataProfile from './EmptyData';
 import TableLoaded from 'components/shared/TableLoaded';
-import { postWithToken } from 'services/swr/postWithToken';
+import { fetcher } from 'services/swr/fetcher';
+import dispatcher from 'services/dispatcher';
 
 const Orders = (props) => {
-  const { data: user } = useSWR(PROFILE, postWithToken);
-  const { data: orders } = useSWR(ORDERS, fetchWithToken);
+  const { data: user } = useSWR(PROFILE, dispatcher);
+  const { data: orders } = useSWR(ORDERS, fetcher);
+
+  const { addresses } = !!user && user.data;
   return (
     <Card title="آخرین سفارش ها">
-      {!user?.addresses ? (
+      {!addresses ? (
         <EmptyDataProfile
           text="شما هیچ سفارشی ندارید"
           textClassName="text-rose-500 font-bold"
@@ -189,7 +189,7 @@ const Orders = (props) => {
         </EmptyDataProfile>
       ) : !orders ? (
         <TableLoaded count={5} />
-      ) : !!orders.length ? (
+      ) : !!orders.data.length ? (
         <div>
           <div class="relative overflow-auto max-h-screen border border-gray-100">
             <table class="w-full text-sm text-right text-gray-500 ">
@@ -216,7 +216,7 @@ const Orders = (props) => {
                 </tr>
               </thead>
               <tbody className="whitespace-nowrap">
-                {orders.map((order, index) => (
+                {orders.data.map((order, index) => (
                   <tr
                     key={order.Id}
                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:text-black hover:bg-gray-50/50 transition-all duration-200 dark:hover:bg-gray-600"
@@ -443,7 +443,5 @@ const Orders = (props) => {
     </Card>
   );
 };
-
-Orders.propTypes = {};
 
 export default Orders;

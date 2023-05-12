@@ -3,9 +3,6 @@ import { BASE_URL } from './baseURL';
 
 const baseOptions = {
   baseURL: BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
 };
 
 export const handleRequest = async (options) => {

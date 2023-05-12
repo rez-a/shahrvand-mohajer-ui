@@ -3,13 +3,12 @@ import Card from './Card';
 import ProfileProductCard from 'components/productCard/ProfileProductCard';
 import { Link, useParams } from 'react-router-dom';
 import { ORDER_DETAILS } from 'services/endPoints';
-import { fetchWithToken } from 'services/swr/fetchWithToken';
 import useSWR from 'swr';
 import { useContext } from 'react';
 import { UserContext } from 'contexts/UserProvider';
 import TableLoaded from 'components/shared/TableLoaded';
-import { fetcher } from 'services/swr/fetcher';
 import Spinner from 'components/shared/Spinner';
+import { fetcher } from 'services/swr/fetcher';
 
 const OrderDetails = (props) => {
   const { orderId } = useParams();
@@ -17,7 +16,7 @@ const OrderDetails = (props) => {
   const [loading, setLoading] = useState(false);
   const { data: order, mutate } = useSWR(
     `${ORDER_DETAILS}/${orderId}`,
-    fetchWithToken,
+    fetcher,
     {
       refreshInterval: false,
     }

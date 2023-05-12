@@ -1,11 +1,14 @@
 import setHeaderRequest from 'helper/setHeaderRequest';
 import { handleRequest } from 'services';
 
-export const fetcher = async (url) => {
+const dispatcher = async (url, data) => {
   const response = await handleRequest({
     url,
-    method: 'get',
+    method: 'post',
+    data,
     headers: setHeaderRequest(),
   });
   return response;
 };
+
+export default dispatcher;

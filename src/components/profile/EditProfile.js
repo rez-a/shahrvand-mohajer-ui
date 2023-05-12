@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import TextInput from 'components/shared/inputs/TextInput';
 import Card from './Card';
 import { Link } from 'react-router-dom';
@@ -10,23 +9,22 @@ import {
   PROFILE,
   REFRESH_TOKEN,
 } from 'services/endPoints';
-import { postWithToken } from 'services/swr/postWithToken';
 import Spinner from 'components/shared/Spinner';
 import TextAreaInput from 'components/shared/inputs/TextAreaInput';
 import validateUserInfo from 'helper/validateUserInfo';
 import { useEffect } from 'react';
-import { postFetcher } from 'services/postFetcher';
 import storeAuthToken from 'helper/handlerAuthorazation/storeAuthToken';
 import { useContext } from 'react';
 import { UserContext } from 'contexts/UserProvider';
 import decodeToken from 'helper/handlerAuthorazation/decodeToken';
-import { fetchWithToken } from 'services/swr/fetchWithToken';
+import { fetcher } from 'services/swr/fetcher';
+import dispatcher from 'services/dispatcher';
 
 const EditProfile = (props) => {
   const { setUser } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
-  const { data: user } = useSWR(PROFILE, postWithToken);
-  const { data: addresses } = useSWR(ADDRESSES, fetchWithToken);
+  const { data: user } = useSWR(PROFILE, dispatcher);
+  const { data: addresses } = useSWR(ADDRESSES, fetcher);
   const [newInfo, setNewInfo] = useState({
     name: '',
     tel: '',
@@ -42,12 +40,14 @@ const EditProfile = (props) => {
       setNewInfo((prevInfo) => {
         return {
           ...prevInfo,
-          name: user.name,
-          mobile: user.mobile,
-          tel: user.tel,
+          name: user.data.name,
+          mobile: user.data.mobile,
+          tel: user.data.tel,
         };
       });
   }, [user?.id]);
+
+  console.log(user);
 
   const handleEditProfile = async () => {
     if (Object.values(validateUserInfo(newInfo)).includes(false)) {
@@ -55,12 +55,13 @@ const EditProfile = (props) => {
     } else {
       setLoading(true);
       try {
-        const editResponse = await postFetcher(EDIT_PROFILE, {
+        const editResponse = await dispatcher(EDIT_PROFILE, {
           name: newInfo.name,
           tel: newInfo.tel,
         });
-        const refreshTokenResponse = await postWithToken(
-          REFRESH_TOKEN
+        const refreshTokenResponse = await dispatcher(
+          REFRESH_TOKEN,
+          {}
         );
         editUser(refreshTokenResponse.access_token);
       } catch (err) {}
@@ -126,7 +127,7 @@ const EditProfile = (props) => {
                     label="آدرس پیش فرض"
                     placeholder="آدرس پیش فرض"
                     valid={true}
-                    value={addresses.at(0)}
+                    value={addresses.data.at(0)}
                     disabled={true}
                   />
                 </div>

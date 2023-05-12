@@ -6,15 +6,16 @@ import { Link } from 'react-router-dom';
 import EmptyDataProfile from './EmptyData';
 import useSWR from 'swr';
 import { PROFILE } from 'services/endPoints';
-import { postWithToken } from 'services/swr/postWithToken';
 import TableLoaded from 'components/shared/TableLoaded';
+import dispatcher from 'services/dispatcher';
 
 const Payments = (props) => {
-  const { data: user } = useSWR(PROFILE, postWithToken);
+  const { data: user } = useSWR(PROFILE, dispatcher);
   const payments = [];
+  const { addresses } = !!user && user.data;
   return (
     <Card title="آخرین پرداخت ها">
-      {!user?.addresses ? (
+      {!addresses ? (
         <EmptyDataProfile
           text="شما هیچ پرداختی ندارید"
           textClassName="text-rose-500 font-bold"

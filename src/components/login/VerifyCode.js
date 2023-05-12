@@ -1,15 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import Spinner from 'components/shared/Spinner';
 import Timer from 'components/shared/Timer';
 import { useRef } from 'react';
-import { postFetcher } from 'services/postFetcher';
-import { BASE_URL } from 'services/baseURL';
 import { VERIFY } from 'services/endPoints';
 import storeAuthToken from 'helper/handlerAuthorazation/storeAuthToken';
 import { UserContext } from 'contexts/UserProvider';
 import decodeToken from 'helper/handlerAuthorazation/decodeToken';
 import { useNavigate } from 'react-router-dom';
+import dispatcher from 'services/dispatcher';
 
 const VerifyCode = ({ setSendVerifyCode, phoneNumber }) => {
   const [verifyCode, setVerifyCode] = useState('');
@@ -21,20 +20,20 @@ const VerifyCode = ({ setSendVerifyCode, phoneNumber }) => {
   const handleLogin = async () => {
     if (verifyCode !== '') {
       setLoading(true);
-      const response = await postFetcher(`${BASE_URL}${VERIFY}`, {
+      const response = await dispatcher(VERIFY, {
         mobile: phoneNumber,
         code: 11111,
       });
       if (response?.status === 'Success') {
         storeAuthToken(response.data.access_token);
         setUser(decodeToken(response.data.access_token));
-        setLoading(false);
         navigate(-1);
       }
     } else {
       labelRef.current.style.animation =
         'buzz 0.5s linear forwards alternate';
     }
+    setLoading(false);
   };
 
   return (
@@ -73,7 +72,7 @@ const VerifyCode = ({ setSendVerifyCode, phoneNumber }) => {
         <input
           className="w-full placeholder:text-xs px-3 py-2 h-12 mb-3 rounded-md border outline-none focus:border-gray-400"
           maxLength={11}
-          type="text"
+          type="number"
           id="phone-number"
           value={verifyCode}
           onChange={(e) => setVerifyCode(e.target.value)}

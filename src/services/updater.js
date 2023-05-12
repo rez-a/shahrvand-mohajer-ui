@@ -1,6 +1,6 @@
 import { handleRequest } from 'services';
 
-export const patchFetcher = async (url, data) => {
+export const updater = async (url, data) => {
   const response = await handleRequest({
     url,
     method: 'patch',

@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import ModalLayout from 'components/shared/modal/ModalLayout';
 import TextAreaInput from 'components/shared/inputs/TextAreaInput';
 import Card from '../Card';
 import { ADDRESSES } from 'services/endPoints';
 import useSWR from 'swr';
-import { fetchWithToken } from 'services/swr/fetchWithToken';
 import EmptyDataProfile from '../EmptyData';
 import { useContext } from 'react';
 import { UserContext } from 'contexts/UserProvider';
-import { Link } from 'react-router-dom';
-import { patchFetcher } from 'services/patchFetcher';
+import { updater } from 'services/updater';
 import Spinner from 'components/shared/Spinner';
 import Address from './Address';
+import { fetcher } from 'services/swr/fetcher';
 
 const Addresses = (props) => {
   const [showModal, setShowModal] = useState({
@@ -30,11 +28,8 @@ const Addresses = (props) => {
   });
   const [newAddress, setNewAddress] = useState('');
   const { user } = useContext(UserContext);
-  const { data: addresses, mutate } = useSWR(
-    ADDRESSES,
-    fetchWithToken
-  );
-
+  const { data, mutate } = useSWR(ADDRESSES, fetcher);
+  const addresses = !!data && data.data;
   const handleShowEditModal = (index) => {
     setNewAddress(addresses[index]);
     setAddressEditedIndex(index);
@@ -47,7 +42,7 @@ const Addresses = (props) => {
   };
 
   const handelSendAddresses = async (addresses) => {
-    const response = await patchFetcher(ADDRESSES, { addresses });
+    const response = await updater(ADDRESSES, { addresses });
     await mutate();
     setLoding({
       add: false,

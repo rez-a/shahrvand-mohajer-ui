@@ -1,10 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import Spinner from 'components/shared/Spinner';
-import { postFetcher } from 'services/postFetcher';
-import { BASE_URL } from 'services/baseURL';
 import { LOGIN } from 'services/endPoints';
 import Toast from 'utilities/sweetAlert';
+import dispatcher from 'services/dispatcher';
 
 const PhoneNumber = ({
   setSendVerifyCode,
@@ -22,18 +21,20 @@ const PhoneNumber = ({
     setValidPhoneNumber(true);
     if (phoneNumberRegex.test(phoneNumber)) {
       setLoading(true);
-      const response = await postFetcher(`${BASE_URL}${LOGIN}`, {
-        mobile: phoneNumber,
-      });
-      if (response?.status === 'Success') {
-        setLoading(false);
-        setSendVerifyCode(true);
-      } else {
+      try {
+        const response = await dispatcher(LOGIN, {
+          mobile: phoneNumber,
+        });
+        if (response?.status === 'Success') {
+          setSendVerifyCode(true);
+        }
+      } catch (err) {
         Toast.fire({
           title: 'بعد از 2 دقیقه مجددا تلاش کنید',
           icon: 'error',
         });
       }
+      setLoading(false);
     } else {
       labelRef.current.style.animation =
         'buzz 0.5s linear forwards alternate';
