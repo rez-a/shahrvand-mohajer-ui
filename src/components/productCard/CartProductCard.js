@@ -29,9 +29,9 @@ const CartProductCard = ({
   );
   return (
     <div className="flex flex-col items-start py-4 border-gray-100 lg:flex-row">
-      <div className="lg:h-40 w-full lg:w-40 mb-4">
+      <div className="h-24 lg:h-40  w-24 lg:w-40 mb-4 mx-auto">
         <img
-          class="object-cover w-full  h-96 md:h-auto md:w-48  "
+          class="object-cover w-full  md:h-auto md:w-48  "
           src={Image}
           alt={Name}
         />

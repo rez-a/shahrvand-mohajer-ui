@@ -6,7 +6,7 @@ const SortItem = ({ clickHandler, querySort, type, title }) => {
     <li className="text-center xl:text-right">
       <button
         onClick={clickHandler}
-        className={`px-3 py-2 rounded-md ${
+        className={`px-2 py-1 rounded-md ${
           querySort === type
             ? 'bg-rose-500 text-white font-bold'
             : ' '

@@ -107,9 +107,7 @@ const Addresses = (props) => {
               user={user}
               address={address}
               index={index}
-              handleShowEditModal={async () =>
-                await handleShowEditModal(index)
-              }
+              handleShowEditModal={() => handleShowEditModal(index)}
               handleRemoveAddress={() => handleRemoveAddress(index)}
             />
           ))
@@ -282,7 +280,7 @@ const Addresses = (props) => {
                 type="button"
               >
                 {loading.add && <Spinner />}
-                <soan className="mr-2">افزودن</soan>
+                <span className="mr-2">افزودن</span>
               </button>
             </form>
           </div>
@@ -325,7 +323,7 @@ const Addresses = (props) => {
                 type="button"
               >
                 {loading.edit && <Spinner />}
-                <soan className="mr-2">ویرایش</soan>
+                <span className="mr-2">ویرایش</span>
               </button>
             </form>
           </div>

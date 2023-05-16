@@ -7,7 +7,6 @@ import useSWR from 'swr';
 export const CostContext = createContext();
 const CostProvider = ({ children }) => {
   const { data } = useSWR(COST, fetcher);
-
   return (
     <CostContext.Provider value={{ ...data }}>
       {children}

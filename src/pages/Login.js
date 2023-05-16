@@ -1,6 +1,12 @@
 import React, { useEffect } from 'react';
 import TitleIcon from 'components/shared/TitleIcon';
-import { Link, useNavigate } from 'react-router-dom';
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useParams,
+  useRoutes,
+} from 'react-router-dom';
 import PhoneNumber from 'components/login/PhoneNumber';
 import VerifyCode from 'components/login/VerifyCode';
 import { useState } from 'react';

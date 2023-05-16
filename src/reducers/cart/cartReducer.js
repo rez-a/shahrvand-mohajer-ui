@@ -9,9 +9,12 @@ import {
 import setToLS from 'helper/LS/setToLS';
 
 export const cartReducer = (state, action) => {
-  const vendor = state.cart.find(
-    (vendor) => vendor.vendorErpCode === action.payload.vendorErpCode
-  );
+  const vendor =
+    action.type !== CLEAR_CART &&
+    state.cart.find(
+      (vendor) =>
+        vendor.vendorErpCode === action.payload.vendorErpCode
+    );
   let newCart = [];
   switch (action.type) {
     case ADD_TO_CART:

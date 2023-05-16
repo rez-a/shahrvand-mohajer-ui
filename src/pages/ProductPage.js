@@ -18,6 +18,7 @@ import md5 from 'md5-hash';
 import Loading from 'components/shared/Loading';
 import Breadcrumb from 'components/Breadcrumb';
 import queryString from 'query-string';
+import { addToCart } from 'reducers/cart/actionCreators';
 
 const ProductPage = () => {
   const { erpCode } = useParams();
@@ -37,7 +38,7 @@ const ProductPage = () => {
     VisitCount,
     IsVendor,
     Attr,
-    IsAvailable,
+    Few,
     Image,
     LastBuyPrice,
     SellPrice,
@@ -63,6 +64,24 @@ const ProductPage = () => {
     IsVendor ? MainGroupErpCode : 'SHAHRVAND'
   );
 
+  const handleShowModal = () => {
+    dispatch(
+      addToCart(
+        { ...product?.data, attrSelected },
+        IsVendor
+          ? {
+              vendorErpCode: MainGroupErpCode,
+              vendorName: MainGroupName,
+            }
+          : {
+              vendorErpCode: 'SHAHRVAND',
+              vendorName: 'شهروند',
+            }
+      )
+    );
+    setShowModal(true);
+  };
+
   return (
     <>
       <Breadcrumb
@@ -87,15 +106,15 @@ const ProductPage = () => {
       <div className="min-h-screen mx-4 2xl:mx-0">
         {!!product?.data ? (
           <>
-            <div className="flex flex-col sm:flex-row items-start gap-6 bg-white p-4 py-8 rounded-md border border-gray-100">
+            <div className="flex flex-col sm:flex-row items-start gap-4 bg-white p-2  md:p-4 rounded-md border border-gray-100">
               <div className="w-72 max-h-96 hidden lg:block overflow-hidden">
                 <ImageZoom image={Image} alt={Name} />
               </div>
-              <div className="sm:w-1/2 w-full max-h-96 block lg:hidden">
+              <div className="sm:w-1/2 w-40 max-h-40 block lg:hidden mx-auto">
                 <img src={Image} alt={Name} />
               </div>
               <div className="grow w-full sm:w-1/2">
-                <h2 className="font-bold py-4 border-b">{Name}</h2>
+                <h2 className="font-bold py-2 border-b">{Name}</h2>
                 <div className="flex flex-col lg:flex-row items-start justify-between my-4">
                   <div>
                     {!!Attr.length && (
@@ -107,10 +126,13 @@ const ProductPage = () => {
                           </span>
                         </h4>
 
-                        <ul className="text-xs space-y-2 mt-3">
+                        <ul className="text-xs space-y-2 mt-2">
                           {Attr.map((atr, index) => (
                             <li key={index} className="mr-2">
-                              <span className="text-zinc-500 relative pr-4 font-semibold before:w-2 before:h-2 before:bg-zinc-500 before:right-0 before:top-1/2 before:-translate-y-1/2 before:rounded-full before:absolute">
+                              <span
+                                onClick={() => setAttrSelected(atr)}
+                                className="text-zinc-500 relative pr-4 font-semibold before:w-2 before:h-2 before:bg-zinc-500 before:right-0 before:top-1/2 before:-translate-y-1/2 before:rounded-full before:absolute"
+                              >
                                 {atr}
                               </span>
                             </li>
@@ -118,7 +140,7 @@ const ProductPage = () => {
                         </ul>
                       </>
                     )}
-                    <div className="flex items-center max-w-[20rem] mx-auto my-8">
+                    <div className="flex items-center max-w-[20rem] mx-auto my-2">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
@@ -152,9 +174,9 @@ const ProductPage = () => {
                             : 'فروشگاه شهروند'}
                         </p>
                       </div>
-                      <p className="flex items-center my-4">
+                      <p className="flex items-center my-2">
                         <div className="w-6 h-6">
-                          {IsAvailable ? (
+                          {Number(Few) ? (
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               viewBox="0 0 24 24"
@@ -173,12 +195,12 @@ const ProductPage = () => {
                           )}
                         </div>
                         <span className="text-sm mr-2 text-zinc-700">
-                          {IsAvailable ? 'موجود در انبار' : 'ناموجود'}
+                          {Number(Few) ? 'موجود در انبار' : 'ناموجود'}
                         </span>
                       </p>
                       {LastBuyPrice !== SellPrice ? (
                         <>
-                          <p className="flex items-center flex-row-reverse mt-4 mb-2">
+                          <p className="flex items-center flex-row-reverse mt-2 mb-2">
                             <span className="bg-rose-500 p-2 py-1 rounded-full text-white text-sm font-semibold">
                               {discount}%
                             </span>
@@ -186,7 +208,7 @@ const ProductPage = () => {
                               {SellPrice?.toLocaleString()}
                             </span>
                           </p>
-                          <p className="text-rose-500 text-left mb-4">
+                          <p className="text-rose-500 text-left mb-2">
                             <span className="font-bold text-2xl ml-3">
                               {LastBuyPrice?.toLocaleString()}
                             </span>
@@ -194,7 +216,7 @@ const ProductPage = () => {
                           </p>
                         </>
                       ) : (
-                        <p className="text-rose-500 text-left mb-4">
+                        <p className="text-rose-500 text-left mb-2">
                           <span className="font-bold text-2xl ml-3">
                             {LastBuyPrice?.toLocaleString()}
                           </span>
@@ -212,7 +234,7 @@ const ProductPage = () => {
                         </small>
                       )}
                       <button
-                        onClick={() => setShowModal(true)}
+                        onClick={handleShowModal}
                         className={`w-full  text-white text-lg p-3 rounded mt-2 transition-all duration-300 ${
                           !!productInCart
                             ? 'bg-sky-500 hover:bg-sky-600'

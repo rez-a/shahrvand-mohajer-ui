@@ -72,19 +72,23 @@ input:checked ~ .dot {
   right: 1.125rem;
 }
 
+.overflow-y-auto::-webkit-scrollbar,
 .overflow-auto::-webkit-scrollbar {
   width: 0.5rem;
   height: 0.5rem;
 }
 
+.overflow-y-auto:hover::-webkit-scrollbar,
 .overflow-auto:hover::-webkit-scrollbar {
   width: 0.75rem;
 }
 
+.overflow-y-auto::-webkit-scrollbar-track,
 .overflow-auto::-webkit-scrollbar-track {
   background-color: #fff;
 }
 
+.overflow-y-auto::-webkit-scrollbar-thumb,
 .overflow-auto::-webkit-scrollbar-thumb {
   border-radius: 2px;
   visibility: visible;

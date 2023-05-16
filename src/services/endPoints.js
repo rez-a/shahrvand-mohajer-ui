@@ -17,5 +17,6 @@ export const ORDERS = 'orders';
 export const ADDRESSES = 'addresses';
 export const REFRESH_TOKEN = 'auth/refresh/token';
 export const ORDER_DETAILS = 'orders/details';
-export const COST = 'orders/courier/cost';
+export const COST = 'app/transportation-cost';
 export const INSTANT_MESSAGINGS = 'app/instant-messagings';
+export const ORDER_SAVE = 'orders/save';

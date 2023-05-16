@@ -7,61 +7,39 @@ import ContentAccordionItem from 'components/shared/accordion/ContentAccordionIt
 import { CartContext } from 'contexts/CartProvider';
 import emptyCart from 'assets/images/empty-cart.svg';
 import { Link, useNavigate } from 'react-router-dom';
-import getTotalPrice from 'helper/getTotalPrice';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { CostContext } from 'contexts/CostProvider';
+import DeliveryProgress from 'components/DeliveryProgress';
+import { UserContext } from 'contexts/UserProvider';
 
-const Cart = () => {
+const Cart = ({
+  data: {
+    totalPrice,
+    deliveryCost,
+    min_order_amount,
+    productsInCart,
+    purchaseProfit,
+  },
+}) => {
   const {
     state: { cart },
     dispatch,
   } = useContext(CartContext);
-  const navigate = useNavigate();
-  const { price_courier_cost, min_order_amount } =
-    useContext(CostContext);
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [purchaseProfit, setPurchaseProfit] = useState(0);
-  const [productsInCart, setProductInCart] = useState(
-    cart.reduce(
-      (totalProducts, vendor) =>
-        totalProducts + vendor.products.length,
-      0
-    )
-  );
 
-  useEffect(() => {
-    setTotalPrice(getTotalPrice(cart));
-    setProductInCart(
-      cart.reduce(
-        (totalProducts, vendor) =>
-          totalProducts + vendor.products.length,
-        0
-      )
-    );
-    setPurchaseProfit(
-      cart.reduce(
-        (total, vendor) =>
-          total +
-          vendor.products.reduce(
-            (subTotal, product) =>
-              subTotal +
-              product.SellPrice *
-                (product.quantity / product.UnitFew),
-            0
-          ),
-        0
-      ) - getTotalPrice(cart)
-    );
-  }, [cart]);
+  const navigate = useNavigate();
+
+  const { user } = useContext(UserContext);
 
   const handleCheck = () => {
-    navigate('/checkout/shipping');
+    user ? navigate('/checkout/shipping') : navigate('/login');
   };
 
   return !!cart.length ? (
     <main className="grid grid-cols-1 xl:grid-cols-7 gap-4 items-start mx-4 2xl:mx-0">
       <section className="col-span-1 xl:col-span-5 ">
+        <DeliveryProgress
+          deliveryCost={deliveryCost}
+          totalPrice={Number(totalPrice)}
+          minPrice={Number(min_order_amount)}
+        />
         <div className="text-zinc-500 flex items-center border-b py-3 border-rose-500 mb-3">
           <p className=" flex items-center">
             <svg
@@ -132,7 +110,7 @@ const Cart = () => {
                     ))}
                   </ul>
                 </div>
-                <div className="bg-gray-50 p-4 rounded-b-md flex flex-col lg:flex-row  justify-center lg:justify-between items-center relative lg:-top-2">
+                <div className="bg-gray-50 p-4 rounded-b-md flex flex-col lg:flex-row  justify-center lg:justify-between items-center relative top-2">
                   <p className="flex flex-col items-center mb-4 lg:flex-row lg:mb-0">
                     <span className="font-bold">
                       مبلغ کل ({vendor.products.length}کالا) :
@@ -151,9 +129,6 @@ const Cart = () => {
                       تومان
                     </span>
                   </p>
-                  <button className="bg-sky-500/90 text-white w-60 py-2 rounded-md font-bold shadow-lg shadow-sky-500/50 hover:bg-sky-500 transition-all duration-300">
-                    ثبت سفارش
-                  </button>
                 </div>
               </ContentAccordionItem>
             </AccordionItem>
@@ -177,7 +152,7 @@ const Cart = () => {
         </p>
         <p className="flex items-center justify-between mb-3 border-b pb-4">
           <span className="font-bold flex items-center">
-            <span>هزینه آدرس</span>
+            <span>هزینه پیک</span>
             <div className="relative group">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -202,7 +177,7 @@ const Cart = () => {
             </div>
           </span>
           <span className="opacity-60">
-            {Number(price_courier_cost).toLocaleString()} تومان
+            {deliveryCost === 0 ? 'رایگان' : `${deliveryCost} تومان`}
           </span>
         </p>
         <p className="font-bold text-lg text-center mb-2">
@@ -210,9 +185,7 @@ const Cart = () => {
         </p>
         <p className="font-bold text-2xl text-center text-rose-500 mb-4">
           <span>
-            {(
-              totalPrice + Number(price_courier_cost)
-            ).toLocaleString()}
+            {(totalPrice + Number(deliveryCost)).toLocaleString()}
           </span>
           <span className="font-medium text-sm mr-2">تومان</span>
         </p>
@@ -232,7 +205,7 @@ const Cart = () => {
             </svg>
           </span>
           <span className="z-0 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 whitespace-nowrap">
-            ادامه ثبت همه سفارش ها
+            ادامه ثبت سفارش
           </span>
         </button>
         <p className=" text-zinc-400 text-xs mt-2">

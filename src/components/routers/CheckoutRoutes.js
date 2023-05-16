@@ -2,13 +2,128 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Cart from 'pages/Cart';
 import Checkout from 'pages/Checkout';
+import { CostContext } from 'contexts/CostProvider';
+import { useContext } from 'react';
+import { CartContext } from 'contexts/CartProvider';
+import getTotalPrice from 'helper/getTotalPrice';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { NORMAL, TAXI } from 'constants/shippingMethod';
+import deliveryCalculate from 'helper/deliveryCalculate';
+import { HOME_DELIVERY } from 'constants/paymentMethod';
 
 const CheckoutRoutes = (props) => {
+  const {
+    state: { cart },
+  } = useContext(CartContext);
+  const {
+    transportationـcost,
+    min_order_amount,
+    price_courier_cost,
+    taxiـfare,
+  } = useContext(CostContext);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [purchaseProfit, setPurchaseProfit] = useState(0);
+  const [deliveryCost, setDeliveryCost] = useState(0);
+  const [productsInCart, setProductInCart] = useState(
+    cart.reduce(
+      (totalProducts, vendor) =>
+        totalProducts + vendor.products.length,
+      0
+    )
+  );
+  const [order, setOrder] = useState({
+    address: {},
+    payMethod: HOME_DELIVERY,
+    shipping: NORMAL,
+    suggest: 1,
+    products: cart
+      .map((vendor) => vendor.products)
+      .flat()
+      .map((product) => {
+        return {
+          erp_code: product.ErpCode,
+          quantity: product.quantity,
+          attr: product.Attr[0] || '',
+        };
+      }),
+  });
+
+  useEffect(() => {
+    setTotalPrice(getTotalPrice(cart));
+    setProductInCart(
+      cart.reduce(
+        (totalProducts, vendor) =>
+          totalProducts + vendor.products.length,
+        0
+      )
+    );
+
+    setPurchaseProfit(
+      cart.reduce(
+        (total, vendor) =>
+          total +
+          vendor.products.reduce(
+            (subTotal, product) =>
+              subTotal +
+              product.SellPrice *
+                (product.quantity / product.UnitFew),
+            0
+          ),
+        0
+      ) - getTotalPrice(cart)
+    );
+  }, [cart]);
+
+  useEffect(() => {
+    if (!!transportationـcost) {
+      order.shipping === TAXI
+        ? setDeliveryCost(Number(taxiـfare))
+        : setDeliveryCost(
+            deliveryCalculate(
+              Number(totalPrice),
+              Number(min_order_amount),
+              Number(price_courier_cost),
+              transportationـcost
+            )
+          );
+    }
+  }, [transportationـcost, totalPrice]);
+
   return (
     <>
       <Routes>
-        <Route path="cart" element={<Cart />} />
-        <Route path="shipping" element={<Checkout />} />
+        <Route
+          path="cart"
+          element={
+            <Cart
+              data={{
+                totalPrice,
+                deliveryCost,
+                min_order_amount,
+                productsInCart,
+                purchaseProfit,
+              }}
+            />
+          }
+        />
+        <Route
+          path="shipping"
+          element={
+            <Checkout
+              data={{
+                totalPrice,
+                deliveryCost,
+                min_order_amount,
+                productsInCart,
+                purchaseProfit,
+                taxiـfare,
+                order,
+                setOrder,
+              }}
+            />
+          }
+        />
       </Routes>
     </>
   );

@@ -14,7 +14,7 @@ const LayoutPage = (props) => {
   return (
     <>
       <Header />
-      <div className="relative py-6">
+      <div className="relative py-0 md:py-6">
         <main className="2xl:container mx-auto">
           <Outlet />
         </main>

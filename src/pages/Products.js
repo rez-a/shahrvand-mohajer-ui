@@ -277,7 +277,7 @@ const Products = (props) => {
         </aside>
 
         <div className="sm:col-span-1 md:col-span-2 xl:col-span-3 2xl:col-span-4">
-          <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:w-1/2 items-center gap-8 xl:gap-4 justify-center xl:justify-start text-xs">
+          <ul className="grid grid-cols-2 md:grid-cols-4 xl:w-1/2 items-center gap-2 xl:gap-4 justify-center xl:justify-start text-xs">
             {sortItems.map((sortItem, index) => (
               <SortItem
                 key={index}
