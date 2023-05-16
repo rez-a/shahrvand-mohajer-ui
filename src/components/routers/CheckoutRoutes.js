@@ -11,6 +11,8 @@ import { useEffect } from 'react';
 import { NORMAL, TAXI } from 'constants/shippingMethod';
 import deliveryCalculate from 'helper/deliveryCalculate';
 import { HOME_DELIVERY } from 'constants/paymentMethod';
+import summaryCart from 'helper/summaryCart';
+import Invoice from 'pages/Invoice';
 
 const CheckoutRoutes = (props) => {
   const {
@@ -22,7 +24,9 @@ const CheckoutRoutes = (props) => {
     price_courier_cost,
     taxiـfare,
   } = useContext(CostContext);
+
   const [totalPrice, setTotalPrice] = useState(0);
+  const [invoice, setInvoice] = useState(null);
   const [purchaseProfit, setPurchaseProfit] = useState(0);
   const [deliveryCost, setDeliveryCost] = useState(0);
   const [productsInCart, setProductInCart] = useState(
@@ -37,16 +41,7 @@ const CheckoutRoutes = (props) => {
     payMethod: HOME_DELIVERY,
     shipping: NORMAL,
     suggest: 1,
-    products: cart
-      .map((vendor) => vendor.products)
-      .flat()
-      .map((product) => {
-        return {
-          erp_code: product.ErpCode,
-          quantity: product.quantity,
-          attr: product.Attr[0] || '',
-        };
-      }),
+    products: summaryCart(cart),
   });
 
   useEffect(() => {
@@ -120,9 +115,14 @@ const CheckoutRoutes = (props) => {
                 taxiـfare,
                 order,
                 setOrder,
+                setInvoice,
               }}
             />
           }
+        />
+        <Route
+          path="invoice"
+          element={<Invoice invoice={invoice} />}
         />
       </Routes>
     </>

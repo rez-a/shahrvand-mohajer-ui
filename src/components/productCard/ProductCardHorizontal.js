@@ -26,6 +26,7 @@ const ProductCartHorizontal = ({
     Id,
     IsVendor,
     Attr,
+    Few,
   } = product;
   const [attrSelected, setAttrSelected] = useState(Attr[0]);
   const {
@@ -97,10 +98,10 @@ const ProductCartHorizontal = ({
                     </svg>
                   </div>
                 </button>
-              ) : (
+              ) : !!Few ? (
                 <button
                   onClick={handleShowModal}
-                  className="text-white  py-1.5 px-2 text-xs rounded-md mx-6 shadow-xl   transition-all duration-300 bg-rose-400/90 hover:bg-rose-400 shadow-sky-500/0  border-b-4 border-b-rose-700"
+                  className="text-white  py-1.5 px-2 text-xs rounded-md mx-6 shadow-xl   transition-all duration-300 bg-rose-400/90 hover:bg-rose-400 shadow-sky-500/0  border-b-4 border-b-rose-700 "
                 >
                   <div>
                     <svg
@@ -112,6 +113,12 @@ const ProductCartHorizontal = ({
                     </svg>
                   </div>
                 </button>
+              ) : (
+                <div className="flex">
+                  <p className="bg-red-100 text-red-800 text-xs mb-3   font-medium mr-2 py-1.5 px-2 mx-2 md:mx-6 rounded dark:bg-red-900 dark:text-red-300">
+                    ناموجود
+                  </p>
+                </div>
               )}
             </div>
             <div className="text-sm font-bold">

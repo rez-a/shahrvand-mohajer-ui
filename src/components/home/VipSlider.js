@@ -14,7 +14,7 @@ const VipSlider = ({}) => {
   const pagination = {
     clickable: true,
     renderBullet: function (_, className) {
-      return `<span class=${className}></span>`;
+      return `<span class=' ${className}'></span>`;
     },
   };
 
@@ -29,21 +29,21 @@ const VipSlider = ({}) => {
 
   return (
     <div
-      className="p-4 pb-0 my-8 grid grid-cols-5 items-center"
+      className="p-4 pb-0 my-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 items-center"
       style={{ backgroundColor: sliderVip?.data?.color }}
     >
-      <div className="hidden lg:block col-span-1 ">
-        <p className="text-white text-4xl px-4 pr-0 mb-4 font-semibold text-center leading-relaxed">
+      <div className="col-span-1 ">
+        <p className="text-white text-2xl md:text-4xl px-4 pr-0 mb-4 font-semibold text-center leading-relaxed">
           {sliderVip?.data?.title}
         </p>
         <div className="mx-auto w-2/3">
           <img
-            src={`${BASE_URL}${sliderVip?.data?.image}`}
+            src={`${sliderVip?.data?.image}`}
             alt={sliderVip?.data?.title}
           />
         </div>
       </div>
-      <div className="col-span-5 lg:col-span-4">
+      <div className="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4 ">
         <Swiper
           pagination={pagination}
           modules={[Navigation, Pagination, A11y, Autoplay]}
@@ -58,7 +58,7 @@ const VipSlider = ({}) => {
             640: {
               slidesPerView: 2,
             },
-            768: {
+            1024: {
               slidesPerView: 3,
             },
             1280: {
@@ -67,7 +67,7 @@ const VipSlider = ({}) => {
           }}
           slidesPerView={4}
           spaceBetween={20}
-          className="mySwiper !pb-12"
+          className="mySwiper !pb-4 sm:!pb-12"
         >
           {productsLoading
             ? [...Array(10)].map((_, index) => (

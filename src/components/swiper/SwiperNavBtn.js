@@ -10,7 +10,7 @@ const SwiperNavBtn = ({
 }) => {
   const swiper = useSwiper();
   return (
-    <div className="swiper-nav-btn absolute top-1/2 -translate-y-1/2 z-10 w-full flex items-center justify-between">
+    <div className="swiper-nav-btn absolute top-1/2 -translate-y-24 sm:-translate-y-1/2 z-10 w-full flex items-center justify-between">
       <button
         className={nextButtonClassName}
         onClick={() => swiper.slideNext()}

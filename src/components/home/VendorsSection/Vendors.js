@@ -21,7 +21,7 @@ const Vendors = () => {
       <header className="text-zinc-400 text-center font-semibold p-4">
         بیش از 1,000 کالا در فروشگاه های شهروند
       </header>
-      <div className="mt-3 mb-2"></div>
+
       <Swiper
         modules={[Navigation, Autoplay]}
         autoplay={{

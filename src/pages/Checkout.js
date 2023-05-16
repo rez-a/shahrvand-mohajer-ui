@@ -8,6 +8,7 @@ import TitleIcon from 'components/shared/TitleIcon';
 import { HOME_DELIVERY, WALLET } from 'constants/paymentMethod';
 import { NORMAL, TAXI } from 'constants/shippingMethod';
 import { CartContext } from 'contexts/CartProvider';
+import { UserContext } from 'contexts/UserProvider';
 import React, { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -27,16 +28,20 @@ const Checkout = ({
     taxiـfare,
     order,
     setOrder,
+    setInvoice,
   },
 }) => {
+  const { user: login } = useContext(UserContext);
+  const navigate = useNavigate();
+  useEffect(() => {
+    !login && navigate('/login');
+  }, []);
   const { dispatch } = useContext(CartContext);
   const [editAddress, setEditAddress] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const { data: user, mutate } = useSWR(PROFILE, dispatcher);
   const { addresses, name, mobile } = !!user && user.data;
-
-  const navigate = useNavigate();
 
   const handleUpdateAddresses = async (addresses) => {
     await updater(ADDRESSES, { addresses });
@@ -54,26 +59,36 @@ const Checkout = ({
     setLoading(true);
     try {
       const response = await dispatcher(ORDER_SAVE, {
-        address: order.address.text,
-        suggest: order.suggest,
-        shipping_method: order.shipping,
         products: order.products,
+        address: order.address.text,
+        shipping_method: order.shipping,
+        payment_method: order.payMethod,
       });
-      Swal.fire({
-        icon: 'success',
-        title: response.message,
-        text: `شماره سفارش ${response.data.Id}`,
-      });
-      navigate('/');
-      dispatch(clearCart());
+      handleResponseOrder(response);
     } catch (err) {
       Swal.fire({
         icon: 'error',
         title: 'سفارش شما ثبت نشد',
-        text: '.مشکلی پیش آمد سفارش شما ثبت نشد ',
+        text: 'مشکلی پیش آمد سفارش شما ثبت نشد',
       });
     }
     setLoading(false);
+  };
+
+  const handleResponseOrder = (response) => {
+    const { data, message } = response;
+    if (data.PaymentMethod === HOME_DELIVERY) {
+      Swal.fire({
+        icon: 'success',
+        title: response.message,
+        text: `شماره سفارش ${data.Id}`,
+      });
+      navigate('/');
+      dispatch(clearCart());
+    } else if (data.PaymentMethod === WALLET) {
+      setInvoice(data);
+      navigate('/checkout/invoice');
+    }
   };
 
   return (
@@ -147,6 +162,7 @@ const Checkout = ({
                         orderAddress={order.address}
                         order={order}
                         setOrder={setOrder}
+                        setEditAddress={setEditAddress}
                       />
                     </div>
                   )}
@@ -283,7 +299,9 @@ const Checkout = ({
                   </div>
                 </span>
                 <span className="opacity-60">
-                  {deliveryCost === 0
+                  {order?.shipping === TAXI
+                    ? `${taxiـfare} تومان`
+                    : deliveryCost === 0
                     ? 'رایگان'
                     : `${deliveryCost} تومان`}
                 </span>
@@ -304,7 +322,11 @@ const Checkout = ({
             </p>
             <p className="font-bold text-2xl text-center text-rose-500 mb-4">
               <span>
-                {(totalPrice + Number(deliveryCost)).toLocaleString()}
+                {order?.shipping === TAXI
+                  ? (totalPrice + Number(taxiـfare)).toLocaleString()
+                  : (
+                      totalPrice + Number(deliveryCost)
+                    ).toLocaleString()}
               </span>
               <span className="font-medium text-sm mr-2">تومان</span>
             </p>

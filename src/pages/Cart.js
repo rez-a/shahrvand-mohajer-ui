@@ -8,7 +8,12 @@ import { CartContext } from 'contexts/CartProvider';
 import emptyCart from 'assets/images/empty-cart.svg';
 import { Link, useNavigate } from 'react-router-dom';
 import DeliveryProgress from 'components/DeliveryProgress';
-import { UserContext } from 'contexts/UserProvider';
+import dispatcher from 'services/dispatcher';
+import { CHECK_CART } from 'services/endPoints';
+import summaryCart from 'helper/summaryCart';
+import Toast from 'utilities/sweetAlert';
+import Spinner from 'components/shared/Spinner';
+import { useState } from 'react';
 
 const Cart = ({
   data: {
@@ -23,13 +28,26 @@ const Cart = ({
     state: { cart },
     dispatch,
   } = useContext(CartContext);
-
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const { user } = useContext(UserContext);
+  const handleCheckCart = async () => {
+    setLoading(true);
+    const products = summaryCart(cart);
+    const response = await dispatcher(CHECK_CART, {
+      erp_codes: products,
+    });
+    if (!!response.length) {
+      for (let product of response) {
+        Toast.fire({
+          icon: 'error',
+          title: product.name,
+          text: product.error,
+        });
+      }
+    } else navigate('/checkout/shipping');
 
-  const handleCheck = () => {
-    user ? navigate('/checkout/shipping') : navigate('/login');
+    setLoading(false);
   };
 
   return !!cart.length ? (
@@ -135,7 +153,7 @@ const Cart = ({
           </AccordionLayout>
         ))}
       </section>
-      <aside className="bg-gray-50/50 border rounded-md border-gray-100 bg-white xl:col-span-2 p-3 xl:sticky top-24 mb-3">
+      <aside className=" border rounded-md border-gray-100 bg-white xl:col-span-2 p-3 xl:sticky top-24 mb-3">
         <p className="flex items-center justify-between mb-3">
           <span className="font-bold">
             مبلغ کل ({productsInCart}کالا)
@@ -190,22 +208,26 @@ const Cart = ({
           <span className="font-medium text-sm mr-2">تومان</span>
         </p>
         <button
-          onClick={handleCheck}
-          className="relative bg-rose-500 h-12 w-full text-white font-bold rounded-md overflow-hidden group"
+          onClick={handleCheckCart}
+          className="relative bg-rose-500 h-12 w-full text-white font-bold rounded-md overflow-hidden group block"
         >
           <span className="bg-rose-400 h-full flex items-center w-12 px-3 z-0 rounded-l-full absolute right-0 top-0 group-hover:w-full group-hover:rounded-l-none transition-all duration-300">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              width="24"
-              height="24"
-              className="fill-white"
-            >
-              <path d="M7.82843 10.9999H20V12.9999H7.82843L13.1924 18.3638L11.7782 19.778L4 11.9999L11.7782 4.22168L13.1924 5.63589L7.82843 10.9999Z"></path>
-            </svg>
+            {loading ? (
+              <Spinner />
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                className="fill-white"
+              >
+                <path d="M7.82843 10.9999H20V12.9999H7.82843L13.1924 18.3638L11.7782 19.778L4 11.9999L11.7782 4.22168L13.1924 5.63589L7.82843 10.9999Z"></path>
+              </svg>
+            )}
           </span>
           <span className="z-0 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 whitespace-nowrap">
-            ادامه ثبت سفارش
+            ثبت سفارش
           </span>
         </button>
         <p className=" text-zinc-400 text-xs mt-2">

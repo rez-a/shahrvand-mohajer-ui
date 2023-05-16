@@ -28,6 +28,7 @@ const ProductCartVertical = ({
     Id,
     IsVendor,
     Attr,
+    Few,
   } = product;
   const discount = Math.floor(
     (SellPrice - LastBuyPrice) / (LastBuyPrice / 100)
@@ -65,16 +66,16 @@ const ProductCartVertical = ({
   return (
     <>
       <div className={` overflow-hidden group ${containerClassName}`}>
-        <div className="px-4 flex items-center">
+        <div className="p-2 md:px-4 flex items-center">
           <span
             className={`bg-rose-500 mr-auto text-xs text-white p-2 rounded-xl rounded-br-none font-bold ${
               SellPrice !== LastBuyPrice ? 'visible' : 'invisible'
             }`}
           >
-            {discount}%
+            %{discount}
           </span>
         </div>
-        <div className="w-full h-60 p-4 overflow-hidden">
+        <div className="w-40 md:w-full h-40 p-2 md:p-4 overflow-hidden mx-auto">
           <img className="object-contain" src={Image} alt={Name} />
         </div>
         {!!productInCart ? (
@@ -92,10 +93,10 @@ const ProductCartVertical = ({
               </svg>
             </div>
           </button>
-        ) : (
+        ) : !!Few ? (
           <button
             onClick={handleShowModal}
-            className="text-white  py-1.5 px-2 text-xs rounded-md mx-6 shadow-xl   transition-all duration-300 bg-rose-400/90 hover:bg-rose-400 shadow-sky-500/0  border-b-4 border-b-rose-700"
+            className="text-white  py-1.5 px-2 text-xs rounded-md mx-2 md:mx-6 shadow-xl   transition-all duration-300 bg-rose-400/90 hover:bg-rose-400 shadow-sky-500/0  border-b-4 border-b-rose-700"
           >
             <div>
               <svg
@@ -107,9 +108,15 @@ const ProductCartVertical = ({
               </svg>
             </div>
           </button>
+        ) : (
+          <div className="flex">
+            <p className="bg-red-100 text-red-800 text-xs mb-3   font-medium mr-2 py-1.5 px-2 mx-2 md:mx-6 rounded dark:bg-red-900 dark:text-red-300">
+              ناموجود
+            </p>
+          </div>
         )}
 
-        <div className="px-6 py-4">
+        <div className="px-2 md:px-6 py-4">
           <Link
             to={`/product/${MainGroupErpCode}/${SideGroupErpCode}/${ErpCode}`}
             className="font-bold truncate block w-full text-rose-500/70 group-hover:text-rose-500/100 transition-all duration-200 text-base"
@@ -117,7 +124,7 @@ const ProductCartVertical = ({
             {Name}
           </Link>
         </div>
-        <div className="px-6 pb-2">
+        <div className="px-2 md:px-6 pb-2">
           <Link
             to={`/products/${MainGroupErpCode}?${queryString.stringify(
               {
@@ -130,7 +137,7 @@ const ProductCartVertical = ({
             #{SideGroupName}
           </Link>
         </div>
-        <div className="text-sm px-6 font-bold">
+        <div className="text-sm px-2 md:px-6 font-bold">
           <span
             className={` relative ${
               SellPrice !== LastBuyPrice
@@ -144,7 +151,7 @@ const ProductCartVertical = ({
             تومان
           </span>
           {SellPrice !== LastBuyPrice && (
-            <span className="mr-4 text-rose-500 whitespace-nowrap">
+            <span className="sm:mr-4 text-rose-500 whitespace-nowrap block sm:inline">
               <span className="ml-1">
                 {LastBuyPrice?.toLocaleString()}
               </span>

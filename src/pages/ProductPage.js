@@ -202,7 +202,7 @@ const ProductPage = () => {
                         <>
                           <p className="flex items-center flex-row-reverse mt-2 mb-2">
                             <span className="bg-rose-500 p-2 py-1 rounded-full text-white text-sm font-semibold">
-                              {discount}%
+                              %{discount}
                             </span>
                             <span className="text-gray-400 relative before:absolute before:w-[110%] before:h-[0.5px] before:bg-gray-400 before:top-1/2 before:-translate-y-1/2 before:left-1/2 before:-translate-x-1/2 ml-3 ">
                               {SellPrice?.toLocaleString()}
@@ -233,18 +233,24 @@ const ProductPage = () => {
                           </span>
                         </small>
                       )}
-                      <button
-                        onClick={handleShowModal}
-                        className={`w-full  text-white text-lg p-3 rounded mt-2 transition-all duration-300 ${
-                          !!productInCart
-                            ? 'bg-sky-500 hover:bg-sky-600'
-                            : 'bg-rose-500 hover:bg-rose-600 '
-                        }`}
-                      >
-                        {!!productInCart
-                          ? 'تغییر تعداد محصول'
-                          : 'افزودن به سبد خرید'}
-                      </button>
+                      {Number(Few) ? (
+                        <button
+                          onClick={handleShowModal}
+                          className={`w-full  text-white text-lg p-3 rounded mt-2 transition-all duration-300 ${
+                            !!productInCart
+                              ? 'bg-sky-500 hover:bg-sky-600'
+                              : 'bg-rose-500 hover:bg-rose-600 '
+                          }`}
+                        >
+                          {!!productInCart
+                            ? 'تغییر تعداد محصول'
+                            : 'افزودن به سبد خرید'}
+                        </button>
+                      ) : (
+                        <div className="w-full  text-white flex items-center justify-center text-lg p-3 rounded mt-2 bg-gray-200 ">
+                          <span>افزودن به سبد خرید</span>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

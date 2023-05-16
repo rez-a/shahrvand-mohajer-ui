@@ -4,7 +4,7 @@
 @tailwind utilities;
 @layer base {
   body {
-    @apply font-Pelak bg-sky-50/50;
+    @apply font-iransans bg-sky-50/50;
   }
   body {
     direction: rtl;
@@ -34,16 +34,26 @@
 
 .swiper-pagination-bullet {
   transition: all 0.2s ease-in-out !important;
+  width: 0.5rem !important;
 }
 
 .swiper-pagination-bullet-active {
   background-color: #ffffffa3 !important;
-  width: 2rem !important;
+  width: 1.5rem !important;
   border-radius: 10px !important;
 }
 
 .bullet-active-rose .swiper-pagination-bullet-active {
   background-color: #f97d7d !important;
+}
+
+@media only screen and (max-width: 640px) {
+  .swiper-pagination-bullet {
+    visibility: hidden;
+  }
+  .swiper-pagination-bullet-active {
+    visibility: hidden;
+  }
 }
 
 .range-slider {

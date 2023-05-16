@@ -20,3 +20,4 @@ export const ORDER_DETAILS = 'orders/details';
 export const COST = 'app/transportation-cost';
 export const INSTANT_MESSAGINGS = 'app/instant-messagings';
 export const ORDER_SAVE = 'orders/save';
+export const CHECK_CART = 'carts/check';
