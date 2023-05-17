@@ -2,18 +2,75 @@ import Loading from 'components/shared/Loading';
 import Spinner from 'components/shared/Spinner';
 import TitleIcon from 'components/shared/TitleIcon';
 import { NORMAL } from 'constants/shippingMethod';
-import React from 'react';
+import { UserContext } from 'contexts/UserProvider';
+import decodeToken from 'helper/handlerAuthorazation/decodeToken';
+import storeAuthToken from 'helper/handlerAuthorazation/storeAuthToken';
+import React, { useState } from 'react';
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import dispatcher from 'services/dispatcher';
+import { ORDER_PAY, REFRESH_TOKEN } from 'services/endPoints';
+import { fetcher } from 'services/swr/fetcher';
+import Swal from 'sweetalert2';
 
-const Invoice = ({ invoice }) => {
-  return true ? (
+const Invoice = ({ invoice, setInvoice }) => {
+  const [loading, setLoading] = useState(false);
+
+  const { setUser } = useContext(UserContext);
+
+  const navigate = useNavigate();
+
+  const handlePayInvoice = async () => {
+    setLoading(true);
+    try {
+      const response = await fetcher(`${ORDER_PAY}/${invoice.Id}`);
+      if (!response.data) throw Error(response);
+      handleResponseInvoice(response);
+    } catch (err) {
+      Swal.fire({
+        icon: 'error',
+        title: 'نتیجه تراکنش',
+        text: err.response.data.message,
+      });
+    }
+  };
+
+  const handleResponseInvoice = async (response) => {
+    try {
+      const refreshTokenResponse = await dispatcher(
+        REFRESH_TOKEN,
+        {}
+      );
+      editUser(refreshTokenResponse.access_token);
+      if (response.data.Section === 'WALLET') {
+        Swal.fire({
+          icon: 'success',
+          title: 'نتیجه تراکنش',
+          text: response.message,
+        }).then((res) => {
+          setInvoice(null);
+          navigate('/');
+        });
+      }
+    } catch (err) {
+      return new Error();
+    }
+    setLoading(false);
+  };
+
+  const editUser = (token) => {
+    storeAuthToken(token);
+    setUser(decodeToken(token));
+  };
+  return !!invoice ? (
     <main className="container mx-auto">
       <div className="max-w-4xl border rounded-md border-gray-100 bg-white mx-auto p-6">
         <div className="flex items-center">
           <TitleIcon />
           <h2 className="text-base font-bold mr-2">جزییات فاکتور</h2>
         </div>
-        <div className="grid grid-cols-3 gap-8">
-          <div className="col-span-2">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2">
             <ul className="mb-4 divide-y">
               <li className="py-4">
                 <div className="flex items-center justify-between font-bold">
@@ -27,7 +84,11 @@ const Invoice = ({ invoice }) => {
                     موجودی کیف پول
                   </span>
                   <span className="font-semibold">
-                    <span>{invoice.CurrentWalletBalance}</span>
+                    <span>
+                      {Number(
+                        invoice.CurrentWalletBalance
+                      ).toLocaleString()}
+                    </span>
                     <span className="font-light text-xs mr-1">
                       تومان
                     </span>
@@ -40,7 +101,9 @@ const Invoice = ({ invoice }) => {
                     مبلغ سفارش
                   </span>
                   <span className="font-semibold">
-                    <span>{invoice.TotalPrice}</span>
+                    <span>
+                      {Number(invoice.TotalPrice).toLocaleString()}
+                    </span>
                     <span className="font-light text-xs mr-1">
                       تومان
                     </span>
@@ -52,8 +115,18 @@ const Invoice = ({ invoice }) => {
                   <span className="text-gray-500 text-sm">
                     مابه التفاوت
                   </span>
-                  <span className="font-semibold">
-                    <span>{invoice.DiffAmountPayWithWallet}</span>
+                  <span
+                    className={`font-semibold  px-2 py-1 rounded-md  ${
+                      !!Number(invoice.DiffAmountPayWithWallet)
+                        ? 'text-rose-600 bg-rose-200'
+                        : 'bg-neutral-100'
+                    }`}
+                  >
+                    <span>
+                      {Number(
+                        invoice.DiffAmountPayWithWallet
+                      ).toLocaleString()}
+                    </span>
                     <span className="font-light text-xs mr-1">
                       تومان
                     </span>
@@ -83,9 +156,12 @@ const Invoice = ({ invoice }) => {
                 </div>
               </li>
             </ul>
-            <button className="relative bg-sky-500 h-12 w-full text-white font-bold rounded-md overflow-hidden group block">
+            <button
+              onClick={handlePayInvoice}
+              className="relative bg-sky-500 h-12 w-full text-white font-bold rounded-md overflow-hidden group block"
+            >
               <span className="bg-sky-400 h-full flex items-center w-12 px-3 z-0 rounded-l-full absolute right-0 top-0 group-hover:w-full group-hover:rounded-l-none transition-all duration-300">
-                {false ? (
+                {loading ? (
                   <Spinner />
                 ) : (
                   <svg
@@ -100,11 +176,17 @@ const Invoice = ({ invoice }) => {
                 )}
               </span>
               <span className="z-0 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 whitespace-nowrap">
-                پرداخت فاکتور
+                {!!Number(invoice.DiffAmountPayWithWallet)
+                  ? loading
+                    ? 'درحال ورود به درگاه بانکی...'
+                    : 'پرداخت فاکتور'
+                  : loading
+                  ? 'درحال پرداخت از کیف پول...'
+                  : 'پرداخت فاکتور'}
               </span>
             </button>
           </div>
-          <div className="col-span-1 flex items-center">
+          <div className="col-span-1  items-center hidden lg:flex">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               data-name="Layer 1"

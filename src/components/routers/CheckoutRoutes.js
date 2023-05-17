@@ -122,7 +122,9 @@ const CheckoutRoutes = (props) => {
         />
         <Route
           path="invoice"
-          element={<Invoice invoice={invoice} />}
+          element={
+            <Invoice invoice={invoice} setInvoice={setInvoice} />
+          }
         />
       </Routes>
     </>

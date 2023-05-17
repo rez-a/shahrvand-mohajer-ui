@@ -15,7 +15,7 @@ const LayoutPage = (props) => {
     <>
       <Header />
       <div className="relative py-0 md:py-6">
-        <main className="2xl:container mx-auto">
+        <main className="2xl:container mx-auto min-h-[400px]">
           <Outlet />
         </main>
         <div

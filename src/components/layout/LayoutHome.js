@@ -16,7 +16,7 @@ const LayoutHome = () => {
     <>
       <WorkingTime />
       <Header />
-      <div className="relative py-2 md:py-6">
+      <div className="relative py-2 md:py-6 min-h-[400px]">
         <Outlet />
         <div
           className={`dimmer absolute top-0 left-0 w-full h-full transition-all duration-150  z-[1] ${

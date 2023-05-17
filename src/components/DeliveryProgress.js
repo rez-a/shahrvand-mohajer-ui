@@ -6,7 +6,7 @@ const DeliveryProgress = ({ deliveryCost, totalPrice, minPrice }) => {
   return (
     <div className="w-full flex items-center gap-4">
       <div className="w-full h-10 relative bg-gray-100 border rounded p-0.5">
-        <h2 className="text-sm font-bold z-10 absolute top-1/2 -translate-y-1/2 text-center w-full">
+        <h2 className="text-sm font-bold  absolute top-1/2 -translate-y-1/2 text-center w-full">
           {deliveryCost === 0
             ? 'پیک رایگان!!'
             : `${Number(diff).toLocaleString()} تومان تا پیک رایگان`}

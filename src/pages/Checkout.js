@@ -32,6 +32,9 @@ const Checkout = ({
   },
 }) => {
   const { user: login } = useContext(UserContext);
+  const {
+    state: { cart },
+  } = useContext(CartContext);
   const navigate = useNavigate();
   useEffect(() => {
     !login && navigate('/login');
@@ -55,6 +58,10 @@ const Checkout = ({
     });
   }, [user]);
 
+  useEffect(() => {
+    !cart.length && navigate('/checkout/cart');
+  }, []);
+
   const handleSaveOrder = async () => {
     setLoading(true);
     try {
@@ -64,6 +71,7 @@ const Checkout = ({
         shipping_method: order.shipping,
         payment_method: order.payMethod,
       });
+      setLoading(false);
       handleResponseOrder(response);
     } catch (err) {
       Swal.fire({
@@ -75,19 +83,21 @@ const Checkout = ({
     setLoading(false);
   };
 
-  const handleResponseOrder = (response) => {
+  const handleResponseOrder = async (response) => {
     const { data, message } = response;
     if (data.PaymentMethod === HOME_DELIVERY) {
-      Swal.fire({
+      return Swal.fire({
         icon: 'success',
-        title: response.message,
+        title: message,
         text: `شماره سفارش ${data.Id}`,
+      }).finally((res) => {
+        navigate('/');
+        dispatch(clearCart());
       });
-      navigate('/');
-      dispatch(clearCart());
     } else if (data.PaymentMethod === WALLET) {
       setInvoice(data);
       navigate('/checkout/invoice');
+      dispatch(clearCart());
     }
   };
 
@@ -350,7 +360,7 @@ const Checkout = ({
                 )}
               </span>
               <span className="z-10 absolute left-1/2 -translate-x-1/2 top-1/2 flex items-center gap-2 -translate-y-1/2">
-                {loading ? 'درحال ثبت سفارش' : 'ثبت سفارش'}
+                {loading ? 'درحال ثبت سفارش' : 'ادامه ثبت سفارش'}
               </span>
             </button>
           </aside>
