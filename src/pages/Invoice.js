@@ -7,7 +7,7 @@ import React from 'react';
 const Invoice = ({ invoice }) => {
   return true ? (
     <main className="container mx-auto">
-      <div className="max-w-4xl border rounded-md border-gray-100 bg-white mx-auto  p-6">
+      <div className="max-w-4xl border rounded-md border-gray-100 bg-white mx-auto p-6">
         <div className="flex items-center">
           <TitleIcon />
           <h2 className="text-base font-bold mr-2">جزییات فاکتور</h2>

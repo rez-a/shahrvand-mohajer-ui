@@ -1,6 +1,6 @@
 import Home from 'pages/Home';
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import LayoutHome from 'components/layout/LayoutHome';
 import LayoutPage from 'components/layout/LayoutPage';
 import Profile from 'pages/Profile';
@@ -13,6 +13,7 @@ import Search from 'pages/Search';
 import AboutUs from 'pages/AboutUs';
 import ContactUs from 'pages/ContactUs';
 import Faq from 'pages/Faq';
+import Callback from 'pages/Callback';
 
 const AllRoutes = () => {
   return (
@@ -27,6 +28,7 @@ const AllRoutes = () => {
         <Route path="checkout/*" element={<CheckoutRoutes />} />
         <Route path="profile/*" element={<Profile />} />
         <Route path="search" element={<Search />} />
+        <Route path="callback" element={<Callback />} />
         <Route path="about-us" element={<AboutUs />} />
         <Route path="contact-us" element={<ContactUs />} />
         <Route path="faq" element={<Faq />} />

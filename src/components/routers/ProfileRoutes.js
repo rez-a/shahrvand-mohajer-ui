@@ -9,12 +9,14 @@ import OrderDetails from '../profile/OrderDetails';
 import PaymentDetails from '../profile/PaymentDetails';
 import { Route, Routes } from 'react-router-dom';
 import NotFound from 'pages/NotFound';
+import Wallet from 'components/profile/Wallet';
 
 const ProfileRoutes = (props) => {
   return (
     <div className="grid xl:col-span-5 gap-y-4">
       <Routes>
         <Route path="main" element={<MainProfile />} />
+        <Route path="wallet" element={<Wallet />} />
         <Route path="edit" element={<EditProfile />} />
         <Route path="addresses" element={<Addresses />} />
         <Route path="orders">

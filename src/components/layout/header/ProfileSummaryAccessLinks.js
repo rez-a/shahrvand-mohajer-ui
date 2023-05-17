@@ -3,11 +3,14 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { LogoutContext } from 'contexts/LogoutHandlerProvider';
+import { UserContext } from 'contexts/UserProvider';
 
 const ProfileSummaryAccessLinks = ({
   setShowProfileLinks,
   closeHandler,
 }) => {
+  const { user } = useContext(UserContext);
+
   useEffect(() => {
     window.document.addEventListener('click', closeHandler);
 
@@ -18,15 +21,80 @@ const ProfileSummaryAccessLinks = ({
   const { logoutHandler } = useContext(LogoutContext);
 
   return (
-    <div className="absolute border border-gray-100 bg-white sm:w-[120%] w-60 left-0 top-full rounded text-xs mt-1">
+    <div className="absolute border border-gray-200 bg-white sm:w-72 w-40 left-0 top-full rounded-lg text-sm mt-1 shadow-lg">
       <ul
         className="divide-y divide-gray-100"
         onClick={() => setShowProfileLinks(false)}
       >
         <li>
           <Link
+            to="/profile/wallet"
+            className="flex items-center w-full px-3 py-4 font-semibold hover:bg-gray-50"
+          >
+            <span className="ml-1">
+              <svg
+                version="1.1"
+                id="Layer_1"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 495 495"
+                className="w-6 h-6"
+                fill="#000000"
+              >
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                  <g>
+                    <path
+                      className="fill-[#FF9811]"
+                      d="M85,455h330v-45H40C40,434.81,60.19,455,85,455z"
+                    ></path>
+                    <path
+                      className="fill-[#FFB655]"
+                      d="M85,365c-24.81,0-45,20.19-45,45h375v-45H85z"
+                    ></path>
+                    <rect
+                      x="247.5"
+                      className="fill-[#FF5023]"
+                      width="247.5"
+                      height="90.25"
+                    ></rect>
+                    <path
+                      className="fill-[#FF6243]"
+                      d="M85,325h162.5V0H85C38.13,0,0,38.13,0,85v325C0,363.13,38.13,325,85,325z"
+                    ></path>
+                    <path
+                      className="fill-[#FF5023]"
+                      d="M247.5,325H85c-46.87,0-85,38.13-85,85s38.13,85,85,85h370V365h40v-90.25H247.5V325z M415,455H85 c-24.81,0-45-20.19-45-45s20.19-45,45-45h330V455z"
+                    ></path>
+                    <path
+                      className="fill-[#FF7956]"
+                      d="M247.5,274.75H495V90.25H247.5V274.75z M339.75,152.5c16.542,0,30,13.458,30,30s-13.458,30-30,30 s-30-13.458-30-30S323.208,152.5,339.75,152.5z"
+                    ></path>
+                    <path
+                      className="fill-[#FFFFFF]"
+                      d="M339.75,212.5c16.542,0,30-13.458,30-30s-13.458-30-30-30s-30,13.458-30,30 S323.208,212.5,339.75,212.5z"
+                    ></path>
+                  </g>
+                </g>
+              </svg>
+            </span>
+            <span>کیف پول</span>
+            <div className="mr-auto">
+              <span>
+                {Number(user.wallet_balance).toLocaleString()}
+              </span>
+              <span className="text-xs font-light mr-1">تومان</span>
+            </div>
+          </Link>
+        </li>
+        <li>
+          <Link
             to="/profile/main"
-            className="flex items-center w-full p-3 font-semibold hover:bg-gray-50"
+            className="flex items-center w-full px-3 py-4 font-semibold hover:bg-gray-50"
           >
             <span className="ml-1">
               <svg
@@ -45,7 +113,7 @@ const ProfileSummaryAccessLinks = ({
         <li>
           <Link
             to="/profile/edit"
-            className=" flex items-center w-full p-3 font-semibold hover:bg-gray-50"
+            className=" flex items-center w-full px-3 py-4 font-semibold hover:bg-gray-50"
           >
             <span className="ml-1">
               <svg
@@ -64,7 +132,7 @@ const ProfileSummaryAccessLinks = ({
         <li>
           <Link
             to="/profile/addresses"
-            className=" flex items-center w-full p-3 font-semibold hover:bg-gray-50"
+            className=" flex items-center w-full px-3 py-4 font-semibold hover:bg-gray-50"
           >
             <span className="ml-1">
               <svg
@@ -83,7 +151,7 @@ const ProfileSummaryAccessLinks = ({
         <li>
           <Link
             to="/profile/orders"
-            className=" flex items-center w-full p-3 font-semibold hover:bg-gray-50"
+            className=" flex items-center w-full px-3 py-4 font-semibold hover:bg-gray-50"
           >
             <span className="ml-1">
               <svg
@@ -102,7 +170,7 @@ const ProfileSummaryAccessLinks = ({
         <li>
           <Link
             to="/profile/payments"
-            className=" flex items-center w-full p-3 font-semibold hover:bg-gray-50"
+            className=" flex items-center w-full px-3 py-4 font-semibold hover:bg-gray-50"
           >
             <span className="ml-1">
               <svg
@@ -121,7 +189,7 @@ const ProfileSummaryAccessLinks = ({
         <li>
           <button
             onClick={() => logoutHandler()}
-            className=" flex items-center w-full p-3 font-semibold hover:bg-gray-50"
+            className=" flex items-center w-full px-3 py-4 font-semibold hover:bg-gray-50"
           >
             <span className="ml-1">
               <svg
