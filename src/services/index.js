@@ -3,7 +3,7 @@ import { BASE_URL } from './baseURL';
 import Swal from 'sweetalert2';
 
 const baseOptions = {
-  baseURL: BA7SE_URL,
+  baseURL: BASE_URL,
 };
 
 export const handleRequest = async (options) => {
