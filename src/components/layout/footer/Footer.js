@@ -133,7 +133,7 @@ const Footer = () => {
         <p className="text-sm mb-3">
           از تخفیف‌ها و جدیدترین‌های فروشگاه باخبر شوید:
         </p>
-        <div className="relative mb-3">
+        <div className="relative mb-3 z-0">
           <input
             type="text"
             className="w-full border rounded-md py-2 px-3"

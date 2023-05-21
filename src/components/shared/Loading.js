@@ -7,7 +7,7 @@ const Loading = ({ isShow = true }) => {
       window.innerWidth - document.documentElement.clientWidth;
     document.body.style.paddingRight = `${scrollbarWidth}px`;
     document.body.classList.add(
-      'fixed',
+      'absolute',
       'inset-x-0',
       'overflow-hidden'
     );
@@ -15,14 +15,14 @@ const Loading = ({ isShow = true }) => {
     return () => {
       document.body.style.paddingRight = null;
       document.body.classList.remove(
-        'fixed',
+        'absolute',
         'inset-x-0',
         'overflow-hidden'
       );
     };
   }, [isShow]);
   return (
-    <div className="fixed flex items-center justify-center top-[10.5rem] left-0 right-0  w-full h-[calc(100vh_-_10.5rem)]  overflow-x-hidden overflow-y-auto inset-0 bg-black/10 backdrop-blur-sm">
+    <div className="absolute flex items-center justify-center top-0 left-0 right-0  w-full h-full  overflow-x-hidden overflow-y-auto inset-0 bg-black/10 backdrop-blur-sm">
       <div className="bg-white/50 w-32 h-32 flex items-center justify-center  rounded-md border border-gray-300">
         <div role="status">
           <svg

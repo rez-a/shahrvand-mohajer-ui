@@ -21,7 +21,7 @@ const ProfileSummary = (props) => {
       <button
         onClick={() => setShowProfileLinks(!showProfileLinks)}
         className=" w-full h-full absolute"
-      ></button>
+      />
       <div>
         <svg
           xmlns="http://www.w3.org/2000/svg"

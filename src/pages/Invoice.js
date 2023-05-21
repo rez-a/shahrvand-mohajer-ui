@@ -6,6 +6,7 @@ import { UserContext } from 'contexts/UserProvider';
 import decodeToken from 'helper/handlerAuthorazation/decodeToken';
 import storeAuthToken from 'helper/handlerAuthorazation/storeAuthToken';
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import dispatcher from 'services/dispatcher';
@@ -62,7 +63,11 @@ const Invoice = ({ invoice, setInvoice }) => {
     storeAuthToken(token);
     setUser(decodeToken(token));
   };
-  return !!invoice ? (
+
+  useEffect(() => {
+    !invoice && navigate(-1);
+  }, []);
+  return invoice ? (
     <main className="container mx-auto">
       <div className="max-w-4xl border rounded-md border-gray-100 bg-white mx-auto p-6">
         <div className="flex items-center">

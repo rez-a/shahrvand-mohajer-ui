@@ -9,12 +9,13 @@ import { UserContext } from 'contexts/UserProvider';
 import TableLoaded from 'components/shared/TableLoaded';
 import Spinner from 'components/shared/Spinner';
 import { fetcher } from 'services/swr/fetcher';
+import { HOME_DELIVERY } from 'constants/paymentMethod';
 
 const OrderDetails = (props) => {
   const { orderId } = useParams();
   const { user } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
-  const { data: order, mutate } = useSWR(
+  const { data, mutate } = useSWR(
     `${ORDER_DETAILS}/${orderId}`,
     fetcher,
     {
@@ -22,12 +23,16 @@ const OrderDetails = (props) => {
     }
   );
 
+  const order = !!data && data.data;
+
   const orderCanceling = async () => {
     setLoading(true);
     const response = await fetcher(`orders/${orderId}/cancelled`);
     if (response.status === 'Success') mutate();
     setLoading(false);
   };
+
+  console.log(order);
   return (
     <div className="grid col-span-5 gap-y-4">
       <Card title="جزییات سفارش">
@@ -102,7 +107,9 @@ const OrderDetails = (props) => {
                   نحوه پرداخت :
                 </p>
                 <p className="text-sm text-zinc-500">
-                  پرداخت درب منزل
+                  {order.PaymentMethod === HOME_DELIVERY
+                    ? 'درب منزل'
+                    : 'کیف پول'}
                 </p>
               </div>
               <div className="space-y-2 py-4 px-7 border-b border-b-gray-100 h-24">
@@ -121,7 +128,17 @@ const OrderDetails = (props) => {
                   وضعیت پرداخت :
                 </p>
                 <p className="text-sm text-zinc-500">
-                  درحال بروز رسانی...
+                  <p
+                    className={`text-xs  inline-flex px-2 py-1 rounded-md  border  ${
+                      order.StatusPaid === 'STATUS_NONPAID'
+                        ? 'border-rose-300 text-rose-500 bg-rose-50 '
+                        : 'border-green-300 text-green-500 bg-green-50'
+                    }`}
+                  >
+                    {order.StatusPaid === 'STATUS_NONPAID'
+                      ? 'پرداخت نشده'
+                      : 'پرداخت شده'}
+                  </p>
                 </p>
               </div>
               <div className="space-y-2 py-4 px-7 border-b border-b-gray-100 h-24">

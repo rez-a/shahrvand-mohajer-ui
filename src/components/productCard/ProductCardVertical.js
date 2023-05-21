@@ -93,7 +93,7 @@ const ProductCartVertical = ({
               </svg>
             </div>
           </button>
-        ) : !!Few ? (
+        ) : !!Number(Few) ? (
           <button
             onClick={handleShowModal}
             className="text-white  py-1.5 px-2 text-xs rounded-md mx-2 md:mx-6 shadow-xl   transition-all duration-300 bg-rose-400/90 hover:bg-rose-400 shadow-sky-500/0  border-b-4 border-b-rose-700"
@@ -110,7 +110,7 @@ const ProductCartVertical = ({
           </button>
         ) : (
           <div className="flex">
-            <p className="bg-red-100 text-red-800 text-xs mb-3   font-medium mr-2 py-1.5 px-2 mx-2 md:mx-6 rounded dark:bg-red-900 dark:text-red-300">
+            <p className="bg-red-100 text-red-800 text-xs mb-3   font-medium mr-2 py-1.5 px-2 mx-2 md:mx-6 rounded">
               ناموجود
             </p>
           </div>

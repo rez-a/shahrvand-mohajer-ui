@@ -162,33 +162,8 @@ const MobileHeader = ({ categories }) => {
           bottomHeader ? 'p-4 h-auto' : 'h-0 py-0 overflow-hidden'
         }`}
       >
-        {/* <div className="relative h-full grow">
-          <input
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="bg-whit outline-none focus-visible:outline-none text-base border border-slate-200 shadow-sm transition-all duration-200 focus:border-slate-300 text-slate-800 p-2 sm:pr-5 rounded-md w-full placeholder:w-3/4 truncate focus:shadow-sm placeholder:text-xs sm:placeholder:text-sm"
-            type="text"
-            placeholder="نام کالا ، برند و یا دسته مورد نظر خود را جستجو کنید..."
-          />
-          <button
-            onClick={handleSearch}
-            className="absolute left-0 top-0 h-full bg-white border pl-4 rounded-l-md flex items-center justify-center"
-          >
-            <span className="h-full w-0.5 border-r border-slate-200 pl-4"></span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              width="20"
-              height="20"
-              className="fill-gray-700 inline-flex"
-            >
-              <path fill="none" d="M0 0h24v24H0z" />
-              <path d="M18.031 16.617l4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617zm-2.006-.742A6.977 6.977 0 0 0 18 11c0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7a6.977 6.977 0 0 0 4.875-1.975l.15-.15z" />
-            </svg>
-          </button>
-        </div> */}
         <SearchBox />
-        <ProfileSummary />
+        {/* <ProfileSummary /> */}
       </div>
       <div
         id="backdrop"

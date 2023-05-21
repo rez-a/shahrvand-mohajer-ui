@@ -7,6 +7,7 @@ import EmptyDataProfile from './EmptyData';
 import TableLoaded from 'components/shared/TableLoaded';
 import { fetcher } from 'services/swr/fetcher';
 import dispatcher from 'services/dispatcher';
+import { HOME_DELIVERY } from 'constants/paymentMethod';
 
 const Orders = (props) => {
   const { data: user } = useSWR(PROFILE, dispatcher);
@@ -210,6 +211,9 @@ const Orders = (props) => {
                   <th scope="col" class="px-6 py-3">
                     وضعیت سفارش
                   </th>
+                  <th scope="col" className="px-6 py-3">
+                    نحوه پرداخت
+                  </th>
                   <th scope="col" class="px-6 py-3">
                     جزییات سفارش
                   </th>
@@ -219,12 +223,12 @@ const Orders = (props) => {
                 {orders.data.map((order, index) => (
                   <tr
                     key={order.Id}
-                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:text-black hover:bg-gray-50/50 transition-all duration-200 dark:hover:bg-gray-600"
+                    class="bg-white border-b  hover:text-black hover:bg-gray-50/50 transition-all duration-200 "
                   >
                     <td class="px-6 py-4">{index + 1}</td>
                     <th
                       scope="row"
-                      class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap dark:text-white"
+                      class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap "
                     >
                       {order.Code}
                     </th>
@@ -241,14 +245,21 @@ const Orders = (props) => {
                     <td class="px-6 py-4 ">
                       <span
                         className={` font-bold border text-xs  p-2  rounded-md ${
-                          order.Status === 'Completed'
+                          !Number(order.Cancelled)
                             ? 'bg-green-50 border-green-300 text-green-500 '
                             : 'bg-rose-50 border-rose-300 text-rose-500'
                         }`}
                       >
-                        {order.Status === 'Completed'
-                          ? 'پرداخت شده'
-                          : 'پرداخت نشده'}
+                        {Number(order.Cancelled)
+                          ? 'لغو شده'
+                          : 'ثبت شده'}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4">
+                      <span className="font-bold border text-xs  p-2  rounded-md bg-neutral-50 border-neutral-300 text-neutral-500">
+                        {order.PaymentMethod === HOME_DELIVERY
+                          ? 'درب منزل'
+                          : 'کیف پول'}
                       </span>
                     </td>
                     <td class="px-6 py-4 text-right">

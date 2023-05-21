@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const InitAlert = ({ message }) => {
+const InitAlert = ({ message, setObserved }) => {
   const [show, setShow] = useState(true);
 
+  const handleShow = () => {
+    setShow(false);
+    setObserved(true);
+  };
   return (
     <div
       className={` flex items-center px-4 justify-center top-0 left-0 right-0 z-40 w-full  overflow-x-hidden overflow-y-auto inset-0 h-full bg-black/10 backdrop-blur-sm ${
@@ -20,7 +24,7 @@ const InitAlert = ({ message }) => {
           {message.data}
         </div>
         <button
-          onClick={() => setShow(false)}
+          onClick={handleShow}
           className="bg-blue-600 w-full hover:opacity-80 text-white py-5 text-sm font-semibold rounded-b-xl transition-all duration-300"
         >
           <svg
@@ -37,6 +41,9 @@ const InitAlert = ({ message }) => {
   );
 };
 
-InitAlert.propTypes = { message: PropTypes.object };
+InitAlert.propTypes = {
+  message: PropTypes.object,
+  setObservedMessage: PropTypes.func,
+};
 
 export default InitAlert;

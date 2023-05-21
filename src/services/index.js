@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { BASE_URL } from './baseURL';
-import Swal from 'sweetalert2';
+import Toast from 'utilities/sweetAlert';
 
 const baseOptions = {
-  baseURL: BA7SE_URL,
+  baseURL: BASE_URL,
 };
 
 export const handleRequest = async (options) => {
@@ -11,14 +11,15 @@ export const handleRequest = async (options) => {
     const response = await axios.request(
       Object.assign(baseOptions, options)
     );
-
+    if (response.status !== 200) {
+      throw new Error(response);
+    }
     return response.data;
   } catch (err) {
-    Swal.fire({
+    Toast.fire({
       icon: 'error',
-      title: 'مشکلی رخ داده است',
-      text: 'لطفا صفحه را مجددا بارگذاری کنید ',
-      confirmButtonText: 'بارگذاری مجدد ',
-    }).then((res) => window.location.reload());
+      text: err.response.data.message,
+      position: 'bottom',
+    });
   }
 };

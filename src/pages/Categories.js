@@ -11,6 +11,7 @@ import Banner from 'components/home/Banner';
 // import Vendors from 'components/home/vendorsSection/Vendors';
 import useObserved from 'hooks/useObserved';
 import Breadcrumb from 'components/Breadcrumb';
+import Vendors from 'components/home/VendorsSection/Vendors';
 
 const Categories = (props) => {
   const { ref, view } = useObserved();
@@ -49,7 +50,7 @@ const Categories = (props) => {
               sectionNum="SECTION8"
             />
           </Banner>
-          {/* <Vendors /> */}
+          <Vendors />
         </div>
       </main>
     </>

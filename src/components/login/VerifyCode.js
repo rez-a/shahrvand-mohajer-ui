@@ -22,7 +22,7 @@ const VerifyCode = ({ setSendVerifyCode, phoneNumber }) => {
       setLoading(true);
       const response = await dispatcher(VERIFY, {
         mobile: phoneNumber,
-        code: 11111,
+        code: verifyCode,
       });
       if (response?.status === 'Success') {
         storeAuthToken(response.data.access_token);

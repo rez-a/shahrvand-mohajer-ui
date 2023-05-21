@@ -19,7 +19,7 @@ const ProfileProductCard = ({
       <div class="flex flex-col w-full justify-between leading-normal grow mr-0 md:mr-2">
         <div>
           <div className="flex flex-col items-start sm:flex-row sm:items-center my-4 gap-4 justify-between">
-            <h5 class="text-base font-bold tracking-tight text-gray-900 dark:text-white ">
+            <h5 class="text-base font-bold tracking-tight text-gray-900 ">
               {Product.Name}
             </h5>
             <div className="flex items-center justify-end">

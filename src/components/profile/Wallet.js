@@ -16,7 +16,7 @@ const Wallet = () => {
               //   onChange={(e) => setVerifyCode(e.target.value)}
               placeholder="مثلا 200,000"
             />
-            <span class="bg-gray-100 absolute left-0 top-1/2 ml-1 -translate-y-1/2 text-gray-800 text-sm font-medium px-3 py-1.5 rounded dark:bg-gray-700 dark:text-gray-300">
+            <span class="bg-gray-100 absolute left-0 top-1/2 ml-1 -translate-y-1/2 text-gray-800 text-sm font-medium px-3 py-1.5 rounded">
               تومان
             </span>
           </div>

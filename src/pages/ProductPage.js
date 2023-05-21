@@ -48,6 +48,7 @@ const ProductPage = () => {
     ErpCode,
     MainGroupErpCode,
   } = !!product?.data && product?.data;
+
   const [attrSelected, setAttrSelected] = useState(Attr?.[0]);
   useEffect(() => {
     setLoader(isLoading);

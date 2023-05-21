@@ -1,6 +1,6 @@
 import Banner from 'components/home/Banner';
 import ShowCase from 'components/home/showcase/ShowCase';
-import React from 'react';
+import React, { useState } from 'react';
 import GridabledProducts from 'components/home/GridabledProducts';
 import VipSlider from 'components/home/VipSlider';
 import BannerItem from 'components/shared/BannerItem';
@@ -8,10 +8,25 @@ import PopularBrands from 'components/home/PopularBrands';
 import SlideProduct from 'components/shared/SlideProduct';
 import Categories from 'components/home/categoriesSection/Categoris';
 import Vendors from 'components/home/VendorsSection/Vendors';
+import { INSTANT_MESSAGINGS } from 'services/endPoints';
+import { fetcher } from 'services/swr/fetcher';
+import useSWR from 'swr';
+import InitAlert from 'components/InitAlert';
+import { useContext } from 'react';
+import { ObservedMessageContext } from 'contexts/ObservedMessageProvider';
 
 const Home = () => {
+  const { data: message } = useSWR(INSTANT_MESSAGINGS, fetcher);
+
+  const { observed, setObserved } = useContext(
+    ObservedMessageContext
+  );
+
   return (
     <main className="2xl:container">
+      {!!message && !observed && (
+        <InitAlert setObserved={setObserved} message={message} />
+      )}
       <ShowCase />
       <Vendors />
       <Categories />

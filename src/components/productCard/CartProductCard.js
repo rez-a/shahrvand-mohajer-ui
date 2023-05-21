@@ -39,7 +39,7 @@ const CartProductCard = ({
       <div class="flex flex-col justify-between leading-normal w-full grow lg:mr-2">
         <div>
           <div className="flex flex-col items-start justify-between sm:flex-row">
-            <div class="text-base font-bold tracking-tight text-gray-900 dark:text-white mb-4 sm:mb-2">
+            <div class="text-base font-bold tracking-tight text-gray-900  mb-4 sm:mb-2">
               {!!discount && (
                 <div className=" inline">
                   <span

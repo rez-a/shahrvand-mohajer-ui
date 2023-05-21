@@ -5,7 +5,11 @@ const EmptyDataProfile = ({ children, text, textClassName }) => {
   return (
     <div className="w-full grid place-items-center py-4">
       <div>{children}</div>
-      <p className={textClassName}>{text}</p>
+      <p
+        className={`text-sm font-bold text-rose-500 ${textClassName}`}
+      >
+        {text}
+      </p>
     </div>
   );
 };

@@ -95,7 +95,7 @@ const Checkout = ({
         dispatch(clearCart());
       });
     } else if (data.PaymentMethod === WALLET) {
-      setInvoice(data);
+      await setInvoice(data);
       navigate('/checkout/invoice');
       dispatch(clearCart());
     }
