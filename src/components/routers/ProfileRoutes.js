@@ -6,7 +6,6 @@ import Addresses from '../profile/Addresses/Addresses';
 import Orders from '../profile/Orders';
 import Payments from '../profile/Payments';
 import OrderDetails from '../profile/OrderDetails';
-import PaymentDetails from '../profile/PaymentDetails';
 import { Route, Routes } from 'react-router-dom';
 import NotFound from 'pages/NotFound';
 import Wallet from 'components/profile/Wallet';
@@ -23,13 +22,7 @@ const ProfileRoutes = (props) => {
           <Route index element={<Orders />} />
           <Route path="details/:orderId" element={<OrderDetails />} />
         </Route>
-        <Route path="payments">
-          <Route index element={<Payments />} />
-          {/* <Route
-            path="details/:paymentId"
-            element={<PaymentDetails />}
-          /> */}
-        </Route>
+        <Route path="payments" element={<Payments />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

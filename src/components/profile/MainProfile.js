@@ -15,7 +15,6 @@ const MainProfile = (props) => {
   const { data: orders } = useSWR(ORDERS, fetcher);
   const { data: payments } = useSWR(PAYMENTS, fetcher);
 
-  console.log(payments);
   const { name, mobile, tel, addresses } = !!user && user.data;
 
   return (
@@ -757,119 +756,61 @@ const MainProfile = (props) => {
                       وضعیت پرداخت
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      جزییات پرداخت
+                      درگاه بانکی
                     </th>
                   </tr>
                 </thead>
                 <tbody className="whitespace-nowrap">
-                  <tr className="bg-white border-b  hover:text-black hover:bg-gray-50/50 transition-all duration-200">
-                    <td className="px-6 py-4">1</td>
-                    <th
-                      scope="row"
-                      className="px-6 py-4 font-bold text-gray-900 whitespace-nowrap "
+                  {payments.data.slice(0, 3).map((payment, index) => (
+                    <tr
+                      key={index}
+                      className="bg-white border-b  hover:text-black hover:bg-gray-50/50 transition-all duration-200"
                     >
-                      SDGASDGSDGSG
-                    </th>
-                    <td className="px-6 py-4">1401/05/09</td>
-                    <td className="px-6 py-4 text-black font-bold">
-                      250,000
-                      <small
-                        className="text-slate-700 font-light mr-1
+                      <td className="px-6 py-4">{index + 1}</td>
+                      <th
+                        scope="row"
+                        className="px-6 py-4 font-bold text-gray-900 whitespace-nowrap "
+                      >
+                        {payment.Resnumber}
+                      </th>
+                      <td className="px-6 py-4">
+                        {payment.CreatedAt}
+                      </td>
+                      <td className="px-6 py-4 text-black font-bold">
+                        {payment.Amount}
+                        <small
+                          className="text-slate-700 font-light mr-1
                     "
-                      >
-                        تومان
-                      </small>
-                    </td>
-                    <td className="px-6 py-4 ">
-                      <span className="bg-rose-50 font-bold border text-xs border-rose-300 p-2 text-rose-500 rounded-md ">
-                        ناموفق
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 text-right">
-                      <a
-                        href="#"
-                        className="font-medium flex items-center text-xs "
-                      >
-                        <span className="bg-sky-50 border border-sky-300 p-2 text-sky-500 rounded-md hover:bg-sky-100/70">
-                          مشاهده جزییات
+                        >
+                          تومان
+                        </small>
+                      </td>
+                      <td className="px-6 py-4 ">
+                        <span
+                          className={`font-bold border text-xs  p-2  rounded-md ${
+                            payment.Status === 'PAID'
+                              ? 'bg-green-50 border-green-300 text-green-500'
+                              : 'bg-rose-50 border-rose-300 text-rose-500'
+                          }`}
+                        >
+                          {payment.Status === 'PAID'
+                            ? 'موفق'
+                            : 'ناموفق'}
                         </span>
-                      </a>
-                    </td>
-                  </tr>
-                  <tr className="bg-white border-b  hover:text-black hover:bg-gray-50/50 transition-all duration-200">
-                    <td className="px-6 py-4">2</td>
-                    <th
-                      scope="row"
-                      className="px-6 py-4 font-bold text-gray-900 whitespace-nowrap "
-                    >
-                      SDGASDGSDGSG
-                    </th>
-                    <td className="px-6 py-4">1401/05/09</td>
-                    <td className="px-6 py-4 text-black font-bold">
-                      250,000
-                      <small
-                        className="text-slate-700 font-light mr-1
-                    "
-                      >
-                        تومان
-                      </small>
-                    </td>
-                    <td className="px-6 py-4 ">
-                      <span className="bg-green-50 font-bold border text-xs border-green-300 p-2 text-green-500 rounded-md ">
-                        موفق
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 text-right">
-                      <a
-                        href="#"
-                        className="font-medium flex items-center text-xs "
-                      >
-                        <span className="bg-sky-50 border border-sky-300 p-2 text-sky-500 rounded-md hover:bg-sky-100/70">
-                          مشاهده جزییات
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="font-bold border text-xs  p-2  rounded-md bg-neutral-50 border-neutral-300 text-neutral-500">
+                          {payment.BankName}
                         </span>
-                      </a>
-                    </td>
-                  </tr>
-                  <tr className="bg-white  hover:text-black hover:bg-gray-50/50 transition-all duration-200">
-                    <td className="px-6 py-4">3</td>
-                    <th
-                      scope="row"
-                      className="px-6 py-4 font-bold text-gray-900 whitespace-nowrap "
-                    >
-                      SDGASDGSDGSG
-                    </th>
-                    <td className="px-6 py-4">1401/05/09</td>
-                    <td className="px-6 py-4 text-black font-bold">
-                      250,000
-                      <small
-                        className="text-slate-700 font-light mr-1
-                    "
-                      >
-                        تومان
-                      </small>
-                    </td>
-                    <td className="px-6 py-4 ">
-                      <span className="bg-rose-50 font-bold border text-xs border-rose-300 p-2 text-rose-500 rounded-md ">
-                        ناموفق
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 text-right">
-                      <a
-                        href="#"
-                        className="font-medium flex items-center text-xs "
-                      >
-                        <span className="bg-sky-50 border border-sky-300 p-2 text-sky-500 rounded-md hover:bg-sky-100/70">
-                          مشاهده جزییات
-                        </span>
-                      </a>
-                    </td>
-                  </tr>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
-            <a
+            <Link
               className="text-slate-700 text-sm w-full bg-gray-50 block hover:opacity-70 text-center py-4 font-semibold rounded-md"
-              href="#"
+              to="/profile/payments"
             >
               مشاهده لیست پرداخت ها
               <svg
@@ -881,7 +822,7 @@ const MainProfile = (props) => {
               >
                 <path d="M7.82843 10.9999H20V12.9999H7.82843L13.1924 18.3638L11.7782 19.778L4 11.9999L11.7782 4.22168L13.1924 5.63589L7.82843 10.9999Z"></path>
               </svg>
-            </a>
+            </Link>
           </div>
         ) : (
           <EmptyDataProfile

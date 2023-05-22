@@ -1,17 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import TitleIcon from 'components/shared/TitleIcon';
 import Card from './Card';
-import { Link } from 'react-router-dom';
 import EmptyDataProfile from './EmptyData';
 import useSWR from 'swr';
-import { PROFILE } from 'services/endPoints';
+import { PAYMENTS, PROFILE } from 'services/endPoints';
 import TableLoaded from 'components/shared/TableLoaded';
 import dispatcher from 'services/dispatcher';
+import { fetcher } from 'services/swr/fetcher';
 
 const Payments = (props) => {
   const { data: user } = useSWR(PROFILE, dispatcher);
-  const payments = [];
+  const { data: payments } = useSWR(PAYMENTS, fetcher);
   const { addresses } = !!user && user.data;
   return (
     <Card title="آخرین پرداخت ها">
@@ -189,153 +187,78 @@ const Payments = (props) => {
         </EmptyDataProfile>
       ) : !payments ? (
         <TableLoaded count={5} />
-      ) : !!payments.length ? (
+      ) : !!payments.data.length ? (
         <div>
-          <div class="relative overflow-x-auto border border-gray-100">
+          <div class="relative  overflow-auto max-h-screen">
             <table class="w-full text-sm text-right text-gray-500 ">
               <thead class="text-sm whitespace-nowrap text-gray-700  bg-gray-100">
                 <tr>
-                  <th scope="col" class="px-6 py-3">
+                  <th scope="col" className="px-6 py-3">
                     #
                   </th>
-                  <th scope="col" class="px-6 py-3">
+                  <th scope="col" className="px-6 py-3">
                     شماره پرداخت
                   </th>
-                  <th scope="col" class="px-6 py-3">
+                  <th scope="col" className="px-6 py-3">
                     تاریخ پرداخت
                   </th>
-                  <th scope="col" class="px-6 py-3">
+                  <th scope="col" className="px-6 py-3">
                     مبلغ پرداختی
                   </th>
-                  <th scope="col" class="px-6 py-3">
+                  <th scope="col" className="px-6 py-3">
                     وضعیت پرداخت
                   </th>
-                  <th scope="col" class="px-6 py-3">
-                    جزییات پرداخت
+                  <th scope="col" className="px-6 py-3">
+                    درگاه بانکی
                   </th>
                 </tr>
               </thead>
               <tbody className="whitespace-nowrap">
-                <tr class="bg-white border-b  hover:text-black hover:bg-gray-50/50 transition-all duration-200 ">
-                  <td class="px-6 py-4">1</td>
-                  <th
-                    scope="row"
-                    class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap "
+                {payments.data.map((payment, index) => (
+                  <tr
+                    key={index}
+                    className="bg-white border-b  hover:text-black hover:bg-gray-50/50 transition-all duration-200"
                   >
-                    SDGASDGSDGSG
-                  </th>
-                  <td class="px-6 py-4">1401/05/09</td>
-                  <td class="px-6 py-4 text-black font-bold">
-                    250,000
-                    <small
-                      className="text-slate-700 font-light mr-1
+                    <td className="px-6 py-4">{index + 1}</td>
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-bold text-gray-900 whitespace-nowrap "
+                    >
+                      {payment.Resnumber}
+                    </th>
+                    <td className="px-6 py-4">{payment.CreatedAt}</td>
+                    <td className="px-6 py-4 text-black font-bold">
+                      {payment.Amount}
+                      <small
+                        className="text-slate-700 font-light mr-1
                     "
-                    >
-                      تومان
-                    </small>
-                  </td>
-                  <td class="px-6 py-4 ">
-                    <span className="bg-rose-50 font-bold border text-xs border-rose-300 p-2 text-rose-500 rounded-md ">
-                      ناموفق
-                    </span>
-                  </td>
-                  <td class="px-6 py-4 text-right">
-                    <a
-                      href="#"
-                      class="font-medium flex items-center text-xs "
-                    >
-                      <span className="bg-sky-50 border border-sky-300 p-2 text-sky-500 rounded-md hover:bg-sky-100/70">
-                        مشاهده جزییات
+                      >
+                        تومان
+                      </small>
+                    </td>
+                    <td className="px-6 py-4 ">
+                      <span
+                        className={`font-bold border text-xs  p-2  rounded-md ${
+                          payment.Status === 'PAID'
+                            ? 'bg-green-50 border-green-300 text-green-500'
+                            : 'bg-rose-50 border-rose-300 text-rose-500'
+                        }`}
+                      >
+                        {payment.Status === 'PAID'
+                          ? 'موفق'
+                          : 'ناموفق'}
                       </span>
-                    </a>
-                  </td>
-                </tr>
-                <tr class="bg-white border-b  hover:text-black hover:bg-gray-50/50 transition-all duration-200">
-                  <td class="px-6 py-4">2</td>
-                  <th
-                    scope="row"
-                    class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap "
-                  >
-                    SDGASDGSDGSG
-                  </th>
-                  <td class="px-6 py-4">1401/05/09</td>
-                  <td class="px-6 py-4 text-black font-bold">
-                    250,000
-                    <small
-                      className="text-slate-700 font-light mr-1
-                    "
-                    >
-                      تومان
-                    </small>
-                  </td>
-                  <td class="px-6 py-4 ">
-                    <span className="bg-green-50 font-bold border text-xs border-green-300 p-2 text-green-500 rounded-md ">
-                      موفق
-                    </span>
-                  </td>
-                  <td class="px-6 py-4 text-right">
-                    <a
-                      href="#"
-                      class="font-medium flex items-center text-xs "
-                    >
-                      <span className="bg-sky-50 border border-sky-300 p-2 text-sky-500 rounded-md hover:bg-sky-100/70">
-                        مشاهده جزییات
+                    </td>
+                    <td className="px-6 py-4">
+                      <span className="font-bold border text-xs  p-2  rounded-md bg-neutral-50 border-neutral-300 text-neutral-500">
+                        {payment.BankName}
                       </span>
-                    </a>
-                  </td>
-                </tr>
-                <tr class="bg-white hover:text-black hover:bg-gray-50/50 transition-all duration-200">
-                  <td class="px-6 py-4">3</td>
-                  <th
-                    scope="row"
-                    class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap"
-                  >
-                    SDGASDGSDGSG
-                  </th>
-                  <td class="px-6 py-4">1401/05/09</td>
-                  <td class="px-6 py-4 text-black font-bold">
-                    250,000
-                    <small
-                      className="text-slate-700 font-light mr-1
-                    "
-                    >
-                      تومان
-                    </small>
-                  </td>
-                  <td class="px-6 py-4 ">
-                    <span className="bg-rose-50 font-bold border text-xs border-rose-300 p-2 text-rose-500 rounded-md ">
-                      ناموفق
-                    </span>
-                  </td>
-                  <td class="px-6 py-4 text-right">
-                    <a
-                      href="#"
-                      class="font-medium flex items-center text-xs "
-                    >
-                      <span className="bg-sky-50 border border-sky-300 p-2 text-sky-500 rounded-md hover:bg-sky-100/70">
-                        مشاهده جزییات
-                      </span>
-                    </a>
-                  </td>
-                </tr>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
-          <a
-            className="text-slate-700 text-sm w-full bg-gray-50 block hover:opacity-70 text-center py-4 font-semibold rounded-md"
-            href="#"
-          >
-            مشاهده لیست پرداخت ها
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              width="24"
-              height="24"
-              className="inline fill-current mr-3"
-            >
-              <path d="M7.82843 10.9999H20V12.9999H7.82843L13.1924 18.3638L11.7782 19.778L4 11.9999L11.7782 4.22168L13.1924 5.63589L7.82843 10.9999Z"></path>
-            </svg>
-          </a>
         </div>
       ) : (
         <EmptyDataProfile

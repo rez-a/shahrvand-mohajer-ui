@@ -14,6 +14,7 @@ import AboutUs from 'pages/AboutUs';
 import ContactUs from 'pages/ContactUs';
 import Faq from 'pages/Faq';
 import Callback from 'pages/Callback';
+import Lottery from 'pages/Lottery';
 
 const AllRoutes = () => {
   return (
@@ -32,6 +33,7 @@ const AllRoutes = () => {
         <Route path="about-us" element={<AboutUs />} />
         <Route path="contact-us" element={<ContactUs />} />
         <Route path="faq" element={<Faq />} />
+        <Route path="lottery" element={<Lottery />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
