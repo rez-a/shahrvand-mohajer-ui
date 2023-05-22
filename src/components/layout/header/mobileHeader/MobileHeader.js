@@ -176,7 +176,11 @@ const MobileHeader = ({ categories }) => {
             : 'invisible opacity-0'
         }
       >
-        <Navigations categories={categories} showNav={showNav} />
+        <Navigations
+          categories={categories}
+          showNav={showNav}
+          setShowNav={setShowNav}
+        />
       </div>
     </header>
   );

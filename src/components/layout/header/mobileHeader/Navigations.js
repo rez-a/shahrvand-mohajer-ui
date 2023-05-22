@@ -6,7 +6,7 @@ import { UserContext } from 'contexts/UserProvider';
 import ProfileAccessLink from './ProfileAccessLink';
 import { useState } from 'react';
 
-const Navigations = ({ categories, showNav }) => {
+const Navigations = ({ categories, showNav, setShowNav }) => {
   const [showProfileAccess, setShowProfileAccess] = useState(false);
   const location = useLocation();
   const { user } = useContext(UserContext);
@@ -40,8 +40,8 @@ const Navigations = ({ categories, showNav }) => {
         showNav ? 'right-0' : '-right-full'
       }`}
     >
-      <div className="pb-4 mb-4 border-b border-b-gray-200">
-        <Link to="/" className="w-full">
+      <div className="pb-4 mb-4 flex items-center justify-between border-b border-b-gray-200">
+        <Link to="/" className="grow">
           <svg
             width="55.861481mm"
             height="10.45898mm"
@@ -124,6 +124,18 @@ const Navigations = ({ categories, showNav }) => {
             </g>
           </svg>
         </Link>
+        <button
+          onClick={() => setShowNav(false)}
+          className="bg-neutral-200 p-0.5 rounded-full"
+        >
+          <svg
+            className="fill-neutral-600 w-6 h-6"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12.0007 10.5865L16.9504 5.63672L18.3646 7.05093L13.4149 12.0007L18.3646 16.9504L16.9504 18.3646L12.0007 13.4149L7.05093 18.3646L5.63672 16.9504L10.5865 12.0007L5.63672 7.05093L7.05093 5.63672L12.0007 10.5865Z"></path>
+          </svg>
+        </button>
       </div>
       <div className="pb-4  border-b border-b-gray-200">
         {!!user ? (
