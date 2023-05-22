@@ -66,12 +66,12 @@ const MainProfile = (props) => {
                     )}
                   </span>
                 </p>
-                <Link
-                  to="/profile/edit"
-                  className="text-rose-500 text-sm underline decoration-dotted"
-                >
-                  ویرایش اطلاعات
-                </Link>
+                <p className=" text-slate-700">
+                  امتیاز شما :
+                  <span className="text-black font-bold mr-1">
+                    {0}
+                  </span>
+                </p>
               </div>
             </div>
           </div>

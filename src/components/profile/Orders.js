@@ -192,7 +192,7 @@ const Orders = (props) => {
         <TableLoaded count={5} />
       ) : !!orders.data.length ? (
         <div>
-          <div class="relative overflow-auto max-h-screen border border-gray-100">
+          <div class="relative overflow-auto max-h-screen">
             <table class="w-full text-sm text-right text-gray-500 ">
               <thead class="text-sm whitespace-nowrap text-gray-700  bg-gray-100">
                 <tr>
