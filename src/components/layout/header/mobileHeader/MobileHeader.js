@@ -1,5 +1,10 @@
 import React, { useEffect, useRef } from 'react';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from 'react-router-dom';
 import ProfileSummary from '../ProfileSummary';
 import { useContext } from 'react';
 import { CartContext } from 'contexts/CartProvider';
@@ -8,9 +13,7 @@ import Navigations from './Navigations';
 import SearchBox from './serchBox/SearchBox';
 
 const MobileHeader = ({ categories }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const navigaion = useNavigate();
-  const [search, setSearch] = useState(searchParams.get('q') || '');
+  const location = useLocation();
   const [showNav, setShowNav] = useState(false);
   const [bottomHeader, setShowBottomHeader] = useState(true);
   const {
@@ -20,10 +23,6 @@ const MobileHeader = ({ categories }) => {
     (totalProducts, vendor) => totalProducts + vendor.products.length,
     0
   );
-  const handleSearch = () => {
-    !!search && navigaion(`/search?q=${search}`);
-  };
-
   const handleCloseNav = (e) => {
     e.target.id === 'backdrop' && setShowNav(false);
   };
@@ -37,6 +36,10 @@ const MobileHeader = ({ categories }) => {
   useEffect(() => {
     window.addEventListener('scroll', controllerNavMenu);
   }, []);
+
+  useEffect(() => {
+    setShowNav(false);
+  }, [location]);
 
   return (
     <header className="shadow bg-white sticky top-0 z-10 mb-4 block lg:hidden">
@@ -163,7 +166,6 @@ const MobileHeader = ({ categories }) => {
         }`}
       >
         <SearchBox />
-        {/* <ProfileSummary /> */}
       </div>
       <div
         id="backdrop"
