@@ -10,8 +10,9 @@ const decodeToken = (token = null) => {
     : null;
 
   const destrucToken = () => {
-    const { mobile, name, exp, wallet_balance } = tokenDecoded;
-    return { mobile, name, exp, wallet_balance };
+    const { mobile, name, exp, wallet_balance, score_order } =
+      tokenDecoded;
+    return { mobile, name, exp, wallet_balance, score_order };
   };
 
   return !!tokenDecoded ? destrucToken() : null;

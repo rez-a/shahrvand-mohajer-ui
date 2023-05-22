@@ -7,6 +7,7 @@ import LotteryWinnersModal from './LotteryWinnersModal';
 
 const LotteryCard = () => {
   const [isShow, setShow] = useState(false);
+  const [loading, setLoading] = useState(false);
   return (
     <>
       <div class=" bg-white  rounded-xl shadow-xl pb-4">
@@ -45,27 +46,14 @@ const LotteryCard = () => {
             <p>1401/02/01</p>
           </div>
           <button
-            onClick={() => setShow(true)}
-            className="relative bg-sky-500 h-10 w-full text-white font-bold rounded-md overflow-hidden group block"
+            // disabled={loading}
+            // onClick={handleEditProfile}
+            className="bg-sky-500/90  text-white w-full  py-2 text-sm rounded-md font-bold shadow-lg shadow-sky-500/50 hover:bg-sky-500 transition-all duration-300"
           >
-            <span className="bg-sky-400 h-full flex items-center w-12 px-3 z-0 rounded-l-full absolute right-0 top-0 group-hover:w-full group-hover:rounded-l-none transition-all duration-300">
-              {false ? (
-                <Spinner />
-              ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  width="24"
-                  height="24"
-                  className="fill-white"
-                >
-                  <path d="M7.82843 10.9999H20V12.9999H7.82843L13.1924 18.3638L11.7782 19.778L4 11.9999L11.7782 4.22168L13.1924 5.63589L7.82843 10.9999Z"></path>
-                </svg>
-              )}
-            </span>
-            <span className="z-0 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 whitespace-nowrap">
-              مشاهده برندگان
-            </span>
+            <div className="flex items-center justify-center">
+              {loading && <Spinner />}
+              <span className="mr-2">مشاهده برنده ها</span>
+            </div>
           </button>
         </div>
       </div>

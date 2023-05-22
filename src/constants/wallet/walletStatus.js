@@ -1,0 +1,2 @@
+export const COMPLETED = 'STATUS_COMPLETED';
+export const REJECTED = 'STATUS_REJECTED';

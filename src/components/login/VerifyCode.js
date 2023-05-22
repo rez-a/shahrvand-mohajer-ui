@@ -9,6 +9,7 @@ import { UserContext } from 'contexts/UserProvider';
 import decodeToken from 'helper/handlerAuthorazation/decodeToken';
 import { useNavigate } from 'react-router-dom';
 import dispatcher from 'services/dispatcher';
+import { useEffect } from 'react';
 
 const VerifyCode = ({ setSendVerifyCode, phoneNumber }) => {
   const [verifyCode, setVerifyCode] = useState('');
@@ -35,6 +36,12 @@ const VerifyCode = ({ setSendVerifyCode, phoneNumber }) => {
     }
     setLoading(false);
   };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleLogin);
+
+    return window.removeEventListener('keydown', handleLogin);
+  }, []);
 
   return (
     <form className="w-full px-6">
@@ -67,7 +74,7 @@ const VerifyCode = ({ setSendVerifyCode, phoneNumber }) => {
               کد ارسالی به {phoneNumber}
             </label>
           </div>
-          <Timer initialMinute={2} />
+          <Timer phoneNumber={phoneNumber} initialMinute={2} />
         </div>
         <input
           className="w-full placeholder:text-xs px-3 py-2 h-12 mb-3 rounded-md border outline-none focus:border-gray-400"

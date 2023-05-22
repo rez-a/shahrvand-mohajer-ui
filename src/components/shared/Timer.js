@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import dispatcher from 'services/dispatcher';
+import { LOGIN } from 'services/endPoints';
 
 const Timer = (props) => {
   const {
     initialMinute = 0,
     initialSeconds = 0,
-    sendVerifyCode,
+    phoneNumber,
   } = props;
   const [minutes, setMinutes] = useState(initialMinute);
   const [seconds, setSeconds] = useState(initialSeconds);
@@ -27,8 +29,14 @@ const Timer = (props) => {
     };
   });
 
+  const handleSendVerifyCode = async () => {
+    const response = await dispatcher(LOGIN, {
+      mobile: phoneNumber,
+    });
+  };
+
   const resendVerifyCode = () => {
-    sendVerifyCode();
+    handleSendVerifyCode();
     setMinutes(2);
     setSeconds(0);
   };
