@@ -19,12 +19,12 @@ const ProfileSummaryAccessLinks = ({ setShowProfileLinks, closeHandler }) => {
   return (
     <div className="absolute border border-gray-200 bg-white sm:w-72 w-40 left-0 top-full rounded-lg text-sm mt-1 shadow-lg">
       <ul className="" onClick={() => setShowProfileLinks(false)}>
-        <li className="border-b border-gray-100">
+        <li>
           <Link
             to="/profile/wallet"
-            className="flex items-center text-neutral-800 hover:bg-gray-50 overflow-hidden"
+            className="flex items-center text-neutral-800 hover:bg-gray-50 overflow-hidden border-b"
           >
-            <div className="flex items-start ml-1 px-4 pl-1 py-3 after:border-gray-300 after:border-b after:w-5 after:mr-1 after:h-2 after:inline-flex ">
+            <div className="flex items-center ml-1 px-4 pl-1 py-3 after:border-gray-300 after:border-b after:w-5 after:mr-1 after:h-2 after:inline-flex ">
               <span class="relative flex h-3 w-3">
                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
                 <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
@@ -46,7 +46,7 @@ const ProfileSummaryAccessLinks = ({ setShowProfileLinks, closeHandler }) => {
             to="/profile/wallet"
             className="flex items-center text-neutral-800 hover:bg-gray-50 overflow-hidden"
           >
-            <div className="flex items-start ml-1 px-4 pl-1 py-3 after:border-gray-300 after:border-b after:w-5 after:mr-1 after:h-2 after:inline-flex ">
+            <div className="flex items-center ml-1 px-4 pl-1 py-3 after:border-gray-300 after:border-b after:w-5 after:mr-1 after:h-2 after:inline-flex ">
               <span class="relative flex h-3 w-3">
                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
                 <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>

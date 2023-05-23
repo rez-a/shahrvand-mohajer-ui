@@ -16,11 +16,11 @@ const ProfileSummary = (props) => {
   return !!user ? (
     <div
       ref={profileLinksRef}
-      className="flex items-center cursor-pointer relative group z-50  py-1"
+      className="flex items-center cursor-pointer relative group z-50 ml-2 py-1"
     >
       <button
         onClick={() => setShowProfileLinks(!showProfileLinks)}
-        className=" w-full h-full absolute focus:ring-4 focus:ring-red-100 rounded-lg bg-red-100/20 text-black"
+        className=" w-full h-full absolute focus:ring-4 focus:ring-red-200 rounded-lg bg-red-100/20 text-black"
       />
       <div>
         <svg

@@ -48,6 +48,33 @@ const Profile = () => {
                 </div>
               </div>
             </NavLink>
+            <NavLink
+              to="/profile/wallet"
+              style={baseStyleLinks}
+              className={(navData) =>
+                navData.isActive
+                  ? ' text-rose-500 font-medium border-b group is-published flex items-center '
+                  : 'hover:bg-gray-100 group border-b flex items-center transition-all duration-300 text-[#1a2947]'
+              }
+            >
+              <span className=" ml-3 rounded-md p-2 py-1.5 group-[.is-published]:bg-rose-500 transition-all duration-200">
+              <span class="relative flex h-3 w-3">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+              </span>
+              </span>
+              <div className="grow flex items-center justify-between">
+                <span>کیف پول</span>
+                <div className="mr-auto">
+                  <span>
+                    {Number(user.wallet_balance).toLocaleString()}
+                  </span>
+                  <span className="text-xs font-light mr-1">
+                    تومان
+                  </span>
+                </div>
+              </div>
+            </NavLink>
           </li>
           <li>
             <NavLink

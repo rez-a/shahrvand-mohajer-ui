@@ -11,53 +11,77 @@ const ProfileAccessLink = ({ user, setShowProfileAccess }) => {
     setShowProfileAccess(false);
   };
   return (
-    <ul className="bg-gray-50/30 mt-2 divide-y divide-gray-50">
-      <li className="border-b border-gray-100">
-          <Link
-            to="/profile/wallet"
-            className="flex items-center text-neutral-800 hover:bg-gray-50 overflow-hidden"
-          >
-            <div className="flex items-start ml-1 px-4 pl-1 py-3 after:border-gray-300 after:border-b after:w-5 after:mr-1 after:h-2 after:inline-flex ">
-              <span class="relative flex h-3 w-3">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
-              </span>
-            </div>
-            <div className=" border-gray-100  font-bold py-3 w-full">
-              <span>کیف پول</span>
-            </div>
+    <ul className="bg-gray-200 mt-2 divide-y divide-gray-300">
+      <li>
+        <Link
+          to="/profile/wallet"
+          className={
+            'hover:bg-gray-100 text-sm flex items-center group transition-all duration-300 text-[#1a2947] p-4'
+          }
+        >
+          <span className=" ml-3 rounded-md  py-1.5 group-[.is-published]:bg-rose-500 transition-all duration-200">
+            <svg
+              version="1.1"
+              id="Layer_1"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 495 495"
+              width={18}
+              height={18}
+              fill="#000000"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <g>
+                  <path
+                    className="fill-[#FF9811]"
+                    d="M85,455h330v-45H40C40,434.81,60.19,455,85,455z"
+                  ></path>
+                  <path
+                    className="fill-[#FFB655]"
+                    d="M85,365c-24.81,0-45,20.19-45,45h375v-45H85z"
+                  ></path>
+                  <rect
+                    x="247.5"
+                    className="fill-[#FF5023]"
+                    width="247.5"
+                    height="90.25"
+                  ></rect>
+                  <path
+                    className="fill-[#FF6243]"
+                    d="M85,325h162.5V0H85C38.13,0,0,38.13,0,85v325C0,363.13,38.13,325,85,325z"
+                  ></path>
+                  <path
+                    className="fill-[#FF5023]"
+                    d="M247.5,325H85c-46.87,0-85,38.13-85,85s38.13,85,85,85h370V365h40v-90.25H247.5V325z M415,455H85 c-24.81,0-45-20.19-45-45s20.19-45,45-45h330V455z"
+                  ></path>
+                  <path
+                    className="fill-[#FF7956]"
+                    d="M247.5,274.75H495V90.25H247.5V274.75z M339.75,152.5c16.542,0,30,13.458,30,30s-13.458,30-30,30 s-30-13.458-30-30S323.208,152.5,339.75,152.5z"
+                  ></path>
+                  <path
+                    className="fill-[#FFFFFF]"
+                    d="M339.75,212.5c16.542,0,30-13.458,30-30s-13.458-30-30-30s-30,13.458-30,30 S323.208,212.5,339.75,212.5z"
+                  ></path>
+                </g>
+              </g>
+            </svg>
+          </span>
+          <div className="grow flex items-center justify-between">
+            <span>کیف پول</span>
             <div className="mr-auto">
-              <div className="pr-2 font-bold px-4 py-3 w-full">
-                {Number(user.wallet_balance).toLocaleString()}
-                <span className="text-xs font-light mr-1">
-                تومان
-                </span>
-              </div>
-            </div>
-          </Link>
-          <Link
-            to="/profile/wallet"
-            className="flex items-center text-neutral-800 hover:bg-gray-50 overflow-hidden"
-          >
-            <div className="flex items-start ml-1 px-4 pl-1 py-3 after:border-gray-300 after:border-b after:w-5 after:mr-1 after:h-2 after:inline-flex ">
-              <span class="relative flex h-3 w-3">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
-              </span>
-            </div>
-            <div className=" border-gray-100  font-bold py-3 w-full">
               <span>
-              امتیاز سفارش
-              </span>
-            </div>
-            <div className="mr-auto">
-              <div className="pr-2 font-bold px-4 py-3 w-full">
                 {Number(user.wallet_balance).toLocaleString()}
-                <span className="text-xs font-light mr-1">امتیاز</span>
-              </div>
+              </span>
+              <span className="text-xs font-light mr-1">تومان</span>
             </div>
-          </Link>
-        </li>
+          </div>
+        </Link>
+      </li>
       <li>
         <Link
           to="/profile/main"

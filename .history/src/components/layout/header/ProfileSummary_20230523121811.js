@@ -16,7 +16,7 @@ const ProfileSummary = (props) => {
   return !!user ? (
     <div
       ref={profileLinksRef}
-      className="flex items-center cursor-pointer relative group z-50  py-1"
+      className="flex items-center cursor-pointer relative group z-50 ml-2 py-1"
     >
       <button
         onClick={() => setShowProfileLinks(!showProfileLinks)}

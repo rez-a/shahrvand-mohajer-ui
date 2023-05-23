@@ -16,7 +16,7 @@ const ProfileSummary = (props) => {
   return !!user ? (
     <div
       ref={profileLinksRef}
-      className="flex items-center cursor-pointer relative group z-50  py-1"
+      className="flex items-center cursor-pointer relative group z-50 px-2 ml-2 py-1"
     >
       <button
         onClick={() => setShowProfileLinks(!showProfileLinks)}
@@ -42,8 +42,8 @@ const ProfileSummary = (props) => {
         </p>
       </div>
       <div className="p-1.5 rounded-full mr-2">
-      <svg xmlns="http://www.w3.org/2000/svg" className="fill-zinc-600" width="34" height="34" fill="none" viewBox="0 0 24 24">
-  <path d="M12 11.25a3.744 3.744 0 0 1-3.733-3.733h-1.5A5.244 5.244 0 0 0 12 12.75v-1.5ZM8.267 7.517C8.267 5.456 9.954 3.75 12 3.75v-1.5c-2.888 0-5.233 2.392-5.233 5.267h1.5ZM12 3.75a3.744 3.744 0 0 1 3.733 3.733h1.5A5.244 5.244 0 0 0 12 2.25v1.5Zm3.733 3.733c0 2.061-1.687 3.767-3.733 3.767v1.5c2.888 0 5.233-2.392 5.233-5.267h-1.5ZM19 20.25H5v1.5h14v-1.5Zm-14 0a.253.253 0 0 1-.25-.25h-1.5c0 .964.786 1.75 1.75 1.75v-1.5ZM4.75 20v-1h-1.5v1h1.5Zm0-1A3.262 3.262 0 0 1 8 15.75v-1.5A4.762 4.762 0 0 0 3.25 19h1.5ZM8 15.75h8v-1.5H8v1.5Zm8 0A3.262 3.262 0 0 1 19.25 19h1.5A4.762 4.762 0 0 0 16 14.25v1.5ZM19.25 19v1h1.5v-1h-1.5Zm0 1c0 .136-.114.25-.25.25v1.5c.964 0 1.75-.786 1.75-1.75h-1.5Z"/>
+      <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="none" viewBox="0 0 24 24">
+  <path stroke="#323232" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 7a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5m4.5 9a2.383 2.383 0 0 0-.594-.866v0a2.367 2.367 0 0 0-1.614-.634H9.708c-.6 0-1.174.227-1.614.634v0c-.26.241-.463.537-.594.866m3 4.865a8.998 8.998 0 0 1-6.321-4.422M5.15 6.17A8.96 8.96 0 0 0 3 12c0 .555.058 1.096.154 1.624M13.5 20.865a8.998 8.998 0 0 0 6.321-4.422M16.55 4.244a8.942 8.942 0 0 0-9.1 0m11.4 1.926A8.96 8.96 0 0 1 21 12c0 .555-.058 1.096-.154 1.624"/>
 </svg>
       </div>
       {showProfileLinks && (

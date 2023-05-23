@@ -11,7 +11,7 @@ const ProfileAccessLink = ({ user, setShowProfileAccess }) => {
     setShowProfileAccess(false);
   };
   return (
-    <ul className="bg-gray-50/30 mt-2 divide-y divide-gray-50">
+    <ul className="bg-gray-50/30 mt-2 divide-y divide-gray-100">
       <li className="border-b border-gray-100">
           <Link
             to="/profile/wallet"

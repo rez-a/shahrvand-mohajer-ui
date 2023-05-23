@@ -16,11 +16,11 @@ const ProfileSummary = (props) => {
   return !!user ? (
     <div
       ref={profileLinksRef}
-      className="flex items-center cursor-pointer relative group z-50  py-1"
+      className="flex items-center cursor-pointer relative group z-50"
     >
       <button
         onClick={() => setShowProfileLinks(!showProfileLinks)}
-        className=" w-full h-full absolute focus:ring-4 focus:ring-red-100 rounded-lg bg-red-100/20 text-black"
+        className=" w-full h-full absolute focus:ring-4 focus:ring-red-300 rounded-lg"
       />
       <div>
         <svg
@@ -41,10 +41,16 @@ const ProfileSummary = (props) => {
           {user.mobile}
         </p>
       </div>
-      <div className="p-1.5 rounded-full mr-2">
-      <svg xmlns="http://www.w3.org/2000/svg" className="fill-zinc-600" width="34" height="34" fill="none" viewBox="0 0 24 24">
-  <path d="M12 11.25a3.744 3.744 0 0 1-3.733-3.733h-1.5A5.244 5.244 0 0 0 12 12.75v-1.5ZM8.267 7.517C8.267 5.456 9.954 3.75 12 3.75v-1.5c-2.888 0-5.233 2.392-5.233 5.267h1.5ZM12 3.75a3.744 3.744 0 0 1 3.733 3.733h1.5A5.244 5.244 0 0 0 12 2.25v1.5Zm3.733 3.733c0 2.061-1.687 3.767-3.733 3.767v1.5c2.888 0 5.233-2.392 5.233-5.267h-1.5ZM19 20.25H5v1.5h14v-1.5Zm-14 0a.253.253 0 0 1-.25-.25h-1.5c0 .964.786 1.75 1.75 1.75v-1.5ZM4.75 20v-1h-1.5v1h1.5Zm0-1A3.262 3.262 0 0 1 8 15.75v-1.5A4.762 4.762 0 0 0 3.25 19h1.5ZM8 15.75h8v-1.5H8v1.5Zm8 0A3.262 3.262 0 0 1 19.25 19h1.5A4.762 4.762 0 0 0 16 14.25v1.5ZM19.25 19v1h1.5v-1h-1.5Zm0 1c0 .136-.114.25-.25.25v1.5c.964 0 1.75-.786 1.75-1.75h-1.5Z"/>
-</svg>
+      <div className="bg-gray-100 p-1.5 rounded-full mr-2">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+          className="fill-zinc-400"
+        >
+          <path d="M4 22C4 17.5817 7.58172 14 12 14C16.4183 14 20 17.5817 20 22H4ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13Z"></path>
+        </svg>
       </div>
       {showProfileLinks && (
         <ProfileSummaryAccessLinks
