@@ -11,18 +11,22 @@ const SwiperNavBtn = ({
   const swiper = useSwiper();
   return (
     <div className="swiper-nav-btn">
+      <div>
         <button
           className={nextButtonClassName}
           onClick={() => swiper.slideNext()}
         >
-          {nextIcon}
+          {nextIcon}sss
         </button>
+      </div>
+      <div>
         <button
           className={prevButtonClassName}
           onClick={() => swiper.slidePrev()}
         >
           {prevIcon}
         </button>
+      </div>
     </div>
   );
 };

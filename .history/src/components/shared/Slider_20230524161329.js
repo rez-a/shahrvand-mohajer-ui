@@ -72,7 +72,7 @@ const Slider = ({ products, title, linkTo, isPagination }) => {
           </div>
         )}
       </header>
-      <main className="border-t border-gray-50 flex">
+      <main className="pt-4 flex">
         <Swiper
           pagination={isPagination && pagination}
           modules={[Navigation, Pagination, A11y, Autoplay]}
@@ -115,7 +115,7 @@ const Slider = ({ products, title, linkTo, isPagination }) => {
                 </SwiperSlide>
               ))}
           <SwiperNavBtn
-            nextButtonClassName="right-0 left-auto top-0 pr-2 absolute bg-white border-gray-50 border-l z-10 w-10 h-full hover:bg-gray-50"
+            nextButtonClassName="right-0 left-auto top-0 pr-2 absolute bg-red-100 z-10 w-10 h-full hover:bg-gray-50"
             nextIcon={
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -133,7 +133,7 @@ const Slider = ({ products, title, linkTo, isPagination }) => {
                 />
               </svg>
             }
-            prevButtonClassName="left-0 right-auto top-0 pr-2 absolute bg-white border-gray-50 border-r z-10 w-10 h-full hover:bg-gray-50"
+            prevButtonClassName="left-0 right-auto top-0 pr-2 absolute bg-red-100 z-10 w-10 h-full hover:bg-gray-50"
             prevIcon={
               <svg
                 xmlns="http://www.w3.org/2000/svg"
