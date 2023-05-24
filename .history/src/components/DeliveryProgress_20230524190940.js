@@ -11,14 +11,14 @@ const DeliveryProgress = ({ deliveryCost, totalPrice, minPrice }) => {
               width: deliveryCost === 0 ? '100%' : `${percent}%`,
             }}>
           <span
-            class="bg-neutral-800  absolute -left-16 bottom-full mb-2 rounded-md py-1 px-2 text-xs font-semibold text-white"
+            class="bg-neutral-800  absolute -left-4 bottom-full mb-2 rounded-md py-1 px-2 text-xs font-semibold text-white"
           >
             <span
               class="bg-neutral-800 absolute bottom-[-2px] left-1/2 -z-10 h-2 w-2 -translate-x-1/2 rotate-45 rounded-sm"
             ></span>
             {deliveryCost === 0
                   ? 'پیک رایگان'
-                  : `${Number(diff).toLocaleString()} تومان تا پیک رایگان`}
+                  : `${Number(diff).toLocaleString()} تومان`}
                   <div className="absolute left-0 translate-x-14"></div>
           </span>
         </div>

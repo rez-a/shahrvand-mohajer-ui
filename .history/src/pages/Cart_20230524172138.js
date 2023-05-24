@@ -153,7 +153,7 @@ const Cart = ({
           </AccordionLayout>
         ))}
       </section>
-      <aside className="shadow border rounded-md space-y-5 border-gray-100 bg-white xl:col-span-2 p-3 xl:sticky top-24 mb-3 py-5 px-5">
+      <aside className=" border rounded-md space-y-5 border-gray-100 bg-white xl:col-span-2 p-3 xl:sticky top-24 mb-3 py-5 px-5">
         <p className="flex items-center justify-between ">
           <span className="font-medium">
             مبلغ کل ({productsInCart}کالا)

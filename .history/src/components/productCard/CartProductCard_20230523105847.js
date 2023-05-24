@@ -207,7 +207,7 @@ const CartProductCard = ({
               )}
             </div>
             <button
-              className="block"
+              className="hidden sm:block"
               onClick={() =>
                 dispatch(
                   removeFromCart(

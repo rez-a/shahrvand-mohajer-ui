@@ -153,23 +153,23 @@ const Cart = ({
           </AccordionLayout>
         ))}
       </section>
-      <aside className="shadow border rounded-md space-y-5 border-gray-100 bg-white xl:col-span-2 p-3 xl:sticky top-24 mb-3 py-5 px-5">
-        <p className="flex items-center justify-between ">
-          <span className="font-medium">
+      <aside className=" border rounded-md border-gray-100 bg-white xl:col-span-2 p-3 xl:sticky top-24 mb-3 py-5 px-5">
+        <p className="flex items-center justify-between mb-3">
+          <span className="font-bold">
             مبلغ کل ({productsInCart}کالا)
           </span>
           <span className="opacity-60">
             {totalPrice.toLocaleString()} تومان
           </span>
         </p>
-        <p className="flex items-center justify-between text-blue-700">
-          <span className="font-medium">سود شما از خرید</span>
+        <p className="flex items-center justify-between mb-3 text-sky-500">
+          <span className="font-bold">سود شما از خرید</span>
           <span className="opacity-100">
             {purchaseProfit.toLocaleString()} تومان
           </span>
         </p>
-        <p className="flex items-center justify-between border-b pb-4">
-          <span className="font-medium flex items-center">
+        <p className="flex items-center justify-between mb-3 border-b pb-4">
+          <span className="font-bold flex items-center">
             <span>هزینه پیک</span>
             <div className="relative group">
               <svg

@@ -5,22 +5,23 @@ const DeliveryProgress = ({ deliveryCost, totalPrice, minPrice }) => {
   const percent = Math.floor((totalPrice / minPrice) * 100);
   return (
     <div className="w-full flex items-center gap-4">
-
-      <div class="bg-light relative h-[10px] w-full rounded-2xl">
-        <div class="bg-blue-500 absolute top-0 right-0 h-full rounded-2xl" style={{
-              width: deliveryCost === 0 ? '100%' : `${percent}%`,
-            }}>
-          <span
-            class="bg-neutral-800  absolute -left-16 bottom-full mb-2 rounded-md py-1 px-2 text-xs font-semibold text-white"
-          >
-            <span
-              class="bg-neutral-800 absolute bottom-[-2px] left-1/2 -z-10 h-2 w-2 -translate-x-1/2 rotate-45 rounded-sm"
-            ></span>
-            {deliveryCost === 0
-                  ? 'پیک رایگان'
-                  : `${Number(diff).toLocaleString()} تومان تا پیک رایگان`}
-                  <div className="absolute left-0 translate-x-14"></div>
-          </span>
+      <div className="relative w-full h-3bg-gray-100 p-0.5">
+        <div
+          className="absolute h-full right-0 top-0 w-2/3 bg-blue-400 rounded z-0 transition-all duration-300"
+          style={{
+            width: deliveryCost === 0 ? '100%' : `${percent}%`,
+          }}
+        >
+          <div className="absolute top-0 mt-3" style={{
+            right: deliveryCost === 0 ? '100%' : `${percent}%`,
+          }}>
+            <div className="whitespace-nowrap inline-block px-3 py-2 text-xs font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm">
+              {deliveryCost === 0
+                ? 'پیک رایگان'
+                : `${Number(diff).toLocaleString()} تومان`}
+                <div className="absolute left-0 translate-x-14"></div>
+            </div>
+          </div>
         </div>
       </div>
 
