@@ -84,7 +84,7 @@ const VipSlider = ({}) => {
                 </SwiperSlide>
               ))}
            <SwiperNavBtn
-            nextButtonClassName="px-3 py-2 rounded-lg bg-black/20 ml-2 mt-3"
+            nextButtonClassName="px-3 py-2 rounded-lg bg-white/20"
             nextIcon={
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -102,7 +102,7 @@ const VipSlider = ({}) => {
                 />
               </svg>
             }
-            prevButtonClassName="px-3 py-2 rounded-lg bg-black/20 mt-3"
+            prevButtonClassName="px-5 py-2"
             prevIcon={
               <svg
                 xmlns="http://www.w3.org/2000/svg"

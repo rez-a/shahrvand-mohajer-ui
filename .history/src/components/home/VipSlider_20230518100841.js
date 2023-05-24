@@ -83,41 +83,29 @@ const VipSlider = ({}) => {
                   />
                 </SwiperSlide>
               ))}
-           <SwiperNavBtn
-            nextButtonClassName="px-3 py-2 rounded-lg bg-black/20 ml-2 mt-3"
+          <SwiperNavBtn
             nextIcon={
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="30"
-                height="30"
-                fill="none"
-                className="text-white stroke-current"
                 viewBox="0 0 24 24"
+                width="50"
+                height="50"
+                className="fill-black opacity-80"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  d="m7.505 3 8.995 9.027L7.5 21"
-                />
+                <path fill="none" d="M0 0h24v24H0z" />
+                <path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z" />
               </svg>
             }
-            prevButtonClassName="px-3 py-2 rounded-lg bg-black/20 mt-3"
             prevIcon={
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="30"
-                height="30"
-                fill="none"
-                className="text-white stroke-current"
                 viewBox="0 0 24 24"
+                width="50"
+                height="50"
+                className="fill-black opacity-80"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  d="m16.5 3-9 9.002L16.495 21"
-                />
+                <path fill="none" d="M0 0h24v24H0z" />
+                <path d="M10.828 12l4.95 4.95-1.414 1.414L8 12l6.364-6.364 1.414 1.414z" />
               </svg>
             }
           />

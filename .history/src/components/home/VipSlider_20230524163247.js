@@ -84,17 +84,17 @@ const VipSlider = ({}) => {
                 </SwiperSlide>
               ))}
            <SwiperNavBtn
-            nextButtonClassName="px-3 py-2 rounded-lg bg-black/20 ml-2 mt-3"
+            nextButtonClassName=""
             nextIcon={
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="30"
                 height="30"
-                fill="none"
-                className="text-white stroke-current"
+                className="stroke-white"
                 viewBox="0 0 24 24"
               >
                 <path
+                  stroke="#323232"
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="1.5"
@@ -102,17 +102,17 @@ const VipSlider = ({}) => {
                 />
               </svg>
             }
-            prevButtonClassName="px-3 py-2 rounded-lg bg-black/20 mt-3"
+            prevButtonClassName=""
             prevIcon={
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="30"
                 height="30"
                 fill="none"
-                className="text-white stroke-current"
                 viewBox="0 0 24 24"
               >
                 <path
+                  stroke="#323232"
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="1.5"

@@ -1,14 +1,27 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperNavBtn from 'components/swiper/SwiperNavBtn';
-import brands from 'brands';
 import { Autoplay, Navigation } from 'swiper';
-import { Link } from 'react-router-dom';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import VendorItem from 'components/home/VendorsSection/VendorItem';
+import SwiperNavBtn from 'components/swiper/SwiperNavBtn';
+import useSWR from 'swr';
+import { fetcher } from 'services/swr/fetcher';
+import { VENDORS } from 'services/endPoints';
+import useObserved from 'hooks/useObserved';
+import LoaderVendor from 'components/home/VendorsSection/LoaderVendor';
 
-const PopularBrands = (props) => {
+const Vendors = () => {
+  const { ref, view } = useObserved();
+  const { data: vendors } = useSWR(view && VENDORS, fetcher);
+
   return (
-    <div className="border rounded-xl mx-4 2xl:mx-0 p-4 my-8 bg-white">
+    <div
+      className="border rounded-xl p-4 m-4 2xl:mx-0 bg-white"
+      ref={ref}
+    >
+      <header className="text-zinc-400 text-center font-semibold p-4">
+        بیش از 9,000 کالا در فروشگاه های شهروند
+      </header>
+
       <Swiper
         modules={[Navigation, Autoplay]}
         autoplay={{
@@ -31,27 +44,29 @@ const PopularBrands = (props) => {
           1024: {
             slidesPerView: 5,
           },
+          1280: {
+            slidesPerView: 6,
+          },
         }}
-        slidesPerView={5}
-        spaceBetween={15}
+        slidesPerView={6}
+        spaceBetween={10}
         className="mySwiper"
       >
-        {brands?.map((brand) => (
-          <SwiperSlide className="relative" key={brand.id}>
-            <div className="h-24 w-24 mx-auto  top-1/2 ">
-              <img
-                src={brand.brandCover}
-                className="w-full h-full object-contain"
-                alt="brand"
-              />
-            </div>
-            <Link
-              to={`/search?q=${brand.linkTo}`}
-              className="absolute w-full h-full top-0 left-0 z-20"
-            />
-          </SwiperSlide>
-        ))}
-         <SwiperNavBtn
+        {!!vendors?.data
+          ? vendors?.data?.map((vendor) => (
+              <SwiperSlide key={vendor.id}>
+                <VendorItem
+                  {...vendor}
+                  containerClassName="bg-white rounded-xl hover:shadow-lg py-4 transition-all duration-200"
+                />
+              </SwiperSlide>
+            ))
+          : [...Array(10)].map((_, index) => (
+              <SwiperSlide key={index}>
+                <LoaderVendor />
+              </SwiperSlide>
+            ))}
+        <SwiperNavBtn
             nextButtonClassName="right-0 rounded-r-lg  left-auto top-0 pr-2 absolute bg-white border-gray-50 border-l z-10 w-10 h-full hover:bg-gray-50"
             nextIcon={
               <svg
@@ -89,12 +104,9 @@ const PopularBrands = (props) => {
               </svg>
             }
           />
-
       </Swiper>
     </div>
   );
 };
 
-PopularBrands.propTypes = {};
-
-export default PopularBrands;
+export default Vendors;

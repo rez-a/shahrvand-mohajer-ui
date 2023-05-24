@@ -18,8 +18,8 @@ const Categoris = () => {
       className="border rounded-xl p-4 m-4 2xl:mx-0 bg-white"
       ref={ref}
     >
-      <header className="text-neutral-800 text-center font-semibold p-4">
-        بیش از 9,000 کالا در دسته بندی های مختلف شهروند
+      <header className="text-zinc-400 text-center font-semibold p-4">
+        بیش از 1,000 کالا در دسته بندی های مختلف شهروند
       </header>
       <Swiper
         modules={[Navigation, Autoplay]}
@@ -65,44 +65,32 @@ const Categoris = () => {
                 <LoaderVendor />
               </SwiperSlide>
             ))}
-          <SwiperNavBtn
-            nextButtonClassName="right-0 rounded-r-lg  left-auto top-0 pr-2 absolute bg-white border-gray-50 border-l z-10 w-10 h-full hover:bg-gray-50"
-            nextIcon={
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="#323232"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  d="m7.505 3 8.995 9.027L7.5 21"
-                />
-              </svg>
-            }
-            prevButtonClassName="left-0 rounded-l-lg right-auto top-0 pr-2 absolute bg-white border-gray-50 border-r z-10 w-10 h-full hover:bg-gray-50"
-            prevIcon={
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="#323232"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  d="m16.5 3-9 9.002L16.495 21"
-                />
-              </svg>
-            }
-          />
+        <SwiperNavBtn
+          nextIcon={
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="50"
+              height="50"
+              className="fill-black opacity-80"
+            >
+              <path fill="none" d="M0 0h24v24H0z" />
+              <path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z" />
+            </svg>
+          }
+          prevIcon={
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="50"
+              height="50"
+              className="fill-black opacity-80"
+            >
+              <path fill="none" d="M0 0h24v24H0z" />
+              <path d="M10.828 12l4.95 4.95-1.414 1.414L8 12l6.364-6.364 1.414 1.414z" />
+            </svg>
+          }
+        />
       </Swiper>
     </div>
   );
