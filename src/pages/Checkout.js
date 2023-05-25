@@ -64,6 +64,7 @@ const Checkout = ({
 
   const handleSaveOrder = async () => {
     setLoading(true);
+    console.log(order);
     try {
       const response = await dispatcher(ORDER_SAVE, {
         products: order.products,
@@ -71,6 +72,7 @@ const Checkout = ({
         shipping_method: order.shipping,
         payment_method: order.payMethod,
       });
+      console.log(response);
       setLoading(false);
       handleResponseOrder(response);
     } catch (err) {

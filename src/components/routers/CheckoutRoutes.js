@@ -68,6 +68,7 @@ const CheckoutRoutes = (props) => {
         0
       ) - getTotalPrice(cart)
     );
+    setOrder({ ...order, products: summaryCart(cart) });
   }, [cart]);
 
   useEffect(() => {
@@ -84,6 +85,8 @@ const CheckoutRoutes = (props) => {
           );
     }
   }, [transportationـcost, totalPrice]);
+
+  console.log(order);
 
   return (
     <>
