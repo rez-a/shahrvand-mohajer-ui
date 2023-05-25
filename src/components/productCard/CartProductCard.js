@@ -6,6 +6,7 @@ import {
   removeFromCart,
 } from 'reducers/cart/actionCreators';
 import { Link } from 'react-router-dom';
+import discountCalculate from 'helper/discountCalculate';
 
 const CartProductCard = ({
   ErpCode,
@@ -24,8 +25,9 @@ const CartProductCard = ({
   quantity,
   cartId,
 }) => {
-  const discount = Math.floor(
-    (SellPrice - LastBuyPrice) / (LastBuyPrice / 100)
+  const discount = discountCalculate(
+    SellPrice,
+    SellPrice - LastBuyPrice
   );
   return (
     <div className="flex flex-col items-start py-4 border-gray-100 lg:flex-row">

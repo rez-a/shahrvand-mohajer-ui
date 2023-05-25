@@ -10,6 +10,7 @@ import useProductInCart from 'hooks/useProductInCart';
 import ControllerQuantityModal from 'components/shared/modal/ControllerQuantityModal';
 import md5 from 'md5-hash';
 import { addToCart } from 'reducers/cart/actionCreators';
+import discountCalculate from 'helper/discountCalculate';
 
 const ProductCartVertical = ({
   containerClassName = '',
@@ -30,9 +31,11 @@ const ProductCartVertical = ({
     Attr,
     Few,
   } = product;
-  const discount = Math.floor(
-    (SellPrice - LastBuyPrice) / (LastBuyPrice / 100)
+  const discount = discountCalculate(
+    SellPrice,
+    SellPrice - LastBuyPrice
   );
+
   const [attrSelected, setAttrSelected] = useState(Attr[0]);
   const {
     state: { cart },
