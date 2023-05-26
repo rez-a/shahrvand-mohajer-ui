@@ -87,8 +87,8 @@ const EditProfile = (props) => {
           <form>
             <div>
               <TextInput
-                label="نام و نام خانوادگی"
-                placeholder="نام و نام خانوادگی"
+                label="نام کاربری"
+                placeholder="نام کاربری"
                 id="usename"
                 valid={validateInfo.name}
                 value={newInfo.name}
@@ -113,7 +113,6 @@ const EditProfile = (props) => {
                 label="تلفن ثابت"
                 placeholder="تلفن ثابت"
                 id="phone"
-                valid={true}
                 value={newInfo.tel}
                 changeHandler={(e) =>
                   setNewInfo({ ...newInfo, tel: e.target.value })

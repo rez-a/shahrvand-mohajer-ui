@@ -24,6 +24,7 @@ const EditProfile = (props) => {
   const { setUser } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
   const { data: user } = useSWR(PROFILE, dispatcher);
+  const { data: addresses } = useSWR(ADDRESSES, fetcher);
   const [newInfo, setNewInfo] = useState({
     name: '',
     tel: '',
@@ -31,6 +32,7 @@ const EditProfile = (props) => {
   });
   const [validateInfo, setValidateInfo] = useState({
     name: true,
+    tel: true,
   });
 
   useEffect(() => {
@@ -44,6 +46,8 @@ const EditProfile = (props) => {
         };
       });
   }, [user?.id]);
+
+  console.log(user);
 
   const handleEditProfile = async () => {
     if (Object.values(validateUserInfo(newInfo)).includes(false)) {
@@ -72,23 +76,17 @@ const EditProfile = (props) => {
   };
   return (
     <Card title="ویرایش اطلاعات کاربری">
-      {!user ? (
+      {!user && !addresses ? (
         <div className="border border-gray-100 bg-gray-50/50 p-4 rounded-md grid place-items-center">
           <Spinner width="w-8" height="h-8" />
         </div>
       ) : (
         <div className="px-4 py-5">
-            <div className="flex justify-end">
-            <Link to="/profile/addresses"  className="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 mb-2">
-              <svg xmlns="http://www.w3.org/2000/svg" className="fill-current w-4 h-4 ml-2" viewBox="0 0 24 24"><path d="M17.0839 15.812C19.6827 13.0691 19.6379 8.73845 16.9497 6.05025C14.2161 3.31658 9.78392 3.31658 7.05025 6.05025C4.36205 8.73845 4.31734 13.0691 6.91612 15.812C7.97763 14.1228 9.8577 13 12 13C14.1423 13 16.0224 14.1228 17.0839 15.812ZM8.38535 17.2848L12 20.8995L15.6147 17.2848C14.9725 15.9339 13.5953 15 12 15C10.4047 15 9.0275 15.9339 8.38535 17.2848ZM12 23.7279L5.63604 17.364C2.12132 13.8492 2.12132 8.15076 5.63604 4.63604C9.15076 1.12132 14.8492 1.12132 18.364 4.63604C21.8787 8.15076 21.8787 13.8492 18.364 17.364L12 23.7279ZM12 10C12.5523 10 13 9.55228 13 9C13 8.44772 12.5523 8 12 8C11.4477 8 11 8.44772 11 9C11 9.55228 11.4477 10 12 10ZM12 12C10.3431 12 9 10.6569 9 9C9 7.34315 10.3431 6 12 6C13.6569 6 15 7.34315 15 9C15 10.6569 13.6569 12 12 12Z"></path></svg>
-              افزدون آدرس های جدید
-            </Link>
-            </div>
           <form>
             <div>
               <TextInput
-                label="نام و نام خانوادگی"
-                placeholder="نام و نام خانوادگی"
+                label="نام کاربری"
+                placeholder="نام کاربری"
                 id="usename"
                 valid={validateInfo.name}
                 value={newInfo.name}
@@ -113,13 +111,42 @@ const EditProfile = (props) => {
                 label="تلفن ثابت"
                 placeholder="تلفن ثابت"
                 id="phone"
-                valid={true}
+                valid={validateInfo.tel}
                 value={newInfo.tel}
                 changeHandler={(e) =>
                   setNewInfo({ ...newInfo, tel: e.target.value })
                 }
               />
             </div>
+            {!!addresses && (
+              <>
+                <div>
+                  <TextAreaInput
+                    className="text-gray-400"
+                    id="address"
+                    label="آدرس پیش فرض"
+                    placeholder="آدرس پیش فرض"
+                    valid={true}
+                    value={addresses.data.at(0)}
+                    disabled={true}
+                  />
+                </div>
+                <div className="text-slate-400 mb-4">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    width={18}
+                    height={18}
+                    className="fill-current inline"
+                  >
+                    <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM11 7H13V9H11V7ZM11 11H13V17H11V11Z"></path>
+                  </svg>
+                  <p className="text-xs inline mr-1">
+                    هنگام ثبت سفارش میتوانید آدرس دیگری را انتخاب کنید
+                  </p>
+                </div>
+              </>
+            )}
           </form>
 
           <button

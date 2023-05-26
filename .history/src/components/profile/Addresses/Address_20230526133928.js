@@ -20,7 +20,7 @@ const Address = ({
   return (
     <div key={index} className="border border-gray-100 flex items-center justify-between">
       <div className="flex items-center">
-        <div className="font-bold border-l px-4 py-5 w-10">{index + 1}</div>
+        <div className="font-bold border-l px-4 py-5 w-6">{index + 1}</div>
         <div className="text-sm px-4">
           <div className="font-bold">
           آدرس ثبت شده:

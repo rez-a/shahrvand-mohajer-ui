@@ -113,7 +113,6 @@ const EditProfile = (props) => {
                 label="تلفن ثابت"
                 placeholder="تلفن ثابت"
                 id="phone"
-                valid={true}
                 value={newInfo.tel}
                 changeHandler={(e) =>
                   setNewInfo({ ...newInfo, tel: e.target.value })
