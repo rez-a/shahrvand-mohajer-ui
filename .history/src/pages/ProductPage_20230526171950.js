@@ -277,8 +277,6 @@ const ProductPage = () => {
                 product={product?.data}
                 productInCart={productInCart}
                 dispatch={dispatch}
-                setAttrSelected={setAttrSelected}
-                attrSelected={attrSelected}
                 setShowModal={setShowModal}
               />
             </ModalLayout>

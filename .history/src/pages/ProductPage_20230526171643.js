@@ -50,7 +50,7 @@ const ProductPage = () => {
     MainGroupErpCode,
   } = !!product?.data && product?.data;
 
-  const [attrSelected, setAttrSelected] = useState(0);
+  const [attrSelected, setAttrSelected] = useState(Attr ?? []);
   useEffect(() => {
     setLoader(isLoading);
   }, [isLoading]);
@@ -277,8 +277,6 @@ const ProductPage = () => {
                 product={product?.data}
                 productInCart={productInCart}
                 dispatch={dispatch}
-                setAttrSelected={setAttrSelected}
-                attrSelected={attrSelected}
                 setShowModal={setShowModal}
               />
             </ModalLayout>

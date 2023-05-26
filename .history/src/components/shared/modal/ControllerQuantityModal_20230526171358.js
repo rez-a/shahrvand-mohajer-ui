@@ -109,12 +109,12 @@ const ControllerQuantityModal = ({
               <li
                 key={index}
                 className={`flex rounded-md p-2 ${
-                  index === attrSelected
+                  productAttr === attrSelected
                     ? 'items-center border-2 border-sky-500 bg-sky-100/70'
                     : 'bg-gray-50/40 border border-gray-200'
                 }`}
               >
-                {console.log(attrSelected)}
+                {console.log(productAttr)}
                 <svg
                   className="w-4 h-4 inline-flex ml-1 fill-current"
                   xmlns="http://www.w3.org/2000/svg"
@@ -123,7 +123,7 @@ const ControllerQuantityModal = ({
                   <path d="M10.0007 15.1709L19.1931 5.97852L20.6073 7.39273L10.0007 17.9993L3.63672 11.6354L5.05093 10.2212L10.0007 15.1709Z"></path>
                 </svg>
                 <button
-                  onClick={() => setAttrSelected(index)}
+                  onClick={() => setAttrSelected(productAttr)}
                   className="text-sm text-slate-800 font-semibold px-2 py-1 mr-auto"
                 >
                   {productAttr}
