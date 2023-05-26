@@ -138,7 +138,7 @@ const ControllerQuantityModal = ({
         </p>
         <div className="flex gap-2 mr-4">
           <div className="text-sm font-bold">
-            { ( ( (Number(LastBuyPrice)* productInCart?.quantity) / 1 ) || 0).toLocaleString()}
+            { ( ( (Number(LastBuyPrice)* productInCart?.quantity) / Number(UnitFew) ) || 0).toLocaleString()}
             <span className="mr-1">تومان</span>
           </div>
         </div>
