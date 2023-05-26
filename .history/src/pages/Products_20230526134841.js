@@ -257,7 +257,7 @@ const Products = (props) => {
           </div>
           <button
             onClick={handleFilters}
-            className="bg-sky-500/90 text-white w-full mt-5 py-2 rounded-md font-bold shadow-lg shadow-sky-500/50 hover:bg-sky-500 transition-all duration-300"
+            className="bg-sky-500/90 text-white w-full py-2 rounded-md font-bold shadow-lg shadow-sky-500/50 hover:bg-sky-500 transition-all duration-300"
           >
             فیلتر
           </button>

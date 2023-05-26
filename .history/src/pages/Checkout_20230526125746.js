@@ -200,7 +200,7 @@ const Checkout = ({
                           })
                         }
                       />
-                      {/* <RadioInput
+                      <RadioInput
                         label="پرداخت آنلاین"
                         id="online-payment"
                         name="payment"
@@ -213,7 +213,7 @@ const Checkout = ({
                             payMethod: e.target.value,
                           })
                         }
-                      /> */}
+                      />
                     </div>
                   </div>
                   <div className="grow xl:w-1/2">
