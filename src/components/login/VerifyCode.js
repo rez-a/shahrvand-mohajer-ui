@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Spinner from 'components/shared/Spinner';
 import Timer from 'components/shared/Timer';
@@ -9,21 +9,23 @@ import { UserContext } from 'contexts/UserProvider';
 import decodeToken from 'helper/handlerAuthorazation/decodeToken';
 import { useNavigate } from 'react-router-dom';
 import dispatcher from 'services/dispatcher';
-import { useEffect } from 'react';
+import convertNumbers2English from 'helper/convertNumbers2English';
 
 const VerifyCode = ({ setSendVerifyCode, phoneNumber }) => {
   const [verifyCode, setVerifyCode] = useState('');
   const [loading, setLoading] = useState(false);
   const { setUser } = useContext(UserContext);
   const labelRef = useRef(null);
+  const inputRef = useRef(null);
+
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     if (verifyCode !== '') {
       setLoading(true);
       const response = await dispatcher(VERIFY, {
-        mobile: phoneNumber,
-        code: verifyCode,
+        mobile: convertNumbers2English(phoneNumber),
+        code: convertNumbers2English(verifyCode),
       });
       if (response?.status === 'Success') {
         storeAuthToken(response.data.access_token);
@@ -37,14 +39,14 @@ const VerifyCode = ({ setSendVerifyCode, phoneNumber }) => {
     setLoading(false);
   };
 
-  useEffect(() => {
-    window.addEventListener('keydown', handleLogin);
+  const handleKeyDown = (e) => e.key === 'Enter' && handleLogin();
 
-    return window.removeEventListener('keydown', handleLogin);
+  useEffect(() => {
+    inputRef.current.focus();
   }, []);
 
   return (
-    <form className="w-full px-6">
+    <div className="w-full px-6">
       <div>
         <div className="w-full flex flex-col items-start md:flex-row md:items-center justify-between  mb-3">
           <div>
@@ -78,7 +80,8 @@ const VerifyCode = ({ setSendVerifyCode, phoneNumber }) => {
         </div>
         <input
           className="w-full placeholder:text-xs px-3 py-2 h-12 mb-3 rounded-md border outline-none focus:border-gray-400"
-          maxLength={11}
+          ref={inputRef}
+          onKeyDown={handleKeyDown}
           type="number"
           id="phone-number"
           value={verifyCode}
@@ -108,7 +111,7 @@ const VerifyCode = ({ setSendVerifyCode, phoneNumber }) => {
           <span className="mr-2">ورود</span>
         </span>
       </button>
-    </form>
+    </div>
   );
 };
 

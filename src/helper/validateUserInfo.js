@@ -1,20 +1,14 @@
 const validateUserInfo = (info) => {
-  const { name, tel, address } = info;
+  const { name } = info;
+  console.log(name);
   let validate = {
     name: true,
-    tel: true,
   };
 
   if (!name.length) {
     validate = {
       ...validate,
       name: false,
-    };
-  }
-  if (!tel.length) {
-    validate = {
-      ...validate,
-      tel: false,
     };
   }
 

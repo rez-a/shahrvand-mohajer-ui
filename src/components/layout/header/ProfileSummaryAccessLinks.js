@@ -1,24 +1,31 @@
-import React, { useEffect, useRef } from "react";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { LogoutContext } from "contexts/LogoutHandlerProvider";
-import { UserContext } from "contexts/UserProvider";
+import React, { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { LogoutContext } from 'contexts/LogoutHandlerProvider';
+import { UserContext } from 'contexts/UserProvider';
 
-const ProfileSummaryAccessLinks = ({ setShowProfileLinks, closeHandler }) => {
+const ProfileSummaryAccessLinks = ({
+  setShowProfileLinks,
+  closeHandler,
+}) => {
   const { user } = useContext(UserContext);
 
   useEffect(() => {
-    window.document.addEventListener("click", closeHandler);
+    window.document.addEventListener('click', closeHandler);
 
-    return () => window.document.removeEventListener("click", closeHandler);
+    return () =>
+      window.document.removeEventListener('click', closeHandler);
   });
 
   const { logoutHandler } = useContext(LogoutContext);
 
   return (
-    <div className="absolute border border-gray-200 bg-white sm:w-72 w-40 left-0 top-full rounded-lg text-sm mt-1 shadow-lg">
-      <ul className="" onClick={() => setShowProfileLinks(false)}>
+    <div className="absolute border border-gray-200 bg-white sm:w-72 w-40 left-0 top-full rounded-lg text-sm mt-1 shadow-lg overflow-hidden">
+      <ul
+        className="overflow-hidden"
+        onClick={() => setShowProfileLinks(false)}
+      >
         <li className="border-b border-gray-100">
           <Link
             to="/profile/wallet"
@@ -36,9 +43,7 @@ const ProfileSummaryAccessLinks = ({ setShowProfileLinks, closeHandler }) => {
             <div className="mr-auto">
               <div className="pr-2 font-bold px-4 py-3 w-full">
                 {Number(user.wallet_balance).toLocaleString()}
-                <span className="text-xs font-light mr-1">
-                تومان
-                </span>
+                <span className="text-xs font-light mr-1">تومان</span>
               </div>
             </div>
           </Link>
@@ -53,14 +58,14 @@ const ProfileSummaryAccessLinks = ({ setShowProfileLinks, closeHandler }) => {
               </span>
             </div>
             <div className=" border-gray-100  font-bold py-3 w-full">
-              <span>
-              امتیاز سفارش
-              </span>
+              <span>امتیاز سفارش</span>
             </div>
             <div className="mr-auto">
               <div className="pr-2 font-bold px-4 py-3 w-full">
                 {Number(user.wallet_balance).toLocaleString()}
-                <span className="text-xs font-light mr-1">امتیاز</span>
+                <span className="text-xs font-light mr-1">
+                  امتیاز
+                </span>
               </div>
             </div>
           </Link>
@@ -241,7 +246,7 @@ const ProfileSummaryAccessLinks = ({ setShowProfileLinks, closeHandler }) => {
         <li>
           <button
             onClick={() => logoutHandler()}
-            className=" flex items-center text-neutral-800 hover:bg-gray-50 overflow-hidden"
+            className=" flex items-center w-full text-neutral-800 hover:bg-gray-50 overflow-hidden"
           >
             <div className="ml-1 px-4 py-3">
               <svg
@@ -267,7 +272,7 @@ const ProfileSummaryAccessLinks = ({ setShowProfileLinks, closeHandler }) => {
                 />
               </svg>
             </div>
-            <div className="border-b border-gray-100 pr-2 font-bold px-4 py-3 w-full">
+            <div className="border-b text-right border-gray-100 pr-2 font-bold px-4 py-3 w-full">
               <span>خروج از حساب کاربری</span>
             </div>
           </button>

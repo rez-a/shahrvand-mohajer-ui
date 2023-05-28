@@ -2,6 +2,7 @@ import ProductSearchResultCard from 'components/productCard/ProductSearchResultC
 import React from 'react';
 import { useEffect } from 'react';
 import { useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const SearchResult = ({
   products,
@@ -13,12 +14,14 @@ const SearchResult = ({
   setSearch,
 }) => {
   const resultRef = useRef();
+  const location = useLocation();
   function closeSearchResult(e) {
     if (!resultRef?.current.contains(e.target)) {
       setShowResult(false);
       setShowDimmer(false);
       setLoading(false);
-      setSearch('');
+
+      if (!location.pathname.includes('search')) setSearch('');
     }
   }
 

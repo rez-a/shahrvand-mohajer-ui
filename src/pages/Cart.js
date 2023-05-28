@@ -83,7 +83,7 @@ const Cart = ({
                 openClassName="border-b border-b-gray-100 bg-gray-50/50"
                 defaultClassName="bg-white"
               >
-                <div className=" p-4   flex items-center justify-between">
+                <div className=" p-4 flex items-center justify-between">
                   <div className="flex items-center">
                     <div className="w-6 h-6">
                       <svg
@@ -270,7 +270,7 @@ const Cart = ({
         سبد خرید شما خالی است!!
       </h2>
       <Link
-        to="/products"
+        to="/"
         className="bg-rose-500/90 mt-4 flex group mx-auto items-center justify-center text-white w-60 py-2 rounded-md font-bold shadow-lg shadow-rose-500/50 hover:bg-rose-500 transition-all duration-300"
       >
         بازگشت به فروشگاه

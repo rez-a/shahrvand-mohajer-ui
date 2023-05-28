@@ -15,6 +15,7 @@ import LoaderProductCardVeritical from 'components/productCard/LoaderProductCard
 import queryString from 'query-string';
 import useSWRMutation from 'swr/mutation';
 import SortItem from 'components/SortItem';
+import PaginationLayout from 'components/pagination/PaginationLayout';
 
 const Search = (props) => {
   const location = useLocation();
@@ -396,7 +397,7 @@ const Search = (props) => {
                     هیچ محصولی یافت نشد!!
                   </h2>
                   <Link
-                    to="/products"
+                    to="/"
                     className="bg-rose-500/90 max-w-full sm:mt-4 text-xs sm:text-base flex group mx-auto items-center justify-center text-white w-60 py-2 rounded-md font-bold shadow-lg shadow-rose-500/50 hover:bg-rose-500 transition-all duration-300"
                   >
                     بازگشت به فروشگاه
@@ -420,12 +421,12 @@ const Search = (props) => {
           )}
         </div>
 
-        {/* <PaginationLayout
+        <PaginationLayout
           totalPage={products?.meta.last_page}
           currentPage={products?.meta.current_page}
           query={query}
           className="flex items-center justify-center"
-        /> */}
+        />
       </div>
     </main>
   );

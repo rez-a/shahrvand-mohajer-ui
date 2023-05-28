@@ -1,0 +1,377 @@
+import AddAddress from 'components/checkout/AddAddress';
+import Addresses from 'components/checkout/Addresses';
+import CheckboxInput from 'components/shared/inputs/CheckboxInput';
+import RadioInput from 'components/shared/inputs/RadioInput';
+import Loading from 'components/shared/Loading';
+import Spinner from 'components/shared/Spinner';
+import TitleIcon from 'components/shared/TitleIcon';
+import { HOME_DELIVERY, WALLET } from 'constants/paymentMethod';
+import { NORMAL, TAXI } from 'constants/shippingMethod';
+import { CartContext } from 'contexts/CartProvider';
+import { UserContext } from 'contexts/UserProvider';
+import React, { useEffect, useState } from 'react';
+import { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { clearCart } from 'reducers/cart/actionCreators';
+import dispatcher from 'services/dispatcher';
+import { ADDRESSES, ORDER_SAVE, PROFILE } from 'services/endPoints';
+import { updater } from 'services/updater';
+import Swal from 'sweetalert2';
+import useSWR from 'swr';
+
+const Checkout = ({
+  data: {
+    totalPrice,
+    deliveryCost,
+    productsInCart,
+    purchaseProfit,
+    taxiـfare,
+    order,
+    setOrder,
+    setInvoice,
+  },
+}) => {
+  const { user: login } = useContext(UserContext);
+  const {
+    state: { cart },
+  } = useContext(CartContext);
+  const navigate = useNavigate();
+  useEffect(() => {
+    !login && navigate('/login');
+  }, []);
+  const { dispatch } = useContext(CartContext);
+  const [editAddress, setEditAddress] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const { data: user, mutate } = useSWR(PROFILE, dispatcher);
+  const { addresses, name, mobile } = !!user && user.data;
+
+  const handleUpdateAddresses = async (addresses) => {
+    await updater(ADDRESSES, { addresses });
+    await mutate();
+  };
+
+  useEffect(() => {
+    setOrder({
+      ...order,
+      address: { text: addresses?.[0], index: 0 },
+    });
+  }, [user]);
+
+  useEffect(() => {
+    !cart.length && navigate('/checkout/cart');
+  }, []);
+
+  const handleSaveOrder = async () => {
+    setLoading(true);
+    console.log(order);
+    try {
+      const response = await dispatcher(ORDER_SAVE, {
+        products: order.products,
+        address: order.address.text,
+        shipping_method: order.shipping,
+        payment_method: order.payMethod,
+      });
+      console.log(response);
+      setLoading(false);
+      handleResponseOrder(response);
+    } catch (err) {
+      Swal.fire({
+        icon: 'error',
+        title: 'سفارش شما ثبت نشد',
+        text: 'مشکلی پیش آمد سفارش شما ثبت نشد',
+      });
+    }
+    setLoading(false);
+  };
+
+  const handleResponseOrder = async (response) => {
+    const { data, message } = response;
+    if (data.PaymentMethod === HOME_DELIVERY) {
+      return Swal.fire({
+        icon: 'success',
+        title: message,
+        text: `شماره سفارش ${data.Id}`,
+      }).finally((res) => {
+        navigate('/');
+        dispatch(clearCart());
+      });
+    } else if (data.PaymentMethod === WALLET) {
+      await setInvoice(data);
+      navigate('/checkout/invoice');
+      dispatch(clearCart());
+    }
+  };
+
+  return (
+    <>
+      {!!user ? (
+        <main className="grid grid-cols-1 xl:grid-cols-7 gap-4 items-start mx-4 2xl:mx-0">
+          <section className="col-span-1 xl:col-span-5 bg-white border border-gray-100 rounded p-4">
+            {!!addresses?.length ? (
+              <>
+                <div className="mb-12">
+                  <div className="flex items-center mb-4 justify-between">
+                    <h2 className="text-zinc-500 font-bold flex items-center">
+                      <TitleIcon />
+                      <span className="mr-1">
+                        انتخاب آدرس تحویل سفارش
+                      </span>
+                    </h2>
+                    {editAddress && (
+                      <button
+                        onClick={() => setEditAddress(false)}
+                        className="bg-gray-100 p-1 rounded-full hover:bg-gray-200/70"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          width="24"
+                          height="24"
+                          className="fill-current"
+                        >
+                          <path d="M12.0007 10.5865L16.9504 5.63672L18.3646 7.05093L13.4149 12.0007L18.3646 16.9504L16.9504 18.3646L12.0007 13.4149L7.05093 18.3646L5.63672 16.9504L10.5865 12.0007L5.63672 7.05093L7.05093 5.63672L12.0007 10.5865Z"></path>
+                        </svg>
+                      </button>
+                    )}
+                  </div>
+                  {!editAddress ? (
+                    <div className="border-r-2 border-r-rose-500 pr-2">
+                      <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between gap-4 sm:gap-8 mb-6 md:mb-2">
+                          <p className="text-zinc-500">
+                            گیرنده :
+                            <span className="text-black font-semibold mr-1">
+                              {name}
+                            </span>
+                          </p>
+                        </div>
+                        <button
+                          onClick={() => setEditAddress(true)}
+                          className="border rounded py-1 px-2 flex items-center bg-white border-gray-100 hover:bg-gray-50/50 text-zinc-500 transition"
+                        >
+                          تغییر آدرس ارسال
+                        </button>
+                      </div>
+                      <p className="text-zinc-500 my-3 text-sm">
+                        شماره تماس :
+                        <span className="text-black font-semibold mr-1">
+                          {mobile}
+                        </span>
+                      </p>
+                      <p>{order.address?.text}</p>
+                    </div>
+                  ) : (
+                    <div>
+                      <AddAddress
+                        handleUpdateAddresses={handleUpdateAddresses}
+                        addresses={addresses}
+                      />
+                      <Addresses
+                        handleUpdateAddresses={handleUpdateAddresses}
+                        addresses={addresses}
+                        user={{ name, mobile }}
+                        orderAddress={order.address}
+                        order={order}
+                        setOrder={setOrder}
+                        setEditAddress={setEditAddress}
+                      />
+                    </div>
+                  )}
+                </div>
+                <div className="flex flex-col xl:flex-row gap-12 justify-between">
+                  <div className="grow mb-8 xl:w-1/2">
+                    <h2 className="text-zinc-500 font-bold flex items-center mb-4">
+                      <TitleIcon />
+                      <span className="mr-1">نحوه پرداخت</span>
+                    </h2>
+                    <div class="flex flex-col sm:flex-row xl:flex-col gap-4 w-full">
+                      <RadioInput
+                        label="پرداخت درب منزل"
+                        id="Pay-at-home"
+                        name="payment"
+                        className="sm:w-1/2"
+                        value={HOME_DELIVERY}
+                        checked={order.payMethod === HOME_DELIVERY}
+                        changeHandler={(e) =>
+                          setOrder({
+                            ...order,
+                            payMethod: e.target.value,
+                          })
+                        }
+                      />
+                      <RadioInput
+                        label="پرداخت آنلاین"
+                        id="online-payment"
+                        name="payment"
+                        className="sm:w-1/2"
+                        value={WALLET}
+                        checked={order.payMethod === WALLET}
+                        changeHandler={(e) =>
+                          setOrder({
+                            ...order,
+                            payMethod: e.target.value,
+                          })
+                        }
+                      />
+                    </div>
+                  </div>
+                  <div className="grow xl:w-1/2">
+                    <h2 className="text-zinc-500 font-bold  flex items-center mb-4">
+                      <TitleIcon />
+                      <span className="mr-1">انتخاب نحوه ارسال</span>
+                    </h2>
+                    <div class="flex flex-col sm:flex-row xl:flex-col gap-4 w-full">
+                      <RadioInput
+                        label="ارسال عادی"
+                        id="free-delivery"
+                        name="delivery"
+                        description="حدودا یک ساعت"
+                        className="sm:w-1/2"
+                        value={NORMAL}
+                        checked={order.shipping === NORMAL}
+                        changeHandler={(e) =>
+                          setOrder({
+                            ...order,
+                            shipping: e.target.value,
+                          })
+                        }
+                      />
+                      <RadioInput
+                        label="ارسال فوری"
+                        id="Immediate-delivery"
+                        name="delivery"
+                        description={`${Number(
+                          taxiـfare
+                        ).toLocaleString()} تومان حدودا 30 دقیقه`}
+                        className="sm:w-1/2"
+                        value={TAXI}
+                        checked={order.shipping === TAXI}
+                        changeHandler={(e) =>
+                          setOrder({
+                            ...order,
+                            shipping: e.target.value,
+                          })
+                        }
+                      />
+                    </div>
+                  </div>
+                </div>
+                <Link
+                  to="/checkout/cart"
+                  className="text-rose-500 text-sm underline decoration-dotted my-4 block hover:no-underline"
+                >
+                  بازگشت به سبد خرید
+                </Link>
+              </>
+            ) : (
+              <div></div>
+            )}
+          </section>
+          <aside className="bg-gray-50/50 border rounded-md border-gray-100 bg-white xl:col-span-2 p-3 xl:sticky top-24 mb-3">
+            <div className="mb-3 pb-4">
+              <p className="flex items-center justify-between mb-3">
+                <span className="font-bold">
+                  مبلغ کل ({productsInCart}کالا)
+                </span>
+                <span className="opacity-60">
+                  {totalPrice.toLocaleString()} تومان
+                </span>
+              </p>
+              <p className="flex items-center justify-between mb-3 text-sky-500">
+                <span className="font-bold">سود شما از خرید</span>
+                <span className="opacity-100">
+                  {purchaseProfit.toLocaleString()} تومان
+                </span>
+              </p>
+              <p className="flex items-center justify-between mb-3 border-b pb-4">
+                <span className="font-bold flex items-center">
+                  <span>هزینه پیک</span>
+                  <div className="relative group">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      height="24"
+                    >
+                      <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM11 7H13V9H11V7ZM11 11H13V17H11V11Z"></path>
+                    </svg>
+                    <div
+                      id="popover-default"
+                      role="tooltip"
+                      class="absolute z-10 -left-2 invisible opacity-0 inline-block w-64 text-xs text-gray-600 font-medium transition-opacity duration-300 bg-white border border-gray-200 rounded-md shadow-sm  group-hover:visible group-hover:opacity-100"
+                    >
+                      <div class="px-3 py-2">
+                        <p className="leading-6">
+                          زمان تحویل کالا با ارسال رایگان حدودا یک
+                          ساعت و ارسال فوری 30 دقیقه خواهد بود.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </span>
+                <span className="opacity-60">
+                  {order?.shipping === TAXI
+                    ? `${taxiـfare} تومان`
+                    : deliveryCost === 0
+                    ? 'رایگان'
+                    : `${deliveryCost} تومان`}
+                </span>
+              </p>
+              <CheckboxInput
+                value={order.suggest}
+                changeHandler={(e) =>
+                  setOrder({
+                    ...order,
+                    suggest: Number(!order.suggest),
+                  })
+                }
+                label="درصورتی که کالایی ناموجود شد کالایی مشابه آن جایگزین شود"
+              />
+            </div>
+            <p className="font-bold text-lg text-center mb-2">
+              مبلغ قابل پرداخت :
+            </p>
+            <p className="font-bold text-2xl text-center text-rose-500 mb-4">
+              <span>
+                {order?.shipping === TAXI
+                  ? (totalPrice + Number(taxiـfare)).toLocaleString()
+                  : (
+                      totalPrice + Number(deliveryCost)
+                    ).toLocaleString()}
+              </span>
+              <span className="font-medium text-sm mr-2">تومان</span>
+            </p>
+            <button
+              onClick={handleSaveOrder}
+              className="relative bg-rose-500 h-12 w-full text-white font-bold rounded-md overflow-hidden group"
+            >
+              <span className="bg-rose-400 h-full flex items-center w-12 px-3 z-0 rounded-l-full absolute right-0 top-0 group-hover:w-full group-hover:rounded-l-none transition-all duration-300">
+                {loading ? (
+                  <Spinner />
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                    className="fill-white"
+                  >
+                    <path d="M7.82843 10.9999H20V12.9999H7.82843L13.1924 18.3638L11.7782 19.778L4 11.9999L11.7782 4.22168L13.1924 5.63589L7.82843 10.9999Z"></path>
+                  </svg>
+                )}
+              </span>
+              <span className="z-10 absolute left-1/2 -translate-x-1/2 top-1/2 flex items-center gap-2 -translate-y-1/2">
+                {loading ? 'درحال ثبت سفارش' : 'ادامه ثبت سفارش'}
+              </span>
+            </button>
+          </aside>
+        </main>
+      ) : (
+        <Loading />
+      )}
+    </>
+  );
+};
+
+export default Checkout;

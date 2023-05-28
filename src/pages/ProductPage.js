@@ -1,6 +1,5 @@
 import React from 'react';
 import TitleIcon from 'components/shared/TitleIcon';
-import ImageZoom from 'components/productPage/ImageZoom';
 import { PRODUCT } from 'services/endPoints';
 import { fetcher } from 'services/swr/fetcher';
 import { useParams } from 'react-router-dom';
@@ -50,7 +49,7 @@ const ProductPage = () => {
     MainGroupErpCode,
   } = !!product?.data && product?.data;
 
-  const [attrSelected, setAttrSelected] = useState(Attr?.[0]);
+  const [attrSelected, setAttrSelected] = useState(0);
   useEffect(() => {
     setLoader(isLoading);
   }, [isLoading]);
@@ -111,9 +110,6 @@ const ProductPage = () => {
           <>
             <div className="flex flex-col sm:flex-row items-start gap-4 bg-white p-2  md:p-4 rounded-md border border-gray-100">
               <div className="w-72 max-h-96 hidden lg:block overflow-hidden">
-                <ImageZoom image={Image} alt={Name} />
-              </div>
-              <div className="sm:w-1/2 w-40 max-h-40 block lg:hidden mx-auto">
                 <img src={Image} alt={Name} />
               </div>
               <div className="grow w-full sm:w-1/2">
@@ -277,6 +273,8 @@ const ProductPage = () => {
                 product={product?.data}
                 productInCart={productInCart}
                 dispatch={dispatch}
+                setAttrSelected={setAttrSelected}
+                attrSelected={attrSelected}
                 setShowModal={setShowModal}
               />
             </ModalLayout>

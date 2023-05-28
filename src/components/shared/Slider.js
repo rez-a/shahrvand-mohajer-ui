@@ -1,15 +1,15 @@
-import React from "react";
-import PropTypes from "prop-types";
-import LoaderProductCardVeritical from "components/productCard/LoaderProductCardVeritical";
-import SwiperNavBtn from "components/swiper/SwiperNavBtn";
-import ProductCartVertical from "components/productCard/ProductCardVertical";
-import TitleIcon from "components/shared/TitleIcon";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, A11y, Autoplay } from "swiper";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import { Link } from "react-router-dom";
+import React from 'react';
+import PropTypes from 'prop-types';
+import LoaderProductCardVeritical from 'components/productCard/LoaderProductCardVeritical';
+import SwiperNavBtn from 'components/swiper/SwiperNavBtn';
+import ProductCartVertical from 'components/productCard/ProductCardVertical';
+import TitleIcon from 'components/shared/TitleIcon';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, A11y, Autoplay } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Link } from 'react-router-dom';
 
 const Slider = ({ products, title, linkTo, isPagination }) => {
   const pagination = {
