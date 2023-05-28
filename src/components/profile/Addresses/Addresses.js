@@ -11,6 +11,8 @@ import { updater } from 'services/updater';
 import Spinner from 'components/shared/Spinner';
 import Address from './Address';
 import { fetcher } from 'services/swr/fetcher';
+import TableLoaded from 'components/shared/TableLoaded';
+import Toast from 'utilities/sweetAlert';
 
 const Addresses = (props) => {
   const [showModal, setShowModal] = useState({
@@ -28,7 +30,7 @@ const Addresses = (props) => {
   });
   const [newAddress, setNewAddress] = useState('');
   const { user } = useContext(UserContext);
-  const { data, mutate } = useSWR(ADDRESSES, fetcher);
+  const { data, mutate, isLoading } = useSWR(ADDRESSES, fetcher);
   const addresses = !!data && data.data;
   const handleShowEditModal = (index) => {
     setNewAddress(addresses[index]);
@@ -43,6 +45,10 @@ const Addresses = (props) => {
 
   const handelSendAddresses = async (addresses) => {
     const response = await updater(ADDRESSES, { addresses });
+    Toast.fire({
+      icon: 'success',
+      title: response,
+    });
     await mutate();
     setLoding({
       add: false,
@@ -57,7 +63,6 @@ const Addresses = (props) => {
   };
 
   const handleRemoveAddress = (index) => {
-    setLoding({ ...loading, remove: true });
     const newAddresses = addresses.filter(
       (_, addressIndex) => addressIndex !== index
     );
@@ -92,6 +97,8 @@ const Addresses = (props) => {
     }
   };
 
+  console.log(addresses);
+
   return (
     <Card title="آدرس ها">
       <div>
@@ -101,10 +108,14 @@ const Addresses = (props) => {
         >
           <span>ایجاد آدرس جدید</span>
         </button>
-        {!!addresses ? (
+        {isLoading ? (
+          <TableLoaded count={5} />
+        ) : !!addresses ? (
           addresses.map((address, index) => (
             <Address
+              key={index}
               user={user}
+              checkLengthAddresses={addresses.length > 1}
               address={address}
               index={index}
               handleShowEditModal={() => handleShowEditModal(index)}
@@ -240,7 +251,6 @@ const Addresses = (props) => {
             </svg>
           </EmptyDataProfile>
         )}
-
         <ModalLayout
           isShow={showModal.add}
           setShow={() => setShowModal({ ...showModal, add: false })}

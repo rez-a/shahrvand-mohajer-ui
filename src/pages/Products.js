@@ -166,7 +166,7 @@ const Products = (props) => {
         ]}
       />
       <main className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-8 items-start mx-4 2xl:mx-0">
-        <aside className="sm:col-span-1 xl:col-span-1  border rounded-md p-4 bg-white border-gray-100 col-span-1 sm:sticky top-32 order-2">
+        <aside className="sm:col-span-1 xl:col-span-1  border rounded-md p-4 bg-white border-gray-100 col-span-1 sm:sticky top-32 order-2 sm:order-1 ">
           {!!subCategories?.data?.length && (
             <div className="mb-8">
               <h2 className="font-semibold text-zinc-400 flex items-center mb-4">
@@ -276,7 +276,7 @@ const Products = (props) => {
           </button>
         </aside>
 
-        <div className="sm:col-span-1 md:col-span-2 xl:col-span-3 2xl:col-span-4 order-1">
+        <div className="sm:col-span-1 md:col-span-2 xl:col-span-3 2xl:col-span-4 order-1 sm:order-2">
           <ul className="grid grid-cols-2 md:grid-cols-4 xl:w-1/2 items-center gap-2 xl:gap-4 justify-center xl:justify-start text-xs">
             {sortItems.map((sortItem, index) => (
               <SortItem

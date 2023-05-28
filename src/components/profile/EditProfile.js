@@ -24,7 +24,10 @@ const EditProfile = (props) => {
   const { setUser } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
   const { data: user } = useSWR(PROFILE, dispatcher);
+  const { name, mobile, tel } = !!user && user.data;
+
   const { data: addresses } = useSWR(ADDRESSES, fetcher);
+  console.log(addresses);
   const [newInfo, setNewInfo] = useState({
     name: '',
     tel: '',
@@ -35,19 +38,16 @@ const EditProfile = (props) => {
     tel: true,
   });
 
-  useEffect(() => {
-    user &&
-      setNewInfo((prevInfo) => {
-        return {
-          ...prevInfo,
-          name: user.data.name,
-          mobile: user.data.mobile,
-          tel: user.data.tel,
-        };
-      });
-  }, [user?.id]);
+  console.log(addresses);
 
-  console.log(user);
+  useEffect(() => {
+    setNewInfo({
+      ...newInfo,
+      name,
+      mobile,
+      tel,
+    });
+  }, [user]);
 
   const handleEditProfile = async () => {
     if (Object.values(validateUserInfo(newInfo)).includes(false)) {
@@ -74,6 +74,8 @@ const EditProfile = (props) => {
     storeAuthToken(token);
     setUser(decodeToken(token));
   };
+
+  console.log(addresses);
   return (
     <Card title="ویرایش اطلاعات کاربری">
       {!user && !addresses ? (
@@ -118,7 +120,7 @@ const EditProfile = (props) => {
                 }
               />
             </div>
-            {!!addresses && (
+            {/* {!!addresses && (
               <>
                 <div>
                   <TextAreaInput
@@ -146,7 +148,7 @@ const EditProfile = (props) => {
                   </p>
                 </div>
               </>
-            )}
+            )} */}
           </form>
 
           <button

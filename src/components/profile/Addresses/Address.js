@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Spinner from 'components/shared/Spinner';
 import { useState } from 'react';
@@ -10,12 +9,13 @@ const Address = ({
   index,
   handleShowEditModal,
   handleRemoveAddress,
+  checkLengthAddresses,
 }) => {
   const [removeLoading, setRemoveLoading] = useState(false);
   const handleRemove = async () => {
     setRemoveLoading(true);
     await handleRemoveAddress();
-    removeLoading(false);
+    setRemoveLoading(false);
   };
   return (
     <div
@@ -47,12 +47,14 @@ const Address = ({
           >
             ویرایش
           </button>
-          <button
-            onClick={handleRemove}
-            className="border  rounded py-1 px-2 flex items-center bg-gray-100 text-xs border-gray-200 hover:bg-gray-200/70 text-zinc-500 transition-all duration-300"
-          >
-            {removeLoading ? <Spinner /> : 'حذف'}
-          </button>
+          {checkLengthAddresses && (
+            <button
+              onClick={handleRemove}
+              className="border  rounded py-1 px-2 flex items-center bg-gray-100 text-xs border-gray-200 hover:bg-gray-200/70 text-zinc-500 transition-all duration-300"
+            >
+              {removeLoading ? <Spinner /> : 'حذف'}
+            </button>
+          )}
         </div>
       </div>
       <p className="text-zinc-500 my-3 text-sm">
