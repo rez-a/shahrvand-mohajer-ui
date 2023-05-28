@@ -13,13 +13,15 @@ const ProductRelated = ({ title, mainCategory, className }) => {
     view && `${PRODUCTS_MAINCATEGORY}/${mainCategory}`,
     fetcher
   );
-
   return (
-    <div
-      className={`border border-gray-100 rounded-lg p-2 md:p-4 pb-0 bullet-active-rose bg-white my-4 ${className}`}
-      ref={ref}
-    >
-      <Slider products={products?.data} title={title} />
+    <div ref={ref}>
+      {!!products?.data.length && (
+        <div
+          className={`border border-gray-100 rounded-lg p-2 md:p-4 pb-0 bullet-active-rose bg-white my-4 ${className}`}
+        >
+          <Slider products={products?.data} title={title} />
+        </div>
+      )}
     </div>
   );
 };

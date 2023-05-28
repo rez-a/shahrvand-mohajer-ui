@@ -1,6 +1,5 @@
 const validateUserInfo = (info) => {
   const { name } = info;
-  console.log(name);
   let validate = {
     name: true,
   };

@@ -1,5 +1,4 @@
 const summaryCart = (cart) => {
-  console.log(cart);
   const products = cart
     .map((vendor) => vendor.products)
     .flat()

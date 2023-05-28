@@ -6,7 +6,7 @@ export const VENDORS = 'vendors';
 export const SLIDER_VIP = 'app/slider-vip';
 export const SLIDESHOW = 'pinneds/products';
 export const TIMEWORK = 'app/working-time';
-export const PRODUCTS = 'products?count=16';
+export const PRODUCTS = 'products?count=50';
 export const PRODUCTS_MAINCATEGORY = 'products/category';
 export const SUBCATEGORIES = 'subcategories/category';
 export const PRODUCT = 'products';

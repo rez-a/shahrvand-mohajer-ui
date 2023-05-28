@@ -50,7 +50,6 @@ const EditProfile = (props) => {
     if (Object.values(validateUserInfo(newInfo)).includes(false)) {
       setValidateInfo(validateUserInfo(newInfo));
     } else {
-      console.log('req');
       setLoading(true);
       try {
         const editResponse = await dispatcher(EDIT_PROFILE, {
@@ -77,7 +76,6 @@ const EditProfile = (props) => {
     setUser(decodeToken(token));
   };
 
-  console.log(addresses);
   return (
     <Card title="ویرایش اطلاعات کاربری">
       {!user ? (

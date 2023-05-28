@@ -8,9 +8,7 @@ import CategoryCard from 'components/CategoryCard/CategoryCard';
 import LoaderCategoryCard from 'components/CategoryCard/LoaderCategoryCard';
 import BannerItem from 'components/shared/BannerItem';
 import Banner from 'components/home/Banner';
-// import Vendors from 'components/home/vendorsSection/Vendors';
 import useObserved from 'hooks/useObserved';
-import Breadcrumb from 'components/Breadcrumb';
 import Vendors from 'components/home/VendorsSection/Vendors';
 
 const Categories = (props) => {
@@ -21,7 +19,6 @@ const Categories = (props) => {
   );
   return (
     <>
-      <Breadcrumb links={[{ title: 'دسته بندی ها' }]} />
       <main>
         <div>
           <h2 className="flex items-center mb-4 mx-4">

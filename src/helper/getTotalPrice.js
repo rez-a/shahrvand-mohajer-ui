@@ -4,8 +4,7 @@ const getTotalPrice = (cart) => {
       total +
       vendor.products.reduce(
         (subTotal, product) =>
-          subTotal +
-          product.LastBuyPrice * (product.quantity / product.UnitFew),
+          subTotal + product.LastBuyPrice * product.quantity,
         0
       ),
     0

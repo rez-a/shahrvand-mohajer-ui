@@ -97,8 +97,6 @@ const Addresses = (props) => {
     }
   };
 
-  console.log(addresses);
-
   return (
     <Card title="آدرس ها">
       <div>

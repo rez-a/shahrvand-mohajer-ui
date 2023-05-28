@@ -49,7 +49,7 @@ const ProductPage = () => {
     MainGroupErpCode,
   } = !!product?.data && product?.data;
 
-  const [attrSelected, setAttrSelected] = useState(0);
+  const [attrSelected, setAttrSelected] = useState(Attr?.[0]);
   useEffect(() => {
     setLoader(isLoading);
   }, [isLoading]);
@@ -239,18 +239,19 @@ const ProductPage = () => {
                           </span>
                         </small>
                       )}
-                      {Number(Few) ? (
+                      {!!productInCart ? (
+                        <button
+                          onClick={() => setShowModal(true)}
+                          className={`w-full  text-white text-lg p-3 rounded mt-2 transition-all duration-300 bg-sky-500 hover:bg-sky-600`}
+                        >
+                          تغییر تعداد محصول
+                        </button>
+                      ) : !!Number(Few) ? (
                         <button
                           onClick={handleShowModal}
-                          className={`w-full  text-white text-lg p-3 rounded mt-2 transition-all duration-300 ${
-                            !!productInCart
-                              ? 'bg-sky-500 hover:bg-sky-600'
-                              : 'bg-rose-500 hover:bg-rose-600 '
-                          }`}
+                          className={`w-full  text-white text-lg p-3 rounded mt-2 transition-all duration-300 bg-rose-500 hover:bg-rose-600`}
                         >
-                          {!!productInCart
-                            ? 'تغییر تعداد محصول'
-                            : 'افزودن به سبد خرید'}
+                          افزودن به سبد خرید
                         </button>
                       ) : (
                         <div className="w-full  text-white flex items-center justify-center text-lg p-3 rounded mt-2 bg-gray-200 ">

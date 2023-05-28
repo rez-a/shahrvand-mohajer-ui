@@ -13,7 +13,7 @@ const ProfileProductCard = ({
         <img
           class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
           src={Product.Image}
-          alt=""
+          alt={Product.Name}
         />
       </div>
       <div class="flex flex-col w-full justify-between leading-normal grow mr-0 md:mr-2">

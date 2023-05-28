@@ -17,7 +17,6 @@ const Lottery = () => {
         </p>
       );
     } else {
-      console.log(seconds < 10 ? `0${seconds}` : seconds);
       return (
         <>
           <p className="flex justify-center gap-4">

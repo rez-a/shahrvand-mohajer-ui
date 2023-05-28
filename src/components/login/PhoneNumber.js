@@ -53,8 +53,6 @@ const PhoneNumber = ({
     inputRef.current.focus();
   }, []);
 
-  console.log(phoneNumber);
-
   return (
     <>
       <div className="w-full px-6">

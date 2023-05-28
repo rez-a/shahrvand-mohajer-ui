@@ -60,9 +60,7 @@ const CheckoutRoutes = (props) => {
           total +
           vendor.products.reduce(
             (subTotal, product) =>
-              subTotal +
-              product.SellPrice *
-                (product.quantity / product.UnitFew),
+              subTotal + product.SellPrice * product.quantity,
             0
           ),
         0
@@ -85,8 +83,6 @@ const CheckoutRoutes = (props) => {
           );
     }
   }, [transportationـcost, totalPrice]);
-
-  console.log(order);
 
   return (
     <>

@@ -6,6 +6,7 @@ import FooterLayout from './footer/FooterLayout';
 import useControllerScroll from 'hooks/useControllerScroll';
 import { DimmerContext } from 'contexts/DimmerProvider';
 import { useContext } from 'react';
+import FooterInnerPage from './footer/FooterInnerPage';
 
 const LayoutPage = (props) => {
   const { showDimmer } = useContext(DimmerContext);
@@ -26,7 +27,7 @@ const LayoutPage = (props) => {
           }`}
         />
       </div>
-      <FooterLayout />
+      <FooterInnerPage />
     </>
   );
 };

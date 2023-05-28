@@ -27,14 +27,7 @@ const Category = ({ category }) => {
             <li key={subCategory.Id}>
               <Link
                 className="block p-3 px-4"
-                to={`/products/${
-                  category.ErpCode
-                }?${queryString.stringify(
-                  {
-                    subcategory: [subCategory.ErpCode],
-                  },
-                  { arrayFormat: 'bracket' }
-                )}`}
+                to={`/products/${category.ErpCode}/${subCategory.ErpCode}`}
               >
                 {subCategory.Name}
               </Link>

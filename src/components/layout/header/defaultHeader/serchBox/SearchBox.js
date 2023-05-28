@@ -17,8 +17,6 @@ const SearchBox = () => {
   const navigaion = useNavigate();
   const [search, setSearch] = useState(searchParams.get('q') || '');
 
-  console.log(search);
-
   const handleSearch = () => {
     !!search && navigaion(`/search?q=${search}`);
   };
@@ -29,8 +27,6 @@ const SearchBox = () => {
     setProducts(response.data);
     setLoading(false);
   };
-
-  console.log(search);
 
   const handleKeyDown = (e) => e.key === 'Enter' && handleSearch();
 

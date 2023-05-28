@@ -64,7 +64,6 @@ const Checkout = ({
 
   const handleSaveOrder = async () => {
     setLoading(true);
-    console.log(order);
     try {
       const response = await dispatcher(ORDER_SAVE, {
         products: order.products,
@@ -72,7 +71,6 @@ const Checkout = ({
         shipping_method: order.shipping,
         payment_method: order.payMethod,
       });
-      console.log(response);
       setLoading(false);
       handleResponseOrder(response);
     } catch (err) {
@@ -265,7 +263,29 @@ const Checkout = ({
                 </Link>
               </>
             ) : (
-              <div></div>
+              <>
+                <div className="bg-rose-50 text-rose-500 rounded-md p-2 font-bold">
+                  جهت ثبت سفارش مراحل زیر را طی کنید :
+                </div>
+                <ol className="flex flex-col gap-4 mt-4 items-start justify-between">
+                  <li>
+                    <Link
+                      className="text-blue-600 underline"
+                      to="/profile/edit"
+                    >
+                      1.تکمیل اطلاعات پروفایل
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className="text-blue-600 underline"
+                      to="/profile/addresses"
+                    >
+                      2.ثبت حداقل یک آدرس
+                    </Link>
+                  </li>
+                </ol>
+              </>
             )}
           </section>
           <aside className="bg-gray-50/50 border rounded-md border-gray-100 bg-white xl:col-span-2 p-3 xl:sticky top-24 mb-3">
@@ -342,29 +362,48 @@ const Checkout = ({
               </span>
               <span className="font-medium text-sm mr-2">تومان</span>
             </p>
-            <button
-              onClick={handleSaveOrder}
-              className="relative bg-rose-500 h-12 w-full text-white font-bold rounded-md overflow-hidden group"
-            >
-              <span className="bg-rose-400 h-full flex items-center w-12 px-3 z-0 rounded-l-full absolute right-0 top-0 group-hover:w-full group-hover:rounded-l-none transition-all duration-300">
-                {loading ? (
-                  <Spinner />
-                ) : (
+            {!!addresses?.length ? (
+              <button
+                onClick={handleSaveOrder}
+                className="relative bg-rose-500 h-12 w-full text-white font-bold rounded-md overflow-hidden group "
+              >
+                <span className="bg-rose-400 h-full flex items-center w-12 px-3 z-0 rounded-l-full absolute right-0 top-0 group-hover:w-full group-hover:rounded-l-none transition-all duration-300">
+                  {loading ? (
+                    <Spinner />
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      height="24"
+                      className="fill-white"
+                    >
+                      <path d="M7.82843 10.9999H20V12.9999H7.82843L13.1924 18.3638L11.7782 19.778L4 11.9999L11.7782 4.22168L13.1924 5.63589L7.82843 10.9999Z"></path>
+                    </svg>
+                  )}
+                </span>
+                <span className="z-10 absolute left-1/2 -translate-x-1/2 top-1/2 flex items-center gap-2 -translate-y-1/2">
+                  {loading ? 'درحال ثبت سفارش' : 'ادامه ثبت سفارش'}
+                </span>
+              </button>
+            ) : (
+              <div className="relative cursor-not-allowed bg-neutral-300 h-12 w-full text-black font-bold rounded-md overflow-hidden group ">
+                <span className="bg-neutral-200 h-full flex items-center w-12 px-3 z-0 rounded-l-full absolute right-0 top-0 group-hover:w-full group-hover:rounded-l-none transition-all duration-300">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                     width="24"
                     height="24"
-                    className="fill-white"
+                    className="fill-black"
                   >
                     <path d="M7.82843 10.9999H20V12.9999H7.82843L13.1924 18.3638L11.7782 19.778L4 11.9999L11.7782 4.22168L13.1924 5.63589L7.82843 10.9999Z"></path>
                   </svg>
-                )}
-              </span>
-              <span className="z-10 absolute left-1/2 -translate-x-1/2 top-1/2 flex items-center gap-2 -translate-y-1/2">
-                {loading ? 'درحال ثبت سفارش' : 'ادامه ثبت سفارش'}
-              </span>
-            </button>
+                </span>
+                <span className="z-10 absolute left-1/2 -translate-x-1/2 top-1/2 flex items-center gap-2 -translate-y-1/2">
+                  ادامه ثبت سفارش
+                </span>
+              </div>
+            )}
           </aside>
         </main>
       ) : (

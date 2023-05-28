@@ -32,7 +32,6 @@ const OrderDetails = (props) => {
     setLoading(false);
   };
 
-  console.log(order);
   return (
     <div className="grid col-span-5 gap-y-4">
       <Card title="جزییات سفارش">

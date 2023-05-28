@@ -129,12 +129,7 @@ const ProductCartVertical = ({
         </div>
         <div className="px-2 md:px-6 pb-2">
           <Link
-            to={`/products/${MainGroupErpCode}?${queryString.stringify(
-              {
-                subcategory: [SideGroupErpCode],
-              },
-              { arrayFormat: 'bracket' }
-            )}`}
+            to={`/products/${MainGroupErpCode}/${SideGroupErpCode}`}
             className="inline-block bg-gray-200 max-w-full truncate rounded-full px-3 py-1 text-xs text-gray-700 opacity-75 hover:opacity-100 transition-all duration-200 cursor-pointer hover:underline"
           >
             #{SideGroupName}

@@ -51,14 +51,24 @@ const PaginationLayout = ({ className, totalPage, currentPage }) => {
           </li>
           {currentPage < PAGINATION_COUNT ? (
             <>
-              {[...Array(PAGINATION_COUNT)].map((_, index) => (
-                <PaginationItems
-                  key={index}
-                  page={index + 1}
-                  currentPage={currentPage}
-                />
-              ))}
-              {totalPage > PAGINATION_COUNT && (
+              {totalPage < PAGINATION_COUNT
+                ? [...Array(Number(totalPage))].map((_, index) => (
+                    <PaginationItems
+                      key={index}
+                      page={index + 1}
+                      currentPage={currentPage}
+                    />
+                  ))
+                : [...Array(Number(PAGINATION_COUNT))].map(
+                    (_, index) => (
+                      <PaginationItems
+                        key={index}
+                        page={index + 1}
+                        currentPage={currentPage}
+                      />
+                    )
+                  )}
+              {totalPage >= PAGINATION_COUNT && (
                 <>
                   <li>
                     <svg

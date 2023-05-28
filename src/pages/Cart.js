@@ -138,9 +138,7 @@ const Cart = ({
                         .reduce(
                           (total, product) =>
                             total +
-                            (product.LastBuyPrice *
-                              product.quantity) /
-                              Number(product.UnitFew),
+                            product.LastBuyPrice * product.quantity,
                           0
                         )
                         .toLocaleString()}

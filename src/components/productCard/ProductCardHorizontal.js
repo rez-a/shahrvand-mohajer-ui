@@ -74,12 +74,7 @@ const ProductCartHorizontal = ({
             </Link>
             <div className="flex items-center justify-between">
               <Link
-                to={`/products/${MainGroupErpCode}?${queryString.stringify(
-                  {
-                    subcategory: [SideGroupErpCode],
-                  },
-                  { arrayFormat: 'bracket' }
-                )}`}
+                to={`/products/${MainGroupErpCode}/${SideGroupErpCode}`}
                 class="inline-block max-w-[50%] truncate bg-gray-200 rounded-full px-3 py-1 text-xs text-gray-700 opacity-75 hover:opacity-100 transition-all duration-200 cursor-pointer hover:underline"
               >
                 #{SideGroupName}
