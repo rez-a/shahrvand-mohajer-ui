@@ -12,7 +12,7 @@ import Wallet from 'components/profile/Wallet';
 
 const ProfileRoutes = (props) => {
   return (
-    <div className="grid xl:col-span-5 gap-y-4">
+    <div className="grid xl:col-span-5 gap-y-4 order-1 xl:order-2">
       <Routes>
         <Route path="main" element={<MainProfile />} />
         <Route path="wallet" element={<Wallet />} />

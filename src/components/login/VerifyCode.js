@@ -11,8 +11,12 @@ import { useNavigate } from 'react-router-dom';
 import dispatcher from 'services/dispatcher';
 import convertNumbers2English from 'helper/convertNumbers2English';
 
-const VerifyCode = ({ setSendVerifyCode, phoneNumber }) => {
-  const [verifyCode, setVerifyCode] = useState('');
+const VerifyCode = ({
+  setSendVerifyCode,
+  phoneNumber,
+  verifyCode,
+  setVerifyCode,
+}) => {
   const [loading, setLoading] = useState(false);
   const { setUser } = useContext(UserContext);
   const labelRef = useRef(null);

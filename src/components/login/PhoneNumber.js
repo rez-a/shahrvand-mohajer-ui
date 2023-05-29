@@ -11,7 +11,9 @@ const PhoneNumber = ({
   setSendVerifyCode,
   phoneNumber,
   setPhoneNumber,
+  setVerifyCode,
 }) => {
+  const signal = new AbortController();
   const phoneNumberRegex = new RegExp('^(\\+98|0)?9\\d{9}$');
 
   const [validPhoneNumber, setValidPhoneNumber] = useState(true);
@@ -29,6 +31,16 @@ const PhoneNumber = ({
           mobile: convertNumbers2English(phoneNumber),
         });
         if (response?.status === 'Success') {
+          let { code } = navigator.credentials
+            .get({
+              abort: signal,
+              otp: {
+                transport: ['sms'],
+              },
+            })
+            .then((otp) => {
+              setVerifyCode(code);
+            });
           setSendVerifyCode(true);
         }
       } catch (err) {

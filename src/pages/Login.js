@@ -16,6 +16,7 @@ import { UserContext } from 'contexts/UserProvider';
 const Login = (props) => {
   const [sendVerifyCode, setSendVerifyCode] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [verifyCode, setVerifyCode] = useState('');
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -153,12 +154,15 @@ const Login = (props) => {
               <VerifyCode
                 setSendVerifyCode={setSendVerifyCode}
                 phoneNumber={phoneNumber}
+                verifyCode={verifyCode}
+                setVerifyCode={setVerifyCode}
               />
             ) : (
               <PhoneNumber
                 phoneNumber={phoneNumber}
                 setPhoneNumber={setPhoneNumber}
                 setSendVerifyCode={setSendVerifyCode}
+                setVerifyCode={setVerifyCode}
               />
             )}
           </div>
@@ -206,7 +210,7 @@ const Login = (props) => {
             </small>
           </p>
           <p className="text-xs text-gray-400">
-            Copyright © 2019 shahrvand
+            Copyright © 2022 shahrvand
           </p>
         </div>
       </div>

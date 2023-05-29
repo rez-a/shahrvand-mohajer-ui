@@ -1,26 +1,21 @@
 import jwt_decode from 'jwt-decode';
 import Cookies from 'js-cookie';
 import { AUTH_TOKEN_SHAHRVAND } from './authTokenKey';
-import removeAuthToken from './removeAuthToken';
 
 const decodeToken = (token = null) => {
-  if (!token) {
-    removeAuthToken(AUTH_TOKEN_SHAHRVAND);
-  } else {
-    const tokenDecoded = !!token
-      ? jwt_decode(token)
-      : !!Cookies.get(AUTH_TOKEN_SHAHRVAND)
-      ? jwt_decode(Cookies.get(AUTH_TOKEN_SHAHRVAND))
-      : null;
+  const tokenDecoded = !!token
+    ? jwt_decode(token)
+    : !!Cookies.get(AUTH_TOKEN_SHAHRVAND)
+    ? jwt_decode(Cookies.get(AUTH_TOKEN_SHAHRVAND))
+    : null;
 
-    const destrucToken = () => {
-      const { mobile, name, exp, wallet_balance, score_order } =
-        tokenDecoded;
-      return { mobile, name, exp, wallet_balance, score_order };
-    };
+  const destrucToken = () => {
+    const { mobile, name, exp, wallet_balance, score_order } =
+      tokenDecoded;
+    return { mobile, name, exp, wallet_balance, score_order };
+  };
 
-    return !!tokenDecoded ? destrucToken() : null;
-  }
+  return !!tokenDecoded ? destrucToken() : null;
 };
 
 export default decodeToken;
