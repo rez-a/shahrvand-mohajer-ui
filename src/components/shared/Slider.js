@@ -48,7 +48,7 @@ const Slider = ({ products, title, linkTo, isPagination }) => {
           <div className="mr-auto">
             <Link
               to={linkTo}
-              className="border border-gray-300 hover:bg-gray-100 transition-all hover:text-neutral-900 duration-200 rounded-md text-gray-700 text-xs px-2 py-1 ml-5"
+              className="border whitespace-nowrap border-gray-300 hover:bg-gray-100 transition-all hover:text-neutral-900 duration-200 rounded-md text-gray-700 text-xs px-2 py-1 ml-5"
               type="button"
             >
               مشاهده همه

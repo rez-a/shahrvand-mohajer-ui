@@ -8,7 +8,7 @@ import useObserved from 'hooks/useObserved';
 import { Link } from 'react-router-dom';
 import queryString from 'query-string';
 
-const BannerItem = ({ sectionNum, className }) => {
+const BannerItem = ({ sectionNum, className = '' }) => {
   const { ref, view } = useObserved();
 
   const { data: banners } = useSWR(view && BANNERS, fetcher);
