@@ -8,6 +8,7 @@ import TableLoaded from 'components/shared/TableLoaded';
 import { fetcher } from 'services/swr/fetcher';
 import { HOME_DELIVERY } from 'constants/paymentMethod';
 import dispatcher from 'services/dispatcher';
+import Order from 'components/orderMobile/Order';
 
 const Orders = (props) => {
   const { data: user } = useSWR(PROFILE, dispatcher);
@@ -192,8 +193,8 @@ const Orders = (props) => {
         <TableLoaded count={5} />
       ) : !!orders.data.length ? (
         <div>
-          <div class="relative">
-            <table class="w-full text-sm text-center text-gray-500 ">
+          <div class="relative overflow-auto max-h-screen ">
+            <table class="w-full text-sm text-center text-gray-500 hidden sm:table">
               <thead class="text-sm whitespace-nowrap text-gray-700  bg-gray-100">
                 <tr>
                   <th scope="col" class="px-6 py-3">
@@ -281,6 +282,26 @@ const Orders = (props) => {
                       </Link>
                     </td>
                   </tr>
+                ))}
+              </tbody>
+            </table>
+            <table class="w-full text-sm text-gray-500 table sm:hidden">
+              <thead class="text-sm whitespace-nowrap text-gray-700  bg-gray-100">
+                <tr>
+                  <th scope="col" class="px-6 py-3">
+                    #
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                    شماره سفارش
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                    خلاصه سفارش
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="whitespace-nowrap">
+                {orders.data.map((order, index) => (
+                  <Order key={index} order={order} index={index} />
                 ))}
               </tbody>
             </table>

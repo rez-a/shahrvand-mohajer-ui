@@ -106,7 +106,7 @@ const Products = (props) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-8 items-start relative mx-4 2xl:mx-0 min-h-screen">
         <div className="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-4 2xl:col-span-5 order-1 sm:order-2">
           <ul className="flex items-center gap-4 text-[10px] sm:text-xs justify-center sm:justify-start flex-wrap">
-            {!!products?.data.length &&
+            {!!products?.data &&
               sortItems.map((sortItem, index) => (
                 <SortItem
                   key={index}
