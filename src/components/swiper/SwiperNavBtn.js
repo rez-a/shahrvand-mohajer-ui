@@ -1,28 +1,29 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { useSwiper } from "swiper/react";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { useSwiper } from 'swiper/react';
 
 const SwiperNavBtn = ({
   nextIcon,
   prevIcon,
   nextButtonClassName,
   prevButtonClassName,
+  className = '',
 }) => {
   const swiper = useSwiper();
   return (
-    <div className="swiper-nav-btn">
-        <button
-          className={nextButtonClassName}
-          onClick={() => swiper.slideNext()}
-        >
-          {nextIcon}
-        </button>
-        <button
-          className={prevButtonClassName}
-          onClick={() => swiper.slidePrev()}
-        >
-          {prevIcon}
-        </button>
+    <div className={`swiper-nav-btn ${className}`}>
+      <button
+        className={nextButtonClassName}
+        onClick={() => swiper.slideNext()}
+      >
+        {nextIcon}
+      </button>
+      <button
+        className={prevButtonClassName}
+        onClick={() => swiper.slidePrev()}
+      >
+        {prevIcon}
+      </button>
     </div>
   );
 };

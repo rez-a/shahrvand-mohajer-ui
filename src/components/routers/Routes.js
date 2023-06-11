@@ -23,6 +23,7 @@ const AllRoutes = () => {
         <Route index element={<Home />} />
       </Route>
       <Route path="/login" element={<Login />} />
+      <Route path="lottery" element={<Lottery />} />
       <Route path="/*" element={<LayoutPage />}>
         <Route path="products/*" element={<ProductsRoutes />} />
         <Route path="product/*" element={<ProductRoutes />} />
@@ -33,7 +34,6 @@ const AllRoutes = () => {
         <Route path="about-us" element={<AboutUs />} />
         <Route path="contact-us" element={<ContactUs />} />
         <Route path="faq" element={<Faq />} />
-        <Route path="lottery" element={<Lottery />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
