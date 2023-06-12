@@ -11,6 +11,7 @@ export const PRODUCTS_MAINCATEGORY = 'products/category';
 export const SUBCATEGORIES = 'subcategories/category';
 export const PRODUCT = 'products';
 export const INSTANT_MESSAGINGS = 'app/instant-messagings';
+export const LOTTERIES = 'lotteries';
 
 //user
 export const LOGIN = 'auth/login';

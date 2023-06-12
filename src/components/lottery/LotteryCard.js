@@ -1,25 +1,25 @@
-import Spinner from 'components/shared/Spinner';
 import image from 'assets/images/lottery.jpg';
 import React from 'react';
-import ModalLayout from 'components/shared/modal/ModalLayout';
-import { useState } from 'react';
 
-const LotteryCard = () => {
-  const [isShow, setShow] = useState(false);
-  const [loading, setLoading] = useState(false);
+const LotteryCard = ({ lottery, setLottery }) => {
+  const { Name, Description, EndAt, StartAt, ImageUrl } = lottery;
   return (
     <>
-      <div class=" bg-white  rounded-xl shadow-xl py-1 relative pt-28">
+      <div class=" bg-white  rounded-xl shadow-xl py-1 relative pt-28 group">
         <div className=" h-32 absolute mb-4 shadow-xl rounded-xl overflow-hidden w-11/12 mx-auto left-1/2 -translate-x-1/2 -top-10">
-          <img src={image} alt="lottery" />
+          <img
+            className="bg-gray-200 group-hover:scale-110 transition-all duration-200"
+            src={ImageUrl}
+            alt="lottery"
+          />
         </div>
 
         <div class="px-3">
-          <h5 class="mb-2 text-base font-bold text-gray-900">
-            عنوان قرعه کشی
+          <h5 class="mb-4 text-base font-bold text-gray-900 truncate group-hover:text-rose-600 transition-all duration-200">
+            {Name}
           </h5>
-          <p class="mb-3 font-normal text-gray-700 text-sm border-b pb-3">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ.
+          <p class="mb-3 font-normal text-gray-700 text-sm border-b pb-3 flex items-center gap-2">
+            <span className="truncate block">{Description}</span>
           </p>
           <div className="text-neutral-500 text-xs flex items-center gap-1">
             <svg
@@ -39,7 +39,7 @@ const LotteryCard = () => {
               </defs>
             </svg>
             <p>تاریخ شروع : </p>
-            <p>1401/02/01</p>
+            <p>{StartAt}</p>
           </div>
           <div className="text-neutral-500 text-xs flex items-center gap-1 my-2">
             <svg
@@ -59,9 +59,13 @@ const LotteryCard = () => {
               </defs>
             </svg>
             <p>تاریخ پایان : </p>
-            <p>1401/02/01</p>
+            <p>{EndAt}</p>
           </div>
         </div>
+        <button
+          onClick={() => setLottery(lottery)}
+          className="absolute w-full h-full top-0 left-0"
+        ></button>
       </div>
     </>
   );

@@ -1,51 +1,24 @@
-import React from 'react';
-import Countdown from 'react-countdown';
-import TitleIcon from 'components/shared/TitleIcon';
-import LotteryCard from 'components/lottery/LotteryCard';
-import SwiperNavBtn from 'components/swiper/SwiperNavBtn';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { A11y, Autoplay, Navigation } from 'swiper';
+import React, { useEffect, useState } from 'react';
+import { LOTTERIES } from 'services/endPoints';
+import { fetcher } from 'services/swr/fetcher';
+import useSWR from 'swr';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 
+import CurrentLottery from 'components/lottery/CurrentLottery';
+import Lotteries from 'components/lottery/Lotteries';
+import Winners from 'components/lottery/Winners';
+
 const Lottery = () => {
-  const renderSingleDigitNumber = (number) =>
-    number < 10 ? `0${number}` : number;
+  const [lotterySelected, setLottery] = useState({});
+  const { data } = useSWR(LOTTERIES, fetcher);
+  const lotteries = !!data && data?.data;
 
-  const swiperRef = useRef();
+  useEffect(() => {
+    setLottery(lotteries[0]);
+  }, [lotteries]);
 
-  const render = ({ days, hours, minutes, seconds, completed }) => {
-    if (completed) {
-      return (
-        <p className="text-sky-600 font-bold text-center pb-8">
-          قرعه کشی به پایان رسید به زودی نتایج اعلان خواهد شد!!
-        </p>
-      );
-    } else {
-      return (
-        <>
-          <div className="flex justify-center gap-4">
-            <div className="text-slate-700 bg-gray-100 w-28 h-28 text-4xl flex flex-col items-center justify-center rounded-xl">
-              <p>{renderSingleDigitNumber(seconds)}</p>
-              <p className="text-base">ثانیه</p>
-            </div>
-            <div className="text-slate-700 bg-gray-100 w-28 h-28 text-4xl flex flex-col items-center justify-center rounded-xl">
-              <p>{renderSingleDigitNumber(minutes)}</p>
-              <p className="text-base">دقیقه</p>
-            </div>
-            <div className="text-slate-700 bg-gray-100 w-28 h-28 text-4xl flex flex-col items-center justify-center rounded-xl">
-              <p>{renderSingleDigitNumber(hours)}</p>
-              <p className="text-base">ساعت</p>
-            </div>
-            <div className="text-slate-700 bg-gray-100 w-28 h-28 text-4xl flex flex-col items-center justify-center rounded-xl">
-              <p>{renderSingleDigitNumber(days)}</p>
-              <p className="text-base">روز</p>
-            </div>
-          </div>
-        </>
-      );
-    }
-  };
+  useEffect(() => {});
   return (
     <main className="bg-white min-h-screen">
       <header className="w-full bg-rose-600 relative">
@@ -433,242 +406,10 @@ const Lottery = () => {
           <p>قرعه کشی شهروند</p>
         </div>
       </header>
-      <div className="p-20 bg-white">
-        <div className="container mx-auto">
-          <div className="mb-8">
-            <h2 className="text-rose-600 font-bold text-center text-3xl mb-4">
-              تا پایان قرعه کشی
-            </h2>
-            <p className="text-center">
-              <span className="text-neutral-500">
-                جایزه قرعه کشی :
-              </span>
-              <span className="text-black font-bold text-xl">
-                یک بسته کاندوم
-              </span>
-            </p>
-          </div>
-          <Countdown
-            className="text-4xl font-bold text-sky-500 mx-auto text-center w-full block"
-            renderer={render}
-            date={Date.now() + 1000000}
-          />
-        </div>
-      </div>
-      <div className="bg-gray-100">
-        <div className="container mx-auto pt-18 pb-16">
-          <div className="grid grid-cols-4 items-center">
-            <div>
-              <div className="flex">
-                <div className="bg-slate-800 flex items-center py-1.5 px-2 rounded-xl skew-x-[10deg] skew-y-[-25deg] relative right-6">
-                  <svg
-                    width="29"
-                    height="22"
-                    className=""
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g
-                      clip-path="url(#fi-rr-gift__a)"
-                      filter="url(#fi-rr-gift__b)"
-                    >
-                      <path
-                        d="M21.352 6.519h-1.448a4.28 4.28 0 0 0 1.448-3.334.833.833 0 1 0-1.667 0c0 2.185-1.976 2.942-3.478 3.201a7.777 7.777 0 0 0 .978-3.2 2.5 2.5 0 0 0-5 0 7.777 7.777 0 0 0 .979 3.2c-1.503-.259-3.479-1.016-3.479-3.2a.833.833 0 0 0-1.666 0 4.28 4.28 0 0 0 1.448 3.333H8.019a3.333 3.333 0 0 0-3.334 3.333v.833a1.666 1.666 0 0 0 1.667 1.667v4.167a4.172 4.172 0 0 0 4.167 4.166h8.333a4.172 4.172 0 0 0 4.167-4.166v-4.167a1.666 1.666 0 0 0 1.666-1.667v-.833a3.333 3.333 0 0 0-3.333-3.333Zm-6.667-4.167a.833.833 0 0 1 .834.833 6.43 6.43 0 0 1-.834 2.511 6.426 6.426 0 0 1-.833-2.51.834.834 0 0 1 .833-.834Zm-8.333 7.5a1.667 1.667 0 0 1 1.667-1.667h5.833v2.5h-7.5v-.833Zm1.667 6.667v-4.167h5.833v6.667h-3.333a2.5 2.5 0 0 1-2.5-2.5Zm13.333 0a2.5 2.5 0 0 1-2.5 2.5h-3.333v-6.667h5.833v4.167Zm-5.833-5.834v-2.5h5.833a1.667 1.667 0 0 1 1.667 1.667v.833h-7.5Z"
-                        fill="#fff"
-                      />
-                    </g>
-                    <defs>
-                      <clipPath id="fi-rr-gift__a">
-                        <path
-                          fill="#fff"
-                          transform="translate(4.685 .685)"
-                          d="M0 0h20v20H0z"
-                        />
-                      </clipPath>
-                      <filter
-                        id="fi-rr-gift__b"
-                        x=".685"
-                        y=".685"
-                        width="28"
-                        height="28"
-                        filterUnits="userSpaceOnUse"
-                        color-interpolation-filters="sRGB"
-                      >
-                        <feFlood
-                          flood-opacity="0"
-                          result="BackgroundImageFix"
-                        />
-                        <feColorMatrix
-                          in="SourceAlpha"
-                          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                          result="hardAlpha"
-                        />
-                        <feOffset dy="4" />
-                        <feGaussianBlur stdDeviation="2" />
-                        <feComposite in2="hardAlpha" operator="out" />
-                        <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-                        <feBlend
-                          in2="BackgroundImageFix"
-                          result="effect1_dropShadow_3_55"
-                        />
-                        <feBlend
-                          in="SourceGraphic"
-                          in2="effect1_dropShadow_3_55"
-                          result="shape"
-                        />
-                      </filter>
-                    </defs>
-                  </svg>
-                </div>
-              </div>
-              <div className="flex">
-                <p className="bg-rose-600 text-white text-lg font-bold text-font py-3 px-10 rounded-xl skew-x-[10deg] skew-y-[-25deg] mt-12">
-                  قرعه کشی های قبلی
-                </p>
-              </div>
-              <div className="swiper-nav-btn mt-5 mr-10">
-                <button
-                  className="px-3 py-3 rounded-full bg-white hover:bg-gray-200 transition-all duration-200 ml-2 mt-3"
-                  onClick={() => swiperRef.current.slideNext()}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    fill="none"
-                    className="text-rose-500 stroke-current"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
-                      d="m7.505 3 8.995 9.027L7.5 21"
-                    />
-                  </svg>
-                </button>
-                <button
-                  className="px-3 py-3 rounded-full bg-white hover:bg-gray-200 transition-all duration-200 ml-2 mt-3"
-                  onClick={() => swiperRef.current.slidePrev()}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    fill="none"
-                    className="text-rose-500 stroke-current"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
-                      d="m16.5 3-9 9.002L16.495 21"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <div className="col-span-3">
-              <Swiper
-                onSwiper={(swiper) => {
-                  swiperRef.current = swiper;
-                }}
-                modules={[Navigation, A11y, Autoplay]}
-                autoplay={{
-                  delay: 2500,
-                  disableOnInteraction: false,
-                }}
-                loop={true}
-                breakpoints={{
-                  0: {
-                    slidesPerView: 1,
-                  },
-                  640: {
-                    slidesPerView: 2,
-                  },
-                  1024: {
-                    slidesPerView: 3,
-                  },
-                }}
-                slidesPerView={3}
-                spaceBetween={48}
-                className="mySwiper w-full "
-                wrapperClass="pb-8 pt-28"
-              >
-                {[...Array(10)].map((_, index) => (
-                  <SwiperSlide key={index}>
-                    <LotteryCard />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </div>
-          </div>
-        </div>
-      </div>
+      <CurrentLottery />
+      <Lotteries setLottery={setLottery} />
+      <Winners lotterySelected={lotterySelected} />
 
-      <div className="py-16">
-        <div className="container mx-auto">
-          <h2 className="text-2xl font-bold text-center mb-8">
-            لیست برندگان
-          </h2>
-          <div class="relative overflow-x-auto shadow-xl">
-            <table class="w-full text-sm text-center rounded-xl overflow-hidden shadow-lg">
-              <thead class="text-base font-bold text-gray-700 uppercase bg-gray-100">
-                <tr>
-                  <th scope="col" class="px-6 py-3">
-                    ردیف
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                    نام و نام خانوادگی
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                    امتیاز
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                    جایزه
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                    شماره همراه
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {[...Array(10)].map((_, index) => (
-                  <tr
-                    key={index}
-                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                  >
-                    <th
-                      scope="row"
-                      class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                    >
-                      {index + 1}
-                    </th>
-                    <td class="px-6 py-4">
-                      <div className="flex justify-center items-center">
-                        <div className="bg-gray-100 p-1.5 rounded-full ml-2">
-                          <svg
-                            className="w-4 h-4"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                          >
-                            <path d="M4 22C4 17.5817 7.58172 14 12 14C16.4183 14 20 17.5817 20 22H18C18 18.6863 15.3137 16 12 16C8.68629 16 6 18.6863 6 22H4ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11Z"></path>
-                          </svg>
-                        </div>
-                        <span>اسماعیل صمدی</span>
-                      </div>
-                    </td>
-                    <td class="px-6 py-4">1324</td>
-                    <td class="px-6 py-4">ماشین لباسشویی</td>
-                    <td class="px-6 py-4">09187655434</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
       <div>
         <div className="container mx-auto  ">
           <div className="bg-gray-100 rounded-t-[120px] text-center p-8">
