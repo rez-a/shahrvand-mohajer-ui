@@ -12,6 +12,7 @@ export const SUBCATEGORIES = 'subcategories/category';
 export const PRODUCT = 'products';
 export const INSTANT_MESSAGINGS = 'app/instant-messagings';
 export const LOTTERIES = 'lotteries';
+export const LOTTERY_CURRENT = 'lottery/current';
 
 //user
 export const LOGIN = 'auth/login';

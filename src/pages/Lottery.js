@@ -18,10 +18,10 @@ const Lottery = () => {
     setLottery(lotteries[0]);
   }, [lotteries]);
 
-  useEffect(() => {});
+  const winnerRef = useRef();
   return (
     <main className="bg-white min-h-screen">
-      <header className="w-full bg-rose-600 relative">
+      <header className="w-full  bg-rose-600 relative">
         <svg
           version="1.1"
           id="Layer_58"
@@ -401,14 +401,17 @@ const Lottery = () => {
             d="M407.3,578.9c-0.1-0.4-0.3-0.9-0.5-1.3h1.3C407.8,578.1,407.5,578.5,407.3,578.9z"
           />
         </svg>
-        <div className="container mx-auto h-full absolute top-0 left-1/2 -translate-x-1/2 flex text-7xl leading-relaxed font-bold justify-center text-white flex-col">
+        <div className="container mx-auto h-full absolute top-0 left-1/2 -translate-x-1/2 flex text-sm sm:text-3xl lg:text-5xl  xl:text-7xl !leading-relaxed font-bold justify-center text-white flex-col">
           <p>جشنواره</p>
           <p>قرعه کشی شهروند</p>
         </div>
       </header>
       <CurrentLottery />
-      <Lotteries setLottery={setLottery} />
-      <Winners lotterySelected={lotterySelected} />
+      <Lotteries winnerRef={winnerRef} setLottery={setLottery} />
+      <Winners
+        winnerRef={winnerRef}
+        lotterySelected={lotterySelected}
+      />
 
       <div>
         <div className="container mx-auto  ">
@@ -498,21 +501,23 @@ const Lottery = () => {
                 </svg>
               </Link>
             </div>
-            <p className="px-32 leading-8 text-sm">
-              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت
-              چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون
-              بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و
-              برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با
-              هدف بهبود ابزارهای کاربردی می باشد
+            <p className=" lg:px-32 leading-8 text-sm text-justify">
+              شهروند به عنوان یکی از قدیمی‌ترین فروشگاه های اینترنتی
+              با بیش از یک دهه تجربه، با پایبندی به سه اصل کلیدی،
+              پرداخت در محل، 7 روز ضمانت بازگشت کالا و تضمین اصل‌بودن
+              کالا، موفق شده تا همگام با فروشگاه‌های معتبر جهان، به
+              بزرگ‌ترین فروشگاه اینترنتی ایران تبدیل شود. به محض ورود
+              به شهروند با یک سایت پر از کالا رو به رو می‌شوید! هر
+              آنچه که نیاز دارید و به ذهن شما خطور می‌کند در اینجا
+              پیدا خواهید کرد
             </p>
           </div>
         </div>
       </div>
       <div className="bg-rose-600 py-4">
-        <div className="container mx-auto text-xs text-white flex items-center justify-between">
-          <p>
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ،
-            و با استفاده از طراحان گرافیک است.
+        <div className="container mx-auto text-xs text-white flex flex-col lg:flex-row gap-8 items-center justify-between">
+          <p className="text-center">
+            فروشگاه اینترنتی شهروند، بررسی، انتخاب و خرید آنلاین
           </p>
           <p>
             <Link to="/">شهروند مهاجر</Link>

@@ -1,8 +1,14 @@
 import image from 'assets/images/lottery.jpg';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const LotteryCard = ({ lottery, setLottery }) => {
+const LotteryCard = ({ lottery, setLottery, winnerRef }) => {
   const { Name, Description, EndAt, StartAt, ImageUrl } = lottery;
+  const navigate = useNavigate();
+  const handelLottery = () => {
+    setLottery(lottery);
+    winnerRef.current.scrollIntoView({ behavior: 'smooth' });
+  };
   return (
     <>
       <div class=" bg-white  rounded-xl shadow-xl py-1 relative pt-28 group">
@@ -63,7 +69,7 @@ const LotteryCard = ({ lottery, setLottery }) => {
           </div>
         </div>
         <button
-          onClick={() => setLottery(lottery)}
+          onClick={handelLottery}
           className="absolute w-full h-full top-0 left-0"
         ></button>
       </div>
