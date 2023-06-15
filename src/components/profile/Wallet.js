@@ -35,8 +35,6 @@ const Wallet = () => {
     setLoading(false);
   };
 
-  console.log(amount);
-
   return (
     <>
       <Card title="افزایش موجودی کیف پول">
