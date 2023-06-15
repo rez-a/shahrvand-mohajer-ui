@@ -1,7 +1,7 @@
 import React from 'react';
 import TitleIcon from 'components/shared/TitleIcon';
 import 'react-range-slider-input/dist/style.css';
-import { SUBCATEGORIES } from 'services/endPoints';
+import { CATEGORIES, SUBCATEGORIES } from 'services/endPoints';
 import { fetcher } from 'services/swr/fetcher';
 import useSWR from 'swr';
 import LoaderCategoryCard from 'components/CategoryCard/LoaderCategoryCard';
@@ -10,18 +10,33 @@ import Banner from 'components/home/Banner';
 import SubCategoryCard from 'components/CategoryCard/SubCategoryCard';
 import { useParams } from 'react-router-dom';
 import ProductRelated from 'components/productPage/ProductRelated';
-import Loading from 'components/shared/Loading';
+import CategoriesScrolled from 'components/shared/categoriesScrolled.js/CategoriesScrolled';
 
 const SubCategories = (props) => {
   const { mainErpCode } = useParams();
 
+  const { data: categories, isLoading: categoriesLoading } = useSWR(
+    CATEGORIES,
+    fetcher
+  );
+
   const { data: subCategories, loading } = useSWR(
-    `${SUBCATEGORIES}/${mainErpCode}`,
+    !!mainErpCode && `${SUBCATEGORIES}/${mainErpCode}`,
     fetcher
   );
   return (
     <>
       <main>
+        {!!categories?.data && (
+          <CategoriesScrolled
+            title="دسته بندی های اصلی"
+            categories={categories?.data}
+            baseLinkTo="/products"
+            selected={mainErpCode}
+            className="mx-4"
+          />
+        )}
+
         <div>
           <h2 className="flex items-center mb-4 mx-4">
             <TitleIcon />

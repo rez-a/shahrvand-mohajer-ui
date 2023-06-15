@@ -50,7 +50,7 @@ const Breadcrumb = ({ links = [] }) => {
               </div>
             </li>
           ) : (
-            <li i key={index}>
+            <li key={index}>
               <div class="flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

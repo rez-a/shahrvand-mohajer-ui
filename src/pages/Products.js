@@ -1,50 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import TitleIcon from 'components/shared/TitleIcon';
-import AccordionLayout from 'components/shared/accordion/AccordionLayout';
-import AccordionItem from 'components/shared/accordion/AccordionItem';
-import TitleAccordionItem from 'components/shared/accordion/TitleAccordionItem';
-import ContentAccordionItem from 'components/shared/accordion/ContentAccordionItem';
-import RangeSlider from 'react-range-slider-input/dist/components/RangeSlider';
-import SwitchInput from 'components/shared/inputs/SwitchInput';
+import React, { useState } from 'react';
 import ProductCartVertical from 'components/productCard/ProductCardVertical';
 import PaginationLayout from 'components/pagination/PaginationLayout';
 import {
   useParams,
-  useLocation,
   useNavigate,
-  useSearchParams,
   Link,
+  useSearchParams,
 } from 'react-router-dom';
-import { PRODUCTS, SUBCATEGORIES } from 'services/endPoints';
+import {
+  CATEGORIES,
+  PRODUCTS,
+  SUBCATEGORIES,
+} from 'services/endPoints';
 import { fetcher } from 'services/swr/fetcher';
 import LoaderProductCardVeritical from 'components/productCard/LoaderProductCardVeritical';
 import queryString from 'query-string';
 import useSWR from 'swr';
-import SortItem from 'components/SortItem';
 import Breadcrumb from 'components/Breadcrumb';
-import {
-  CHEAP,
-  DISCOUNT,
-  EXPENSIVE,
-  VISIT_COUNT,
-} from 'constants/sortProducts';
+import CategoriesScrolled from 'components/shared/categoriesScrolled.js/CategoriesScrolled';
 
 const Products = (props) => {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const sortItems = [
-    { type: VISIT_COUNT, title: 'بیشترین بازدید' },
-    { type: DISCOUNT, title: 'بیشترین تخفیف' },
-    { type: CHEAP, title: 'ارزان ترین' },
-    { type: EXPENSIVE, title: 'گران ترین' },
-    ,
-  ];
-
   const { mainErpCode, subErpCode } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const [sort, setSort] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const { data: categories, isLoading: categoriesLoading } = useSWR(
+    CATEGORIES,
+    fetcher
+  );
+
+  const { data: subCategories, loading: subCategoriesLoading } =
+    useSWR(
+      !!mainErpCode && `${SUBCATEGORIES}/${mainErpCode}`,
+      fetcher
+    );
   const { data: products } = useSWR(setParamsFilters(), fetcher);
 
   function setParamsFilters() {
@@ -52,7 +42,6 @@ const Products = (props) => {
       {
         url: `${PRODUCTS}&category=${mainErpCode}`,
         query: {
-          sort,
           subcategory: [subErpCode],
           page: searchParams.get('page') || 1,
         },
@@ -64,27 +53,6 @@ const Products = (props) => {
       }
     );
   }
-  function handleNavigate() {
-    navigate(
-      queryString.stringifyUrl(
-        {
-          url: `/products/${mainErpCode}/${subErpCode}`,
-          query: {
-            sort,
-          },
-        },
-        {
-          arrayFormat: 'bracket',
-          skipEmptyString: true,
-          skipNull: true,
-        }
-      )
-    );
-  }
-
-  useEffect(() => {
-    handleNavigate();
-  }, [sort]);
 
   return (
     <>
@@ -102,21 +70,28 @@ const Products = (props) => {
           ]}
         />
       )}
+      {!!categories?.data && (
+        <CategoriesScrolled
+          title="دسته بندی های اصلی"
+          categories={categories?.data}
+          baseLinkTo="/products"
+          selected={mainErpCode}
+          className="mx-4 2xl:mx-0"
+        />
+      )}
+
+      {!!categories?.data && !!subCategories?.data && (
+        <CategoriesScrolled
+          title="زیرمجموعه ها"
+          categories={subCategories?.data}
+          baseLinkTo={`/products/${mainErpCode}`}
+          selected={subErpCode}
+          className="mx-4 2xl:mx-0"
+        />
+      )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-8 items-start relative mx-4 2xl:mx-0 min-h-screen">
         <div className="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-4 2xl:col-span-5 order-1 sm:order-2">
-          <ul className="flex items-center gap-4 text-[10px] sm:text-xs justify-center sm:justify-start flex-wrap">
-            {!!products?.data &&
-              sortItems.map((sortItem, index) => (
-                <SortItem
-                  key={index}
-                  {...sortItem}
-                  querySort={sort}
-                  clickHandler={() => setSort(sortItem.type)}
-                />
-              ))}
-          </ul>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5 gap-8 my-8">
             {!!products?.data && !loading ? (
               products.data.length ? (
