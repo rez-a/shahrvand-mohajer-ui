@@ -1,12 +1,18 @@
 import Loading from 'components/shared/Loading';
+import { UserContext } from 'contexts/UserProvider';
+import decodeToken from 'helper/handlerAuthorazation/decodeToken';
+import storeAuthToken from 'helper/handlerAuthorazation/storeAuthToken';
 import queryString from 'query-string';
 import React, { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { PAYMENT_CALLBACK } from 'services/endPoints';
+import dispatcher from 'services/dispatcher';
+import { PAYMENT_CALLBACK, REFRESH_TOKEN } from 'services/endPoints';
 import { fetcher } from 'services/swr/fetcher';
 import useSWR from 'swr';
 
 const Callback = () => {
+  const { setUser } = useContext(UserContext);
   const [style, setStyle] = useState(createStyle(false));
   const { search } = useLocation();
   const navigate = useNavigate();
@@ -24,6 +30,23 @@ const Callback = () => {
   useEffect(() => {
     setStyle(createStyle(!!data));
   }, [data]);
+
+  useEffect(() => {
+    const refreshToken = async () => {
+      const refreshTokenResponse = await dispatcher(
+        REFRESH_TOKEN,
+        {}
+      );
+      editUser(refreshTokenResponse.data.access_token);
+    };
+
+    if (!!data) refreshToken();
+  }, [data]);
+
+  const editUser = (token) => {
+    storeAuthToken(token);
+    setUser(decodeToken(token));
+  };
 
   function createStyle(status) {
     return {
@@ -98,7 +121,7 @@ const Callback = () => {
                     مبلغ پرداختی
                   </p>
                   <p className={`font-semibold ${style.text}`}>
-                    <span>{Number(paymentCallback?.Amount)}</span>
+                    <span>{paymentCallback?.Amount}</span>
                     <span className="text-xs font-light mr-1">
                       تومان
                     </span>

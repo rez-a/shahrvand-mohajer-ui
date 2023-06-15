@@ -23,6 +23,7 @@ export const EDIT_PROFILE = 'auth/profile/edit';
 export const ORDERS = 'orders';
 export const PAYMENTS = 'payments/self';
 export const WALLET = 'wallets/self';
+export const INCREAMENT_WALLET = 'wallets';
 export const ADDRESSES = 'addresses';
 export const REFRESH_TOKEN = 'auth/refresh/token';
 export const ORDER_DETAILS = 'orders/details';

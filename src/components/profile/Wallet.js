@@ -2,18 +2,40 @@ import React, { useState } from 'react';
 import Card from './Card';
 import Spinner from 'components/shared/Spinner';
 import useSWR from 'swr';
-import { WALLET } from 'services/endPoints';
+import { INCREAMENT_WALLET, WALLET } from 'services/endPoints';
 import { fetcher } from 'services/swr/fetcher';
 import TableLoaded from 'components/shared/TableLoaded';
 import { DEPOSIT } from 'constants/wallet/walletType';
 import { COMPLETED } from 'constants/wallet/walletStatus';
 import EmptyDataProfile from './EmptyData';
+import Toast from 'utilities/sweetAlert';
+import redirectToGateway from 'helper/redirectToGateway';
 
 const Wallet = () => {
   const [loading, setLoading] = useState(false);
+  const [amount, setAmount] = useState('');
+
   const { data } = useSWR(WALLET, fetcher);
 
   const walletList = !!data && data.data;
+
+  const icreamentWallet = async () => {
+    setLoading(true);
+    if (!!Number(amount)) {
+      const response = await fetcher(
+        `${INCREAMENT_WALLET}/${amount}`
+      );
+      redirectToGateway(response?.data.redirectToUrl);
+    } else {
+      Toast.fire({
+        icon: 'info',
+        text: 'مقدار فیلد را بررسی کنید',
+      });
+    }
+    setLoading(false);
+  };
+
+  console.log(amount);
 
   return (
     <>
@@ -28,10 +50,10 @@ const Wallet = () => {
             <div className="relative mb-3">
               <input
                 className="w-full placeholder:text-xs px-3 py-2 h-10  rounded-md border outline-none focus:border-gray-400"
-                type="number"
+                type="text"
                 id="amount"
-                //   value={verifyCode}
-                //   onChange={(e) => setVerifyCode(e.target.value)}
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
                 placeholder="مثلا 200,000"
               />
               <span class="bg-gray-100 absolute left-0 top-1/2 ml-1 -translate-y-1/2 text-gray-800 text-sm font-medium px-3 py-1.5 rounded">
@@ -40,8 +62,8 @@ const Wallet = () => {
             </div>
 
             <button
-              // disabled={loading}
-              // onClick={handleEditProfile}
+              onClick={icreamentWallet}
+              type="button"
               className="bg-sky-500/90  text-white w-full sm:w-60 py-2 text-sm rounded-md font-bold shadow-lg shadow-sky-500/50 hover:bg-sky-500 transition-all duration-300"
             >
               <div className="flex items-center justify-center">
