@@ -1,14 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
-import TitleIcon from "components/shared/TitleIcon";
-import ProductCartHorizontal from "components/productCard/ProductCardHorizontal";
-import useSWR from "swr";
-import { fetcher } from "services/swr/fetcher";
-import { SLIDESHOW } from "services/endPoints";
-import LoaderProductCardHorizontal from "components/productCard/LoaderProductCardHorizontal";
-import useObserved from "hooks/useObserved";
+import React from 'react';
+import PropTypes from 'prop-types';
+import ProductCartHorizontal from 'components/productCard/ProductCardHorizontal';
+import useSWR from 'swr';
+import { fetcher } from 'services/swr/fetcher';
+import { SLIDESHOW } from 'services/endPoints';
+import LoaderProductCardHorizontal from 'components/productCard/LoaderProductCardHorizontal';
+import useObserved from 'hooks/useObserved';
+import { Link } from 'react-router-dom';
 
-const GridabledProducts = ({ title, section }) => {
+const GridabledProducts = ({ title, section, link = true }) => {
   const { ref, view } = useObserved();
 
   const { data: products } = useSWR(
@@ -18,7 +18,7 @@ const GridabledProducts = ({ title, section }) => {
 
   return (
     <div className="my-4 mx-4 2xl:mx-0" ref={ref}>
-      <header className="text-sm">
+      <header className="text-sm flex items-center justify-between">
         <h2 className="font-semibold text-neutral-900 flex items-center ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -38,6 +38,33 @@ const GridabledProducts = ({ title, section }) => {
           </svg>
           <span className="mr-1"> {title}</span>
         </h2>
+        {link && (
+          <div className="mr-auto">
+            <Link
+              to={`/products/section/${section}`}
+              className="border whitespace-nowrap border-gray-300 hover:bg-gray-100 transition-all hover:text-neutral-900 duration-200 rounded-md text-gray-700 text-xs px-2 py-1"
+              type="button"
+            >
+              مشاهده همه
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="inline mr-2"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="#323232"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M18.503 12a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0M12.5 12a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0m-6.002 0a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0"
+                />
+              </svg>
+            </Link>
+          </div>
+        )}
       </header>
       <main className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 my-4">
         {!!products?.data

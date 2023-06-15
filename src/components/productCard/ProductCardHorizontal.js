@@ -28,7 +28,7 @@ const ProductCartHorizontal = ({
     Attr,
     Few,
   } = product;
-  const [attrSelected, setAttrSelected] = useState(Attr[0]);
+  const [attrSelected, setAttrSelected] = useState(undefined);
   const {
     state: { cart },
     dispatch,
@@ -41,20 +41,6 @@ const ProductCartHorizontal = ({
   );
 
   const handleShowModal = () => {
-    dispatch(
-      addToCart(
-        { ...product, attrSelected },
-        IsVendor
-          ? {
-              vendorErpCode: MainGroupErpCode,
-              vendorName: MainGroupName,
-            }
-          : {
-              vendorErpCode: 'SHAHRVAND',
-              vendorName: 'شهروند',
-            }
-      )
-    );
     setShowModal(true);
   };
 

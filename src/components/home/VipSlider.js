@@ -67,7 +67,7 @@ const VipSlider = ({}) => {
           }}
           slidesPerView={4}
           spaceBetween={20}
-          className="mySwiper !pb-4 sm:!pb-12"
+          className="mySwiper !pb-4 sm:!pb-12 vipSlider"
         >
           {productsLoading
             ? [...Array(10)].map((_, index) => (
@@ -83,7 +83,7 @@ const VipSlider = ({}) => {
                   />
                 </SwiperSlide>
               ))}
-           <SwiperNavBtn
+          <SwiperNavBtn
             nextButtonClassName="px-3 py-2 rounded-lg bg-black/20 ml-2 mt-3"
             nextIcon={
               <svg

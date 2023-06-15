@@ -24,24 +24,25 @@ const CartProductCard = ({
   IsAvailable,
   quantity,
   cartId,
+  attrSelected,
 }) => {
   const discount = discountCalculate(
     SellPrice,
     SellPrice - LastBuyPrice
   );
   return (
-    <div className="flex flex-col items-start py-4 border-gray-100 lg:flex-row">
-      <div className="h-20 lg:h-40  w-20 lg:w-40 mb-4 mx-auto">
+    <div className="flex flex-col items-start py-4 border-gray-100 lg:flex-row relative">
+      <div className="h-10 lg:h-40  w-10 lg:w-40 mb-4 mx-auto">
         <img
-          class="object-cover w-full  md:h-auto md:w-48  "
+          class="object-cover w-full md:h-auto md:w-48"
           src={Image}
           alt={Name}
         />
       </div>
-      <div class="flex flex-col justify-between leading-normal w-full grow lg:mr-2 text-sm">
+      <div class="flex flex-col justify-between leading-normal w-full grow lg:mr-2 text-xs lg:text-base">
         <div>
           <div className="flex flex-col items-start justify-between sm:flex-row">
-            <div class="text-base font-bold tracking-tight text-gray-900  mb-4 sm:mb-2">
+            <div class="text-sm font-bold tracking-tight text-gray-900  mb-4 sm:mb-2">
               {!!discount && (
                 <div className=" inline">
                   <span
@@ -56,13 +57,20 @@ const CartProductCard = ({
                 </div>
               )}
               <Link
-                class="hover:text-rose-500 transition-all duration-200 text-sm"
+                class="hover:text-rose-500 transition-all duration-200"
                 to={`/product/${MainGroupErpCode}/${SideGroupErpCode}/${ErpCode}`}
                 className={`${!!discount ? 'mr-2' : ''}`}
               >
                 {Name}
               </Link>
             </div>
+            {!!attrSelected && (
+              <div className="flex items-center gap-1 text-xs lg:text-sm">
+                <p className="text-neutral-400">نوع محصول :</p>
+                <p className="font-bold">{attrSelected}</p>
+              </div>
+            )}
+
             <div className="flex items-center">
               {!!discount ? (
                 <>
@@ -82,7 +90,7 @@ const CartProductCard = ({
               )}
             </div>
           </div>
-          <p className="text-xs flex items-center justify-start sm:justify-end text-slate-400 mt-1 mb-4">
+          <p className="text-xs flex items-center justify-start sm:justify-end text-slate-400 mt-1 mb-2 md:mb-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -94,7 +102,7 @@ const CartProductCard = ({
             </svg>
             <span>به ازای هر 1 {UnitName}</span>
           </p>
-          <div className="flex items-center mb-4">
+          <div className="flex items-center mb-2 md:mb-4">
             <div className="w-6 h-6">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -207,7 +215,7 @@ const CartProductCard = ({
               )}
             </div>
             <button
-              className="block"
+              className="hidden lg:block"
               onClick={() =>
                 dispatch(
                   removeFromCart(
@@ -240,6 +248,19 @@ const CartProductCard = ({
           </div>
         </div>
       </div>
+      <button
+        onClick={() =>
+          dispatch(
+            removeFromCart(
+              cartId,
+              IsVendor ? MainGroupErpCode : 'SHAHRVAND'
+            )
+          )
+        }
+        className="bg-rose-500 absolute left-0 top-0 text-sm rounded-md px-2 py-1  hover:bg-rose-500 bg-rose-500/90 shadow-rose-500/50 text-white group block lg:hidden shadow-lg transition-all duration-300 "
+      >
+        حذف محصول
+      </button>
     </div>
   );
 };

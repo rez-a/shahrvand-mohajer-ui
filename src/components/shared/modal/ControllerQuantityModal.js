@@ -6,6 +6,7 @@ import {
   removeFromCart,
 } from 'reducers/cart/actionCreators';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 const ControllerQuantityModal = ({
   product,
@@ -31,6 +32,69 @@ const ControllerQuantityModal = ({
     MainGroupErpCode,
     MinUnitFew,
   } = product;
+
+  const [attrError, setAttrError] = useState(false);
+  console.log(attrSelected);
+
+  const handleAdded = () => {
+    if (!!Attr?.length) {
+      if (!!attrSelected) {
+        dispatch(
+          addToCart(
+            { ...product, attrSelected },
+            IsVendor
+              ? {
+                  vendorErpCode: MainGroupErpCode,
+                  vendorName: MainGroupName,
+                }
+              : {
+                  vendorErpCode: 'SHAHRVAND',
+                  vendorName: 'شهروند',
+                }
+          )
+        );
+      } else {
+        setAttrError(true);
+      }
+    } else {
+      dispatch(
+        addToCart(
+          { ...product, attrSelected },
+          IsVendor
+            ? {
+                vendorErpCode: MainGroupErpCode,
+                vendorName: MainGroupName,
+              }
+            : {
+                vendorErpCode: 'SHAHRVAND',
+                vendorName: 'شهروند',
+              }
+        )
+      );
+    }
+  };
+
+  const handleRemoved = () => {
+    setAttrSelected(undefined);
+    dispatch(
+      removeFromCart(
+        productInCart.cartId,
+        IsVendor ? MainGroupErpCode : 'SHAHRVAND'
+      )
+    );
+  };
+
+  const changeAttr = (newAttr) => {
+    if (!!productInCart) {
+      dispatch(
+        removeFromCart(
+          productInCart.cartId,
+          IsVendor ? MainGroupErpCode : 'SHAHRVAND'
+        )
+      );
+    }
+    setAttrSelected(newAttr);
+  };
 
   return (
     <div className="relative flex flex-col rounded-2xl bg-clip-border overflow-hidden text-gray-700 shadow-none bg-white max-w-lg w-full">
@@ -99,28 +163,46 @@ const ControllerQuantityModal = ({
           </div>
         </div>
       </div>
+      {attrError && (
+        <div className="flex gap-1 mx-2 mt-2 bg-rose-50 w-fit p-1 px-2 rounded-md">
+          <svg
+            className="w-5 h-5 fill-rose-600"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM11 15H13V17H11V15ZM11 7H13V13H11V7Z"></path>
+          </svg>
+          <p className="text-sm text-rose-600 font-bold">
+            لطفا ابتدا نوع محصول را انتخاب کنید
+          </p>
+        </div>
+      )}
+
       {!!Attr.length && (
-        <div className="p-4">
-          <ul className="flex gap-2">
+        <div className="overflow-auto">
+          <ul className="flex p-2">
             {Attr.map((productAttr, index) => (
               <li
                 key={index}
-                className={`flex rounded-md p-2 ${
-                  index === attrSelected
+                className={`flex rounded-md p-2 whitespace-nowrap items-center ml-2 ${
+                  productAttr === attrSelected
                     ? 'items-center border-2 border-sky-500 bg-sky-100/70'
                     : 'bg-gray-50/40 border border-gray-200'
                 }`}
               >
-                <svg
-                  className="w-4 h-4 inline-flex ml-1 fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M10.0007 15.1709L19.1931 5.97852L20.6073 7.39273L10.0007 17.9993L3.63672 11.6354L5.05093 10.2212L10.0007 15.1709Z"></path>
-                </svg>
+                {productAttr === attrSelected && (
+                  <svg
+                    className="w-4 h-4 inline-flex ml-1 fill-current"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M10.0007 15.1709L19.1931 5.97852L20.6073 7.39273L10.0007 17.9993L3.63672 11.6354L5.05093 10.2212L10.0007 15.1709Z"></path>
+                  </svg>
+                )}
+
                 <button
-                  onClick={() => setAttrSelected(index)}
-                  className="text-sm text-slate-800 font-semibold px-2 py-1 mr-auto"
+                  onClick={() => changeAttr(productAttr)}
+                  className="text-sm text-slate-800 font-semibold  py-1 mr-auto"
                 >
                   {productAttr}
                 </button>
@@ -202,16 +284,7 @@ const ControllerQuantityModal = ({
                 </span>
               </p>
               {productInCart?.quantity === Number(MinUnitFew) ? (
-                <button
-                  onClick={() =>
-                    dispatch(
-                      removeFromCart(
-                        productInCart.cartId,
-                        IsVendor ? MainGroupErpCode : 'SHAHRVAND'
-                      )
-                    )
-                  }
-                >
+                <button onClick={() => handleRemoved()}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -260,22 +333,7 @@ const ControllerQuantityModal = ({
           </div>
         ) : (
           <button
-            onClick={() =>
-              dispatch(
-                addToCart(
-                  { ...product, attrSelected },
-                  IsVendor
-                    ? {
-                        vendorErpCode: MainGroupErpCode,
-                        vendorName: MainGroupName,
-                      }
-                    : {
-                        vendorErpCode: 'SHAHRVAND',
-                        vendorName: 'شهروند',
-                      }
-                )
-              )
-            }
+            onClick={handleAdded}
             className="w-full font-semibold bg-rose-500 text-white text-sm py-6 rounded-b-2xl hover:bg-rose-600 transition-all duration-300"
           >
             افزودن به سبد خرید

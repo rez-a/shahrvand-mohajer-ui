@@ -35,7 +35,11 @@ const Home = () => {
         <BannerItem sectionNum="SECTION4" />
         <BannerItem sectionNum="SECTION5" />
       </Banner>
-      <GridabledProducts title="نوشیدنی" section="SLIDER7" />
+      <GridabledProducts
+        link={true}
+        title="نوشیدنی"
+        section="SLIDER7"
+      />
       <Banner className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         <BannerItem sectionNum="SECTION6" />
         <BannerItem sectionNum="SECTION7" />
@@ -58,7 +62,11 @@ const Home = () => {
         <BannerItem sectionNum="SECTION4" />
         <BannerItem sectionNum="SECTION9" />
       </Banner>
-      <GridabledProducts title="جدید ترین ها" section="SLIDER2" />
+      <GridabledProducts
+        link={true}
+        title="جدید ترین ها"
+        section="SLIDER2"
+      />
       <Banner className="grid-cols-1 max-h-96 ">
         <BannerItem sectionNum="SECTION1" />
       </Banner>
@@ -74,7 +82,11 @@ const Home = () => {
         <BannerItem sectionNum="SECTION2" />
         <BannerItem sectionNum="SECTION3" />
       </Banner>
-      <GridabledProducts title="خرید عمده" section="SLIDER4" />
+      <GridabledProducts
+        link={true}
+        title="خرید عمده"
+        section="SLIDER4"
+      />
       <Banner className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         <BannerItem sectionNum="SECTION4" />
         <BannerItem sectionNum="SECTION5" />
@@ -97,7 +109,11 @@ const Home = () => {
         <BannerItem sectionNum="SECTION9" />
         <BannerItem sectionNum="SECTION2" />
       </Banner>
-      <GridabledProducts title="پروتئینی" section="SLIDER9" />
+      <GridabledProducts
+        link={true}
+        title="پروتئینی"
+        section="SLIDER9"
+      />
       <Banner className="grid-cols-1 max-h-96">
         <BannerItem sectionNum="SECTION1" />
       </Banner>

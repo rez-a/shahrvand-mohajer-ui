@@ -17,7 +17,10 @@ import md5 from 'md5-hash';
 import Loading from 'components/shared/Loading';
 import Breadcrumb from 'components/Breadcrumb';
 import queryString from 'query-string';
-import { addToCart } from 'reducers/cart/actionCreators';
+import {
+  addToCart,
+  removeFromCart,
+} from 'reducers/cart/actionCreators';
 import discountCalculate from 'helper/discountCalculate';
 
 const ProductPage = () => {
@@ -49,10 +52,12 @@ const ProductPage = () => {
     MainGroupErpCode,
   } = !!product?.data && product?.data;
 
-  const [attrSelected, setAttrSelected] = useState(Attr?.[0]);
+  const [attrSelected, setAttrSelected] = useState(undefined);
+
   useEffect(() => {
     setLoader(isLoading);
   }, [isLoading]);
+
   const [showModal, setShowModal] = useState(false);
 
   const discount = discountCalculate(
@@ -67,20 +72,6 @@ const ProductPage = () => {
   );
 
   const handleShowModal = () => {
-    dispatch(
-      addToCart(
-        { ...product?.data, attrSelected },
-        IsVendor
-          ? {
-              vendorErpCode: MainGroupErpCode,
-              vendorName: MainGroupName,
-            }
-          : {
-              vendorErpCode: 'SHAHRVAND',
-              vendorName: 'شهروند',
-            }
-      )
-    );
     setShowModal(true);
   };
 
@@ -130,7 +121,7 @@ const ProductPage = () => {
                             <li key={index} className="mr-2">
                               <span
                                 onClick={() => setAttrSelected(atr)}
-                                className="text-zinc-500 relative pr-4 font-semibold before:w-2 before:h-2 before:bg-zinc-500 before:right-0 before:top-1/2 before:-translate-y-1/2 before:rounded-full before:absolute"
+                                className="text-neutral-400 relative pr-1 font-semibold "
                               >
                                 {atr}
                               </span>

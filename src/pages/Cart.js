@@ -129,11 +129,11 @@ const Cart = ({
                   </ul>
                 </div>
                 <div className="bg-gray-50 p-4 rounded-b-md flex flex-col lg:flex-row  justify-center lg:justify-between items-center relative top-2">
-                  <p className="flex flex-col items-center mb-4 lg:flex-row lg:mb-0">
-                    <span className="font-bold">
+                  <p className="flex flex-col items-center mb-4 lg:flex-row lg:mb-0 text-sm md:text-base">
+                    <span className="font-bold ">
                       مبلغ کل ({vendor.products.length}کالا) :
                     </span>
-                    <span className="opacity-60 mr-2">
+                    <span className="opacity-60 lg:mr-2">
                       {vendor.products
                         .reduce(
                           (total, product) =>
