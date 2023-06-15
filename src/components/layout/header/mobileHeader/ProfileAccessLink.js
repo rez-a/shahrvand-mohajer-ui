@@ -13,51 +13,51 @@ const ProfileAccessLink = ({ user, setShowProfileAccess }) => {
   return (
     <ul className="bg-gray-50/30 mt-2 divide-y divide-gray-50">
       <li className="border-b border-gray-100">
-          <Link
-            to="/profile/wallet"
-            className="flex items-center text-neutral-800 hover:bg-gray-50 overflow-hidden"
-          >
-            <div className="flex items-start ml-1 px-4 pl-1 py-3 after:border-gray-300 after:border-b after:w-5 after:mr-1 after:h-2 after:inline-flex ">
-              <span class="relative flex h-3 w-3">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
-              </span>
+        <Link
+          to="/profile/wallet"
+          className="flex items-center text-neutral-800 hover:bg-gray-50 overflow-hidden"
+        >
+          <div className="flex items-start ml-1 px-4 pl-1 py-3 after:border-gray-300 after:border-b after:w-5 after:mr-1 after:h-2 after:inline-flex ">
+            <span class="relative flex h-3 w-3">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+            </span>
+          </div>
+          <div className=" border-gray-100  font-bold py-3 w-full">
+            <span>کیف پول</span>
+          </div>
+          <div className="mr-auto">
+            <div className="pr-2 font-bold px-4 py-3 w-full">
+              {!!user?.wallet_balance
+                ? Number(user.wallet_balance).toLocaleString()
+                : 0}
+              <span className="text-xs font-light mr-1">تومان</span>
             </div>
-            <div className=" border-gray-100  font-bold py-3 w-full">
-              <span>کیف پول</span>
+          </div>
+        </Link>
+        <Link
+          to="/profile/wallet"
+          className="flex items-center text-neutral-800 hover:bg-gray-50 overflow-hidden"
+        >
+          <div className="flex items-start ml-1 px-4 pl-1 py-3 after:border-gray-300 after:border-b after:w-5 after:mr-1 after:h-2 after:inline-flex ">
+            <span class="relative flex h-3 w-3">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+            </span>
+          </div>
+          <div className=" border-gray-100  font-bold py-3 w-full">
+            <span>امتیاز سفارش</span>
+          </div>
+          <div className="mr-auto">
+            <div className="pr-2 font-bold px-4 py-3 w-full">
+              {!!user?.score_order
+                ? Number(user.score_order).toLocaleString()
+                : 0}
+              <span className="text-xs font-light mr-1">امتیاز</span>
             </div>
-            <div className="mr-auto">
-              <div className="pr-2 font-bold px-4 py-3 w-full">
-                {Number(user.wallet_balance).toLocaleString()}
-                <span className="text-xs font-light mr-1">
-                تومان
-                </span>
-              </div>
-            </div>
-          </Link>
-          <Link
-            to="/profile/wallet"
-            className="flex items-center text-neutral-800 hover:bg-gray-50 overflow-hidden"
-          >
-            <div className="flex items-start ml-1 px-4 pl-1 py-3 after:border-gray-300 after:border-b after:w-5 after:mr-1 after:h-2 after:inline-flex ">
-              <span class="relative flex h-3 w-3">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
-              </span>
-            </div>
-            <div className=" border-gray-100  font-bold py-3 w-full">
-              <span>
-              امتیاز سفارش
-              </span>
-            </div>
-            <div className="mr-auto">
-              <div className="pr-2 font-bold px-4 py-3 w-full">
-                {Number(user.wallet_balance).toLocaleString()}
-                <span className="text-xs font-light mr-1">امتیاز</span>
-              </div>
-            </div>
-          </Link>
-        </li>
+          </div>
+        </Link>
+      </li>
       <li>
         <Link
           to="/profile/main"

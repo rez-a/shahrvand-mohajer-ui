@@ -146,7 +146,7 @@ const Checkout = ({
                         </div>
                         <button
                           onClick={() => setEditAddress(true)}
-                          className="border rounded py-1 px-2 flex items-center bg-white border-gray-100 hover:bg-gray-50/50 text-zinc-500 transition"
+                          className="relative overflow-hidden group block text-white w-auto text-sm px-4 py-2 rounded-md font-bold shadow-lg  transition-all duration-300 bg-sky-500  hover:bg-sky-500 bg-sky-500/90 shadow-sky-500/50"
                         >
                           تغییر آدرس ارسال
                         </button>
@@ -198,7 +198,7 @@ const Checkout = ({
                           })
                         }
                       />
-                      {/* <RadioInput
+                      <RadioInput
                         label="پرداخت آنلاین"
                         id="online-payment"
                         name="payment"
@@ -211,7 +211,7 @@ const Checkout = ({
                             payMethod: e.target.value,
                           })
                         }
-                      /> */}
+                      />
                     </div>
                   </div>
                   <div className="grow xl:w-1/2">

@@ -263,7 +263,7 @@ const Orders = (props) => {
                       <span className="font-bold border text-xs  p-2  rounded-md bg-neutral-50 border-neutral-300 text-neutral-500">
                         {order.PaymentMethod === HOME_DELIVERY
                           ? 'درب منزل'
-                          : 'کیف پول'}
+                          : 'پرداخت آنلاین'}
                       </span>
                     </td>
                     <td className="px-6 py-4">

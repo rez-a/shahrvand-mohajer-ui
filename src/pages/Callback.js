@@ -1,12 +1,29 @@
+import Loading from 'components/shared/Loading';
+import queryString from 'query-string';
 import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { PAYMENT_CALLBACK } from 'services/endPoints';
+import { fetcher } from 'services/swr/fetcher';
+import useSWR from 'swr';
 
 const Callback = () => {
-  const [status, setStatus] = useState(false);
-  const [style, setStyle] = useState(createStyle(status));
+  const [style, setStyle] = useState(createStyle(false));
+  const { search } = useLocation();
+  const navigate = useNavigate();
+
+  const paymentData = queryString.parse(search);
+  if (!paymentData?.trans_id) navigate('/');
+
+  const { data, isLoading } = useSWR(
+    !!paymentData?.trans_id && `${PAYMENT_CALLBACK}${search}`,
+    fetcher
+  );
+
+  const paymentCallback = !!data && data?.data;
 
   useEffect(() => {
-    setStyle(createStyle(status));
-  }, [status]);
+    setStyle(createStyle(!!data));
+  }, [data]);
 
   function createStyle(status) {
     return {
@@ -20,13 +37,13 @@ const Callback = () => {
     };
   }
 
-  return (
-    <main className="container mx-auto ">
+  return !isLoading && !!paymentData?.trans_id ? (
+    <main className="container mx-auto">
       <div className="max-w-4xl mx-auto">
         <div
           className={`relative border rounded-md  mx-auto p-8 pb-32 ${style.bg} ${style.border}`}
         >
-          {false ? (
+          {!!data ? (
             <svg
               className={`w-32 h-32 mx-auto ${style.fill}`}
               xmlns="http://www.w3.org/2000/svg"
@@ -47,40 +64,77 @@ const Callback = () => {
           <h2
             className={`text-2xl font-bold text-center ${style.text} mt-4`}
           >
-            {status
+            {!!paymentCallback
               ? 'پرداخت با موفقیت انجام شد'
               : 'پرداخت انجام نشد'}
           </h2>
         </div>
         <div className="bg-white w-[calc(100%_-_1rem)]  md:w-2/3 relative -top-20 mx-auto p-4 rounded-lg">
           <ul className="divide-y">
-            <li className="flex items-center justify-between py-4">
-              <p className="text-sm text-gray-500">کد رهگیری</p>
-              <p className={`font-semibold ${style.text}`}>
-                0123456789
-              </p>
-            </li>
-            <li className="flex items-center justify-between py-4">
-              <p className="text-sm text-gray-500">تراکنش</p>
-              <p className={`font-semibold ${style.text}`}>
-                <span className={` px-3 py-1 rounded-md ${style.bg}`}>
-                  {status ? 'موفق' : 'ناموفق'}
-                </span>
-              </p>
-            </li>
-            <li className="flex items-center justify-between py-4">
-              <p className="text-sm text-gray-500">مبلغ پرداختی</p>
-              <p className={`font-semibold ${style.text}`}>
-                <span>12,000</span>
-                <span className="text-xs font-light mr-1">تومان</span>
-              </p>
-            </li>
-            <li className="flex items-center justify-between py-4">
-              <p className="text-sm text-gray-500">تاریخ تراکنش</p>
-              <p className={`font-semibold ${style.text}`}>
-                1401/02/03
-              </p>
-            </li>
+            {!!data ? (
+              <>
+                <li className="flex items-center justify-between py-4 gap-3">
+                  <p className="text-sm text-gray-500 whitespace-nowrap">
+                    کد رهگیری
+                  </p>
+                  <p className={`font-semibold ${style.text}`}>
+                    {paymentCallback?.Resnumber}
+                  </p>
+                </li>
+                <li className="flex items-center justify-between py-4 gap-3">
+                  <p className="text-sm text-gray-500 whitespace-nowrap">
+                    تراکنش
+                  </p>
+                  <p className={`font-semibold ${style.text}`}>
+                    <span
+                      className={` px-3 py-1 rounded-md ${style.bg}`}
+                    >
+                      موفق
+                    </span>
+                  </p>
+                </li>
+                <li className="flex items-center justify-between py-4 gap-3">
+                  <p className="text-sm text-gray-500 whitespace-nowrap">
+                    مبلغ پرداختی
+                  </p>
+                  <p className={`font-semibold ${style.text}`}>
+                    <span>{Number(paymentCallback?.Amount)}</span>
+                    <span className="text-xs font-light mr-1">
+                      تومان
+                    </span>
+                  </p>
+                </li>
+                <li className="flex items-center justify-between py-4 gap-3">
+                  <p className="text-sm text-gray-500 whitespace-nowrap">
+                    تاریخ تراکنش
+                  </p>
+                  <p className={`font-semibold ${style.text}`}>
+                    {paymentCallback?.CreatedAt}
+                  </p>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="flex items-center justify-between py-4">
+                  <p className="text-sm text-gray-500">تراکنش</p>
+                  <p className={`font-semibold ${style.text}`}>
+                    <span
+                      className={` px-3 py-1 rounded-md ${style.bg}`}
+                    >
+                      ناموفق
+                    </span>
+                  </p>
+                </li>
+                <li className="flex items-center justify-center py-4">
+                  <p
+                    className={`font-semibold text-center ${style.text}`}
+                  >
+                    پرداخت انجام نشد ، مبلغ تا 72 ساعت آینده
+                    بازگردانده خواهد شد
+                  </p>
+                </li>
+              </>
+            )}
           </ul>
           <button
             className={`relative  h-12 overflow-hidden group block text-white w-full py-2 rounded-md font-bold shadow-lg  transition-all duration-300 ${style.buttonClass}`}
@@ -92,6 +146,8 @@ const Callback = () => {
         </div>
       </div>
     </main>
+  ) : (
+    <Loading />
   );
 };
 

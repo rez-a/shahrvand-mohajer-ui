@@ -26,7 +26,7 @@ const AddAddress = ({ addresses, handleUpdateAddresses }) => {
     <>
       <button
         onClick={() => setShowModal(true)}
-        className="border w-full border-dashed bg-white text-center text-sm text-zinc-400 rounded-md py-4 mb-3"
+        className="border w-full border-dashed border-sky-700 bg-sky-50 text-center text-sm text-sky-700 rounded-md py-4 mb-3"
       >
         <span>ایجاد آدرس جدید</span>
       </button>

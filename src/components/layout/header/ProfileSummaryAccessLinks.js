@@ -42,7 +42,9 @@ const ProfileSummaryAccessLinks = ({
             </div>
             <div className="mr-auto">
               <div className="pr-2 font-bold px-4 py-3 w-full">
-                {Number(user.wallet_balance).toLocaleString()}
+                {!!user?.wallet_balance
+                  ? Number(user.wallet_balance).toLocaleString()
+                  : 0}
                 <span className="text-xs font-light mr-1">تومان</span>
               </div>
             </div>
@@ -62,7 +64,9 @@ const ProfileSummaryAccessLinks = ({
             </div>
             <div className="mr-auto">
               <div className="pr-2 font-bold px-4 py-3 w-full">
-                {Number(user.wallet_balance).toLocaleString()}
+                {!!user?.score_order
+                  ? Number(user.score_order).toLocaleString()
+                  : 0}
                 <span className="text-xs font-light mr-1">
                   امتیاز
                 </span>

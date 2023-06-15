@@ -774,7 +774,9 @@ const MainProfile = (props) => {
                       </td>
                       <td className="px-6 py-4">
                         <span className="font-bold border text-xs  p-2  rounded-md bg-neutral-50 border-neutral-300 text-neutral-500">
-                          {payment.BankName}
+                          {!!payment?.BankName
+                            ? payment.BankName
+                            : 'نامشخص'}
                         </span>
                       </td>
                     </tr>

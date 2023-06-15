@@ -5,6 +5,7 @@ import { NORMAL } from 'constants/shippingMethod';
 import { UserContext } from 'contexts/UserProvider';
 import decodeToken from 'helper/handlerAuthorazation/decodeToken';
 import storeAuthToken from 'helper/handlerAuthorazation/storeAuthToken';
+import redirectToGateway from 'helper/redirectToGateway';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useContext } from 'react';
@@ -37,24 +38,22 @@ const Invoice = ({ invoice, setInvoice }) => {
   };
 
   const handleResponseInvoice = async (response) => {
-    try {
+    if (response?.data?.section === 'PAYMENT') {
+      redirectToGateway(response?.data.redirectToUrl);
+    } else {
       const refreshTokenResponse = await dispatcher(
         REFRESH_TOKEN,
         {}
       );
       editUser(refreshTokenResponse.access_token);
-      if (response.data.Section === 'WALLET') {
-        Swal.fire({
-          icon: 'success',
-          title: 'نتیجه تراکنش',
-          text: response.message,
-        }).then((res) => {
-          setInvoice(null);
-          navigate('/');
-        });
-      }
-    } catch (err) {
-      return new Error();
+      Swal.fire({
+        icon: 'success',
+        title: 'نتیجه تراکنش',
+        text: response.message,
+      }).then((res) => {
+        setInvoice(null);
+        navigate('/');
+      });
     }
     setLoading(false);
   };
