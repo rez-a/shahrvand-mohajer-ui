@@ -34,7 +34,6 @@ const ControllerQuantityModal = ({
   } = product;
 
   const [attrError, setAttrError] = useState(false);
-  console.log(attrSelected);
 
   const handleAdded = () => {
     if (!!Attr?.length) {

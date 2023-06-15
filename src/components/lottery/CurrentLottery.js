@@ -8,9 +8,6 @@ const CurrentLottery = () => {
   const { data } = useSWR(LOTTERY_CURRENT, fetcher);
   const lotteryCurrent = !!data && data?.data;
 
-  console.log(lotteryCurrent);
-  console.log();
-
   const renderSingleDigitNumber = (number) =>
     number < 10 ? `0${number}` : number;
   const render = ({ days, hours, minutes, seconds, completed }) => {
