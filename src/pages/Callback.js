@@ -1,4 +1,5 @@
 import Loading from 'components/shared/Loading';
+import { LogoutContext } from 'contexts/LogoutHandlerProvider';
 import { UserContext } from 'contexts/UserProvider';
 import decodeToken from 'helper/handlerAuthorazation/decodeToken';
 import storeAuthToken from 'helper/handlerAuthorazation/storeAuthToken';
@@ -12,10 +13,13 @@ import { fetcher } from 'services/swr/fetcher';
 import useSWR from 'swr';
 
 const Callback = () => {
-  const { setUser } = useContext(UserContext);
+  const { logoutHandler } = useContext(LogoutContext);
+  const { setUser, user } = useContext(UserContext);
   const [style, setStyle] = useState(createStyle(false));
   const { search } = useLocation();
   const navigate = useNavigate();
+
+  if (!user) logoutHandler();
 
   const paymentData = queryString.parse(search);
   if (!paymentData?.trans_id) navigate('/');
@@ -59,6 +63,12 @@ const Callback = () => {
         : `bg-rose-500  hover:bg-rose-500 bg-rose-500/90 shadow-rose-500/50`,
     };
   }
+
+  useEffect(() => {
+    !user && logoutHandler();
+  }, [user]);
+
+  const handleNavigateToHome = () => navigate('/');
 
   return !isLoading && !!paymentData?.trans_id ? (
     <main className="container mx-auto">
@@ -160,6 +170,7 @@ const Callback = () => {
             )}
           </ul>
           <button
+            onClick={handleNavigateToHome}
             className={`relative  h-12 overflow-hidden group block text-white w-full py-2 rounded-md font-bold shadow-lg  transition-all duration-300 ${style.buttonClass}`}
           >
             <span className="z-0 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 whitespace-nowrap">

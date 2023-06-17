@@ -14,6 +14,7 @@ export const INSTANT_MESSAGINGS = 'app/instant-messagings';
 export const LOTTERIES = 'lotteries';
 export const LOTTERY_CURRENT = 'lottery/current';
 export const PAYMENT_CALLBACK = 'payments/callback';
+export const CONTACT = 'message/store';
 
 //user
 export const LOGIN = 'auth/login';

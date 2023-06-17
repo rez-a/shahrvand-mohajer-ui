@@ -7,6 +7,7 @@ import {
 } from 'reducers/cart/actionCreators';
 import { Link } from 'react-router-dom';
 import discountCalculate from 'helper/discountCalculate';
+import { useState } from 'react';
 
 const CartProductCard = ({
   ErpCode,
@@ -26,10 +27,20 @@ const CartProductCard = ({
   cartId,
   attrSelected,
 }) => {
+  const [confirmRemove, setConfirmRemove] = useState(false);
   const discount = discountCalculate(
     SellPrice,
     SellPrice - LastBuyPrice
   );
+
+  const handleRemoveProduct = () => {
+    dispatch(
+      removeFromCart(
+        cartId,
+        IsVendor ? MainGroupErpCode : 'SHAHRVAND'
+      )
+    );
+  };
   return (
     <div className="flex flex-col items-start py-4 border-gray-100 lg:flex-row relative">
       <div className="h-10 lg:h-40  w-10 lg:w-40 mb-4 mx-auto">
@@ -214,27 +225,56 @@ const CartProductCard = ({
                 </button>
               )}
             </div>
-            <button
-              className="hidden lg:block"
-              onClick={() =>
-                dispatch(
-                  removeFromCart(
-                    cartId,
-                    IsVendor ? MainGroupErpCode : 'SHAHRVAND'
-                  )
-                )
-              }
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                width="20"
-                height="20"
-                className="fill-zinc-400 hover:fill-rose-500 transition-all duration-300 mr-2"
+            {confirmRemove ? (
+              <div
+                class=" flex-col rounded-md shadow-sm text-xs mr-2 hidden lg:flex"
+                role="group"
               >
-                <path d="M17 6H22V8H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V8H2V6H7V3C7 2.44772 7.44772 2 8 2H16C16.5523 2 17 2.44772 17 3V6ZM18 8H6V20H18V8ZM9 11H11V17H9V11ZM13 11H15V17H13V11ZM9 4V6H15V4H9Z"></path>
-              </svg>
-            </button>
+                <button
+                  onClick={handleRemoveProduct}
+                  type="button"
+                  class="px-2 py-2 font-medium text-sky-700 bg-sky-50 border border-sky-200 rounded-t-md hover:bg-sky-100 transition-all duration-200"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    className="w-4 h-4 inline ml-1 fill-current"
+                  >
+                    <path d="M10.0007 15.1709L19.1931 5.97852L20.6073 7.39273L10.0007 17.9993L3.63672 11.6354L5.05093 10.2212L10.0007 15.1709Z"></path>
+                  </svg>
+                  <span>حذف</span>
+                </button>
+                <button
+                  onClick={() => setConfirmRemove(false)}
+                  type="button"
+                  class="px-2 py-2 font-medium text-rose-700 bg-rose-50 border border-rose-200 rounded-b-md hover:bg-rose-100 transition-all duration-200"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    className="w-4 h-4 inline ml-1 fill-current"
+                  >
+                    <path d="M12.0007 10.5865L16.9504 5.63672L18.3646 7.05093L13.4149 12.0007L18.3646 16.9504L16.9504 18.3646L12.0007 13.4149L7.05093 18.3646L5.63672 16.9504L10.5865 12.0007L5.63672 7.05093L7.05093 5.63672L12.0007 10.5865Z"></path>
+                  </svg>
+                  لغو حذف
+                </button>
+              </div>
+            ) : (
+              <button
+                className="hidden lg:block"
+                onClick={() => setConfirmRemove(true)}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="20"
+                  height="20"
+                  className="fill-zinc-400 hover:fill-rose-500 transition-all duration-300 mr-2"
+                >
+                  <path d="M17 6H22V8H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V8H2V6H7V3C7 2.44772 7.44772 2 8 2H16C16.5523 2 17 2.44772 17 3V6ZM18 8H6V20H18V8ZM9 11H11V17H9V11ZM13 11H15V17H13V11ZM9 4V6H15V4H9Z"></path>
+                </svg>
+              </button>
+            )}
           </div>
           <div className="flex items-center">
             <p className="font-bold lg:mr-4 ">
@@ -248,19 +288,48 @@ const CartProductCard = ({
           </div>
         </div>
       </div>
-      <button
-        onClick={() =>
-          dispatch(
-            removeFromCart(
-              cartId,
-              IsVendor ? MainGroupErpCode : 'SHAHRVAND'
-            )
-          )
-        }
-        className="bg-rose-500 absolute left-0 top-0 text-sm rounded-md px-2 py-1  hover:bg-rose-500 bg-rose-500/90 shadow-rose-500/50 text-white group block lg:hidden shadow-lg transition-all duration-300 "
-      >
-        حذف محصول
-      </button>
+      {confirmRemove ? (
+        <div
+          class="absolute left-0 top-0 rounded-md shadow-sm text-[10px] sm:text-xs mr-2 flex flex-col sm:flex-row lg:hidden"
+          role="group"
+        >
+          <button
+            onClick={handleRemoveProduct}
+            type="button"
+            class="p-1 sm:p-2 font-medium text-sky-700 bg-sky-50 border border-sky-200 rounded-t-md sm:rounded-t-none sm:!rounded-r-md hover:bg-sky-100 transition-all duration-200"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              className="w-4 h-4 inline ml-1 fill-current"
+            >
+              <path d="M10.0007 15.1709L19.1931 5.97852L20.6073 7.39273L10.0007 17.9993L3.63672 11.6354L5.05093 10.2212L10.0007 15.1709Z"></path>
+            </svg>
+            <span>حذف</span>
+          </button>
+          <button
+            onClick={() => setConfirmRemove(false)}
+            type="button"
+            class="p-1 sm:p-2 font-medium text-rose-700 bg-rose-50 border border-rose-200 rounded-b-md sm:rounded-b-none sm:!rounded-l-md hover:bg-rose-100 transition-all duration-200"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              className="w-4 h-4 inline ml-1 fill-current"
+            >
+              <path d="M12.0007 10.5865L16.9504 5.63672L18.3646 7.05093L13.4149 12.0007L18.3646 16.9504L16.9504 18.3646L12.0007 13.4149L7.05093 18.3646L5.63672 16.9504L10.5865 12.0007L5.63672 7.05093L7.05093 5.63672L12.0007 10.5865Z"></path>
+            </svg>
+            لغو حذف
+          </button>
+        </div>
+      ) : (
+        <button
+          onClick={() => setConfirmRemove(true)}
+          className="bg-rose-500 absolute left-0 top-0 text-sm rounded-md px-2 py-1  hover:bg-rose-500 bg-rose-500/90 shadow-rose-500/50 text-white group block lg:hidden shadow-lg transition-all duration-300 "
+        >
+          حذف محصول
+        </button>
+      )}
     </div>
   );
 };

@@ -38,8 +38,8 @@ const CheckoutRoutes = (props) => {
   );
   const [order, setOrder] = useState({
     address: {},
-    payMethod: HOME_DELIVERY,
-    shipping: NORMAL,
+    payMethod: null,
+    shipping: null,
     suggest: 1,
     products: summaryCart(cart),
   });

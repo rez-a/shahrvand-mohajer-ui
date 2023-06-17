@@ -18,6 +18,8 @@ const Profile = () => {
     fontWeight: '600',
   };
 
+  if (!user) logoutHandler();
+
   useEffect(() => {
     !user && logoutHandler();
   }, [user]);

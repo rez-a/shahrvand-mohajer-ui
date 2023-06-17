@@ -32,18 +32,25 @@ const Checkout = ({
   },
 }) => {
   const { user: login } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  if (!login) navigate('/login');
   const {
     state: { cart },
   } = useContext(CartContext);
-  const navigate = useNavigate();
+
   useEffect(() => {
     !login && navigate('/login');
-  }, []);
+  }, [login]);
+
   const { dispatch } = useContext(CartContext);
   const [editAddress, setEditAddress] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const { data: user, mutate } = useSWR(PROFILE, dispatcher);
+  const { data: user, mutate } = useSWR(
+    !!login && PROFILE,
+    dispatcher
+  );
   const { addresses, name, mobile } = !!user && user.data;
 
   const handleUpdateAddresses = async (addresses) => {
@@ -183,6 +190,14 @@ const Checkout = ({
                       <TitleIcon />
                       <span className="mr-1">نحوه پرداخت</span>
                     </h2>
+                    {!order?.payMethod && (
+                      <div className="mb-2">
+                        <span className="text-xs bg-rose-50 text-rose-600 rounded px-2 py-1">
+                          لطفا نحوه پرداخت خود را مشخص کنید
+                        </span>
+                      </div>
+                    )}
+
                     <div class="flex flex-col sm:flex-row xl:flex-col gap-4 w-full">
                       <RadioInput
                         label="پرداخت درب منزل"
@@ -219,6 +234,13 @@ const Checkout = ({
                       <TitleIcon />
                       <span className="mr-1">انتخاب نحوه ارسال</span>
                     </h2>
+                    {!order?.shipping && (
+                      <div className="mb-2">
+                        <span className="text-xs bg-rose-50 text-rose-600 rounded px-2 py-1">
+                          لطفا نحوه ارسال را مشخص کنید
+                        </span>
+                      </div>
+                    )}
                     <div class="flex flex-col sm:flex-row xl:flex-col gap-4 w-full">
                       <RadioInput
                         label="ارسال عادی"
@@ -362,7 +384,9 @@ const Checkout = ({
               </span>
               <span className="font-medium text-sm mr-2">تومان</span>
             </p>
-            {!!addresses?.length ? (
+            {!!addresses?.length &&
+            !!order?.payMethod &&
+            !!order?.shipping ? (
               <button
                 onClick={handleSaveOrder}
                 className="relative bg-rose-500 h-12 w-full text-white font-bold rounded-md overflow-hidden group "

@@ -11,7 +11,7 @@ const LogoutHandlerProvider = ({ children }) => {
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const location = useLocation();
-  const accessRoutesUser = ['profile', 'shipping'];
+  const accessRoutesUser = ['profile', 'shipping', 'callback'];
 
   const logoutHandler = () => {
     removeAuthToken(AUTH_TOKEN_SHAHRVAND);

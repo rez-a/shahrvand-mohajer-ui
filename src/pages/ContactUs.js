@@ -1,19 +1,57 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Breadcrumb from 'components/Breadcrumb';
 import { Link } from 'react-router-dom';
 import TitleIcon from 'components/shared/TitleIcon';
 import TextInput from 'components/shared/inputs/TextInput';
 import TextAreaInput from 'components/shared/inputs/TextAreaInput';
+import Toast from 'utilities/sweetAlert';
+import dispatcher from 'services/dispatcher';
+import { CONTACT } from 'services/endPoints';
+import Spinner from 'components/shared/Spinner';
 
 const ContactUs = (props) => {
   const [contactForm, setContactForm] = useState({
-    subject: '',
-    name: '',
-    email: '',
-    phone: '',
+    fullname: '',
+    mobile: '',
     message: '',
   });
+  const [loading, setLoading] = useState(false);
+
+  const [contactFormError, setContactFormError] = useState({
+    fullname: false,
+    mobile: false,
+    message: false,
+  });
+
+  const handleSendMessage = async () => {
+    setLoading(true);
+    if (Object.values(contactFormError).includes(false)) {
+      Toast.fire({
+        text: 'تمامی فیلد ها الزامی هستند',
+        icon: 'info',
+      });
+    } else {
+      const response = await dispatcher(CONTACT, contactForm);
+      if (response) {
+        Toast.fire({ icon: 'success', text: response?.message });
+        setContactForm({
+          fullname: '',
+          mobile: '',
+          message: '',
+        });
+      }
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    setContactFormError({
+      fullname: !!contactForm.fullname.trim(),
+      mobile: !!contactForm.mobile.trim(),
+      message: !!contactForm.message.trim(),
+    });
+  }, [contactForm]);
   return (
     <>
       <Breadcrumb links={[{ title: 'تماس با ما' }]} />
@@ -190,53 +228,27 @@ const ContactUs = (props) => {
           <form className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <TextInput
-                value={contactForm.subject}
+                value={contactForm.fullname}
                 changeHandler={(e) =>
                   setContactForm({
                     ...contactForm,
-                    subject: e.target.value,
+                    fullname: e.target.value,
                   })
                 }
-                id="subject"
-                label="موضوع"
-              />
-            </div>
-            <div>
-              <TextInput
-                value={contactForm.name}
-                changeHandler={(e) =>
-                  setContactForm({
-                    ...contactForm,
-                    name: e.target.value,
-                  })
-                }
-                id="name"
+                id="fullname"
                 label="نام و نام خانوادگی"
               />
             </div>
             <div>
               <TextInput
-                value={contactForm.email}
+                value={contactForm.mobile}
                 changeHandler={(e) =>
                   setContactForm({
                     ...contactForm,
-                    email: e.target.value,
+                    mobile: e.target.value,
                   })
                 }
-                id="email"
-                label="ایمیل"
-              />
-            </div>
-            <div>
-              <TextInput
-                value={contactForm.phone}
-                changeHandler={(e) =>
-                  setContactForm({
-                    ...contactForm,
-                    phone: e.target.value,
-                  })
-                }
-                id="phone"
+                id="mobile"
                 label="تلفن تماس"
               />
             </div>
@@ -254,8 +266,17 @@ const ContactUs = (props) => {
               />
             </div>
             <div>
-              <button className="bg-rose-500/90 w-full text-white sm:w-60 py-2 rounded-md font-bold shadow-lg shadow-rose-500/50 hover:bg-rose-500 transition-all duration-300">
-                ارسال پیام
+              <button
+                onClick={handleSendMessage}
+                type="button"
+                className="bg-rose-500/90 w-full flex items-center justify-center text-white sm:w-60 py-2 rounded-md font-bold shadow-lg shadow-rose-500/50 hover:bg-rose-500 transition-all duration-300"
+              >
+                {loading && (
+                  <span className="ml-2">
+                    <Spinner />
+                  </span>
+                )}
+                <span>ارسال پیام</span>
               </button>
             </div>
           </form>
@@ -269,7 +290,7 @@ const ContactUs = (props) => {
                 <path d="M21 8C22.1046 8 23 8.89543 23 10V14C23 15.1046 22.1046 16 21 16H19.9381C19.446 19.9463 16.0796 23 12 23V21C15.3137 21 18 18.3137 18 15V9C18 5.68629 15.3137 3 12 3C8.68629 3 6 5.68629 6 9V16H3C1.89543 16 1 15.1046 1 14V10C1 8.89543 1.89543 8 3 8H4.06189C4.55399 4.05369 7.92038 1 12 1C16.0796 1 19.446 4.05369 19.9381 8H21ZM7.75944 15.7849L8.81958 14.0887C9.74161 14.6662 10.8318 15 12 15C13.1682 15 14.2584 14.6662 15.1804 14.0887L16.2406 15.7849C15.0112 16.5549 13.5576 17 12 17C10.4424 17 8.98882 16.5549 7.75944 15.7849Z"></path>
               </svg>
               <p className="font-semibold mx-2">تلفن تماس : </p>
-              <p className="text-gray-600">0863655447</p>
+              <p className="text-gray-600">08638624080</p>
             </div>
             <div className="flex">
               <svg
@@ -279,9 +300,12 @@ const ContactUs = (props) => {
               >
                 <path d="M18.364 17.364L12 23.7279L5.63604 17.364C2.12132 13.8492 2.12132 8.15076 5.63604 4.63604C9.15076 1.12132 14.8492 1.12132 18.364 4.63604C21.8787 8.15076 21.8787 13.8492 18.364 17.364ZM12 15C14.2091 15 16 13.2091 16 11C16 8.79086 14.2091 7 12 7C9.79086 7 8 8.79086 8 11C8 13.2091 9.79086 15 12 15ZM12 13C10.8954 13 10 12.1046 10 11C10 9.89543 10.8954 9 12 9C13.1046 9 14 9.89543 14 11C14 12.1046 13.1046 13 12 13Z"></path>
               </svg>
-              <p className="font-semibold mx-2">آدرس فروشگاه : </p>
+              <p className="font-semibold mx-2 whitespace-nowrap">
+                آدرس فروشگاه :
+              </p>
               <p className="text-gray-600">
-                مهاجران گلستان ششم بن بست گلها
+                شهرمهاجران، خیابان ملاصدرا، بازارچه شرقی،زیر پاساژ
+                تبارک، طبقه اول، فروشگاه شهروند مهاجر
               </p>
             </div>
           </div>

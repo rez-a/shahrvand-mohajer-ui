@@ -19,7 +19,7 @@ const Categoris = () => {
       ref={ref}
     >
       <header className="text-neutral-800 text-center font-semibold p-4">
-        بیش از 9,000 کالا در دسته بندی های مختلف شهروند
+        بیش از 12,000 کالا در دسته بندی های مختلف شهروند
       </header>
       <Swiper
         modules={[Navigation, Autoplay]}
@@ -65,44 +65,44 @@ const Categoris = () => {
                 <LoaderVendor />
               </SwiperSlide>
             ))}
-          <SwiperNavBtn
-            nextButtonClassName="right-0 rounded-r-lg  left-auto top-0 pr-2 absolute bg-white border-gray-50 border-l z-10 w-10 h-full hover:bg-gray-50"
-            nextIcon={
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="#323232"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  d="m7.505 3 8.995 9.027L7.5 21"
-                />
-              </svg>
-            }
-            prevButtonClassName="left-0 rounded-l-lg right-auto top-0 pr-2 absolute bg-white border-gray-50 border-r z-10 w-10 h-full hover:bg-gray-50"
-            prevIcon={
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="#323232"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  d="m16.5 3-9 9.002L16.495 21"
-                />
-              </svg>
-            }
-          />
+        <SwiperNavBtn
+          nextButtonClassName="right-0 rounded-r-lg  left-auto top-0 pr-2 absolute bg-white border-gray-50 border-l z-10 w-10 h-full hover:bg-gray-50"
+          nextIcon={
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="#323232"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="m7.505 3 8.995 9.027L7.5 21"
+              />
+            </svg>
+          }
+          prevButtonClassName="left-0 rounded-l-lg right-auto top-0 pr-2 absolute bg-white border-gray-50 border-r z-10 w-10 h-full hover:bg-gray-50"
+          prevIcon={
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="#323232"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="m16.5 3-9 9.002L16.495 21"
+              />
+            </svg>
+          }
+        />
       </Swiper>
     </div>
   );
