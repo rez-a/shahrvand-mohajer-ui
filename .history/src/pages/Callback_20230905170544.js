@@ -18,10 +18,10 @@ const Callback = () => {
   const navigate = useNavigate();
 
   const paymentData = queryString.parse(search);
-  if (!paymentData?.invoiceId) navigate('/');
+  if (!paymentData?.trans_id) navigate('/');
 
   const { data, isLoading } = useSWR(
-    !!paymentData?.invoiceId && `${PAYMENT_CALLBACK}${search}`,
+    !!paymentData?.trans_id && `${PAYMENT_CALLBACK}${search}`,
     fetcher
   );
 
