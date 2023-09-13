@@ -27,7 +27,12 @@ const BannerItem = ({ sectionNum, className = '' }) => {
           <Link
             to={`/products/${
               banner.LinkToMainGroup
-            }/${banner.LinkToSideGroup}`}
+            }?${queryString.stringify(
+              {
+                subcategory: [banner.LinkToSideGroup],
+              },
+              { arrayFormat: 'bracket' }
+            )}`}
             className="absolute top-0 right-0 w-full h-full"
           />
         </>

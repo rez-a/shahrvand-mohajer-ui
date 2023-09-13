@@ -30,7 +30,6 @@ export const ORDER_DETAILS = 'orders/details';
 
 //orders
 export const COST = 'app/transportation-cost';
-export const STEPWISE_COST = 'app/stepwise-cost';
 export const ORDER_SAVE = 'orders/save';
 export const CHECK_CART = 'carts/check';
 export const ORDER_PAY = 'orders/pay';

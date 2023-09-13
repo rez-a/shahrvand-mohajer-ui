@@ -11,9 +11,9 @@ const CategoriesScrolled = ({
 }) => {
 
   const selectedOptions =
-      categories?.filter?.((category) => category.ErpCode === selected) ?? [];
+      categories?.filter?.((category) => ErpCode === selected) ?? [];
    const nonSelectedOptions =
-      categories?.filter?.((category) => category.ErpCode !== selected) ??
+      categories?.filter?.((category) => ErpCode !== selected) ??
       [];
   const categoriesToRender = [...selectedOptions, ...nonSelectedOptions];
 

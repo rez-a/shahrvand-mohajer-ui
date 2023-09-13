@@ -75,7 +75,7 @@ const CheckoutRoutes = (props) => {
           const response = await fetcher(`${STEPWISE_COST}/${Number(totalPrice)}`);
           setDeliveryCost(Number(response?.stepwise_cost))
         } catch (err) {
-          setDeliveryCost(Number(0))
+          setDeliveryCost(0)
         }
       };
       order.shipping === TAXI

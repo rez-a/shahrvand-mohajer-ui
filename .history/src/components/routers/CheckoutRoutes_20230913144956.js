@@ -54,6 +54,8 @@ const CheckoutRoutes = (props) => {
       )
     );
 
+    const getStepwiseCost = ;
+
     setPurchaseProfit(
       cart.reduce(
         (total, vendor) =>
@@ -70,17 +72,17 @@ const CheckoutRoutes = (props) => {
   }, [cart]);
 
   useEffect(() => {
-      const getStepwiseCost = async (totalPrice) => {
-        try {
-          const response = await fetcher(`${STEPWISE_COST}/${Number(totalPrice)}`);
-          setDeliveryCost(Number(response?.stepwise_cost))
-        } catch (err) {
-          setDeliveryCost(Number(0))
-        }
-      };
+    console.log(order.shipping);
       order.shipping === TAXI
         ? setDeliveryCost(Number(taxiـfare))
-        : getStepwiseCost(Number(totalPrice))
+        : async (totalPrice) => {
+          try {
+            const response = await fetcher(`${STEPWISE_COST}/${Number(totalPrice)}`);
+            setDeliveryCost(Number(20000000))
+          } catch (err) {
+            // setDeliveryCost(0)
+          }
+        }
   }, [totalPrice]);
 
   return (

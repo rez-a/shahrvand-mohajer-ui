@@ -13,8 +13,6 @@ import deliveryCalculate from 'helper/deliveryCalculate';
 import { HOME_DELIVERY } from 'constants/paymentMethod';
 import summaryCart from 'helper/summaryCart';
 import Invoice from 'pages/Invoice';
-import { STEPWISE_COST } from 'services/endPoints';
-import { fetcher } from 'services/swr/fetcher';
 
 const CheckoutRoutes = (props) => {
   const {
@@ -70,17 +68,13 @@ const CheckoutRoutes = (props) => {
   }, [cart]);
 
   useEffect(() => {
-      const getStepwiseCost = async (totalPrice) => {
-        try {
-          const response = await fetcher(`${STEPWISE_COST}/${Number(totalPrice)}`);
-          setDeliveryCost(Number(response?.stepwise_cost))
-        } catch (err) {
-          setDeliveryCost(Number(0))
-        }
-      };
       order.shipping === TAXI
         ? setDeliveryCost(Number(taxiـfare))
-        : getStepwiseCost(Number(totalPrice))
+        : setDeliveryCost(
+            deliveryCalculate(
+              Number(totalPrice)
+            )
+          );
   }, [totalPrice]);
 
   return (

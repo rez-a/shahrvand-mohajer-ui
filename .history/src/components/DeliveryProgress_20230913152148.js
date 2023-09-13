@@ -2,10 +2,8 @@ import React from 'react';
 
 const DeliveryProgress = ({ deliveryCost, totalPrice, minPrice }) => {
   const diff = minPrice - totalPrice;
-  let percent = Math.floor((totalPrice / minPrice) * 100);
-  if(totalPrice >= minPrice){
-    percent = 100;
-  }
+  const percent = Math.floor((totalPrice / minPrice) * 100);
+  
   return (
     <div className="w-full flex items-center gap-4">
       <div class="bg-light relative h-[10px] w-full rounded-2xl">

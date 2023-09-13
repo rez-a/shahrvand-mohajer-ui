@@ -9,7 +9,7 @@ const SubCategories = ({ Name, ErpCode, mainErpCode }) => {
         className="text-sm font-normal px-2 py-2.5 hover:underline	 text-white  flex items-center transition group w-full"
         to={`/products/${mainErpCode}/${ErpCode}`}
       >
-        {Name} 
+        {Name}
       </Link>
     </li>
   );

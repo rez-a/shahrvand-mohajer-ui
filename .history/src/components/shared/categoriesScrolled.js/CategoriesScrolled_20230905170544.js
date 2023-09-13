@@ -9,14 +9,6 @@ const CategoriesScrolled = ({
   selected,
   className,
 }) => {
-
-  const selectedOptions =
-      categories?.filter?.((category) => category.ErpCode === selected) ?? [];
-   const nonSelectedOptions =
-      categories?.filter?.((category) => category.ErpCode !== selected) ??
-      [];
-  const categoriesToRender = [...selectedOptions, ...nonSelectedOptions];
-
   return (
     <div>
       <h2 className={`flex items-center mb-4 ${className}`}>
@@ -27,7 +19,7 @@ const CategoriesScrolled = ({
         className={`overflow-auto text-sm mb-4 bg-white p-4 rounded ${className}`}
       >
         <ul className="flex items-center py-2 space-x-3 space-x-reverse">
-          {categoriesToRender?.map((category) => (
+          {categories?.map((category) => (
             <Category
               key={category?.Id}
               {...category}

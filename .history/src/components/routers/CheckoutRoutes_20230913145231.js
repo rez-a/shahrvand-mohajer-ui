@@ -70,14 +70,16 @@ const CheckoutRoutes = (props) => {
   }, [cart]);
 
   useEffect(() => {
-      const getStepwiseCost = async (totalPrice) => {
-        try {
-          const response = await fetcher(`${STEPWISE_COST}/${Number(totalPrice)}`);
-          setDeliveryCost(Number(response?.stepwise_cost))
-        } catch (err) {
-          setDeliveryCost(Number(0))
-        }
-      };
+    const getStepwiseCost = async (totalPrice) => {
+      try {
+        const response = await fetcher(`${STEPWISE_COST}/${Number(totalPrice)}`);
+        console.log(response);
+        setDeliveryCost(Number(response?.data?.stepwise_cost))
+      } catch (err) {
+        // setDeliveryCost(0)
+      }
+    };
+
       order.shipping === TAXI
         ? setDeliveryCost(Number(taxiـfare))
         : getStepwiseCost(Number(totalPrice))
