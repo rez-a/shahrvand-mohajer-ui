@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   decrease,
   increase,
   removeFromCart,
-} from "reducers/cart/actionCreators";
-import { Link } from "react-router-dom";
-import discountCalculate from "helper/discountCalculate";
+} from 'reducers/cart/actionCreators';
+import { Link } from 'react-router-dom';
+import discountCalculate from 'helper/discountCalculate';
 
 const CartProductCard = ({
   ErpCode,
@@ -27,8 +27,10 @@ const CartProductCard = ({
   cartId,
   attrSelected,
 }) => {
-  const discount = discountCalculate(SellPrice, SellPrice - LastBuyPrice);
-  const [showConfirmation, setShowConfirmation] = useState(false);
+  const discount = discountCalculate(
+    SellPrice,
+    SellPrice - LastBuyPrice
+  );
   return (
     <div className="flex flex-col items-start py-4 border-gray-100 lg:flex-row relative">
       <div className="h-10 lg:h-40  w-10 lg:w-40 mb-4 mx-auto">
@@ -46,7 +48,9 @@ const CartProductCard = ({
                 <div className=" inline">
                   <span
                     className={`bg-rose-500 mr-auto text-xs text-white p-2 rounded-xl ml-2 rounded-br-none font-bold ${
-                      SellPrice !== LastBuyPrice ? "visible" : "invisible"
+                      SellPrice !== LastBuyPrice
+                        ? 'visible'
+                        : 'invisible'
                     }`}
                   >
                     %{discount}
@@ -56,7 +60,7 @@ const CartProductCard = ({
               <Link
                 class="hover:text-rose-500 transition-all duration-200"
                 to={`/product/${MainGroupErpCode}/${SideGroupErpCode}/${ErpCode}`}
-                className={`${!!discount ? "mr-2" : ""}`}
+                className={`${!!discount ? 'mr-2' : ''}`}
               >
                 {Name}
               </Link>
@@ -110,7 +114,7 @@ const CartProductCard = ({
               </svg>
             </div>
             <p className="text-xs mr-2 text-zinc-700">
-              {IsVendor ? MainGroupName : "فروشگاه شهروند"}
+              {IsVendor ? MainGroupName : 'فروشگاه شهروند'}
             </p>
           </div>
           <p className="flex items-center">
@@ -134,14 +138,15 @@ const CartProductCard = ({
               )}
             </div>
             <span className="text-xs mr-2 text-zinc-700">
-              {IsAvailable ? "موجود در انبار" : "ناموجود"}
+              {IsAvailable ? 'موجود در انبار' : 'ناموجود'}
             </span>
           </p>
         </div>
         <div className="flex flex-col items-center justify-center lg:flex-row lg:justify-between">
           <div className="flex items-center mt-2 mb-4 w-full sm:justify-center lg:w-2/3 lg:justify-start">
             <div className="items-center justify-between bg-gray-50 flex p-2 rounded-md w-full sm:w-1/2 xl:w-1/3">
-              {Number(quantity) === Number(LimitOrder) ? (
+
+            {Number(quantity) === Number(LimitOrder) ? (
                 <div className="group relative">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -165,30 +170,32 @@ const CartProductCard = ({
                   </div>
                 </div>
               ) : (
-                <button
-                  onClick={() =>
-                    dispatch(
-                      increase(
-                        cartId,
-                        IsVendor ? MainGroupErpCode : "SHAHRVAND"
-                      )
-                    )
-                  }
+              <button
+                onClick={() =>
+                  dispatch(
+                    increase(
+                      cartId,
+                      IsVendor ? MainGroupErpCode : 'SHAHRVAND'
+                    ) 
+                  )
+                }
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                  className="fill-sky-500"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    width="24"
-                    height="24"
-                    className="fill-sky-500"
-                  >
-                    <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
-                  </svg>
-                </button>
+                  <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
+                </svg>
+              </button>
               )}
               <p className="mx-6 text-center">
                 <span className="block font-bold">{quantity}</span>
-                <span className="text-xs text-slate-400">{UnitName}</span>
+                <span className="text-xs text-slate-400">
+                  {UnitName}
+                </span>
               </p>
               {quantity === 1 ? (
                 <button
@@ -196,7 +203,7 @@ const CartProductCard = ({
                     dispatch(
                       removeFromCart(
                         cartId,
-                        IsVendor ? MainGroupErpCode : "SHAHRVAND"
+                        IsVendor ? MainGroupErpCode : 'SHAHRVAND'
                       )
                     )
                   }
@@ -217,7 +224,7 @@ const CartProductCard = ({
                     dispatch(
                       decrease(
                         cartId,
-                        IsVendor ? MainGroupErpCode : "SHAHRVAND"
+                        IsVendor ? MainGroupErpCode : 'SHAHRVAND'
                       )
                     )
                   }
@@ -235,8 +242,15 @@ const CartProductCard = ({
               )}
             </div>
             <button
-              className={`transition-all duration-500 ease-out ${showConfirmation ? "opacity-0 hidden" : "opacity-100 lg:block"}`}
-              onClick={() => setShowConfirmation(true)}
+              className="hidden lg:block"
+              onClick={() =>
+                dispatch(
+                  removeFromCart(
+                    cartId,
+                    IsVendor ? MainGroupErpCode : 'SHAHRVAND'
+                  )
+                )
+              }
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -247,60 +261,47 @@ const CartProductCard = ({
               >
                 <path d="M17 6H22V8H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V8H2V6H7V3C7 2.44772 7.44772 2 8 2H16C16.5523 2 17 2.44772 17 3V6ZM18 8H6V20H18V8ZM9 11H11V17H9V11ZM13 11H15V17H13V11ZM9 4V6H15V4H9Z"></path>
               </svg>
-            </button>
-            <div className={`transition-all duration-500 ease-out opacity-0 ${showConfirmation ? "opacity-100 flex" : "opacity-0 hidden"}`}>
-              <button
-                onClick={() => setShowConfirmation(false)}
-                className="bg-rose-600 hover:bg-rose-700 focus:ring-4 focus:ring-red-300 font-medium rounded-r text-white px-2 py-1"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="fill-current w-5 h-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="m6 6 6 6m0 0 6 6m-6-6 6-6m-6 6-6 6"
-                  />
-                </svg>
-              </button>
 
-              <button
-                onClick={() =>
-                  dispatch(
-                    removeFromCart(
-                      cartId,
-                      IsVendor ? MainGroupErpCode : "SHAHRVAND"
-                    )
-                  )
-                }
-                className="bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-300 font-medium  rounded-l text-white px-2 py-1"
+              <div
+              className='text-white bg-white-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-500 font-medium rounded-lg text-sm mr-2 mb-2 overflow-hidden'
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="w-5 h-5 inline"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 11.917 9.724 16.5 19 7.5"
-                  />
-                </svg>
-              </button>
-            </div>
+                <button class="inline-flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-md">
+	<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+	  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+	</svg>
+
+  </button>
+
+                  <button
+                    className='bg-green-500 px-3 py-1'
+                    onClick={() =>
+                      dispatch(
+                        removeFromCart(
+                          cartId,
+                          IsVendor ? MainGroupErpCode : 'SHAHRVAND'
+                        )
+                      )
+                    }
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5"/>
+</svg>
+<span className='text-xs font-light pr-2'>
+  حذفش کن
+</span>
+                </button>
+
+              </div>
+            </button>
+
+
           </div>
           <div className="flex items-center">
             <p className="font-bold lg:mr-4 ">
               <span>
-                {((Number(LastBuyPrice) * quantity) / 1 || 0).toLocaleString()}
+                {(
+                  (Number(LastBuyPrice) * quantity) / 1 || 0
+                ).toLocaleString()}
               </span>
               <span className="mr-1">تومان</span>
             </p>
@@ -310,7 +311,10 @@ const CartProductCard = ({
       <button
         onClick={() =>
           dispatch(
-            removeFromCart(cartId, IsVendor ? MainGroupErpCode : "SHAHRVAND")
+            removeFromCart(
+              cartId,
+              IsVendor ? MainGroupErpCode : 'SHAHRVAND'
+            )
           )
         }
         className="bg-rose-500 absolute left-0 top-0 text-sm rounded-md px-2 py-1  hover:bg-rose-500 bg-rose-500/90 shadow-rose-500/50 text-white group block lg:hidden shadow-lg transition-all duration-300 "

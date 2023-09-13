@@ -5,7 +5,8 @@ const summaryCart = (cart) => {
     .map((product) => {
       return {
         erp_code: product.ErpCode,
-        quantity: Number(product.quantity),
+        quantity:
+          Number(product.quantity),
         attr: product.Attr[0] || '',
       };
     });

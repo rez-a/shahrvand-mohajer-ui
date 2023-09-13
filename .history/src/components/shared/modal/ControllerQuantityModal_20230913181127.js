@@ -229,7 +229,7 @@ const ControllerQuantityModal = ({
         {!!productInCart ? (
           <div className="flex items-center px-4 py-2 bg-slate-100">
             <div className="items-center justify-center w-1/2 flex p-2 ">
-              {Number(productInCart?.quantity) === Number(LimitOrder) ? (
+              {productInCart?.quantity === Number(LimitOrder) ? (
                 <div className="group relative">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

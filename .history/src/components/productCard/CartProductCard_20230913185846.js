@@ -235,8 +235,10 @@ const CartProductCard = ({
               )}
             </div>
             <button
-              className={`transition-all duration-500 ease-out ${showConfirmation ? "opacity-0 hidden" : "opacity-100 lg:block"}`}
-              onClick={() => setShowConfirmation(true)}
+              className={`${(showConfirmation) ? 'hidden lg:block' : 'flex'}`}
+              onClick={() =>
+                setShowConfirmation(true)
+              }
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -248,54 +250,51 @@ const CartProductCard = ({
                 <path d="M17 6H22V8H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V8H2V6H7V3C7 2.44772 7.44772 2 8 2H16C16.5523 2 17 2.44772 17 3V6ZM18 8H6V20H18V8ZM9 11H11V17H9V11ZM13 11H15V17H13V11ZM9 4V6H15V4H9Z"></path>
               </svg>
             </button>
-            <div className={`transition-all duration-500 ease-out opacity-0 ${showConfirmation ? "opacity-100 flex" : "opacity-0 hidden"}`}>
-              <button
-                onClick={() => setShowConfirmation(false)}
-                className="bg-rose-600 hover:bg-rose-700 focus:ring-4 focus:ring-red-300 font-medium rounded-r text-white px-2 py-1"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="fill-current w-5 h-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="m6 6 6 6m0 0 6 6m-6-6 6-6m-6 6-6 6"
-                  />
-                </svg>
-              </button>
+            <div className={`${(showConfirmation) ? 'flex' : 'hidden'}`}>
+                <button className="bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-r text-white px-2 py-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="fill-current w-5 h-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="m6 6 6 6m0 0 6 6m-6-6 6-6m-6 6-6 6"
+                    />
+                  </svg>
+                </button>
 
-              <button
-                onClick={() =>
-                  dispatch(
-                    removeFromCart(
-                      cartId,
-                      IsVendor ? MainGroupErpCode : "SHAHRVAND"
+                <button
+                  onClick={() =>
+                    dispatch(
+                      removeFromCart(
+                        cartId,
+                        IsVendor ? MainGroupErpCode : "SHAHRVAND"
+                      )
                     )
-                  )
-                }
-                className="bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-300 font-medium  rounded-l text-white px-2 py-1"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="w-5 h-5 inline"
-                  fill="none"
-                  viewBox="0 0 24 24"
+                  }
+                  className="bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-300 font-medium  rounded-l text-white px-2 py-1"
                 >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 11.917 9.724 16.5 19 7.5"
-                  />
-                </svg>
-              </button>
-            </div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-5 h-5 inline"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 11.917 9.724 16.5 19 7.5"
+                    />
+                  </svg>
+                </button>
+              </div>
           </div>
           <div className="flex items-center">
             <p className="font-bold lg:mr-4 ">

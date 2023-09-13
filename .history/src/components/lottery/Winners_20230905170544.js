@@ -44,11 +44,11 @@ const Winners = ({ lotterySelected, winnerRef }) => {
                   {lotterySelected.Winners.map((winner, index) => (
                     <tr
                       key={index}
-                      class="bg-white border-b"
+                      class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                     >
                       <th
                         scope="row"
-                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                       >
                         {index + 1}
                       </th>

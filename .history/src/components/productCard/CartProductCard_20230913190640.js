@@ -251,7 +251,7 @@ const CartProductCard = ({
             <div className={`transition-all duration-500 ease-out opacity-0 ${showConfirmation ? "opacity-100 flex" : "opacity-0 hidden"}`}>
               <button
                 onClick={() => setShowConfirmation(false)}
-                className="bg-rose-600 hover:bg-rose-700 focus:ring-4 focus:ring-red-300 font-medium rounded-r text-white px-2 py-1"
+                className="bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-r text-white px-2 py-1"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
