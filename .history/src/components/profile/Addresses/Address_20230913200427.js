@@ -25,6 +25,7 @@ const Address = ({
           {index + 1}
         </div>
         <div className="text-sm px-4">
+          <div className="font-bold">آدرس ثبت شده:</div>
           {address.address_full}
         </div>
       </div>

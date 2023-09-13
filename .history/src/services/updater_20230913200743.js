@@ -4,6 +4,7 @@ export const remove = async (url, data) => {
   const response = await handleRequest({
     url,
     method: 'delete',
+    data,
   });
   return response.data;
 };

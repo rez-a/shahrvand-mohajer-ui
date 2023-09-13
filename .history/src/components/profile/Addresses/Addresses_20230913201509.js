@@ -63,7 +63,7 @@ const Addresses = (props) => {
   };
 
   const handleRemoveAddress = async (id) => {
-    const response = await remove(`${ADDRESSES}/${id}`);
+    const response = await remove(ADDRESSES);
     Toast.fire({
       icon: "success",
       title: response,
@@ -101,7 +101,7 @@ const Addresses = (props) => {
       add: false,
       edit: false,
     });
-    // setValid({ ...valid, edit: false });
+    setValid({ ...valid, edit: false });
   };
 
   const handleAddAddress = async () => {

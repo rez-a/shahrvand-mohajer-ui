@@ -23,6 +23,12 @@ const Address = ({
             : 'border-gray-400 bg-gray-50/50 hover:bg-gray-100'
         }`}
       >
+        <p className="text-zinc-500 my-3 text-sm">
+          شماره تماس :
+          <span className="text-black font-semibold mr-1">
+            {user.mobile}
+          </span>
+        </p>
         <p>{address}</p>
       </div>
     </>

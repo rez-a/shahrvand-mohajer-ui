@@ -23,6 +23,22 @@ const Address = ({
             : 'border-gray-400 bg-gray-50/50 hover:bg-gray-100'
         }`}
       >
+        <div className="flex flex-col md:flex-row items-start gap-4 justify-between">
+          <div className="flex items-center gap-8">
+            <p className="text-zinc-500">
+              گیرنده :
+              <span className="text-black font-semibold mr-1">
+                {user.name}
+              </span>
+            </p>
+          </div>
+        </div>
+        <p className="text-zinc-500 my-3 text-sm">
+          شماره تماس :
+          <span className="text-black font-semibold mr-1">
+            {user.mobile}
+          </span>
+        </p>
         <p>{address}</p>
       </div>
     </>
