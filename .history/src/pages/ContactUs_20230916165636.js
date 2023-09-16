@@ -16,8 +16,7 @@ const ContactUs = (props) => {
     message: '',
   });
 
-  const handleAddMessage = async (e) => {
-    e.preventDefault();
+  const handleAddMessage = async () => {
     if (contactForm.message.length) {
       const response = await handleRequest({
         url: MASSAGE_STORE,
@@ -27,12 +26,6 @@ const ContactUs = (props) => {
       Toast.fire({
         icon: "success",
         title: 'باموفقیت ثبت شد',
-      });
-
-      setContactForm({
-        fullname: '',
-        mobile: '',
-        message: '',
       });
     }
   };
@@ -209,7 +202,7 @@ const ContactUs = (props) => {
               را مشاهده کنید.
             </p>
           </article>
-          <form className="grid grid-cols-1 sm:grid-cols-2 gap-4" onSubmit={handleAddMessage}>
+          <form className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <TextInput
                 value={contactForm.fullname}
@@ -251,7 +244,7 @@ const ContactUs = (props) => {
             </div>
             <div>
               <button 
-              name='submit'
+              onClick={handleAddMessage}
               className="bg-rose-500/90 w-full text-white sm:w-60 py-2 rounded-md font-bold shadow-lg shadow-rose-500/50 hover:bg-rose-500 transition-all duration-300">
                 ارسال پیام
               </button>

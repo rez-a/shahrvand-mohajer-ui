@@ -28,12 +28,6 @@ const ContactUs = (props) => {
         icon: "success",
         title: 'باموفقیت ثبت شد',
       });
-
-      setContactForm({
-        fullname: '',
-        mobile: '',
-        message: '',
-      });
     }
   };
   return (
