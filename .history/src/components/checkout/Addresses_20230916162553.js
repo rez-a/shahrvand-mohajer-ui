@@ -9,7 +9,6 @@ import TitleIcon from 'components/shared/TitleIcon';
 const Addresses = ({ user, orderAddress, order, setOrder, setEditAddress, editAddress }) => {
   const { data, mutate, isLoading } = useSWR(ADDRESSES, fetcher);
   const addresses = !!data && data.data;
-  
   return (
     <>
       <div className="mb-12">
@@ -46,7 +45,7 @@ const Addresses = ({ user, orderAddress, order, setOrder, setEditAddress, editAd
               </div>
               <button
                 onClick={() => setEditAddress(true)}
-                className="relative overflow-hidden group block text-white w-auto text-sm px-4 py-2 rounded-md font-right transition-all duration-300 bg-blue-500  hover:bg-blue-500 bg-blue-500/90 "
+                className="relative overflow-hidden group block text-white w-auto text-sm px-4 py-2 rounded-md font-bold shadow-lg  transition-all duration-300 bg-sky-500  hover:bg-sky-500 bg-sky-500/90 shadow-sky-500/50"
               >
                 تغییر آدرس ارسال
               </button>

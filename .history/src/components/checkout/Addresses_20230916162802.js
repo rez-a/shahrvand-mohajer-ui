@@ -9,7 +9,6 @@ import TitleIcon from 'components/shared/TitleIcon';
 const Addresses = ({ user, orderAddress, order, setOrder, setEditAddress, editAddress }) => {
   const { data, mutate, isLoading } = useSWR(ADDRESSES, fetcher);
   const addresses = !!data && data.data;
-  
   return (
     <>
       <div className="mb-12">

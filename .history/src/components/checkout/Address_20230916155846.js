@@ -17,7 +17,7 @@ const Address = ({
     <>
       <div
         onClick={handleSetAddress}
-        className={`border rounded-md mb-3 cursor-pointer p-4  ${
+        className={`border p-4 rounded-md mb-3 cursor-pointer ${
           orderAddress.index === index
             ? 'border-sky-400 bg-sky-50/50'
             : 'border-gray-400 bg-gray-50/50 hover:bg-gray-100'

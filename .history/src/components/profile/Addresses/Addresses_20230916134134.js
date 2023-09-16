@@ -7,48 +7,131 @@ import useSWR from "swr";
 import EmptyDataProfile from "../EmptyData";
 import { useContext } from "react";
 import { UserContext } from "contexts/UserProvider";
+import { updater } from "services/updater";
 import Spinner from "components/shared/Spinner";
 import Address from "./Address";
 import { fetcher } from "services/swr/fetcher";
 import TableLoaded from "components/shared/TableLoaded";
 import Toast from "utilities/sweetAlert";
-import { handleRequest } from "services";
 
 const Addresses = (props) => {
+  const [showModal, setShowModal] = useState({
+    add: false,
+    edit: false,
+  });
+  const [addressEditedIndex, setAddressEditedIndex] = useState(null);
+  const [loading, setLoding] = useState({
+    add: false,
+    edit: false,
+  });
+  const [valid, setValid] = useState({
+    add: true,
+    edit: true,
+  });
+  const [newAddress, setNewAddress] = useState("");
   const { user } = useContext(UserContext);
   const { data, mutate, isLoading } = useSWR(ADDRESSES, fetcher);
   const addresses = !!data && data.data;
-
-  const [showModal, setShowModal] = useState(false);
-  const [newAddress, setNewAddress] = useState(null);
-  const [isLoadingSpinner, setLoadingSpinner] = useState();
-  const [valided, isValided] = useState(false);
-
-  const handleAddAddress = async (id) => {
-    if (newAddress.length) {
-      setLoadingSpinner(true);
-      const response = await handleRequest({
-        url: ADDRESSES,
-        method: "post",
-        data: { address: newAddress },
-      });
-      Toast.fire({
-        icon: "success",
-        title: response.data,
-      });
-      await mutate();
-      setLoadingSpinner(false);
-      setShowModal(false);
-    } else {
-      isValided(true);
-    }
+  const handleShowEditModal = (index) => {
+    setNewAddress(addresses[index]);
+    setAddressEditedIndex(index);
+    setShowModal({ ...showModal, edit: true });
   };
+  const handleCloseEditModal = () => {
+    setNewAddress("");
+    setAddressEditedIndex(null);
+    setShowModal({ ...showModal, edit: false });
+  };
+
+  const handelAddress = async (addresses) => {
+    const response = await updater(ADDRESSES, { addresses });
+    Toast.fire({
+      icon: "success",
+      title: response,
+    });
+    await mutate();
+    setLoding({
+      add: false,
+      edit: false,
+      remove: false,
+    });
+    setNewAddress("");
+    setShowModal({
+      add: false,
+      edit: false,
+    });
+  };
+
+  const handleRemoveAddress = async (id) => {
+    const response = await remove(`${ADDRESSES}/${id}`);
+    Toast.fire({
+      icon: "success",
+      title: response,
+    });
+    await mutate();
+    setLoding({
+      add: false,
+      edit: false,
+      remove: false,
+    });
+    setNewAddress("");
+    setShowModal({
+      add: false,
+      edit: false,
+    });
+  };
+
+  const handleEditAddress = async () => {
+    setLoding({ ...loading, edit: true });
+    const response = await updater(ADDRESSES, {
+      address: newAddress,
+    });
+    Toast.fire({
+      icon: "success",
+      title: response,
+    });
+    await mutate();
+    setLoding({
+      add: false,
+      edit: false,
+      remove: false,
+    });
+    setNewAddress("");
+    setShowModal({
+      add: false,
+      edit: false,
+    });
+    // setValid({ ...valid, edit: false });
+  };
+
+  // const handleAddAddress = async () => {
+  //   setLoding({ ...loading, add: true });
+  //   const response = await add(ADDRESSES, {
+  //     address: newAddress,
+  //   });
+  //   Toast.fire({
+  //     icon: "success",
+  //     title: response,
+  //   });
+  //   await mutate();
+  //   setLoding({
+  //     add: false,
+  //     edit: false,
+  //     remove: false,
+  //   });
+  //   setNewAddress("");
+  //   setShowModal({
+  //     add: false,
+  //     edit: false,
+  //   });
+  //   // setValid({ ...valid, add: false });
+  // };
 
   return (
     <Card title="آدرس ها">
       <div>
         <button
-          onClick={() => setShowModal(true)}
+          onClick={() => setShowModal({ ...showModal, add: true })}
           className="border-2  w-full border-dashed font-semibold hover:opacity-50  border-neutral-700 text-center text-sm text-neutral-800 py-4 mb-3"
         >
           <svg
@@ -70,6 +153,8 @@ const Addresses = (props) => {
               checkLengthAddresses={addresses.length > 1}
               address={address}
               index={index}
+              handleShowEditModal={() => handleShowEditModal(index)}
+              handleRemoveAddress={() => handleRemoveAddress(index)}
             />
           ))
         ) : (
@@ -201,21 +286,66 @@ const Addresses = (props) => {
             </svg>
           </EmptyDataProfile>
         )}
-        <ModalLayout isShow={showModal} setShow={() => setShowModal(false)}>
+        <ModalLayout
+          isShow={showModal.add}
+          setShow={() => setShowModal({ ...showModal, add: false })}
+        >
           <div className="relative flex flex-col rounded-md bg-clip-border text-gray-700 shadow-none bg-white max-w-lg w-full  ">
             <h4 className="text-xl font-semibold text-center border-b mx-4 py-3">
               ایجاد آدرس جدید
             </h4>
+
             <form className="mt-4 mb-2 px-4 py-3">
               <TextAreaInput
                 label="آدرس"
                 placeholder="آدرس"
                 id="address"
                 value={newAddress}
-                valid={isValided}
+                valid={valid.add}
                 changeHandler={(e) => setNewAddress(e.target.value)}
               />
-              {!isValided && (
+              {!valid.add && (
+                <div className="bg-rose-50 text-rose-600 rounded px-2 py-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    className="fill-current w-4 h-4 inline"
+                  >
+                    <path d="M12.865 3.00017L22.3912 19.5002C22.6674 19.9785 22.5035 20.5901 22.0252 20.8662C21.8732 20.954 21.7008 21.0002 21.5252 21.0002H2.47266C1.92037 21.0002 1.47266 20.5525 1.47266 20.0002C1.47266 19.8246 1.51886 19.6522 1.60663 19.5002L11.1329 3.00017C11.4091 2.52187 12.0206 2.358 12.4989 2.63414C12.651 2.72191 12.7772 2.84815 12.865 3.00017ZM10.9989 16.0002V18.0002H12.9989V16.0002H10.9989ZM10.9989 9.00017V14.0002H12.9989V9.00017H10.9989Z"></path>
+                  </svg>
+                  <span className="text-xs mr-1 font-semibold">
+                    فیلد آدرس باید مقدار داشته باشد
+                  </span>
+                </div>
+              )}
+
+              <button
+                onClick={handleAddAddress}
+                className="mt-6 w-full flex items-center justify-center rounded-md bg-rose-500 py-3 px-6 text-center  text-sm font-bold  text-white shadow-lg shadow-rose-500/20 transition-all hover:bg-rose-600 duration-300"
+                type="button"
+              >
+                {loading.add && <Spinner />}
+                <span className="mr-2">افزودن</span>
+              </button>
+            </form>
+          </div>
+        </ModalLayout>
+        <ModalLayout isShow={showModal.edit} setShow={handleCloseEditModal}>
+          <div className="relative flex flex-col rounded-md bg-clip-border text-gray-700 shadow-none bg-white max-w-lg w-full  ">
+            <h4 className="text-xl font-semibold text-center border-b mx-4 py-3">
+              ویرایش آدرس
+            </h4>
+
+            <form className="mt-4 mb-2 px-4 py-3">
+              <TextAreaInput
+                label="آدرس"
+                placeholder="آدرس"
+                id="address"
+                valid={valid.edit}
+                value={newAddress}
+                changeHandler={(e) => setNewAddress(e.target.value)}
+              />
+              {!valid.edit && (
                 <div className="bg-rose-50 text-rose-600 rounded px-2 py-1">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -230,12 +360,12 @@ const Addresses = (props) => {
                 </div>
               )}
               <button
-                onClick={handleAddAddress}
+                onClick={handleEditAddress}
                 className="mt-6 w-full flex items-center justify-center rounded-md bg-rose-500 py-3 px-6 text-center  text-sm font-bold  text-white shadow-lg shadow-rose-500/20 transition-all hover:bg-rose-600 duration-300"
                 type="button"
               >
-                {isLoadingSpinner && <Spinner />}
-                <span className="mr-2">افزودن</span>
+                {loading.edit && <Spinner />}
+                <span className="mr-2">ویرایش</span>
               </button>
             </form>
           </div>

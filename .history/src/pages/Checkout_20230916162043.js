@@ -108,7 +108,6 @@ const Checkout = ({
                   orderAddress={order.address}
                   order={order}
                   setOrder={setOrder}
-                  editAddress={editAddress}
                   setEditAddress={setEditAddress}
                 />
                 <div className="flex flex-col xl:flex-row gap-12 justify-between">

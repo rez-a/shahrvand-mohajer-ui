@@ -4,12 +4,10 @@ import { ADDRESSES } from "services/endPoints";
 import useSWR from "swr";
 import { fetcher } from "services/swr/fetcher";
 import AddAddress from "./AddAddress";
-import TitleIcon from 'components/shared/TitleIcon';
 
 const Addresses = ({ user, orderAddress, order, setOrder, setEditAddress, editAddress }) => {
   const { data, mutate, isLoading } = useSWR(ADDRESSES, fetcher);
   const addresses = !!data && data.data;
-  
   return (
     <>
       <div className="mb-12">
@@ -39,27 +37,23 @@ const Addresses = ({ user, orderAddress, order, setOrder, setEditAddress, editAd
           <div className="border-r-2 border-r-rose-500 pr-2">
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
               <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between gap-4 sm:gap-8 mb-6 md:mb-2">
-                <p className="text-zinc-500 text-sm">
-                  نام و نام و خانوادگی گیرنده: 
+                <p className="text-zinc-500">
+                  گیرنده :
                   <span className="text-black font-semibold mr-1">{user.name}</span>
                 </p>
               </div>
               <button
                 onClick={() => setEditAddress(true)}
-                className="relative overflow-hidden group block text-white w-auto text-sm px-4 py-2 rounded-md font-right transition-all duration-300 bg-blue-500  hover:bg-blue-500 bg-blue-500/90 "
+                className="relative overflow-hidden group block text-white w-auto text-sm px-4 py-2 rounded-md font-bold shadow-lg  transition-all duration-300 bg-sky-500  hover:bg-sky-500 bg-sky-500/90 shadow-sky-500/50"
               >
                 تغییر آدرس ارسال
               </button>
             </div>
-            <p className="text-zinc-500 my-1 text-sm">
-              شماره همراه :
-              <span className="text-black font-semibold mr-1">{user.mobile}</span>
+            <p className="text-zinc-500 my-3 text-sm">
+              شماره تماس :
+              <span className="text-black font-semibold mr-1">{mobile}</span>
             </p>
-            {addresses && (
-            <p className="text-zinc-500 my-1 text-sm">
-              آدرس پیش فرض شما:
-              <span className="text-black font-semibold mr-1">{addresses[0].address_full ?? null}</span>
-            </p> )}
+            <p>{order.address?.text}</p>
           </div>
         ) : (
           <div>

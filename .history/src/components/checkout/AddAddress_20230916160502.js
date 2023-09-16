@@ -1,39 +1,38 @@
-import Spinner from "components/shared/Spinner";
-import TextAreaInput from "components/shared/inputs/TextAreaInput";
-import ModalLayout from "components/shared/modal/ModalLayout";
-import React from "react";
-import { useState } from "react";
-import { handleRequest } from "services";
-import { ADDRESSES } from "services/endPoints";
-import { mutate } from "swr";
-import Toast from "utilities/sweetAlert";
+import Spinner from 'components/shared/Spinner';
+import TextAreaInput from 'components/shared/inputs/TextAreaInput';
+import ModalLayout from 'components/shared/modal/ModalLayout';
+import React from 'react';
+import { useState } from 'react';
 
 const AddAddress = ({ addresses, handleUpdateAddresses }) => {
   const [showModal, setShowModal] = useState(false);
-  const [newAddress, setNewAddress] = useState("");
+  const [newAddress, setNewAddress] = useState('');
   const [addressValidate, setAddressValidate] = useState(true);
   const [loading, setLoading] = useState(false);
 
+
   const handleAddAddress = async () => {
+    setLoading(true);
     if (newAddress.length) {
-      setLoading(true);
-      const response = await handleRequest({
-        url: ADDRESSES,
-        method: "post",
-        data: { address: newAddress },
-      });
-      Toast.fire({
-        icon: "success",
-        title: response.data,
-      });
-      await mutate();
-      setLoading(false);
-      setNewAddress("");
-      setShowModal(false);
-    } else {
-      setAddressValidate(false);
-    }
+    setLoadingSpinner(true);
+    const response = await handleRequest({
+      url : ADDRESSES,
+      method: 'post',
+      data: { address : newAddress }
+    });
+    Toast.fire({
+      icon: "success",
+      title: response.data,
+    });
+    await mutate();
+    setLoading(false);
+    setNewAddress('');
+    setShowModal(false);
+  } else {
+    setAddressValidate(false);
+  }
   };
+
 
   return (
     <>
@@ -43,7 +42,10 @@ const AddAddress = ({ addresses, handleUpdateAddresses }) => {
       >
         <span>ایجاد آدرس جدید</span>
       </button>
-      <ModalLayout isShow={showModal} setShow={() => setShowModal(false)}>
+      <ModalLayout
+        isShow={showModal}
+        setShow={() => setShowModal(false)}
+      >
         <div className="relative flex flex-col rounded-md bg-clip-border text-gray-700 shadow-none bg-white max-w-lg w-full  ">
           <h4 className="text-xl font-semibold text-center border-b mx-4 py-3">
             ایجاد آدرس جدید

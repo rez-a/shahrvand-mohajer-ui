@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { ADDRESSES } from 'services/endPoints';
 import { handleRequest } from 'services';
 import Toast from 'utilities/sweetAlert';
-import { mutate } from 'swr';
 
 const Address = ({
   address,
@@ -12,9 +11,10 @@ const Address = ({
   checkLengthAddresses,
 }) => {
 
-  const [isLoadingSpinner, setLoadingSpinner] = useState();
+  const [isLoading, setLoading] = useState();
 
   const handleRemoveAddress = async (id) => {
+    setLoading(true);
     const response = await handleRequest({
       url : `${ADDRESSES}/${id}`,
       method: 'delete',
@@ -24,6 +24,7 @@ const Address = ({
       title: response,
     });
     await mutate();
+    setLoading(false);
   };
 
   return (
@@ -41,12 +42,24 @@ const Address = ({
       </div>
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 justify-between px-4">
         <div className="flex gap-1">
+          <button
+            class="text-white border border-blue-700 hover:border-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-1.5 text-center inline-flex items-center mr-2"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-5 h-5 fill-blue-700"
+              viewBox="0 0 24 24"
+            >
+              <path d="M15.7279 9.57629L14.3137 8.16207L5 17.4758V18.89H6.41421L15.7279 9.57629ZM17.1421 8.16207L18.5563 6.74786L17.1421 5.33365L15.7279 6.74786L17.1421 8.16207ZM7.24264 20.89H3V16.6474L16.435 3.21233C16.8256 2.8218 17.4587 2.8218 17.8492 3.21233L20.6777 6.04075C21.0682 6.43128 21.0682 7.06444 20.6777 7.45497L7.24264 20.89Z"></path>
+            </svg>
+          </button>
+
           {checkLengthAddresses && (
             <button
-            onClick={()=>handleRemoveAddress(address.id)}
+            onClick={handleRemoveAddress(address.id)}
               class="text-white border border-rose-700 hover:border-rose-800  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-1.5 text-center inline-flex items-center mr-2 "
             >
-              {isLoadingSpinner ? (
+              {isLoading ? (
                 <Spinner />
               ) : (
                 <svg

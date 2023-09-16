@@ -47,9 +47,15 @@ const Checkout = ({
   const { data: user, mutate } = useSWR(PROFILE, dispatcher);
   const { is_profile_complete, name, mobile } = !!user && user.data;
 
+  const handleUpdateAddresses = async (addresses) => {
+    await updater(ADDRESSES, { addresses });
+    await mutate();
+  };
+
   useEffect(() => {
     setOrder({
-      ...order
+      ...order,
+      // address: { text: addresses?.[0], index: 0 },
     });
   }, [user]);
 
@@ -103,14 +109,74 @@ const Checkout = ({
           <section className="col-span-1 xl:col-span-5 bg-white border border-gray-100 rounded p-4">
             {!!is_profile_complete ? (
               <>
-                <Addresses
-                  user={{ name, mobile }}
-                  orderAddress={order.address}
-                  order={order}
-                  setOrder={setOrder}
-                  editAddress={editAddress}
-                  setEditAddress={setEditAddress}
-                />
+                <div className="mb-12">
+                  <div className="flex items-center mb-4 justify-between">
+                    <h2 className="text-zinc-500 font-bold flex items-center">
+                      <TitleIcon />
+                      <span className="mr-1">
+                        انتخاب آدرس تحویل سفارش
+                      </span>
+                    </h2>
+                    {editAddress && (
+                      <button
+                        onClick={() => setEditAddress(false)}
+                        className="bg-gray-100 p-1 rounded-full hover:bg-gray-200/70"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          width="24"
+                          height="24"
+                          className="fill-current"
+                        >
+                          <path d="M12.0007 10.5865L16.9504 5.63672L18.3646 7.05093L13.4149 12.0007L18.3646 16.9504L16.9504 18.3646L12.0007 13.4149L7.05093 18.3646L5.63672 16.9504L10.5865 12.0007L5.63672 7.05093L7.05093 5.63672L12.0007 10.5865Z"></path>
+                        </svg>
+                      </button>
+                    )}
+                  </div>
+                  {!editAddress ? (
+                    <div className="border-r-2 border-r-rose-500 pr-2">
+                      <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between gap-4 sm:gap-8 mb-6 md:mb-2">
+                          <p className="text-zinc-500">
+                            گیرنده :
+                            <span className="text-black font-semibold mr-1">
+                              {name}
+                            </span>
+                          </p>
+                        </div>
+                        <button
+                          onClick={() => setEditAddress(true)}
+                          className="relative overflow-hidden group block text-white w-auto text-sm px-4 py-2 rounded-md font-bold shadow-lg  transition-all duration-300 bg-sky-500  hover:bg-sky-500 bg-sky-500/90 shadow-sky-500/50"
+                        >
+                          تغییر آدرس ارسال
+                        </button>
+                      </div>
+                      <p className="text-zinc-500 my-3 text-sm">
+                        شماره تماس :
+                        <span className="text-black font-semibold mr-1">
+                          {mobile}
+                        </span>
+                      </p>
+                      <p>{order.address?.text}</p>
+                    </div>
+                  ) : (
+                    <div>
+                      {/* <AddAddress
+                        handleUpdateAddresses={handleUpdateAddresses}
+                        addresses={addresses}
+                      /> */}
+                      <Addresses
+                        handleUpdateAddresses={handleUpdateAddresses}
+                        user={{ name, mobile }}
+                        orderAddress={order.address}
+                        order={order}
+                        setOrder={setOrder}
+                        setEditAddress={setEditAddress}
+                      />
+                    </div>
+                  )}
+                </div>
                 <div className="flex flex-col xl:flex-row gap-12 justify-between">
                   <div className="grow mb-8 xl:w-1/2">
                     <h2 className="text-zinc-500 font-bold flex items-center mb-4">

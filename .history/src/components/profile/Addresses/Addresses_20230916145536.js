@@ -15,6 +15,8 @@ import Toast from "utilities/sweetAlert";
 import { handleRequest } from "services";
 
 const Addresses = (props) => {
+
+
   const { user } = useContext(UserContext);
   const { data, mutate, isLoading } = useSWR(ADDRESSES, fetcher);
   const addresses = !!data && data.data;
@@ -25,30 +27,25 @@ const Addresses = (props) => {
   const [valided, isValided] = useState(false);
 
   const handleAddAddress = async (id) => {
-    if (newAddress.length) {
-      setLoadingSpinner(true);
-      const response = await handleRequest({
-        url: ADDRESSES,
-        method: "post",
-        data: { address: newAddress },
-      });
-      Toast.fire({
-        icon: "success",
-        title: response.data,
-      });
-      await mutate();
-      setLoadingSpinner(false);
-      setShowModal(false);
-    } else {
-      isValided(true);
-    }
+    const response = await handleRequest({
+      url : ADDRESSES,
+      method: 'post',
+      data: { address : newAddress }
+    });
+    Toast.fire({
+      icon: "success",
+      title: response.data,
+    });
+    await mutate();
+    setShowModal(false)
   };
 
+ 
   return (
     <Card title="آدرس ها">
       <div>
         <button
-          onClick={() => setShowModal(true)}
+        onClick={() => setShowModal(true)}
           className="border-2  w-full border-dashed font-semibold hover:opacity-50  border-neutral-700 text-center text-sm text-neutral-800 py-4 mb-3"
         >
           <svg
@@ -201,7 +198,10 @@ const Addresses = (props) => {
             </svg>
           </EmptyDataProfile>
         )}
-        <ModalLayout isShow={showModal} setShow={() => setShowModal(false)}>
+         <ModalLayout
+          isShow={showModal}
+          setShow={() => setShowModal(false)}
+        >
           <div className="relative flex flex-col rounded-md bg-clip-border text-gray-700 shadow-none bg-white max-w-lg w-full  ">
             <h4 className="text-xl font-semibold text-center border-b mx-4 py-3">
               ایجاد آدرس جدید

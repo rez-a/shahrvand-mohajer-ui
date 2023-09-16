@@ -4,9 +4,6 @@ import ModalLayout from "components/shared/modal/ModalLayout";
 import React from "react";
 import { useState } from "react";
 import { handleRequest } from "services";
-import { ADDRESSES } from "services/endPoints";
-import { mutate } from "swr";
-import Toast from "utilities/sweetAlert";
 
 const AddAddress = ({ addresses, handleUpdateAddresses }) => {
   const [showModal, setShowModal] = useState(false);
@@ -15,8 +12,9 @@ const AddAddress = ({ addresses, handleUpdateAddresses }) => {
   const [loading, setLoading] = useState(false);
 
   const handleAddAddress = async () => {
+    setLoading(true);
     if (newAddress.length) {
-      setLoading(true);
+      setLoadingSpinner(true);
       const response = await handleRequest({
         url: ADDRESSES,
         method: "post",
