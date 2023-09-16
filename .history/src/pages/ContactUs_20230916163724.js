@@ -8,7 +8,9 @@ import TextAreaInput from 'components/shared/inputs/TextAreaInput';
 
 const ContactUs = (props) => {
   const [contactForm, setContactForm] = useState({
+    subject: '',
     name: '',
+    email: '',
     phone: '',
     message: '',
   });

@@ -12,6 +12,27 @@ const ContactUs = (props) => {
     phone: '',
     message: '',
   });
+  const handleMessage = async () => {
+    if (newAddress.length) {
+      setLoading(true);
+      const response = await handleRequest({
+        url: ADDRESSES,
+        method: "post",
+        data: { address: newAddress },
+      });
+      Toast.fire({
+        icon: "success",
+        title: response.data,
+      });
+      await mutate();
+      setLoading(false);
+      setNewAddress("");
+      setShowModal(false);
+    } else {
+      setAddressValidate(false);
+    }
+  };
+
   return (
     <>
       <Breadcrumb links={[{ title: 'تماس با ما' }]} />
