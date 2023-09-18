@@ -58,24 +58,25 @@ const Checkout = ({
   }, []);
 
   const handleSaveOrder = async () => {
-    setLoading(true);
-      try {
-        const response = await dispatcher(ORDER_SAVE, {
-          products: order.products,
-          address: order.address.index,
-          shipping_method: order.shipping,
-          payment_method: order.payMethod,
-        });
-        setLoading(false);
-        handleResponseOrder(response);
-      } catch (err) {
-        Swal.fire({
-          icon: 'error',
-          title: 'سفارش شما ثبت نشد',
-          text: 'مشکلی پیش آمد سفارش شما ثبت نشد',
-        });
-      }
-    setLoading(false);
+    alert(order.address.index);
+    // setLoading(true);
+    // try {
+    //   const response = await dispatcher(ORDER_SAVE, {
+    //     products: order.products,
+    //     address: order.address.index,
+    //     shipping_method: order.shipping,
+    //     payment_method: order.payMethod,
+    //   });
+    //   setLoading(false);
+    //   handleResponseOrder(response);
+    // } catch (err) {
+    //   Swal.fire({
+    //     icon: 'error',
+    //     title: 'سفارش شما ثبت نشد',
+    //     text: 'مشکلی پیش آمد سفارش شما ثبت نشد',
+    //   });
+    // }
+    // setLoading(false);
   };
 
   const handleResponseOrder = async (response) => {

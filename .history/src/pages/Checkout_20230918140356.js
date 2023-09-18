@@ -62,7 +62,7 @@ const Checkout = ({
       try {
         const response = await dispatcher(ORDER_SAVE, {
           products: order.products,
-          address: order.address.index,
+          address: order.address.index ?? 1,
           shipping_method: order.shipping,
           payment_method: order.payMethod,
         });
