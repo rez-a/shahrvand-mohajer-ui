@@ -11,7 +11,9 @@ import dispatcher from 'services/dispatcher';
 import Order from 'components/orderMobile/Order';
 
 const Orders = (props) => {
-  const { data: orders } = useSWR(ORDERS, fetcher);
+  const { data: user } = useSWR(PROFILE, dispatcher);
+  const { addresses } = !!user && user.data;
+  const { data: orders } = useSWR(addresses && ORDERS, fetcher);
 
   return (
     <Card title="آخرین سفارش ها">

@@ -16,7 +16,7 @@ const MainProfile = (props) => {
     user: { score_order },
   } = useContext(UserContext);
   const { data: user } = useSWR(PROFILE, dispatcher);
-  const { name, mobile, tel } = !!user && user.data;
+  const { name, mobile, tel, addresses } = !!user && user.data;
 
   const { data: orders } = useSWR(ORDERS, fetcher);
   const { data: payments } = useSWR(PAYMENTS, fetcher);

@@ -8,7 +8,9 @@ import { fetcher } from 'services/swr/fetcher';
 import dispatcher from 'services/dispatcher';
 
 const Payments = (props) => {
-  const { data: payments } = useSWR(PAYMENTS, fetcher);
+  const { data: user } = useSWR(PROFILE, dispatcher);
+  const { addresses } = !!user && user.data;
+  const { data: payments } = useSWR(addresses && PAYMENTS, fetcher);
   return (
     <Card title="آخرین پرداخت ها">
       {!payments ? (

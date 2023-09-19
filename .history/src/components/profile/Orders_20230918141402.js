@@ -11,6 +11,8 @@ import dispatcher from 'services/dispatcher';
 import Order from 'components/orderMobile/Order';
 
 const Orders = (props) => {
+  const { data: user } = useSWR(PROFILE, dispatcher);
+  const { addresses } = !!user && user.data;
   const { data: orders } = useSWR(ORDERS, fetcher);
 
   return (
