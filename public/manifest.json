@@ -2,7 +2,7 @@
  "name": "مهاجران شاپ",
  "id": "https://mohajeran.shop/index",
  "start_url": "https://mohajeran.shop/index",
- "display": "standalone",
+ "display": "minimal-ui",
  "background_color": "#fe5353",
  "theme_color": "#fe5353",
  "icons": [
