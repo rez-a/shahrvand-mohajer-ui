@@ -16,9 +16,10 @@ const TextInput = ({
     <div className="mb-6">
       <label htmlFor={id}>
         <p className="flex items-center mb-2">
+          <TitleIcon />
           <span
-            className={`font-normal text-sm after:content-[':']  mr-2 ${
-              valid ? 'text-sky-900' : 'text-rose-500'
+            className={`font-bold  mr-2 ${
+              valid ? 'text-zinc-500' : 'text-rose-500'
             }`}
           >
             {label}
@@ -26,7 +27,7 @@ const TextInput = ({
         </p>
       </label>
       <input
-        className={`border w-full rounded-md p-2 focus:outline-none disabled:bg-gray-100 placeholder:text-gray-300  placeholder:text-xs placeholder:font-semibold ${className} ${
+        className={`border w-full rounded-md p-2 focus:outline-none disabled:bg-gray-100 ${className} ${
           valid
             ? 'border-gray-100 focus:border-gray-300'
             : 'border-rose-200 focus:border-rose-400'

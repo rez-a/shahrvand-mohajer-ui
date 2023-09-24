@@ -63,7 +63,6 @@ const Checkout = ({
         products: order.products,
         address: order.address.index,
         shipping_method: order.shipping,
-        suggest: order.suggest,
         payment_method: order.payMethod,
       });
       setLoading(false);

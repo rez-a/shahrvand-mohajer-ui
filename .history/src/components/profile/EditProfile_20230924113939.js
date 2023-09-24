@@ -4,6 +4,7 @@ import Card from './Card';
 import { Link } from 'react-router-dom';
 import useSWR from 'swr';
 import {
+  ADDRESSES,
   EDIT_PROFILE,
   PROFILE,
   REFRESH_TOKEN,
@@ -24,8 +25,9 @@ const EditProfile = (props) => {
   const { setUser } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
   const { data: user } = useSWR(PROFILE, dispatcher);
-  const { name, mobile, tel, address } = !!user && user.data;
+  const { name, mobile, tel } = !!user && user.data;
 
+  const { data: addresses } = useSWR(ADDRESSES, fetcher);
   const [newInfo, setNewInfo] = useState({
     name: '',
     tel: '',
@@ -54,7 +56,6 @@ const EditProfile = (props) => {
       try {
         const editResponse = await dispatcher(EDIT_PROFILE, {
           name: newInfo.name,
-          address :newInfo.address,
           tel: newInfo.tel,
         });
         const refreshTokenResponse = await dispatcher(
@@ -124,7 +125,7 @@ const EditProfile = (props) => {
             <div>
               <TextInput
                 label="آدرس تحویل سفارش"
-                placeholder="آدرس کامل"
+                placeholder="آدرس تحویل سفارش"
                 id="address"
                 valid={true}
                 value={newInfo.address}

@@ -1,4 +1,5 @@
-
+import AddAddress from "components/checkout/AddAddress";
+import Addresses from "components/checkout/Addresses";
 import CheckboxInput from "components/shared/inputs/CheckboxInput";
 import RadioInput from "components/shared/inputs/RadioInput";
 import Loading from "components/shared/Loading";
@@ -10,7 +11,6 @@ import { CartContext } from "contexts/CartProvider";
 import { UserContext } from "contexts/UserProvider";
 import React, { useEffect, useState } from "react";
 import { useContext } from "react";
-import { NavLink } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
 import { clearCart } from "reducers/cart/actionCreators";
 import dispatcher from "services/dispatcher";
@@ -63,7 +63,6 @@ const Checkout = ({
         products: order.products,
         address: order.address.index,
         shipping_method: order.shipping,
-        suggest: order.suggest,
         payment_method: order.payMethod,
       });
       setLoading(false);
@@ -152,23 +151,16 @@ const Checkout = ({
                         </div>
                         <div className="text-neutral-800 font-light text-sm flex pt-2">
                           نام و نام و خانوادگی گیرنده
-                          <div className="mr-1 font-medium before:content-[':'] before:px-2">
-                            {name}
-                          </div>
+                          <div className="mr-1 font-medium before:content-[':'] before:px-2">{name}</div>
                         </div>
                         <div className="text-neutral-800 font-light text-sm flex pt-2">
                           شماره همراه گیرنده
-                          <div className="mr-1 font-medium before:content-[':'] before:px-2">
-                            {mobile}
-                          </div>
+                          <div className="mr-1 font-medium before:content-[':'] before:px-2">{mobile}</div>
                         </div>
                       </div>
                     </div>
                     <div className="flex items-center justify-end">
-                      <NavLink
-                        to="/profile/edit"
-                        className="hover:opacity-70 relative overflow-hidden group block text-sky-500 w-auto text-sm px-4 py-2 rounded-md font-right transition-all duration-300"
-                      >
+                      <button className="hover:opacity-70 relative overflow-hidden group block text-sky-500 w-auto text-sm px-4 py-2 rounded-md font-right transition-all duration-300">
                         تغییر یا ویرایش آدرس
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -185,7 +177,7 @@ const Checkout = ({
                             d="m10 16 4-4-4-4"
                           />
                         </svg>
-                      </NavLink>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -355,7 +347,7 @@ const Checkout = ({
                 changeHandler={(e) =>
                   setOrder({
                     ...order,
-                    suggest: !order.suggest,
+                    suggest: Number(!order.suggest),
                   })
                 }
                 label="درصورتی که کالایی ناموجود شد کالایی مشابه آن جایگزین شود"

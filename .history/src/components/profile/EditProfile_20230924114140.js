@@ -124,7 +124,7 @@ const EditProfile = (props) => {
             <div>
               <TextInput
                 label="آدرس تحویل سفارش"
-                placeholder="آدرس کامل"
+                placeholder="آدرس تحویل سفارش"
                 id="address"
                 valid={true}
                 value={newInfo.address}

@@ -1,24 +1,24 @@
-
-import CheckboxInput from "components/shared/inputs/CheckboxInput";
-import RadioInput from "components/shared/inputs/RadioInput";
-import Loading from "components/shared/Loading";
-import Spinner from "components/shared/Spinner";
-import TitleIcon from "components/shared/TitleIcon";
-import { HOME_DELIVERY, WALLET } from "constants/paymentMethod";
-import { NORMAL, TAXI } from "constants/shippingMethod";
-import { CartContext } from "contexts/CartProvider";
-import { UserContext } from "contexts/UserProvider";
-import React, { useEffect, useState } from "react";
-import { useContext } from "react";
-import { NavLink } from "react-router-dom";
-import { Link, useNavigate } from "react-router-dom";
-import { clearCart } from "reducers/cart/actionCreators";
-import dispatcher from "services/dispatcher";
-import { ADDRESSES, ORDER_SAVE, PROFILE } from "services/endPoints";
-import { fetcher } from "services/swr/fetcher";
-import { updater } from "services/updater";
-import Swal from "sweetalert2";
-import useSWR from "swr";
+import AddAddress from 'components/checkout/AddAddress';
+import Addresses from 'components/checkout/Addresses';
+import CheckboxInput from 'components/shared/inputs/CheckboxInput';
+import RadioInput from 'components/shared/inputs/RadioInput';
+import Loading from 'components/shared/Loading';
+import Spinner from 'components/shared/Spinner';
+import TitleIcon from 'components/shared/TitleIcon';
+import { HOME_DELIVERY, WALLET } from 'constants/paymentMethod';
+import { NORMAL, TAXI } from 'constants/shippingMethod';
+import { CartContext } from 'contexts/CartProvider';
+import { UserContext } from 'contexts/UserProvider';
+import React, { useEffect, useState } from 'react';
+import { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { clearCart } from 'reducers/cart/actionCreators';
+import dispatcher from 'services/dispatcher';
+import { ADDRESSES, ORDER_SAVE, PROFILE } from 'services/endPoints';
+import { fetcher } from 'services/swr/fetcher';
+import { updater } from 'services/updater';
+import Swal from 'sweetalert2';
+import useSWR from 'swr';
 
 const Checkout = ({
   data: {
@@ -38,9 +38,10 @@ const Checkout = ({
   } = useContext(CartContext);
   const navigate = useNavigate();
   useEffect(() => {
-    !login && navigate("/login");
+    !login && navigate('/login');
   }, []);
   const { dispatch } = useContext(CartContext);
+  const [editAddress, setEditAddress] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const { data: user, mutate } = useSWR(PROFILE, dispatcher);
@@ -48,33 +49,32 @@ const Checkout = ({
 
   useEffect(() => {
     setOrder({
-      ...order,
+      ...order
     });
   }, [user]);
 
   useEffect(() => {
-    !cart.length && navigate("/checkout/cart");
+    !cart.length && navigate('/checkout/cart');
   }, []);
 
   const handleSaveOrder = async () => {
     setLoading(true);
-    try {
-      const response = await dispatcher(ORDER_SAVE, {
-        products: order.products,
-        address: order.address.index,
-        shipping_method: order.shipping,
-        suggest: order.suggest,
-        payment_method: order.payMethod,
-      });
-      setLoading(false);
-      handleResponseOrder(response);
-    } catch (err) {
-      Swal.fire({
-        icon: "error",
-        title: "سفارش شما ثبت نشد",
-        text: "مشکلی پیش آمد سفارش شما ثبت نشد",
-      });
-    }
+      try {
+        const response = await dispatcher(ORDER_SAVE, {
+          products: order.products,
+          address: order.address.index,
+          shipping_method: order.shipping,
+          payment_method: order.payMethod,
+        });
+        setLoading(false);
+        handleResponseOrder(response);
+      } catch (err) {
+        Swal.fire({
+          icon: 'error',
+          title: 'سفارش شما ثبت نشد',
+          text: 'مشکلی پیش آمد سفارش شما ثبت نشد',
+        });
+      }
     setLoading(false);
   };
 
@@ -82,16 +82,16 @@ const Checkout = ({
     const { data, message } = response;
     if (data.PaymentMethod === HOME_DELIVERY) {
       return Swal.fire({
-        icon: "success",
+        icon: 'success',
         title: message,
         text: `شماره سفارش ${data.Id}`,
       }).finally((res) => {
-        navigate("/");
+        navigate('/');
         dispatch(clearCart());
       });
     } else if (data.PaymentMethod === WALLET) {
       await setInvoice(data);
-      navigate("/checkout/invoice");
+      navigate('/checkout/invoice');
       dispatch(clearCart());
     }
   };
@@ -103,92 +103,83 @@ const Checkout = ({
           <section className="col-span-1 xl:col-span-5 bg-white border border-gray-100 rounded p-4">
             {!!is_profile_complete ? (
               <>
-                <div className="mb-12">
-                  <div className="flex items-center mb-4 justify-between">
-                    <h2 className="text-neutral-800 font-bold flex items-center">
-                      <span className="mr-1">آدرس تحویل سفارش</span>
-                    </h2>
-                  </div>
-                  <div className="pr-2">
-                    <div className="flex">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="25"
-                        fill="none"
-                        viewBox="0 0 24 25"
-                      >
-                        <path
-                          stroke="#323232"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="1.5"
-                          d="M17.276 6.022v0a7.462 7.462 0 0 1 0 10.553l-4.033 4.034a1.76 1.76 0 0 1-2.487 0l-4.033-4.034a7.462 7.462 0 0 1 0-10.553v0a7.462 7.462 0 0 1 10.553 0Z"
-                          clip-rule="evenodd"
-                        />
-                        <path
-                          stroke="#323232"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="1.5"
-                          d="M17.276 6.022v0a7.462 7.462 0 0 1 0 10.553l-4.033 4.034a1.76 1.76 0 0 1-2.487 0l-4.033-4.034a7.462 7.462 0 0 1 0-10.553v0a7.462 7.462 0 0 1 10.553 0Z"
-                          clip-rule="evenodd"
-                        />
-                        <circle
-                          cx="12"
-                          cy="11.299"
-                          r="2.56"
-                          stroke="#323232"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="1.5"
-                        />
-                      </svg>
-                      <div>
-                        <div className="text-neutral-800 font-medium my-1 text-sm">
-                          <span className="text-black font-semibold mr-1">
-                            {address}
-                          </span>
-                        </div>
-                        <div className="text-neutral-800 font-light text-sm flex pt-2">
-                          نام و نام و خانوادگی گیرنده
-                          <div className="mr-1 font-medium before:content-[':'] before:px-2">
-                            {name}
-                          </div>
-                        </div>
-                        <div className="text-neutral-800 font-light text-sm flex pt-2">
-                          شماره همراه گیرنده
-                          <div className="mr-1 font-medium before:content-[':'] before:px-2">
-                            {mobile}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex items-center justify-end">
-                      <NavLink
-                        to="/profile/edit"
-                        className="hover:opacity-70 relative overflow-hidden group block text-sky-500 w-auto text-sm px-4 py-2 rounded-md font-right transition-all duration-300"
-                      >
-                        تغییر یا ویرایش آدرس
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="inline rotate-180 stroke-current"
-                          width="24"
-                          height="24"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="1.5"
-                            d="m10 16 4-4-4-4"
-                          />
-                        </svg>
-                      </NavLink>
-                    </div>
-                  </div>
-                </div>
+      <div className="mb-12">
+        <div className="flex items-center mb-4 justify-between">
+          <h2 className="text-neutral-800 font-bold flex items-center">
+            <span className="mr-1">آدرس تحویل سفارش</span>
+          </h2>
+        </div>
+        <div className="pr-2">
+          <div className="flex">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="25"
+              fill="none"
+              viewBox="0 0 24 25"
+            >
+              <path
+                stroke="#323232"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M17.276 6.022v0a7.462 7.462 0 0 1 0 10.553l-4.033 4.034a1.76 1.76 0 0 1-2.487 0l-4.033-4.034a7.462 7.462 0 0 1 0-10.553v0a7.462 7.462 0 0 1 10.553 0Z"
+                clip-rule="evenodd"
+              />
+              <path
+                stroke="#323232"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M17.276 6.022v0a7.462 7.462 0 0 1 0 10.553l-4.033 4.034a1.76 1.76 0 0 1-2.487 0l-4.033-4.034a7.462 7.462 0 0 1 0-10.553v0a7.462 7.462 0 0 1 10.553 0Z"
+                clip-rule="evenodd"
+              />
+              <circle
+                cx="12"
+                cy="11.299"
+                r="2.56"
+                stroke="#323232"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+              />
+            </svg>
+            <div>
+              <div className="text-neutral-800 font-medium my-1 text-sm">
+                <span className="text-black font-semibold mr-1">
+                  {user.address}
+                </span>
+              </div>
+              <div className="text-neutral-800 font-light text-sm flex">
+                نام و نام و خانوادگی گیرنده
+                <div className="mr-1">{user.name}</div>
+              </div>
+            </div>
+          </div>
+          <div className="flex items-center justify-end">
+            <button
+              className="hover:opacity-70 relative overflow-hidden group block text-sky-500 w-auto text-sm px-4 py-2 rounded-md font-right transition-all duration-300"
+            >
+              تغییر یا ویرایش آدرس
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="inline rotate-180 stroke-current"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="m10 16 4-4-4-4"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
                 <div className="flex flex-col xl:flex-row gap-12 justify-between">
                   <div className="grow mb-8 xl:w-1/2">
                     <h2 className="text-zinc-500 font-bold flex items-center mb-4">
@@ -335,8 +326,8 @@ const Checkout = ({
                     >
                       <div class="px-3 py-2">
                         <p className="leading-6">
-                          زمان تحویل کالا با ارسال رایگان حدودا یک ساعت نیم و
-                          ارسال فوری 45 دقیقه خواهد بود.
+                         زمان تحویل کالا با ارسال رایگان حدودا یک 
+                          ساعت نیم و ارسال فوری 45 دقیقه خواهد بود.
                         </p>
                       </div>
                     </div>
@@ -346,7 +337,7 @@ const Checkout = ({
                   {order?.shipping === TAXI
                     ? `${taxiـfare} تومان`
                     : deliveryCost === 0
-                    ? "رایگان"
+                    ? 'رایگان'
                     : `${deliveryCost} تومان`}
                 </span>
               </p>
@@ -355,7 +346,7 @@ const Checkout = ({
                 changeHandler={(e) =>
                   setOrder({
                     ...order,
-                    suggest: !order.suggest,
+                    suggest: Number(!order.suggest),
                   })
                 }
                 label="درصورتی که کالایی ناموجود شد کالایی مشابه آن جایگزین شود"
@@ -368,7 +359,9 @@ const Checkout = ({
               <span>
                 {order?.shipping === TAXI
                   ? (totalPrice + Number(taxiـfare)).toLocaleString()
-                  : (totalPrice + Number(deliveryCost)).toLocaleString()}
+                  : (
+                      totalPrice + Number(deliveryCost)
+                    ).toLocaleString()}
               </span>
               <span className="font-medium text-sm mr-2">تومان</span>
             </p>
@@ -393,7 +386,7 @@ const Checkout = ({
                   )}
                 </span>
                 <span className="z-10 absolute left-1/2 -translate-x-1/2 top-1/2 flex items-center gap-2 -translate-y-1/2">
-                  {loading ? "درحال ثبت سفارش" : "ادامه ثبت سفارش"}
+                  {loading ? 'درحال ثبت سفارش' : 'ادامه ثبت سفارش'}
                 </span>
               </button>
             ) : (

@@ -45,6 +45,10 @@ const CheckoutRoutes = (props) => {
   });
 
   useEffect(() => {
+    alert(order);
+  }, [order]);
+
+  useEffect(() => {
     setTotalPrice(getTotalPrice(cart));
     setProductInCart(
       cart.reduce(

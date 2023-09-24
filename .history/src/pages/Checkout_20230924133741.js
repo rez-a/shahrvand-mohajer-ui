@@ -63,7 +63,6 @@ const Checkout = ({
         products: order.products,
         address: order.address.index,
         shipping_method: order.shipping,
-        suggest: order.suggest,
         payment_method: order.payMethod,
       });
       setLoading(false);
@@ -353,10 +352,12 @@ const Checkout = ({
               <CheckboxInput
                 value={order.suggest}
                 changeHandler={(e) =>
-                  setOrder({
-                    ...order,
-                    suggest: !order.suggest,
-                  })
+                  // setOrder({
+                  //   ...order,
+                  //   suggest: !order.suggest,
+                  // });
+
+                  alert(!order.suggest);
                 }
                 label="درصورتی که کالایی ناموجود شد کالایی مشابه آن جایگزین شود"
               />

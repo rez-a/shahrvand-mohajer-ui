@@ -24,7 +24,7 @@ const EditProfile = (props) => {
   const { setUser } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
   const { data: user } = useSWR(PROFILE, dispatcher);
-  const { name, mobile, tel, address } = !!user && user.data;
+  const { name, mobile, tel } = !!user && user.data;
 
   const [newInfo, setNewInfo] = useState({
     name: '',
@@ -124,7 +124,7 @@ const EditProfile = (props) => {
             <div>
               <TextInput
                 label="آدرس تحویل سفارش"
-                placeholder="آدرس کامل"
+                placeholder="آدرس تحویل سفارش"
                 id="address"
                 valid={true}
                 value={newInfo.address}

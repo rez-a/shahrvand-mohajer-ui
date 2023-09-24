@@ -40,7 +40,7 @@ const CheckoutRoutes = (props) => {
     address: {},
     payMethod: HOME_DELIVERY,
     shipping: NORMAL,
-    suggest: false,
+    suggest: null,
     products: summaryCart(cart),
   });
 
