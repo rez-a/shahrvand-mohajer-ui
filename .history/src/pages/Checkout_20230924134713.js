@@ -188,10 +188,10 @@ const Checkout = ({
                     </div>
                   </div>
                 </div>
-                <div className="bg-white border border-gray-100 rounded-lg px-6 py-3">
+                <div className="bg-white border border-gray-100 rounded-lg p-4">
                   <div className="flex flex-col xl:flex-row gap-12 justify-between">
                     <div className="grow mb-8 xl:w-1/2">
-                      <h2 className="text-neutral-800 font-bold flex items-center pb-2">
+                      <h2 className="text-neutral-800 font-bold flex items-center">
                         <span className="mr-1">نحوه پرداخت</span>
                       </h2>
                       <div class="flex flex-col sm:flex-row xl:flex-col gap-4 w-full">
@@ -226,7 +226,7 @@ const Checkout = ({
                       </div>
                     </div>
                     <div className="grow xl:w-1/2">
-                      <h2 className="text-neutral-800 font-bold flex items-center pb-2">
+                      <h2 className="text-neutral-800 font-bold flex items-center">
                         <span className="mr-1">انتخاب نحوه ارسال</span>
                       </h2>
                       <div class="flex flex-col sm:flex-row xl:flex-col gap-4 w-full">
@@ -265,14 +265,12 @@ const Checkout = ({
                       </div>
                     </div>
                   </div>
-                  <div className="flex justify-end">
-                    <Link
-                      to="/checkout/cart"
-                      className="text-rose-500 text-sm border border-rose-600 rounded-lg px-3 py-2 hover:opacity-40 my-4 block hover:no-underline"
-                    >
-                      بازگشت به سبد خرید
-                    </Link>
-                  </div>
+                  <Link
+                    to="/checkout/cart"
+                    className="text-rose-500 text-sm underline decoration-dotted my-4 block hover:no-underline"
+                  >
+                    بازگشت به سبد خرید
+                  </Link>
                 </div>
               </>
             ) : (
