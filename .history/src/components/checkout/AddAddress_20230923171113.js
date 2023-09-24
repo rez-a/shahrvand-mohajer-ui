@@ -39,13 +39,11 @@ const AddAddress = ({ addresses, handleUpdateAddresses }) => {
     <>
       <button
         onClick={() => setShowModal(true)}
-        className="h-9 rounded-md bg-sky-500 text-white flex items-center justify-evenly text-right font-normal text-md px-4 mb-3"
+        className="border-y-2 border-sky-600 flex gap-4 w-full text-right font-semibold text-md text-sky-600 py-4 mb-3"
       >
-        <span>ایجاد آدرس جدید</span>
-        <div className="w-[1px] bg-white inline-block h-[calc(100%-17px)] mx-2"></div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="stroke-current"
+          className="inline stroke-current"
           width="24"
           height="24"
           fill="none"
@@ -55,25 +53,43 @@ const AddAddress = ({ addresses, handleUpdateAddresses }) => {
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="1.5"
-            d="M12 11.069a.068.068 0 0 0 .049-.02.068.068 0 0 0 .019-.05.07.07 0 1 0-.068.07"
+            d="M5.997 14.001a4.002 4.002 0 1 1 0 8.003 4.002 4.002 0 0 1 0-8.003m-1.178 4.002h2.357m-1.179 1.178v-2.357"
           />
           <path
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="1.5"
-            d="M17.496 5.273v0a7.773 7.773 0 0 1 0 10.993v0l-4.201 4.202a1.832 1.832 0 0 1-2.59 0l-4.202-4.202a7.771 7.771 0 0 1 0-10.993v0a7.771 7.771 0 0 1 10.993 0Z"
+            d="M5.757 14.01a8.504 8.504 0 1 1 4.232 4.232"
+          />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="m14.455 14.601 2.501-6.759a.619.619 0 0 0-.795-.795L9.399 9.551a.618.618 0 0 0 .064 1.18l3.046.766.76 3.036a.62.62 0 0 0 1.186.068v0Z"
             clip-rule="evenodd"
           />
+        </svg>
+
+        <span>ایجاد آدرس جدید</span>
+
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="inline rotate-180 stroke-current mr-auto"
+          width="24"
+          height="24"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
           <path
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="1.5"
-            d="M8.63 11.069a.069.069 0 1 0 0-.138.069.069 0 0 0 0 .138m6.74 0a.068.068 0 0 0 .068-.069.07.07 0 1 0-.068.069"
+            d="m10 16 4-4-4-4"
           />
         </svg>
       </button>
       <ModalLayout isShow={showModal} setShow={() => setShowModal(false)}>
-        <div className="relative flex flex-col rounded-md bg-clip-border text-gray-700 shadow-none bg-white max-w-lg w-full">
+        <div className="relative flex flex-col rounded-md bg-clip-border text-gray-700 shadow-none bg-white max-w-lg w-full  ">
           <h4 className="text-xl font-semibold text-center border-b mx-4 py-3">
             ایجاد آدرس جدید
           </h4>

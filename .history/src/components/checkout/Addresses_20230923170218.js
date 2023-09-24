@@ -94,18 +94,19 @@ const Addresses = ({
             <div className="flex items-center justify-end">
               <button
                 onClick={() => setEditAddress(true)}
-                className="hover:opacity-70 relative overflow-hidden group block text-sky-500 w-auto text-sm px-4 py-2 rounded-md font-right transition-all duration-300"
+                className="hover:opacity-70 relative overflow-hidden group block text-sky-800 w-auto text-sm px-4 py-2 rounded-md font-right transition-all duration-300"
               >
                 تغییر یا ویرایش آدرس
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="inline rotate-180 stroke-current"
+                  className="inline rotate-180"
                   width="24"
                   height="24"
                   fill="none"
                   viewBox="0 0 24 24"
                 >
                   <path
+                    stroke="#323232"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="1.5"

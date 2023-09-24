@@ -39,10 +39,10 @@ const AddAddress = ({ addresses, handleUpdateAddresses }) => {
     <>
       <button
         onClick={() => setShowModal(true)}
-        className="h-9 rounded-md bg-sky-500 text-white flex items-center justify-evenly text-right font-normal text-md px-4 mb-3"
+        className="h-9 border border-neutral-800 rounded-lg flex items-center justify-evenly text-right font-light text-md text-neutral-800 px-4 mb-3"
       >
         <span>ایجاد آدرس جدید</span>
-        <div className="w-[1px] bg-white inline-block h-[calc(100%-17px)] mx-2"></div>
+        <div className="w-[1px] bg-black inline-block h-[calc(100%-5px)] mx-2"></div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="stroke-current"

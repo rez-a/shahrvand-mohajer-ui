@@ -39,38 +39,11 @@ const AddAddress = ({ addresses, handleUpdateAddresses }) => {
     <>
       <button
         onClick={() => setShowModal(true)}
-        className="h-9 rounded-md bg-sky-500 text-white flex items-center justify-evenly text-right font-normal text-md px-4 mb-3"
+        className="border border-neutral-800 rounded-lg flex items-center  text-right font-light text-md text-neutral-800 px-4 py-3 mb-3"
       >
         <span>ایجاد آدرس جدید</span>
-        <div className="w-[1px] bg-white inline-block h-[calc(100%-17px)] mx-2"></div>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="stroke-current"
-          width="24"
-          height="24"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-            d="M12 11.069a.068.068 0 0 0 .049-.02.068.068 0 0 0 .019-.05.07.07 0 1 0-.068.07"
-          />
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-            d="M17.496 5.273v0a7.773 7.773 0 0 1 0 10.993v0l-4.201 4.202a1.832 1.832 0 0 1-2.59 0l-4.202-4.202a7.771 7.771 0 0 1 0-10.993v0a7.771 7.771 0 0 1 10.993 0Z"
-            clip-rule="evenodd"
-          />
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-            d="M8.63 11.069a.069.069 0 1 0 0-.138.069.069 0 0 0 0 .138m6.74 0a.068.068 0 0 0 .068-.069.07.07 0 1 0-.068.069"
-          />
-        </svg>
+        <div className="w-2 bg-black inline-block h-[calc(100%-8px)] h-full mx-1"></div>
+        
       </button>
       <ModalLayout isShow={showModal} setShow={() => setShowModal(false)}>
         <div className="relative flex flex-col rounded-md bg-clip-border text-gray-700 shadow-none bg-white max-w-lg w-full">

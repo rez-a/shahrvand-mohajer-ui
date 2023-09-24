@@ -43,7 +43,7 @@ const Addresses = ({
         </div>
         {!editAddress ? (
           <div className="pr-2">
-            <div className="flex">
+            <div className="flex ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -78,40 +78,27 @@ const Addresses = ({
                 />
               </svg>
               <div>
-                {addresses && (
-                  <div className="text-neutral-800 font-medium my-1 text-sm">
-                    <span className="text-black font-semibold mr-1">
-                      {addresses[0].address_full ?? null}
-                    </span>
-                  </div>
-                )}
-                <div className="text-neutral-800 font-light text-sm flex">
-                  نام و نام و خانوادگی گیرنده
-                  <div className="mr-1">{user.name}</div>
-                </div>
+              {addresses && (
+              <div className="text-neutral-800 font-medium my-1 text-sm">
+                <span className="text-black font-semibold mr-1">
+                  {addresses[0].address_full ?? null}
+                </span>
+              </div>
+            )}
+                <p className="text-zinc-500 text-sm">
+                  نام و نام و خانوادگی گیرنده:
+                  <span className="text-black font-semibold mr-1">
+                    {user.name}
+                  </span>
+                </p>
               </div>
             </div>
-            <div className="flex items-center justify-end">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
               <button
                 onClick={() => setEditAddress(true)}
-                className="hover:opacity-70 relative overflow-hidden group block text-sky-500 w-auto text-sm px-4 py-2 rounded-md font-right transition-all duration-300"
+                className="relative overflow-hidden group block text-white w-auto text-sm px-4 py-2 rounded-md font-right transition-all duration-300 bg-blue-500  hover:bg-blue-500 bg-blue-500/90 "
               >
-                تغییر یا ویرایش آدرس
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="inline rotate-180 stroke-current"
-                  width="24"
-                  height="24"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
-                    d="m10 16 4-4-4-4"
-                  />
-                </svg>
+                تغییر آدرس ارسال
               </button>
             </div>
           </div>
