@@ -51,7 +51,7 @@ const Invoice = ({ invoice, setInvoice }) => {
         icon: 'success',
         title: 'نتیجه تراکنش',
         text: response.message,
-      }).finally((res) => {
+      }).then((res) => {
         setInvoice(null);
         navigate('/');
       });

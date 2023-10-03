@@ -46,12 +46,12 @@ const Invoice = ({ invoice, setInvoice }) => {
         REFRESH_TOKEN,
         {}
       );
-      editUser(refreshTokenResponse.data?.access_token);
+      editUser(refreshTokenResponse.access_token);
       Swal.fire({
         icon: 'success',
         title: 'نتیجه تراکنش',
         text: response.message,
-      }).finally((res) => {
+      }).then((res) => {
         setInvoice(null);
         navigate('/');
       });

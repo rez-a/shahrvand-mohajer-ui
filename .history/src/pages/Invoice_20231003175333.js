@@ -23,19 +23,19 @@ const Invoice = ({ invoice, setInvoice }) => {
   const navigate = useNavigate();
 
   const handlePayInvoice = async () => {
-    setLoading(true);
+    // setLoading(true);
     try {
       const response = await fetcher(`${ORDER_PAY}/${invoice.Id}`);
-      if (!response.data) throw Error(response);
-      handleResponseInvoice(response);
+      console.log(response);
+      // if (!response.data) throw Error(response);
+      // handleResponseInvoice(response);
     } catch (err) {
-      Swal.fire({
-        icon: 'error',
-        title: 'نتیجه تراکنش',
-        text: err.response.data.message,
-      });
+      // Swal.fire({
+      //   icon: 'error',
+      //   title: 'نتیجه تراکنش',
+      //   text: err.response.data.message,
+      // });
     }
-    setLoading(false);  
   };
 
   const handleResponseInvoice = async (response) => {
@@ -46,12 +46,12 @@ const Invoice = ({ invoice, setInvoice }) => {
         REFRESH_TOKEN,
         {}
       );
-      editUser(refreshTokenResponse.data?.access_token);
+      editUser(refreshTokenResponse.access_token);
       Swal.fire({
         icon: 'success',
         title: 'نتیجه تراکنش',
         text: response.message,
-      }).finally((res) => {
+      }).then((res) => {
         setInvoice(null);
         navigate('/');
       });
