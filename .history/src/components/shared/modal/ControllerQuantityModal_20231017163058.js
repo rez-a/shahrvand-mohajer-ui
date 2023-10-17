@@ -84,6 +84,7 @@ const ControllerQuantityModal = ({
   };
 
   const changeAttr = (newAttr) => {
+    
     if (!!productInCart) {
       dispatch(
         removeFromCart(
@@ -92,6 +93,7 @@ const ControllerQuantityModal = ({
         )
       );
     }
+    alert(newAttr);
     setAttrSelected(newAttr);
   };
 
@@ -176,6 +178,9 @@ const ControllerQuantityModal = ({
           </p>
         </div>
       )}
+  <p>
+    here
+  </p>
       {!!Attr.length && (
         <div className="overflow-auto">
           <ul className="flex p-2">

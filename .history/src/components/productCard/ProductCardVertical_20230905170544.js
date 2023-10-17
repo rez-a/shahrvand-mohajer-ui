@@ -150,7 +150,7 @@ const ProductCartVertical = ({
           productInCart={productInCart}
           dispatch={dispatch}
           setShowModal={setShowModal}
-          attrSelected={attrSelected}
+          attrSelecte={attrSelected}
           setAttrSelected={setAttrSelected}
           cart={cart}
         />

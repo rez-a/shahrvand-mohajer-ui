@@ -1,15 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 const DeliveryProgress = ({ deliveryCost, totalPrice, minPrice }) => {
-  
-    const diff = minPrice - totalPrice;
-    let percent = 0;
-    if(diff >= 0){
-      percent = Math.floor((totalPrice / minPrice) * 100);
-    }else{
-      percent = 100;
-    }
-
+  const diff = minPrice - totalPrice;
+  let percent = 100;
+  if(diff >= 0){
+    percent = Math.floor((totalPrice / minPrice) * 100);
+  }
 
   return (
     <div className="w-full flex items-center gap-4">

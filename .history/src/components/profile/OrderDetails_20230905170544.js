@@ -97,7 +97,7 @@ const OrderDetails = (props) => {
                       <span>لفو کردن سفارش</span>
                     </button>
                   )}
-                  {order.StatusPaid === 'STATUS_UNPAID' &&
+                  {order.StatusPaid === 'STATUS_NONPAID' &&
                     !Number(order.Cancelled) && (
                       <button
                         onClick={() => orderPay()}

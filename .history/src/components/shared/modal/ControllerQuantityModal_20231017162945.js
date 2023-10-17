@@ -84,15 +84,16 @@ const ControllerQuantityModal = ({
   };
 
   const changeAttr = (newAttr) => {
-    if (!!productInCart) {
-      dispatch(
-        removeFromCart(
-          productInCart.cartId,
-          IsVendor ? MainGroupErpCode : 'SHAHRVAND'
-        )
-      );
-    }
-    setAttrSelected(newAttr);
+    alert(newAttr);
+    // if (!!productInCart) {
+    //   dispatch(
+    //     removeFromCart(
+    //       productInCart.cartId,
+    //       IsVendor ? MainGroupErpCode : 'SHAHRVAND'
+    //     )
+    //   );
+    // }
+    // setAttrSelected(newAttr);
   };
 
   return (
@@ -176,6 +177,9 @@ const ControllerQuantityModal = ({
           </p>
         </div>
       )}
+  <p>
+    here
+  </p>
       {!!Attr.length && (
         <div className="overflow-auto">
           <ul className="flex p-2">
